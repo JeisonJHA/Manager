@@ -1,0 +1,141 @@
+unit uspmRegrasMenuAcoesExecutaveis;
+
+interface
+
+uses
+  Winapi.Windows, System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls,
+  Vcl.Forms, System.Actions, Vcl.ActnList, Vcl.ComCtrls, Vcl.ImgList, Winapi.ShellApi,
+  Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, System.StrUtils;
+
+type
+  TspmRegrasMenuAcoesExecutaveis = class
+    procedure acExecutarAcaoPadrao(Sender: TObject);
+  private
+    FoFormMenu: TForm;
+    FoActionList: TActionList;
+    FoToolBar: TToolbar;
+  public
+    constructor Create(poActionList: TActionList; poImageList: TImageList; poToolBar: TToolbar);
+    destructor Destroy; override;
+
+    procedure CriarAcoesExecutaveis;
+  end;
+
+implementation
+
+{ TspmRegrasMenuAcoesExecutaveis }
+
+uses
+  usmpDados, uspmConstantes;
+
+procedure TspmRegrasMenuAcoesExecutaveis.acExecutarAcaoPadrao(Sender: TObject);
+var
+  oHandle: THandle;
+begin
+  try
+    try
+      case AnsiIndexStr(UpperCase(Sender.ClassName), ['TTOOLBUTTON', 'TACTION']) of
+        0:
+          begin
+            ShellExecute(oHandle, nil, PChar(TToolButton(Sender).Hint), sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, SW_SHOWNORMAL);
+          end;
+        1:
+          begin
+            ShellExecute(oHandle, nil, PChar(TAction(Sender).Hint), sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, SW_SHOWNORMAL);
+          end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+
+end;
+
+constructor TspmRegrasMenuAcoesExecutaveis.Create(poActionList: TActionList; poImageList: TImageList; poToolBar: TToolbar);
+begin
+  try
+    try
+      Self.FoActionList := poActionList;
+      Self.FoActionList.Images := poImageList;
+      Self.FoToolBar := poToolBar;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuAcoesExecutaveis.CriarAcoesExecutaveis;
+var
+  oClone: TZQuery;
+  oIcone: TPicture;
+  oStream: TMemoryStream;
+  oAcao: TAction;
+  oBotao: TToolButton;
+begin
+  if dmDados.qrCadAplicacoes.IsEmpty then
+  begin
+    Exit;
+  end;
+
+  oClone := TZQuery.Create(nil);
+  oIcone := TPicture.Create;
+  oStream := TMemoryStream.Create;
+  try
+    oBotao := TToolButton.Create(Self.FoToolBar);
+    oBotao.Style := tbsSeparator;
+    oBotao.Width := 5;
+    oBotao.Parent := Self.FoToolBar;
+
+    oClone.Connection := dmDados.qrCadAplicacoes.Connection;
+    oClone.SQL.Text := dmDados.qrCadAplicacoes.SQL.Text;
+    oClone.IndexFieldNames := dmDados.qrCadAplicacoes.IndexFieldNames;
+    oClone.SortType := stDescending;
+    oClone.Open;
+
+    oClone.First;
+    while not oClone.Eof do
+    begin
+      oStream.Seek(0, soFromBeginning);
+      TBlobField(oClone.FieldByName('BLICONE')).SaveToStream(oStream);
+      oStream.Position := 0;
+      oIcone.Icon.LoadFromStream(oStream);
+
+      oAcao := TAction.Create(Self.FoActionList);
+      oAcao.Name := 'acExecutavel' + oClone.FieldByName('CDAPLICACOES').AsString;
+      oAcao.ActionList := Self.FoActionList;
+      oAcao.Category := 'Aplicacoes';
+      oAcao.Hint := oClone.FieldByName('DEEXECUTAVEL').AsString + ' ' + oClone.FieldByName('DEPARAMETROS').AsString;
+      oAcao.ImageIndex := Self.FoActionList.Images.AddIcon(oIcone.Icon);
+      oAcao.OnExecute := acExecutarAcaoPadrao;
+
+      oBotao := TToolButton.Create(Self.FoToolBar);
+      oBotao.Style := tbsButton;
+      oBotao.Parent := Self.FoToolBar;
+      oBotao.Name := 'btExecutavel' + oClone.FieldByName('CDAPLICACOES').AsString;
+      oBotao.Action := oAcao;
+      oBotao.ImageIndex := oAcao.ImageIndex;
+      oBotao.ShowHint := false;
+
+      oClone.Next;
+    end;
+  finally
+    FreeAndNil(oClone)
+  end;
+end;
+
+destructor TspmRegrasMenuAcoesExecutaveis.Destroy;
+begin
+end;
+
+end.
+

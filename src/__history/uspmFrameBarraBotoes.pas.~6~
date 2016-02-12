@@ -1,0 +1,117 @@
+unit uspmFrameBarraBotoes;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.ComCtrls,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, Vcl.ActnList, Data.DB, System.Actions,
+  Vcl.ImgList, Vcl.ToolWin, System.StrUtils, Winapi.ShellApi, Winapi.Windows;
+
+type
+  TspmFrameBarraBotoes = class(TFrame)
+    tbBarraBotoes: TToolBar;
+    imBarraBotoes: TImageList;
+    alBarraBotoes: TActionList;
+    procedure OnExecutarAcaoClick(Sender: TObject);
+  private
+  public
+    procedure InicializarBarraBotoes;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uspmDados, uspmConstantes;
+
+{ TsmpFrameBarraBotoes }
+
+procedure TspmFrameBarraBotoes.InicializarBarraBotoes;
+var
+  oCloneAplicacoes: TZQuery;
+  oIcone: TPicture;
+  oStream: TMemoryStream;
+  oAcao: TAction;
+  oBotao: TToolButton;
+begin
+  oCloneAplicacoes := TZQuery.Create(nil);
+  oIcone := TPicture.Create;
+  oStream := TMemoryStream.Create;
+  try
+    try
+      if not dmDados.PegarDados(dmDados.qrCadAplicacoes, oCloneAplicacoes) then
+      begin
+        Exit;
+      end;
+
+      oCloneAplicacoes.First;
+      while not oCloneAplicacoes.Eof do
+      begin
+        oStream.Seek(0, soFromBeginning);
+        TBlobField(oCloneAplicacoes.FieldByName('BLICONE')).SaveToStream(oStream);
+        oStream.Position := 0;
+        oIcone.Icon.LoadFromStream(oStream);
+
+        oAcao := TAction.Create(Self.alBarraBotoes);
+        oAcao.Name := 'acExecutavel' + oCloneAplicacoes.FieldByName('CDAPLICACOES').AsString;
+        oAcao.ActionList := Self.alBarraBotoes;
+        oAcao.Category := 'Aplicacoes';
+        oAcao.Hint := oCloneAplicacoes.FieldByName('DEAPLICACOES').AsString;
+        oAcao.ImageIndex := Self.alBarraBotoes.Images.AddIcon(oIcone.Icon);
+        oAcao.OnExecute := OnExecutarAcaoClick;
+        oAcao.Caption := oCloneAplicacoes.FieldByName('DEEXECUTAVEL').AsString + ' ' + oCloneAplicacoes.FieldByName('DEPARAMETROS').AsString;
+
+        oBotao := TToolButton.Create(Self.tbBarraBotoes);
+        oBotao.Style := tbsButton;
+        oBotao.Parent := Self.tbBarraBotoes;
+        oBotao.Name := 'btExecutavel' + oCloneAplicacoes.FieldByName('CDAPLICACOES').AsString;
+        oBotao.Action := oAcao;
+        oBotao.ImageIndex := oAcao.ImageIndex;
+        oBotao.ShowHint := True;
+
+        oCloneAplicacoes.Next;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(oCloneAplicacoes)
+  end;
+end;
+
+procedure TspmFrameBarraBotoes.OnExecutarAcaoClick(Sender: TObject);
+var
+  oHandle: THandle;
+  sExecutavel: PChar;
+begin
+  try
+    try
+      case AnsiIndexStr(UpperCase(Sender.ClassName), ['TTOOLBUTTON', 'TACTION']) of
+        0:
+          begin
+            sExecutavel := PChar(TToolButton(Sender).Caption);
+          end;
+        1:
+          begin
+            sExecutavel := PChar(TAction(Sender).Caption);
+          end;
+      end;
+
+      ShellExecute(oHandle, nil, sExecutavel, sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, SW_SHOWNORMAL);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+end.
+

@@ -1,0 +1,132 @@
+unit uspmCadAplicacoes;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  uspmFormCadPadrao, Data.DB, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
+  JvgSpeedButton, JvDialogs, Winapi.Shellapi, Vcl.Buttons, System.Actions, Vcl.ActnList,
+  Vcl.ImgList, JvLabel, JvDBControls, Vcl.Grids, Vcl.DBGrids, JvExDBGrids,
+  JvDBGrid, Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls;
+
+type
+  TspmCadAplicacoes = class(TspmFormCadPadrao)
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label3: TLabel;
+    edExecutavel: TDBEdit;
+    odExecutavel: TJvOpenDialog;
+    btExecutavel: TJvgSpeedButton;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btExecutavelClick(Sender: TObject);
+    procedure acSalvarExecute(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  spmCadAplicacoes: TspmCadAplicacoes;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uspmConstantes, uspmForm;
+
+procedure TspmCadAplicacoes.FormCreate(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      Self.FoFormulario := Self;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmCadAplicacoes.FormDestroy(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      spmCadAplicacoes := nil;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmCadAplicacoes.acSalvarExecute(Sender: TObject);
+var
+  oIcone: TPicture;
+  oStream: TMemoryStream;
+begin
+  try
+    oIcone := TPicture.Create;
+    oStream := TMemoryStream.Create;
+    try
+      try
+        oIcone.Icon.Handle := ExtractIcon(Handle, PChar(Self.edExecutavel.Text), 0);
+      except
+        oIcone.Icon.Handle := Application.Icon;
+      end;
+      oIcone.Icon.SaveToStream(oStream);
+
+      oStream.Position := 0;
+      TBlobField(Self.dsFormCadPadrao.DataSet.FieldByName('BLICONE')).LoadFromStream(oStream);
+
+      inherited;
+
+      TspmForm(Application.MainForm).PassarParametro('prmATUALIZAR_APLICACOES', sFLAG_SIM);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(oIcone);
+    FreeAndNil(oStream);
+  end;
+end;
+
+procedure TspmCadAplicacoes.btExecutavelClick(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      Self.odExecutavel.Execute;
+      Self.edExecutavel.Text := Self.odExecutavel.FileName;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+end.
+

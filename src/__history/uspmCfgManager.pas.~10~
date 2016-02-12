@@ -1,0 +1,89 @@
+unit uspmCfgManager;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Controls, Vcl.Forms, uspmFormCfgPadrao,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, JvgSpeedButton, JvSelectDirectory, Vcl.Dialogs,
+  JvBaseDlg, Vcl.Buttons, Data.DB, System.Actions, Vcl.ActnList, Vcl.ImgList,
+  Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls;
+
+type
+  TspmCfgManager = class(TspmFormCfgPadrao)
+    Label1: TLabel;
+    edPathRefer: TDBEdit;
+    btPathRefer: TJvgSpeedButton;
+    odPathRefer: TJvSelectDirectory;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btPathReferClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  spmCfgManager: TspmCfgManager;
+
+implementation
+
+{$R *.dfm}
+
+procedure TspmCfgManager.btPathReferClick(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      Self.odPathRefer.Execute;
+      Self.edPathRefer.Text := Self.odPathRefer.Directory;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmCfgManager.FormCreate(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      Self.FoFormulario := Self;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmCfgManager.FormDestroy(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      spmCfgManager := nil;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+end.
+

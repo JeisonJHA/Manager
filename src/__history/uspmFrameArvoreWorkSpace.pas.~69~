@@ -1,0 +1,755 @@
+unit uspmFrameArvoreWorkSpace;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Controls, Vcl.Forms, Vcl.ExtCtrls, Data.DB,
+  Datasnap.DBClient, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  JvDBTreeView, IniFiles, Vcl.DBGrids, Vcl.Grids, Vcl.ComCtrls, JvExComCtrls,
+  Vcl.Menus, System.Actions, Vcl.ActnList, Winapi.ShellApi, Winapi.Windows, Vcl.StdCtrls,
+  System.StrUtils, System.Variants;
+
+type
+  TspmFrameArvoreWorkSpace = class(TFrame)
+    pnWorkSpacePadrao: TPanel;
+    pnWorkSpaceArvore: TPanel;
+    tvArvoreWorkSpace: TJvDBTreeView;
+    cdsArvoreWorkSpace: TClientDataSet;
+    dsArvoreWorkSpace: TDataSource;
+    grArvoreWorkSpace: TDBGrid;
+    ppArvoreWorkSpace: TPopupMenu;
+    alArvoreWorkSpace: TActionList;
+    acWorkSpacePadrao: TAction;
+    Padro1: TMenuItem;
+    acApagarCache: TAction;
+    acApagarLogs: TAction;
+    acExplorarSrc: TAction;
+    acExplorarBin: TAction;
+    ApagarCache1: TMenuItem;
+    ApagarLogs1: TMenuItem;
+    Explorarbin1: TMenuItem;
+    ExplorarSrc1: TMenuItem;
+    pnBaseDados: TPanel;
+    pcBaseDados: TPageControl;
+    procedure acWorkSpacePadraoExecute(Sender: TObject);
+    procedure dsArvoreWorkSpaceDataChange(Sender: TObject; Field: TField);
+    procedure acApagarCacheExecute(Sender: TObject);
+    procedure acApagarLogsExecute(Sender: TObject);
+    procedure acExplorarSrcExecute(Sender: TObject);
+    procedure acExplorarBinExecute(Sender: TObject);
+    procedure OnDefinirBaseDados(Sender: TObject);
+    procedure tvArvoreWorkSpaceDblClick(Sender: TObject);
+  private
+    procedure CriarArvoreWorkSpace;
+    procedure DefinirEstruturaDadosArvoreWorkSpace;
+    procedure CriarNodoArvoreWorkSpace(const psSistema: string; const pnCodigo: integer; const pnCodigoPai: integer; const psDecricao: string; const pnNivel: integer; const psPath: string; const psModulo: string; const psAlias: string; const psInstancia: string);
+    procedure CriarNodoArvoreWorkSpaceExecutavel(const psSistema: string; var pnCodigo: integer; const pnCodigoPai: integer; const psModulo: string; const psNomeCampo: string; pqrCloneSistema: TZQuery; const psNomeBranch: string; const psAlias: string; const psInstancia: string);
+    procedure PegarBaseConfiguradaArquivoIni(psArquivo: string; var psAlias: string; var psInstancia: string);
+    procedure DefinirWorkSpacePadrao;
+    procedure DefinirCaptionWorkSpacePadrao(const psWorkSpace: string);
+    procedure LocalizarWorkSpacePadrao(const psWorkSpace: string);
+    procedure CriarListaBaseDados;
+    procedure AbrirExecutavelWorkSpace(const psPathExecutavel: string);
+  public
+    procedure InicializarArvoreWorkSpace;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uspmDados, uspmFuncoes, uspmConstantes;
+
+{ TspmFrameArvoreWorkSpace }
+
+procedure TspmFrameArvoreWorkSpace.InicializarArvoreWorkSpace;
+begin
+  Self.CriarArvoreWorkSpace;
+  Self.CriarListaBaseDados;
+
+  Self.DefinirCaptionWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.AsString);
+  Self.LocalizarWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+
+  // Self.DefinirPopUpMenuTrayIcon(dmDados.qrCfgManagerDEWSPADRAO.Value);
+  // PegarBaseConfiguradaArquivoIni(dmDados.qrCfgManagerDEPATHREFER.Value + '\' + Trim(slListaBranch[i]) + '\bin\spCfg.ini', sAlias, sInstancia);
+end;
+
+procedure TspmFrameArvoreWorkSpace.acApagarCacheExecute(Sender: TObject);
+var
+  oHandle: THandle;
+  cdsDados: TClientDataSet;
+begin
+  cdsDados := TClientDataSet.Create(nil);
+  try
+    try
+      cdsDados.Data := Self.cdsArvoreWorkSpace.Data;
+
+      cdsDados.Filtered := False;
+      cdsDados.Filter := 'CODIGOPAI = ' + Self.cdsArvoreWorkSpace.FieldByName('CODIGO').AsString;
+      cdsDados.Filtered := True;
+
+      cdsDados.First;
+      while not cdsDados.Eof do
+      begin
+        DeletarDiretorio(oHandle, cdsDados.FieldByName('PATH').AsString + 'Cache', False);
+
+        cdsDados.Next;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(cdsDados);
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.acApagarLogsExecute(Sender: TObject);
+var
+  cdsDados: TClientDataSet;
+begin
+  cdsDados := TClientDataSet.Create(nil);
+  try
+    try
+      cdsDados.Data := Self.cdsArvoreWorkSpace.Data;
+
+      cdsDados.Filtered := False;
+      cdsDados.Filter := 'CODIGOPAI = ' + Self.cdsArvoreWorkSpace.FieldByName('CODIGO').AsString;
+      cdsDados.Filtered := True;
+
+      cdsDados.First;
+      while not cdsDados.Eof do
+      begin
+        DeletarArquivo(cdsDados.FieldByName('PATH').AsString + '*.txt');
+
+        cdsDados.Next;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(cdsDados);
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.acExplorarBinExecute(Sender: TObject);
+begin
+  try
+    try
+      ShellExecute(Application.Handle, PChar('open'), PChar('explorer.exe'), PChar(Self.cdsArvoreWorkSpace.FieldByName('PATH').AsString + 'BIN'), nil, SW_NORMAL);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.acExplorarSrcExecute(Sender: TObject);
+begin
+  try
+    try
+      ShellExecute(Application.Handle, PChar('open'), PChar('explorer.exe'), PChar(Self.cdsArvoreWorkSpace.FieldByName('PATH').AsString + 'SRC'), nil, SW_NORMAL);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.acWorkSpacePadraoExecute(Sender: TObject);
+begin
+  try
+    try
+      Self.DefinirWorkSpacePadrao;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.CriarArvoreWorkSpace;
+var
+  qrCadSistemas: TZQuery;
+  slListaBranch: TStringList;
+  i: integer;
+  nCodigo: integer;
+  nCodigoSistema: integer;
+  nCodigoWorkSpace: integer;
+  sAlias: string;
+  sInstancia: string;
+begin
+  nCodigo := 0;
+
+  qrCadSistemas := TZQuery.Create(nil);
+  slListaBranch := TStringList.Create;
+  try
+    if not dmDados.PegarDados(dmDados.qrCadSistemas, qrCadSistemas) then
+    begin
+      Exit;
+    end;
+
+    Self.DefinirEstruturaDadosArvoreWorkSpace;
+
+    qrCadSistemas.First;
+    while not qrCadSistemas.Eof do
+    begin
+      Inc(nCodigo);
+      nCodigoSistema := nCodigo;
+
+      Self.CriarNodoArvoreWorkSpace(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigoSistema, 0, qrCadSistemas.FieldByName('DESISTEMA').Value, nNIVEL_SISTEMA, sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, sSTRING_INDEFINIDO);
+
+      uspmFuncoes.PegarListaDeDiretorios(dmDados.qrCfgManagerDEPATHREFER.Value + '\', slListaBranch);
+      for i := 0 to slListaBranch.Count - 1 do
+      begin
+        if Pos(qrCadSistemas.FieldByName('DEDIRREFER').AsString, UpperCase(Trim(slListaBranch[i]))) > 0 then
+        begin
+          Inc(nCodigo);
+          nCodigoWorkSpace := nCodigo;
+
+          Self.PegarBaseConfiguradaArquivoIni(dmDados.qrCfgManagerDEPATHREFER.Value + '\' + Trim(slListaBranch[i]) + '\bin\spCfg.ini', sAlias, sInstancia);
+
+          Self.CriarNodoArvoreWorkSpace(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigoWorkSpace, nCodigoSistema, Trim(slListaBranch[i]), nNIVEL_WORKSPACE, dmDados.qrCfgManagerDEPATHREFER.Value + '\' + Trim(slListaBranch[i]) + '\', sSTRING_INDEFINIDO, sAlias, sInstancia);
+
+          Self.CriarNodoArvoreWorkSpaceExecutavel(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigo, nCodigoWorkSpace, 'BIN', 'DELISTAEXE', qrCadSistemas, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigo, nCodigoWorkSpace, 'PRO', 'DELISTAEXEPRO', qrCadSistemas, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigo, nCodigoWorkSpace, 'SGC', 'DELISTAEXESGC', qrCadSistemas, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigo, nCodigoWorkSpace, 'ARC', 'DELISTAEXEARC', qrCadSistemas, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigo, nCodigoWorkSpace, 'PSS', 'DELISTAEXEPSS', qrCadSistemas, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(qrCadSistemas.FieldByName('DESISTEMA').AsString, nCodigo, nCodigoWorkSpace, 'BIN', 'DELISTAEXEEXT', qrCadSistemas, Trim(slListaBranch[i]), sAlias, sInstancia);
+        end;
+      end;
+
+      qrCadSistemas.Next;
+    end;
+  finally
+    FreeAndNil(slListaBranch);
+    FreeAndNil(qrCadSistemas)
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.DefinirEstruturaDadosArvoreWorkSpace;
+begin
+  try
+    try
+      Self.cdsArvoreWorkSpace.Close;
+      Self.cdsArvoreWorkSpace.FieldDefs.Clear;
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('CODIGO', ftFloat);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('CODIGOPAI', ftFloat);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('DESCRICAO', ftString, 50);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('NIVEL', ftFloat);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('PATH', ftString, 500);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('PATHEXECUTAVEL', ftString, 500);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('MODULO', ftString, 50);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('ALIAS', ftString, 50);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('INSTANCIA', ftString, 100);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('SISTEMA', ftString, 100);
+      Self.cdsArvoreWorkSpace.FieldDefs.Add('TIPOBASEDADOS', ftString, 100);
+      Self.cdsArvoreWorkSpace.CreateDataSet;
+      Self.cdsArvoreWorkSpace.LogChanges := False;
+
+      Self.cdsArvoreWorkSpace.Active := True;
+
+      Self.cdsArvoreWorkSpace.FieldByName('CODIGO').DisplayWidth := 10;
+      Self.cdsArvoreWorkSpace.FieldByName('CODIGOPAI').DisplayWidth := 10;
+      Self.cdsArvoreWorkSpace.FieldByName('DESCRICAO').DisplayWidth := 30;
+      Self.cdsArvoreWorkSpace.FieldByName('NIVEL').DisplayWidth := 5;
+      Self.cdsArvoreWorkSpace.FieldByName('PATH').DisplayWidth := 50;
+      Self.cdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').DisplayWidth := 50;
+      Self.cdsArvoreWorkSpace.FieldByName('MODULO').DisplayWidth := 10;
+      Self.cdsArvoreWorkSpace.FieldByName('ALIAS').DisplayWidth := 10;
+      Self.cdsArvoreWorkSpace.FieldByName('INSTANCIA').DisplayWidth := 20;
+      Self.cdsArvoreWorkSpace.FieldByName('SISTEMA').DisplayWidth := 10;
+      Self.cdsArvoreWorkSpace.FieldByName('TIPOBASEDADOS').DisplayWidth := 10;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.dsArvoreWorkSpaceDataChange(Sender: TObject; Field: TField);
+var
+  i: integer;
+  j: integer;
+begin
+  try
+    try
+      Self.ppArvoreWorkSpace.Items.Find('Padrão').Visible := (Self.cdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.ppArvoreWorkSpace.Items.Find('Apagar Cache').Visible := (Self.cdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.ppArvoreWorkSpace.Items.Find('Apagar Logs').Visible := (Self.cdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.ppArvoreWorkSpace.Items.Find('Explorar Src').Visible := (Self.cdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.ppArvoreWorkSpace.Items.Find('Explorar Bin').Visible := (Self.cdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.pnBaseDados.Visible := not (Self.cdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_SISTEMA);
+      if Self.pnBaseDados.Visible then
+      begin
+        for i := 0 to Self.pcBaseDados.ComponentCount - 1 do
+        begin
+          if (Self.pcBaseDados.Components[i]) is TTabSheet then
+          begin
+            if TTabSheet(Self.pcBaseDados.Components[i]).Caption = Self.cdsArvoreWorkSpace.FieldByName('SISTEMA').AsString then
+            begin
+              Self.pcBaseDados.ActivePage := TTabSheet(Self.pcBaseDados.Components[i]);
+
+              for j := 0 to Self.pcBaseDados.ActivePage.ComponentCount - 1 do
+              begin
+                if (Self.pcBaseDados.ActivePage.Components[j]) is TRadioButton then
+                begin
+                  TRadioButton(Self.pcBaseDados.ActivePage.Components[j]).Checked := TRadioButton(Self.pcBaseDados.ActivePage.Components[j]).Hint = (Self.cdsArvoreWorkSpace.FieldByName('ALIAS').AsString + ',' + Self.cdsArvoreWorkSpace.FieldByName('INSTANCIA').AsString) + ',' + Self.cdsArvoreWorkSpace.FieldByName('TIPOBASEDADOS').AsString);
+                end;
+              end;
+            end;
+          end;
+        end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.CriarNodoArvoreWorkSpace(const psSistema: string; const pnCodigo, pnCodigoPai: integer; const psDecricao: string; const pnNivel: integer; const psPath, psModulo, psAlias, psInstancia: string);
+begin
+  try
+    try
+      Self.cdsArvoreWorkSpace.Append;
+      Self.cdsArvoreWorkSpace.FieldByName('CODIGO').Value := pnCodigo;
+      Self.cdsArvoreWorkSpace.FieldByName('CODIGOPAI').Value := pnCodigoPai;
+      Self.cdsArvoreWorkSpace.FieldByName('DESCRICAO').Value := psDecricao;
+      Self.cdsArvoreWorkSpace.FieldByName('NIVEL').Value := pnNivel;
+      if (pnNivel = nNIVEL_EXECUTAVEL) then
+      begin
+        Self.cdsArvoreWorkSpace.FieldByName('PATH').AsString := ExtractFilePath(psPath);
+        Self.cdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').AsString := psPath;
+      end
+      else
+      begin
+        Self.cdsArvoreWorkSpace.FieldByName('PATH').AsString := psPath;
+        Self.cdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').AsString := psPath;
+      end;
+      Self.cdsArvoreWorkSpace.FieldByName('MODULO').AsString := psModulo;
+      Self.cdsArvoreWorkSpace.FieldByName('ALIAS').AsString := psAlias;
+      Self.cdsArvoreWorkSpace.FieldByName('INSTANCIA').AsString := psInstancia;
+      Self.cdsArvoreWorkSpace.FieldByName('SISTEMA').AsString := psSistema;
+      Self.cdsArvoreWorkSpace.Post;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.CriarNodoArvoreWorkSpaceExecutavel(const psSistema: string; var pnCodigo: integer; const pnCodigoPai: integer; const psModulo, psNomeCampo: string; pqrCloneSistema: TZQuery; const psNomeBranch, psAlias, psInstancia: string);
+var
+  slListaExec: TStringList;
+  j: integer;
+  sPathArquivo: string;
+begin
+  slListaExec := TStringList.Create;
+  try
+    try
+      slListaExec.CommaText := pqrCloneSistema.FieldByName(psNomeCampo).AsString;
+      for j := 0 to slListaExec.Count - 1 do
+      begin
+        uspmFuncoes.LocalizarArquivo(dmDados.qrCfgManagerDEPATHREFER.Value + '\' + Trim(psNomeBranch) + '\bin', UpperCase(slListaExec[j]), sPathArquivo);
+
+        if not (Trim(sPathArquivo) = sSTRING_INDEFINIDO) then
+        begin
+          Inc(pnCodigo);
+          Self.CriarNodoArvoreWorkSpace(psSistema, pnCodigo, pnCodigoPai, ChangeFileExt(UpperCase(slListaExec[j]), sSTRING_INDEFINIDO), nNIVEL_EXECUTAVEL, sPathArquivo, psModulo, psAlias, psInstancia);
+        end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(slListaExec);
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.PegarBaseConfiguradaArquivoIni(psArquivo: string; var psAlias, psInstancia: string);
+var
+  oArquivoIni: TIniFile;
+begin
+  oArquivoIni := TIniFile.Create(psArquivo);
+  try
+    try
+      psAlias := sSTRING_INDEFINIDO;
+      psInstancia := sSTRING_INDEFINIDO;
+
+      if not FileExists(psArquivo) then
+      begin
+        Exit;
+      end;
+
+      psAlias := oArquivoIni.ReadString('DATABASE', 'ALIAS', sSTRING_INDEFINIDO);
+      psInstancia := oArquivoIni.ReadString('DATABASE', 'SERVER', sSTRING_INDEFINIDO);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(oArquivoIni);
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.tvArvoreWorkSpaceDblClick(Sender: TObject);
+begin
+  try
+    try
+      case Self.cdsArvoreWorkSpace.FieldByName('NIVEL').AsInteger of
+        nNIVEL_SISTEMA:
+          begin
+
+          end;
+        nNIVEL_WORKSPACE:
+          begin
+            Self.DefinirWorkSpacePadrao;
+          end;
+        nNIVEL_EXECUTAVEL:
+          begin
+            Self.AbrirExecutavelWorkSpace(Self.cdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').AsString);
+          end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.DefinirWorkSpacePadrao;
+begin
+  try
+    try
+      dmDados.qrCfgManager.Edit;
+      dmDados.qrCfgManagerDEWSPADRAO.Value := Self.cdsArvoreWorkSpace.FieldByName('DESCRICAO').Value;
+      dmDados.qrCfgManager.Post;
+      dmDados.qrCfgManager.Refresh;
+
+      Self.DefinirCaptionWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+      //Self.DefinirPopUpMenuTrayIcon(dmDados.qrCfgManagerDEWSPADRAO.Value);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.DefinirCaptionWorkSpacePadrao(const psWorkSpace: string);
+begin
+  try
+    try
+      Self.pnWorkSpacePadrao.Caption := psWorkSpace;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.LocalizarWorkSpacePadrao(const psWorkSpace: string);
+var
+  i: integer;
+begin
+  try
+    try
+      Self.tvArvoreWorkSpace.FullCollapse;
+
+      Self.cdsArvoreWorkSpace.Locate('DESCRICAO', psWorkSpace, []);
+      Self.tvArvoreWorkSpace.SelectNode(Self.cdsArvoreWorkSpace.FieldByName('CODIGO').Value);
+
+      for i := 0 to Self.tvArvoreWorkSpace.Items.Count - 1 do
+      begin
+        if (Self.tvArvoreWorkSpace.Items[i].Text = psWorkSpace) then
+        begin
+          Self.tvArvoreWorkSpace.Items.Item[i].Expand(True);
+          Break;
+        end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.OnDefinirBaseDados(Sender: TObject);
+var
+  qrCadBaseDados: TZQuery;
+  cdsDados: TClientDataSet;
+  oArquivoIni: TIniFile;
+  sArquivo: string;
+  sBaseDados: string;
+  sAlias: string;
+  sInstancia: string;
+  sTipoBanco: string;
+  slHint: TStringList;
+begin
+  qrCadBaseDados := TZQuery.Create(nil);
+  cdsDados := TClientDataSet.Create(nil);
+  slHint := TStringList.Create;
+  try
+    try
+      if not dmDados.PegarDados(dmDados.qrCadBaseDados, qrCadBaseDados) then
+      begin
+        Exit;
+      end;
+
+      sBaseDados := TRadioButton(Sender).Caption;
+      slHint.CommaText := TRadioButton(Sender).Hint;
+      sAlias := slHint[0];
+      sInstancia := slHint[1];
+      sTipoBanco := slHint[2];
+
+      if not qrCadBaseDados.Locate('DEBASEDADOS;DEALIAS;DEINSTANCIA', VarArrayOf([sBaseDados, sAlias, sInstancia]), []) then
+      begin
+        Exit;
+      end;
+
+      cdsDados.Data := Self.cdsArvoreWorkSpace.Data;
+
+      if Self.cdsArvoreWorkSpace.FieldByName('NIVEL').AsInteger = nNIVEL_WORKSPACE then
+      begin
+        cdsDados.Filtered := False;
+        cdsDados.Filter := 'CODIGOPAI = ' + Self.cdsArvoreWorkSpace.FieldByName('CODIGO').AsString + ' OR CODIGO = ' + Self.cdsArvoreWorkSpace.FieldByName('CODIGO').AsString;
+        cdsDados.Filtered := True;
+      end
+      else
+      begin
+        cdsDados.Filtered := False;
+        cdsDados.Filter := 'CODIGOPAI = ' + Self.cdsArvoreWorkSpace.FieldByName('CODIGOPAI').AsString + ' OR CODIGO = ' + Self.cdsArvoreWorkSpace.FieldByName('CODIGOPAI').AsString;
+        cdsDados.Filtered := True;
+      end;
+
+      cdsDados.First;
+      while not cdsDados.Eof do
+      begin
+        sArquivo := cdsDados.FieldByName('PATH').Value + 'spCfg.ini';
+
+        oArquivoIni := TIniFile.Create(sArquivo);
+        try
+          try
+            Self.cdsArvoreWorkSpace.DisableControls;
+            Self.cdsArvoreWorkSpace.Locate('CODIGO', cdsDados.FieldByName('CODIGO').AsInteger, []);
+            Self.cdsArvoreWorkSpace.Edit;
+            Self.cdsArvoreWorkSpace.FieldByName('ALIAS').AsString := qrCadBaseDados.FieldByName('DEALIAS').AsString;
+            Self.cdsArvoreWorkSpace.FieldByName('INSTANCIA').AsString := qrCadBaseDados.FieldByName('DEINSTANCIA').AsString;
+            Self.cdsArvoreWorkSpace.Post;
+
+            if not FileExists(sArquivo) then
+            begin
+              cdsDados.Next;
+              Continue;
+            end;
+
+            case AnsiIndexStr(cdsDados.FieldByName('MODULO').AsString, ['BIN', 'PRO', 'SGC', 'ARC', 'PSS']) of
+              0:
+                begin
+                  sAlias := qrCadBaseDados.FieldByName('DEALIAS').AsString;
+                  sInstancia := qrCadBaseDados.FieldByName('DEINSTANCIA').AsString;
+                end;
+              1:
+                begin
+                  sAlias := qrCadBaseDados.FieldByName('DEALIASPRO').AsString;
+                  sInstancia := qrCadBaseDados.FieldByName('DEINSTANCIA').AsString;
+                end;
+              2:
+                begin
+                  sAlias := qrCadBaseDados.FieldByName('DEALIASSGC').AsString;
+                  sInstancia := qrCadBaseDados.FieldByName('DEINSTANCIA').AsString;
+                end;
+              3:
+                begin
+                  sAlias := qrCadBaseDados.FieldByName('DEALIASSGC').AsString;
+                  sInstancia := qrCadBaseDados.FieldByName('DEINSTANCIA').AsString;
+                end;
+              4:
+                begin
+                  sAlias := qrCadBaseDados.FieldByName('DEALIASPSS').AsString;
+                  sInstancia := qrCadBaseDados.FieldByName('DEINSTANCIA').AsString;
+                end;
+            end;
+
+            oArquivoIni.WriteString('DATABASE', 'ALIAS', sAlias);
+            oArquivoIni.WriteString('DATABASE', 'SERVER', sInstancia);
+            oArquivoIni.WriteString('DATABASE', 'TIPOBANCO', sTipoBanco);
+            oArquivoIni.UpdateFile;
+          except
+            on E: Exception do
+            begin
+              raise Exception.Create(E.Message);
+            end;
+          end;
+        finally
+          Self.cdsArvoreWorkSpace.EnableControls;
+
+          FreeAndNil(oArquivoIni);
+        end;
+
+        cdsDados.Next;
+      end;
+
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(qrCadBaseDados);
+    FreeAndNil(cdsDados);
+    FreeAndNil(slHint);
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.CriarListaBaseDados;
+var
+  qrCadSistemas: TZQuery;
+  qrCadBaseDados: TZQuery;
+  oTab: TTabSheet;
+  oBase: TRadioButton;
+  sTipoBanco: string;
+begin
+  qrCadSistemas := TZQuery.Create(nil);
+  qrCadBaseDados := TZQuery.Create(nil);
+  try
+    try
+      if not dmDados.PegarDados(dmDados.qrCadSistemas, qrCadSistemas) then
+      begin
+        Exit;
+      end;
+
+      if not dmDados.PegarDados(dmDados.qrCadBaseDados, qrCadBaseDados) then
+      begin
+        Exit;
+      end;
+
+      qrCadSistemas.First;
+      while not qrCadSistemas.Eof do
+      begin
+        oTab := TTabSheet.Create(Self.pcBaseDados);
+        oTab.Name := 'pcSistema' + qrCadSistemas.FieldByName('CDSISTEMA').AsString;
+        oTab.Caption := qrCadSistemas.FieldByName('DESISTEMA').AsString;
+        oTab.PageControl := Self.pcBaseDados;
+        oTab.TabVisible := False;
+
+        qrCadBaseDados.Filtered := False;
+        qrCadBaseDados.Filter := 'CDSISTEMA = ' + qrCadSistemas.FieldByName('CDSISTEMA').AsString;
+        qrCadBaseDados.Filtered := True;
+
+        qrCadBaseDados.First;
+        while not qrCadBaseDados.Eof do
+        begin
+          case AnsiIndexStr(qrCadBaseDados.FieldByName('TPBASEDADOS').AsString, ['D', 'O', 'S']) of
+            0:
+              begin
+                sTipoBanco := 'DB2';
+              end;
+            1:
+              begin
+                sTipoBanco := 'ORACLE';
+              end;
+            2:
+              begin
+                sTipoBanco := 'SQLSERVER';
+              end;
+          end;
+
+          oBase := TRadioButton.Create(oTab);
+          oBase.Caption := qrCadBaseDados.FieldByName('DEBASEDADOS').AsString;
+          oBase.Hint := qrCadBaseDados.FieldByName('DEALIAS').AsString + ',' + qrCadBaseDados.FieldByName('DEINSTANCIA').AsString + ',' + sTipoBanco;
+          oBase.Parent := oTab;
+          oBase.Align := alTop;
+          oBase.ShowHint := True;
+          oBase.OnClick := OnDefinirBaseDados;
+
+          qrCadBaseDados.Next;
+        end;
+
+        qrCadSistemas.Next;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(qrCadSistemas);
+    FreeAndNil(qrCadBaseDados);
+  end;
+end;
+
+procedure TspmFrameArvoreWorkSpace.AbrirExecutavelWorkSpace(const psPathExecutavel: string);
+var
+  oHandle: THandle;
+begin
+  try
+    try
+      ShellExecute(oHandle, nil, PChar(psPathExecutavel), sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, SW_SHOWNORMAL);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+end.
+

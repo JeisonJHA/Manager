@@ -1,0 +1,16 @@
+unit uspmConstante;
+
+interface
+
+const
+  sNOME_BASE_DADOS_DB2 = 'DB2';
+  sNOME_BASE_DADOS_SQL_SERVER = 'SQL Server';
+  sNOME_BASE_DADOS_ORACLE = 'Oracle';
+
+  sTIPO_BASE_DADOS_DB2 = 'D';
+  sTIPO_BASE_DADOS_SQL_SERVER = 'S';
+  sTIPO_BASE_DADOS_ORACLE = 'O';
+
+implementation
+
+end.

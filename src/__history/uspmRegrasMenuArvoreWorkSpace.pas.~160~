@@ -1,0 +1,791 @@
+unit uspmRegrasMenuArvoreWorkSpace;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ActnList,
+  Vcl.Menus, Vcl.ExtCtrls, Vcl.AppEvnts, Vcl.ComCtrls, Data.DB, Datasnap.DBClient,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, Vcl.StdCtrls, Winapi.ShellApi,
+  Winapi.Windows, JvDBTreeView, JvTrayIcon, IniFiles, JvRadioGroup;
+
+type
+  TspmRegrasMenuArvoreWorkSpace = class
+  private
+    FtvArvoreWorkSpace: TJvDBTreeView;
+    FpnWorkSpacePadrao: TPanel;
+    FcdsArvoreWorkSpace: TClientDataSet;
+    FdsArvoreWorkSpace: TDataSource;
+    FppArvoreWorkSpace: TPopupMenu;
+    FppTrayIconMenu: TPopupMenu;
+    FtiTrayIconMenu: TJvTrayIcon;
+    FacTrayIconAcaoSair: TAction;
+    FrgBaseDados: TJvRadioGroup;
+    procedure OnArvoreWorkSpaceDataChange(Sender: TObject; Field: TField);
+    procedure OnArvoreWorkSpaceDblClick(Sender: TObject);
+    procedure OnArvoreWorkSpacePopUpPadraoClick(Sender: TObject);
+    procedure OnArvoreWorkSpacePopUpApagarLogClick(Sender: TObject);
+    procedure OnArvoreWorkSpacePopUpApagarCacheClick(Sender: TObject);
+    procedure OnArvoreWorkSpacePopUpExploreSrcClick(Sender: TObject);
+    procedure OnArvoreWorkSpacePopUpExploreBinClick(Sender: TObject);
+    procedure OnPopUpTrayIconAbrirExecutavelClick(Sender: TObject);
+    procedure DefinirPropriedadesArvoreWorkSpace;
+    procedure DefinirEstruturaDadosArvoreWorkSpace;
+    procedure DefinirPopUpMenuArvoreWorkSpace;
+    procedure AbrirExecutavelWorkSpace(const psPathExecutavel: string);
+    procedure DefinirWorkSpacePadrao;
+    procedure DefinirPopUpMenuTrayIcon(const psWorkSpace: string);
+    procedure DefinirCaptionWorkSpacePadrao(const psWorkSpace: string);
+    procedure LocalizarWorkSpacePadrao(const psWorkSpace: string);
+    procedure CriarNodoArvoreWorkSpace(const pnCodigo: integer; const pnCodigoPai: integer; const psDecricao: string; const pnNivel: integer; const psPath: string; const psModulo: string; const psAlias: string; const psInstancia: string);
+    procedure CriarNodoArvoreWorkSpaceExecutavel(var pnCodigo: integer; const pnCodigoPai: integer; const psModulo: string; const psNomeCampo: string; pqrCloneSistema: TZQuery; const psNomeBranch: string; const psAlias: string; const psInstancia: string);
+    procedure CriarListaBaseDados;
+    procedure PegarBaseConfiguradaArquivoIni(psArquivo: string; var psAlias: string; var psInstancia: string);
+  public
+    constructor Create(poArvoreWorkSpace: TJvDBTreeView; poPainelWorkSpace: TPanel; poTrayIconMenu: TJvTrayIcon; poActionSair: TAction; poRadioGroupBaseDados: TJvRadioGroup);
+    destructor Destroy; override;
+    procedure OnArvoreWorkFullExpand(Sender: TObject);
+    procedure OnArvoreWorkFullCollapse(Sender: TObject);
+    procedure CriarArvoreWorkSpace;
+    property spmDataSourceArvoreWorkSpace: TDataSource read FdsArvoreWorkSpace;
+  end;
+
+implementation
+
+{ TspmRegrasMenuListaWorkSpace }
+
+uses
+  usmpDados, uspmFuncoes, uspmConstantes;
+
+constructor TspmRegrasMenuArvoreWorkSpace.Create(poArvoreWorkSpace: TJvDBTreeView; poPainelWorkSpace: TPanel; poTrayIconMenu: TJvTrayIcon; poActionSair: TAction; poRadioGroupBaseDados: TJvRadioGroup);
+begin
+  try
+    try
+      Self.FtvArvoreWorkSpace := poArvoreWorkSpace;
+      Self.FpnWorkSpacePadrao := poPainelWorkSpace;
+      Self.FtiTrayIconMenu := poTrayIconMenu;
+      Self.FacTrayIconAcaoSair := poActionSair;
+      Self.FrgBaseDados := poRadioGroupBaseDados;
+
+      Self.FppArvoreWorkSpace := TPopupMenu.Create(nil);
+      Self.FppTrayIconMenu := TPopupMenu.Create(nil);
+
+      Self.DefinirPopUpMenuArvoreWorkSpace;
+
+      Self.FcdsArvoreWorkSpace := TClientDataSet.Create(nil);
+      Self.FdsArvoreWorkSpace := TDataSource.Create(nil);
+
+      Self.FtvArvoreWorkSpace.PopupMenu := Self.FppArvoreWorkSpace;
+      Self.FdsArvoreWorkSpace.OnDataChange := Self.OnArvoreWorkSpaceDataChange;
+      Self.FtvArvoreWorkSpace.OnDblClick := Self.OnArvoreWorkSpaceDblClick;
+      Self.FtiTrayIconMenu.PopupMenu := Self.FppTrayIconMenu;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+destructor TspmRegrasMenuArvoreWorkSpace.Destroy;
+begin
+  try
+    try
+      FreeAndNil(Self.FppArvoreWorkSpace);
+      FreeAndNil(Self.FppTrayIconMenu);
+      FreeAndNil(Self.FcdsArvoreWorkSpace);
+      FreeAndNil(Self.FdsArvoreWorkSpace);
+
+      inherited;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkFullCollapse(Sender: TObject);
+begin
+  try
+    try
+      Self.FtvArvoreWorkSpace.FullCollapse;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkFullExpand(Sender: TObject);
+begin
+  try
+    try
+      Self.FtvArvoreWorkSpace.FullExpand;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkSpaceDataChange(Sender: TObject; Field: TField);
+begin
+  try
+    try
+      Self.FppArvoreWorkSpace.Items.Find('Padrão').Visible := (Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.FppArvoreWorkSpace.Items.Find('Apagar Cache').Visible := (Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.FppArvoreWorkSpace.Items.Find('Apagar Logs').Visible := (Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.FppArvoreWorkSpace.Items.Find('Abrir Src').Visible := (Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+      Self.FppArvoreWorkSpace.Items.Find('Abrir Bin').Visible := (Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').Value = nNIVEL_WORKSPACE);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkSpacePopUpApagarCacheClick(Sender: TObject);
+var
+  oHandle: THandle;
+  cdsDados: TClientDataSet;
+begin
+  cdsDados := TClientDataSet.Create(nil);
+  try
+    try
+      Self.LocalizarWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+
+      cdsDados.Data := Self.FcdsArvoreWorkSpace.Data;
+
+      cdsDados.Filtered := False;
+      cdsDados.Filter := 'CODIGOPAI = ' + Self.FcdsArvoreWorkSpace.FieldByName('CODIGO').AsString;
+      cdsDados.Filtered := True;
+
+      cdsDados.First;
+      while not cdsDados.Eof do
+      begin
+        DeletarDiretorio(oHandle, cdsDados.FieldByName('PATH').AsString + 'Cache', False);
+
+        cdsDados.Next;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(cdsDados);
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkSpacePopUpApagarLogClick(Sender: TObject);
+var
+  cdsDados: TClientDataSet;
+begin
+  cdsDados := TClientDataSet.Create(nil);
+  try
+    try
+      Self.LocalizarWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+
+      cdsDados.Data := Self.FcdsArvoreWorkSpace.Data;
+
+      cdsDados.Filtered := False;
+      cdsDados.Filter := 'CODIGOPAI = ' + Self.FcdsArvoreWorkSpace.FieldByName('CODIGO').AsString;
+      cdsDados.Filtered := True;
+
+      cdsDados.First;
+      while not cdsDados.Eof do
+      begin
+        DeletarArquivo(cdsDados.FieldByName('PATH').AsString + '*.txt');
+
+        cdsDados.Next;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(cdsDados);
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkSpacePopUpExploreBinClick(Sender: TObject);
+begin
+  try
+    try
+      Self.LocalizarWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+      ShellExecute(Application.Handle, PChar('open'), PChar('explorer.exe'), PChar(Self.FcdsArvoreWorkSpace.FieldByName('PATH').AsString + 'BIN'), nil, SW_NORMAL);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkSpacePopUpExploreSrcClick(Sender: TObject);
+begin
+  try
+    try
+      Self.LocalizarWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+      ShellExecute(Application.Handle, PChar('open'), PChar('explorer.exe'), PChar(Self.FcdsArvoreWorkSpace.FieldByName('PATH').AsString + 'SRC'), nil, SW_NORMAL);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkSpacePopUpPadraoClick(Sender: TObject);
+begin
+  try
+    try
+      Self.DefinirWorkSpacePadrao;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnPopUpTrayIconAbrirExecutavelClick(Sender: TObject);
+begin
+  try
+    try
+      Self.LocalizarWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+      Self.AbrirExecutavelWorkSpace(TmenuItem(Sender).Hint);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.PegarBaseConfiguradaArquivoIni(psArquivo: string; var psAlias: string; var psInstancia: string);
+var
+  oArquivoIni: TIniFile;
+begin
+  oArquivoIni := TIniFile.Create(psArquivo);
+  try
+    try
+      psAlias := sSTRING_INDEFINIDO;
+      psInstancia := sSTRING_INDEFINIDO;
+
+      if not FileExists(psArquivo) then
+      begin
+        Exit;
+      end;
+
+      psAlias := oArquivoIni.ReadString('DATABASE', 'ALIAS', sSTRING_INDEFINIDO);
+      psInstancia := oArquivoIni.ReadString('DATABASE', 'INSTANCIA', sSTRING_INDEFINIDO);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(oArquivoIni);
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.DefinirWorkSpacePadrao;
+begin
+  try
+    try
+      dmDados.qrCfgManager.Edit;
+      dmDados.qrCfgManagerDEWSPADRAO.Value := Self.FcdsArvoreWorkSpace.FieldByName('DESCRICAO').Value;
+      dmDados.qrCfgManager.Post;
+      dmDados.qrCfgManager.Refresh;
+
+      Self.DefinirCaptionWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+      Self.DefinirPopUpMenuTrayIcon(dmDados.qrCfgManagerDEWSPADRAO.Value);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.DefinirPropriedadesArvoreWorkSpace;
+begin
+  try
+    try
+      Self.FtvArvoreWorkSpace.DetailField := 'CODIGOPAI';
+      Self.FtvArvoreWorkSpace.ItemField := 'DESCRICAO';
+      Self.FtvArvoreWorkSpace.MasterField := 'CODIGO';
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.DefinirCaptionWorkSpacePadrao(const psWorkSpace: string);
+begin
+  try
+    try
+      Self.FpnWorkSpacePadrao.Caption := psWorkSpace;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.DefinirEstruturaDadosArvoreWorkSpace;
+begin
+  try
+    try
+      Self.FcdsArvoreWorkSpace.Close;
+      Self.FcdsArvoreWorkSpace.FieldDefs.Clear;
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('CODIGO', ftFloat);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('CODIGOPAI', ftFloat);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('DESCRICAO', ftString, 50);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('NIVEL', ftFloat);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('PATH', ftString, 500);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('PATHEXECUTAVEL', ftString, 500);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('MODULO', ftString, 50);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('ALIAS', ftString, 50);
+      Self.FcdsArvoreWorkSpace.FieldDefs.Add('INSTANCIA', ftString, 100);
+      Self.FcdsArvoreWorkSpace.CreateDataSet;
+      Self.FcdsArvoreWorkSpace.LogChanges := False;
+
+      Self.FcdsArvoreWorkSpace.Active := True;
+
+      Self.FcdsArvoreWorkSpace.FieldByName('CODIGO').DisplayWidth := 10;
+      Self.FcdsArvoreWorkSpace.FieldByName('CODIGOPAI').DisplayWidth := 10;
+      Self.FcdsArvoreWorkSpace.FieldByName('DESCRICAO').DisplayWidth := 30;
+      Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').DisplayWidth := 5;
+      Self.FcdsArvoreWorkSpace.FieldByName('PATH').DisplayWidth := 50;
+      Self.FcdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').DisplayWidth := 50;
+      Self.FcdsArvoreWorkSpace.FieldByName('MODULO').DisplayWidth := 10;
+      Self.FcdsArvoreWorkSpace.FieldByName('ALIAS').DisplayWidth := 10;
+      Self.FcdsArvoreWorkSpace.FieldByName('INSTANCIA').DisplayWidth := 20;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.DefinirPopUpMenuArvoreWorkSpace;
+var
+  oItem: TMenuItem;
+begin
+  try
+    try
+      oItem := TmenuItem.Create(Self.FppArvoreWorkSpace);
+      oItem.Caption := 'Padrão';
+      oItem.OnClick := OnArvoreWorkSpacePopUpPadraoClick;
+      Self.FppArvoreWorkSpace.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppArvoreWorkSpace);
+      oItem.Caption := 'Apagar Cache';
+      oItem.OnClick := OnArvoreWorkSpacePopUpApagarCacheClick;
+      Self.FppArvoreWorkSpace.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppArvoreWorkSpace);
+      oItem.Caption := 'Apagar Logs';
+      oItem.OnClick := OnArvoreWorkSpacePopUpApagarLogClick;
+      Self.FppArvoreWorkSpace.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppArvoreWorkSpace);
+      oItem.Caption := 'Abrir Src';
+      oItem.OnClick := OnArvoreWorkSpacePopUpExploreSrcClick;
+      Self.FppArvoreWorkSpace.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppArvoreWorkSpace);
+      oItem.Caption := 'Abrir Bin';
+      oItem.OnClick := OnArvoreWorkSpacePopUpExploreBinClick;
+      Self.FppArvoreWorkSpace.Items.Add(oItem);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.DefinirPopUpMenuTrayIcon(const psWorkSpace: string);
+var
+  cdsDados: TClientDataSet;
+  oItem: TMenuItem;
+  oSubMenuItem: TMenuItem;
+  sCodigo: string;
+begin
+  cdsDados := TClientDataSet.Create(nil);
+  try
+    try
+      Self.FppTrayIconMenu.Items.Clear;
+
+      cdsDados.Data := Self.FcdsArvoreWorkSpace.Data;
+
+      if not cdsDados.Locate('DESCRICAO', psWorkSpace, []) then
+      begin
+        Exit;
+      end;
+
+      sCodigo := cdsDados.FieldByName('CODIGO').AsString;
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := cdsDados.FieldByName('DESCRICAO').AsString;
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := '-';
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      cdsDados.Filtered := False;
+      cdsDados.Filter := 'CODIGOPAI = ' + sCodigo;
+      cdsDados.Filtered := True;
+
+      oSubMenuItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oSubMenuItem.Caption := 'Executáveis';
+      Self.FppTrayIconMenu.Items.Add(oSubMenuItem);
+
+      cdsDados.First;
+      while not cdsDados.Eof do
+      begin
+        oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+        oItem.Caption := cdsDados.FieldByName('DESCRICAO').AsString;
+        oItem.Hint := cdsDados.FieldByName('PATHEXECUTAVEL').AsString;
+        oItem.OnClick := OnPopUpTrayIconAbrirExecutavelClick;
+        oSubMenuItem.Add(oItem);
+
+        cdsDados.Next;
+      end;
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := '-';
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := 'Apagar Cache';
+      oItem.OnClick := OnArvoreWorkSpacePopUpApagarCacheClick;
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := 'Apagar Logs';
+      oItem.OnClick := OnArvoreWorkSpacePopUpApagarLogClick;
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := 'Abrir Src';
+      oItem.OnClick := OnArvoreWorkSpacePopUpExploreSrcClick;
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := 'Abrir Bin';
+      oItem.OnClick := OnArvoreWorkSpacePopUpExploreBinClick;
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Caption := '-';
+      Self.FppTrayIconMenu.Items.Add(oItem);
+
+      oItem := TmenuItem.Create(Self.FppTrayIconMenu);
+      oItem.Action := Self.FacTrayIconAcaoSair;
+      Self.FppTrayIconMenu.Items.Add(oItem);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(cdsDados);
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.LocalizarWorkSpacePadrao(const psWorkSpace: string);
+var
+  i: integer;
+begin
+  try
+    try
+      Self.FtvArvoreWorkSpace.FullCollapse;
+
+      Self.FcdsArvoreWorkSpace.Locate('DESCRICAO', psWorkSpace, []);
+      Self.FtvArvoreWorkSpace.SelectNode(Self.FcdsArvoreWorkSpace.FieldByName('CODIGO').Value);
+
+      for i := 0 to Self.FtvArvoreWorkSpace.Items.Count - 1 do
+      begin
+        if (Self.FtvArvoreWorkSpace.Items[i].Text = psWorkSpace) then
+        begin
+          Self.FtvArvoreWorkSpace.Items.Item[i].Expand(true);
+          Break;
+        end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.AbrirExecutavelWorkSpace(const psPathExecutavel: string);
+var
+  oHandle: THandle;
+begin
+  try
+    try
+      ShellExecute(oHandle, nil, PChar(psPathExecutavel), sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, SW_SHOWNORMAL);
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.CriarArvoreWorkSpace;
+var
+  qrCloneSistema: TZQuery;
+  slListaBranch: TStringList;
+  i: integer;
+  nCodigo: Integer;
+  nCodigoSistema: Integer;
+  nCodigoWorkSpace: Integer;
+  sAlias: string;
+  sInstancia: string;
+begin
+  nCodigo := 0;
+
+  qrCloneSistema := TZQuery.Create(nil);
+  slListaBranch := TStringList.Create;
+  try
+    if not dmDados.PegarDados(dmDados.qrCadSistemas, qrCloneSistema) then
+    begin
+      Exit;
+    end;
+
+    Self.DefinirEstruturaDadosArvoreWorkSpace;
+    Self.DefinirPropriedadesArvoreWorkSpace;
+
+    qrCloneSistema.First;
+    while not qrCloneSistema.Eof do
+    begin
+      Inc(nCodigo);
+      nCodigoSistema := nCodigo;
+
+      Self.CriarNodoArvoreWorkSpace(nCodigoSistema, 0, qrCloneSistema.FieldByName('DESISTEMA').Value, nNIVEL_SISTEMA, sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, sSTRING_INDEFINIDO, sSTRING_INDEFINIDO);
+
+      uspmFuncoes.PegarListaDeDiretorios(dmDados.qrCfgManagerDEPATHREFER.Value + '\', slListaBranch);
+      for i := 0 to slListaBranch.Count - 1 do
+      begin
+        if Pos(qrCloneSistema.FieldByName('DEDIRREFER').AsString, UpperCase(Trim(slListaBranch[i]))) > 0 then
+        begin
+          Inc(nCodigo);
+          nCodigoWorkSpace := nCodigo;
+
+          PegarBaseConfiguradaArquivoIni(dmDados.qrCfgManagerDEPATHREFER.Value + '\' + Trim(slListaBranch[i]) + '\bin\spCfg.ini', sAlias, sInstancia);
+
+          Self.CriarNodoArvoreWorkSpace(nCodigoWorkSpace, nCodigoSistema, Trim(slListaBranch[i]), nNIVEL_WORKSPACE, dmDados.qrCfgManagerDEPATHREFER.Value + '\' + Trim(slListaBranch[i]) + '\', sSTRING_INDEFINIDO, sAlias, sInstancia);
+
+          Self.CriarNodoArvoreWorkSpaceExecutavel(nCodigo, nCodigoWorkSpace, 'BIN', 'DELISTAEXE', qrCloneSistema, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(nCodigo, nCodigoWorkSpace, 'PRO', 'DELISTAEXEPRO', qrCloneSistema, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(nCodigo, nCodigoWorkSpace, 'SGC', 'DELISTAEXESGC', qrCloneSistema, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(nCodigo, nCodigoWorkSpace, 'ARC', 'DELISTAEXEARC', qrCloneSistema, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(nCodigo, nCodigoWorkSpace, 'PSS', 'DELISTAEXEPSS', qrCloneSistema, Trim(slListaBranch[i]), sAlias, sInstancia);
+          Self.CriarNodoArvoreWorkSpaceExecutavel(nCodigo, nCodigoWorkSpace, 'BIN', 'DELISTAEXEEXT', qrCloneSistema, Trim(slListaBranch[i]), sAlias, sInstancia);
+        end;
+      end;
+
+      qrCloneSistema.Next;
+    end;
+
+    Self.FdsArvoreWorkSpace.DataSet := Self.FcdsArvoreWorkSpace;
+    Self.FtvArvoreWorkSpace.DataSource := Self.FdsArvoreWorkSpace;
+
+    Self.LocalizarWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+    Self.DefinirCaptionWorkSpacePadrao(dmDados.qrCfgManagerDEWSPADRAO.Value);
+    Self.DefinirPopUpMenuTrayIcon(dmDados.qrCfgManagerDEWSPADRAO.Value);
+
+    Self.CriarListaBaseDados;
+  finally
+    FreeAndNil(slListaBranch);
+    FreeAndNil(qrCloneSistema)
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.CriarListaBaseDados;
+var
+  qrCloneBaseDados: TZQuery;
+begin
+  qrCloneBaseDados := TZQuery.Create(nil);
+  try
+    if not dmDados.PegarDados(dmDados.qrCadBaseDados, qrCloneBaseDados) then
+    begin
+      Exit;
+    end;
+
+    qrCloneBaseDados.First;
+    while not qrCloneBaseDados.Eof do
+    begin
+      Self.FrgBaseDados.Items.Add(qrCloneBaseDados.FieldByName('DEBASEDADOS').AsString);
+
+      qrCloneBaseDados.Next;
+    end;
+  finally
+    FreeAndNil(qrCloneBaseDados)
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.CriarNodoArvoreWorkSpace(const pnCodigo: integer; const pnCodigoPai: integer; const psDecricao: string; const pnNivel: integer; const psPath: string; const psModulo: string; const psAlias: string; const psInstancia: string);
+begin
+  try
+    try
+      Self.FcdsArvoreWorkSpace.Append;
+      Self.FcdsArvoreWorkSpace.FieldByName('CODIGO').Value := pnCodigo;
+      Self.FcdsArvoreWorkSpace.FieldByName('CODIGOPAI').Value := pnCodigoPai;
+      Self.FcdsArvoreWorkSpace.FieldByName('DESCRICAO').Value := psDecricao;
+      Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').Value := pnNivel;
+      if (pnNivel = nNIVEL_EXECUTAVEL) then
+      begin
+        Self.FcdsArvoreWorkSpace.FieldByName('PATH').AsString := ExtractFilePath(psPath);
+        Self.FcdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').AsString := psPath;
+      end
+      else
+      begin
+        Self.FcdsArvoreWorkSpace.FieldByName('PATH').AsString := psPath;
+        Self.FcdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').AsString := psPath;
+      end;
+      Self.FcdsArvoreWorkSpace.FieldByName('MODULO').AsString := psModulo;
+      Self.FcdsArvoreWorkSpace.FieldByName('ALIAS').AsString := psAlias;
+      Self.FcdsArvoreWorkSpace.FieldByName('INSTANCIA').AsString := psInstancia;
+      Self.FcdsArvoreWorkSpace.Post;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.CriarNodoArvoreWorkSpaceExecutavel(var pnCodigo: integer; const pnCodigoPai: integer; const psModulo: string; const psNomeCampo: string; pqrCloneSistema: TZQuery; const psNomeBranch: string; const psAlias: string; const psInstancia: string);
+var
+  slListaExec: TStringList;
+  j: integer;
+  sPathArquivo: string;
+begin
+  slListaExec := TStringList.Create;
+  try
+    try
+      slListaExec.CommaText := pqrCloneSistema.FieldByName(psNomeCampo).AsString;
+      for j := 0 to slListaExec.Count - 1 do
+      begin
+        uspmFuncoes.LocalizarArquivo(dmDados.qrCfgManagerDEPATHREFER.Value + '\' + Trim(psNomeBranch) + '\bin', UpperCase(slListaExec[j]), sPathArquivo);
+
+        if not (Trim(sPathArquivo) = sSTRING_INDEFINIDO) then
+        begin
+          Inc(pnCodigo);
+          Self.CriarNodoArvoreWorkSpace(pnCodigo, pnCodigoPai, ChangeFileExt(UpperCase(slListaExec[j]), sSTRING_INDEFINIDO), nNIVEL_EXECUTAVEL, sPathArquivo, psModulo, psAlias, psInstancia);
+        end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+    FreeAndNil(slListaExec);
+  end;
+end;
+
+procedure TspmRegrasMenuArvoreWorkSpace.OnArvoreWorkSpaceDblClick(Sender: TObject);
+begin
+  try
+    try
+      case Self.FcdsArvoreWorkSpace.FieldByName('NIVEL').AsInteger of
+        nNIVEL_SISTEMA:
+          begin
+
+          end;
+        nNIVEL_WORKSPACE:
+          begin
+            Self.DefinirWorkSpacePadrao;
+          end;
+        nNIVEL_EXECUTAVEL:
+          begin
+            Self.AbrirExecutavelWorkSpace(Self.FcdsArvoreWorkSpace.FieldByName('PATHEXECUTAVEL').AsString);
+          end;
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  finally
+
+  end;
+end;
+
+end.
+

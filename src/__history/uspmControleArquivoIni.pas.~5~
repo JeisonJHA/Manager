@@ -1,0 +1,21 @@
+unit uspmControleArquivoIni;
+
+interface
+
+uses
+  SysUtils, Classes, IniFiles;
+
+type
+  TspmControleArquivoIni = class
+  private
+     class var _Instancia: TspmControleArquivoIni;
+  public
+    destructor Destroy; override;
+    class function Instancia: TspmControleArquivoIni;
+    class function NovaInstancia: TObject; override;
+  end;
+
+implementation
+
+
+end.
