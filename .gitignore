@@ -4,3 +4,4 @@
 *pas.~*
 *.~*
 *.bak*
+/packages/DelphiXE3/*.stat
