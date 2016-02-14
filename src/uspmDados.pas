@@ -61,11 +61,9 @@ type
     qrCadSistemasDELISTAEXEEXT: TWideStringField;
     qrCadBaseDadosTPBASEDADOS: TWideStringField;
     qrCadBaseDadosCC_DETPBASEDADOS: TWideMemoField;
-    FDConnection1: TFDConnection;
-    FDTransaction1: TFDTransaction;
-    InstantFireDACConnector1: TInstantFireDACConnector;
     SmallImageList: TcxImageList;
     LargeImageList: TcxImageList;
+    MediumImageList: TcxImageList;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;

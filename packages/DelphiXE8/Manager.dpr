@@ -21,8 +21,7 @@ uses
   uspmDados in '..\..\src\uspmDados.pas' {dmDados: TDataModule},
   ufrmConfigDatabase in '..\..\src\ufrmConfigDatabase.pas' {frmConfigDatabase},
   ufrmWorkspace in '..\..\src\ufrmWorkspace.pas' {frmWorkspace},
-  AplicacaoAction in '..\..\src\AplicacaoAction.pas',
-  ufrmRGBToColor in '..\..\src\ufrmRGBToColor.pas' {frmRGBToColor};
+  AplicacaoAction in '..\..\src\AplicacaoAction.pas';
 
 {$R *.res}
 

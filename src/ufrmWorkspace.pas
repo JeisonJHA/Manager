@@ -95,7 +95,7 @@ begin
       BIL.Item.OnClick := OnExecutarAmbienteClick;
       BIL.Item.Tag := Qry.FieldByName('CDAPLICACOES').AsInteger;
       BIL.Item.Caption := Qry.FieldByName('DEAPLICACOES').AsString;
-      BIL.Item.ImageIndex := 8;
+      BIL.Item.ImageIndex := 11;
       BIL.Item.Category := dxBarManager1.Categories.IndexOf('Default');
 
       Qry.Next;

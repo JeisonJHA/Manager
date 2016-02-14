@@ -155,7 +155,18 @@ object frmPrincipal: TfrmPrincipal
     Top = 614
     Width = 1071
     Height = 23
-    Panels = <>
+    Images = dmDados.SmallImageList
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.ImageIndex = 1
+        Width = 255
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.Alignment = taRightJustify
+        Width = 100
+      end>
     Ribbon = dxRibbon1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clDefault
@@ -246,7 +257,7 @@ object frmPrincipal: TfrmPrincipal
           Font.Name = 'Segoe UI'
           Font.Style = []
           ParentFont = False
-          LargeImages = dmDados.LargeImageList
+          LargeImages = dmDados.MediumImageList
           MaximizedCount = 3
           NavPanelFont.Charset = DEFAULT_CHARSET
           NavPanelFont.Color = clWindowText
@@ -257,7 +268,7 @@ object frmPrincipal: TfrmPrincipal
           NavPanelHotTrackFont.Color = clWindowText
           NavPanelHotTrackFont.Height = -12
           NavPanelHotTrackFont.Name = 'Segoe UI'
-          NavPanelHotTrackFont.Style = [fsBold]
+          NavPanelHotTrackFont.Style = []
           SmallImages = dmDados.SmallImageList
           object JvNavPanelPage1: TJvNavPanelPage
             Left = 0
@@ -285,7 +296,7 @@ object frmPrincipal: TfrmPrincipal
             Background.Tile = False
             Background.Transparent = False
             Caption = 'Segundo Grau (SG5)'
-            ImageIndex = 9
+            ImageIndex = 10
           end
           object JvNavPanelPage3: TJvNavPanelPage
             Left = 0
@@ -367,10 +378,6 @@ object frmPrincipal: TfrmPrincipal
         item
           Visible = True
           ItemName = 'btnCadAplicacoes'
-        end
-        item
-          Visible = True
-          ItemName = 'btnRGBToColor'
         end>
       OneOnRow = True
       Row = 1
@@ -381,7 +388,7 @@ object frmPrincipal: TfrmPrincipal
     object barAplicacoes: TdxBar
       Caption = 'Aplica'#231#245'es'
       CaptionButtons = <>
-      DockedLeft = 255
+      DockedLeft = 200
       DockedTop = 0
       FloatLeft = 1105
       FloatTop = 8
@@ -409,14 +416,6 @@ object frmPrincipal: TfrmPrincipal
     object btnCadAplicacoes: TdxBarLargeButton
       Action = actCadAplicacoes
       Category = 0
-    end
-    object btnRGBToColor: TdxBarLargeButton
-      Caption = 'RGB To Color'
-      Category = 0
-      Hint = 'RGB To Color'
-      Visible = ivAlways
-      LargeImageIndex = 5
-      OnClick = btnRGBToColorClick
     end
   end
   object dxSkinController1: TdxSkinController

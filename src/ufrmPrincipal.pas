@@ -51,7 +51,6 @@ type
     cxLabel2: TcxLabel;
     SpeedButton1: TSpeedButton;
     dxTabbedMDIManager1: TdxTabbedMDIManager;
-    btnRGBToColor: TdxBarLargeButton;
     dxDockingManager1: TdxDockingManager;
     dxDockSite1: TdxDockSite;
     dxDockPanel1: TdxDockPanel;
@@ -71,6 +70,7 @@ type
     { Private declarations }
     procedure Teste;
     procedure CarregarAplicacoes;
+    procedure CarregarVersao;
     procedure OnExecutarAplicativoClick(Sender: TObject);
   public
     { Public declarations }
@@ -84,9 +84,7 @@ implementation
 {$R *.dfm}
 
 uses JvTypes, uspmFuncoes, uspmCadSistemas, uspmCadBaseDados, uspmCadAplicacoes,
-  ufrmWorkspace,
-
-  ZDataset, Winapi.ShellApi, uspmDados, ufrmRGBToColor;
+  ufrmWorkspace, ZDataset, Winapi.ShellApi, uspmDados;
 
 { TForm1 }
 
@@ -120,8 +118,7 @@ var
 begin
   try
     ShellExecute(handle, nil, PChar(TAplicacaoAction(Sender).Executavel),
-      PChar(TAplicacaoAction(Sender).Parametros), '',
-      SW_SHOWNORMAL);
+      PChar(TAplicacaoAction(Sender).Parametros), '', SW_SHOWNORMAL);
   except
     on E: Exception do
     begin
@@ -140,7 +137,8 @@ begin
   try
     Qry.Connection := dmDados.dmConexao;
     Qry.SQL.Clear;
-    Qry.SQL.Add('SELECT AP.* FROM CADAPLICACOES AP WHERE FLWORKSPACE = :FLWORKSPACE');
+    Qry.SQL.Add
+      ('SELECT AP.* FROM CADAPLICACOES AP WHERE FLWORKSPACE = :FLWORKSPACE');
     Qry.ParamByName('FLWORKSPACE').AsString := 'N';
     Qry.Open;
 
@@ -168,6 +166,18 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.CarregarVersao;
+begin
+  try
+    dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + PegarVersaoAplicacao;
+  except
+    on E: Exception do
+    begin
+      raise Exception.Create(E.Message);
+    end;
+  end;
+end;
+
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   DisableAero := True;
@@ -177,6 +187,8 @@ procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
   Teste;
   CarregarAplicacoes;
+  CarregarVersao;
+  dxRibbonStatusBar1.Panels[0].Text := dmDados.dmConexao.Database;
   with TfrmWorkspace.Create(Self) do
   begin
     Show;
