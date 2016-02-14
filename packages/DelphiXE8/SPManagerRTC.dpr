@@ -18,9 +18,11 @@ uses
   uspmFuncoes in '..\..\src\uspmFuncoes.pas',
   uspmFrameArvoreWorkSpace in '..\..\src\uspmFrameArvoreWorkSpace.pas' {spmFrameArvoreWorkSpace: TFrame},
   uspmFrameBarraBotoes in '..\..\src\uspmFrameBarraBotoes.pas' {spmFrameBarraBotoes: TFrame},
-  uspmForm in '..\..\src\uspmForm.pas' {spmForm};
+  uspmForm in '..\..\src\uspmForm.pas' {spmForm},
+  Configuracao in '..\..\src\models\Configuracao.pas';
 
 {$R *.res}
+{$R *.mdr} {Configuracao}
 
 var
   hMutex: integer;
@@ -53,4 +55,5 @@ begin
   end;
   CloseHandle(hMutex);
 end.
+
 

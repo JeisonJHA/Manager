@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.ComCtrls,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, Vcl.ActnList, Data.DB, System.Actions,
-  Vcl.ImgList, System.StrUtils, Winapi.ShellApi, Winapi.Windows, Vcl.ToolWin;
+  Vcl.ImgList, System.StrUtils, Winapi.ShellApi, Winapi.Windows, Vcl.ToolWin,
+  System.ImageList;
 
 type
   TspmFrameBarraBotoes = class(TFrame)

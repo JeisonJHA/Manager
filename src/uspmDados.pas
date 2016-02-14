@@ -4,7 +4,13 @@ interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Forms, ZConnection, ZAbstractConnection,
-  Data.DB, ZDataset, ZSqlUpdate, ZAbstractRODataset, ZAbstractDataset;
+  Data.DB, ZDataset, ZSqlUpdate, ZAbstractRODataset, ZAbstractDataset,
+  InstantPersistence, InstantBrokers, InstantZeosDBO, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
+  FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  InstantFireDAC, FireDAC.Comp.Client, System.ImageList, Vcl.ImgList,
+  Vcl.Controls, cxGraphics;
 
 type
   TdmDados = class(TDataModule)
@@ -12,7 +18,6 @@ type
     qrCadBaseDados: TZQuery;
     qrCadBaseDadosCDBASEDADOS: TLargeintField;
     qrCadBaseDadosDEBASEDADOS: TWideStringField;
-    qrCadBaseDadosTPBASEDADOS: TWideStringField;
     qrCadBaseDadosDEINSTANCIA: TWideStringField;
     qrCadBaseDadosDEUSUARIO: TWideStringField;
     qrCadBaseDadosDESENHA: TWideStringField;
@@ -22,7 +27,6 @@ type
     upCadSistemas: TZUpdateSQL;
     qrCadSistemasCDSISTEMA: TLargeintField;
     qrCadSistemasDESISTEMA: TWideStringField;
-    qrCadBaseDadosCC_DETPBASEDADOS: TWideStringField;
     qrCadBaseDadosCC_DESISTEMA: TWideStringField;
     qrCadAplicacoes: TZQuery;
     upCadAplicacoes: TZUpdateSQL;
@@ -55,6 +59,13 @@ type
     qrCadSistemasDELISTAEXEARC: TWideStringField;
     qrCadSistemasDELISTAEXEPSS: TWideStringField;
     qrCadSistemasDELISTAEXEEXT: TWideStringField;
+    qrCadBaseDadosTPBASEDADOS: TWideStringField;
+    qrCadBaseDadosCC_DETPBASEDADOS: TWideMemoField;
+    FDConnection1: TFDConnection;
+    FDTransaction1: TFDTransaction;
+    InstantFireDACConnector1: TInstantFireDACConnector;
+    SmallImageList: TcxImageList;
+    LargeImageList: TcxImageList;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;
@@ -103,8 +114,8 @@ end;
 
 procedure TdmDados.Conectar;
 const
-  sNOME_BANCO_DADOS = 'SPManager.sqlite3';
-  sNOME_DLL = 'sqlite3.dll';
+  sNOME_BANCO_DADOS = 'data.db';
+  sNOME_DLL = 'sqlite.dll';
 var
   sPathAplicacao: string;
 begin

@@ -7,7 +7,8 @@ uses
   uspmFormCadPadrao, Data.DB, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
   JvgSpeedButton, JvDialogs, Winapi.Shellapi, Vcl.Buttons, System.Actions, Vcl.ActnList,
   Vcl.ImgList, JvLabel, JvDBControls, Vcl.Grids, Vcl.DBGrids, JvExDBGrids,
-  JvDBGrid, Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls;
+  JvDBGrid, Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls,
+  System.ImageList;
 
 type
   TspmCadAplicacoes = class(TspmFormCadPadrao)

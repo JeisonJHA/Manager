@@ -6,6 +6,9 @@
         <Projects Include="SPManagerRTC.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Manager.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -23,14 +26,23 @@
     <Target Name="SPManagerRTC:Make">
         <MSBuild Projects="SPManagerRTC.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Manager">
+        <MSBuild Projects="Manager.dproj"/>
+    </Target>
+    <Target Name="Manager:Clean">
+        <MSBuild Projects="Manager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Manager:Make">
+        <MSBuild Projects="Manager.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="SPManagerRTC"/>
+        <CallTarget Targets="SPManagerRTC;Manager"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="SPManagerRTC:Clean"/>
+        <CallTarget Targets="SPManagerRTC:Clean;Manager:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="SPManagerRTC:Make"/>
+        <CallTarget Targets="SPManagerRTC:Make;Manager:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -54,7 +54,7 @@ implementation
 { TspmRegrasMenuListaWorkSpace }
 
 uses
-  usmpDados, uspmFuncoes, uspmConstantes;
+  uspmDados, uspmFuncoes, uspmConstantes;
 
 constructor TspmRegrasMenuArvoreWorkSpace.Create(poArvoreWorkSpace: TJvDBTreeView; poPainelWorkSpace: TPanel; poTrayIconMenu: TJvTrayIcon; poActionSair: TAction; poRadioGroupBaseDados: TJvRadioGroup);
 begin

@@ -7,7 +7,7 @@ uses
   Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, JvgSpeedButton, JvSelectDirectory,
   Vcl.Dialogs, JvBaseDlg, Vcl.Buttons, Data.DB, System.Actions, Vcl.ActnList,
   Vcl.ImgList, Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, System.ImageList;
 
 type
   TspmCfgManager = class(TspmFormCfgPadrao)

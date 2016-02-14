@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, Vcl.Controls, Vcl.Forms, uspmFormPadrao,
   System.Actions, Vcl.ActnList, Vcl.ComCtrls, JvTransparentButton, Vcl.ExtCtrls,
   Data.DB, Vcl.DBGrids, JvDBGrid, JvLabel, JvDBControls, ZAbstractRODataset,
-  ZDataset, Vcl.Grids, JvExDBGrids, Vcl.ImgList, JvExControls, JvButton;
+  ZDataset, Vcl.Grids, JvExDBGrids, Vcl.ImgList, JvExControls, JvButton,
+  System.ImageList;
 
 type
   TspmFormCadPadrao = class(TspmFormPadrao)
