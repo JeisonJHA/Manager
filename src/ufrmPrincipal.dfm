@@ -74,7 +74,6 @@ object frmPrincipal: TfrmPrincipal
         OptionsView.Item.Text.Position = posRight
         OptionsView.Item.PinMode = bgipmTag
         Ribbon = dxRibbon1
-        ExplicitHeight = 208
         object dxRibbonBackstageViewGalleryControl1Group1: TdxRibbonBackstageViewGalleryGroup
           ShowCaption = False
           object dxRibbonBackstageViewGalleryControl1Group1Item1: TdxRibbonBackstageViewGalleryItem
@@ -125,7 +124,7 @@ object frmPrincipal: TfrmPrincipal
       object cxTextEdit1: TcxTextEdit
         Left = 20
         Top = 84
-        TabOrder = 3
+        TabOrder = 0
         Text = 'cxTextEdit1'
         Width = 289
       end
@@ -164,8 +163,17 @@ object frmPrincipal: TfrmPrincipal
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.Alignment = taCenter
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         PanelStyle.Alignment = taRightJustify
         Width = 100
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.Alignment = taRightJustify
+        Width = 20
       end>
     Ribbon = dxRibbon1
     Font.Charset = DEFAULT_CHARSET
@@ -191,8 +199,6 @@ object frmPrincipal: TfrmPrincipal
       Top = 0
       Width = 185
       Height = 459
-      ExplicitWidth = 300
-      ExplicitHeight = 200
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 200
@@ -208,7 +214,6 @@ object frmPrincipal: TfrmPrincipal
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
-      ExplicitHeight = 140
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 140
@@ -224,14 +229,12 @@ object frmPrincipal: TfrmPrincipal
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 182
-        ExplicitHeight = 140
         object JvNavigationPane1: TJvNavigationPane
           Left = 0
           Top = 0
           Width = 174
           Height = 415
-          ActivePage = JvNavPanelPage2
+          ActivePage = JvNavPanelPage1
           Align = alClient
           BorderWidth = 0
           Background.Stretch = False
@@ -282,7 +285,7 @@ object frmPrincipal: TfrmPrincipal
             Background.Tile = False
             Background.Transparent = False
             Caption = 'Primeiro Grau (PG5)'
-            ImageIndex = 9
+            ImageIndex = 10
           end
           object JvNavPanelPage2: TJvNavPanelPage
             Left = 0
@@ -310,9 +313,7 @@ object frmPrincipal: TfrmPrincipal
             Background.Tile = False
             Background.Transparent = False
             Caption = 'Minit'#233'rio P'#250'blico (MP)'
-            ImageIndex = 9
-            ExplicitWidth = 182
-            ExplicitHeight = 21
+            ImageIndex = 10
           end
         end
       end
@@ -379,8 +380,8 @@ object frmPrincipal: TfrmPrincipal
           Visible = True
           ItemName = 'btnCadAplicacoes'
         end>
-      OneOnRow = True
-      Row = 1
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -395,7 +396,7 @@ object frmPrincipal: TfrmPrincipal
       FloatClientWidth = 0
       FloatClientHeight = 0
       ItemLinks = <>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -455,6 +456,7 @@ object frmPrincipal: TfrmPrincipal
   object regStorage: TJvAppRegistryStorage
     StorageOptions.BooleanStringTrueValues = 'TRUE, YES, Y'
     StorageOptions.BooleanStringFalseValues = 'FALSE, NO, N'
+    Root = '%NONE%'
     SubStorages = <>
     Left = 880
     Top = 216

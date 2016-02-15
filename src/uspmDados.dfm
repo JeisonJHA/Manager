@@ -11,14 +11,15 @@ object dmDados: TdmDados
       'codepage=UTF-8'
       'controls_cp=CP_UTF16')
     TransactIsolationLevel = tiReadCommitted
+    Connected = True
     DesignConnection = True
     HostName = ''
     Port = 0
-    Database = 'data.db'
+    Database = 'D:\apps\Softplan-Manager\bin\data.db'
     User = ''
     Password = ''
     Protocol = 'sqlite-3'
-    LibraryLocation = 'sqlite.dll'
+    LibraryLocation = 'D:\apps\Softplan-Manager\bin\sqlite.dll'
     Left = 16
     Top = 8
   end
@@ -513,6 +514,13 @@ object dmDados: TdmDados
       FieldName = 'DEPARAMETROS'
       Visible = False
       Size = 400
+    end
+    object qrCadAplicacoesCDICON: TLargeintField
+      FieldName = 'CDICON'
+    end
+    object qrCadAplicacoesFLWORKSPACE: TWideStringField
+      FieldName = 'FLWORKSPACE'
+      Size = 1
     end
   end
   object upCadAplicacoes: TZUpdateSQL

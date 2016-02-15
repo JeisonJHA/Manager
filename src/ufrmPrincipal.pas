@@ -65,7 +65,6 @@ type
     procedure actCadBaseDadosExecute(Sender: TObject);
     procedure actCadAplicacoesExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btnRGBToColorClick(Sender: TObject);
   private
     { Private declarations }
     procedure Teste;
@@ -101,15 +100,6 @@ end;
 procedure TfrmPrincipal.actCadSistemasExecute(Sender: TObject);
 begin
   uspmFuncoes.AbrirFormulario(Self, TspmCadSistemas, spmCadSistemas);
-end;
-
-procedure TfrmPrincipal.btnRGBToColorClick(Sender: TObject);
-begin
-  with TfrmRGBToColor.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
 end;
 
 procedure TfrmPrincipal.OnExecutarAplicativoClick(Sender: TObject);
@@ -169,7 +159,7 @@ end;
 procedure TfrmPrincipal.CarregarVersao;
 begin
   try
-    dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + PegarVersaoAplicacao;
+    dxRibbonStatusBar1.Panels[2].Text := 'Versão: ' + PegarVersaoAplicacao;
   except
     on E: Exception do
     begin
