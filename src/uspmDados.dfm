@@ -9,7 +9,6 @@ object dmDados: TdmDados
     Catalog = ''
     Properties.Strings = (
       'codepage=UTF-8')
-    Connected = True
     DesignConnection = True
     HostName = ''
     Port = 0
