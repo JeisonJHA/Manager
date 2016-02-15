@@ -18,7 +18,10 @@ uses
   uspmFuncoes in 'uspmFuncoes.pas',
   uspmFrameArvoreWorkSpace in 'uspmFrameArvoreWorkSpace.pas' {spmFrameArvoreWorkSpace: TFrame},
   uspmFrameBarraBotoes in 'uspmFrameBarraBotoes.pas' {spmFrameBarraBotoes: TFrame},
-  uspmForm in 'uspmForm.pas' {spmForm};
+  uspmForm in 'uspmForm.pas' {spmForm},
+  Workspace.Utils in 'models\Workspace.Utils.pas',
+  Workspace.Config in 'models\Workspace.Config.pas',
+  Workspace in 'models\Workspace.pas';
 
 {$R *.res}
 

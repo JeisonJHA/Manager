@@ -9,14 +9,15 @@ object dmDados: TdmDados
     Catalog = ''
     Properties.Strings = (
       'codepage=UTF-8')
+    Connected = True
     DesignConnection = True
     HostName = ''
     Port = 0
-    Database = 'C:\Softplan\Projetos\SPManagerRTC\bin\SPManager.sqlite3'
+    Database = 'D:\apps\Softplan-Manager\bin\SPManager.sqlite3'
     User = ''
     Password = ''
     Protocol = 'sqlite-3'
-    LibraryLocation = 'C:\Softplan\Projetos\SPManagerRTC\bin\sqlite3.dll'
+    LibraryLocation = 'D:\apps\Softplan-Manager\bin\sqlite3.dll'
     Left = 16
     Top = 8
   end
@@ -71,21 +72,6 @@ object dmDados: TdmDados
       FieldName = 'CC_DESISTEMA'
       Required = True
       Size = 100
-    end
-    object qrCadBaseDadosTPBASEDADOS: TWideStringField
-      DisplayLabel = 'Tipo'
-      DisplayWidth = 10
-      FieldName = 'TPBASEDADOS'
-      Required = True
-      Visible = False
-      Size = 2
-    end
-    object qrCadBaseDadosCC_DETPBASEDADOS: TWideStringField
-      DisplayLabel = 'Tipo'
-      DisplayWidth = 10
-      FieldName = 'CC_DETPBASEDADOS'
-      ReadOnly = True
-      Size = 510
     end
     object qrCadBaseDadosDEALIAS: TWideStringField
       DisplayLabel = 'Alias'
@@ -160,6 +146,18 @@ object dmDados: TdmDados
       FieldName = 'CC_FLUSAPSS'
       Visible = False
       Size = 2
+    end
+    object qrCadBaseDadosTPBASEDADOS: TWideStringField
+      DisplayLabel = 'Tipo'
+      FieldName = 'TPBASEDADOS'
+      Required = True
+      Size = 1
+    end
+    object qrCadBaseDadosCC_DETPBASEDADOS: TWideMemoField
+      DisplayLabel = 'Tipo'
+      FieldName = 'CC_DETPBASEDADOS'
+      ReadOnly = True
+      BlobType = ftWideMemo
     end
   end
   object upCadBaseDados: TZUpdateSQL

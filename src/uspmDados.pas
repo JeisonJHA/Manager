@@ -12,7 +12,6 @@ type
     qrCadBaseDados: TZQuery;
     qrCadBaseDadosCDBASEDADOS: TLargeintField;
     qrCadBaseDadosDEBASEDADOS: TWideStringField;
-    qrCadBaseDadosTPBASEDADOS: TWideStringField;
     qrCadBaseDadosDEINSTANCIA: TWideStringField;
     qrCadBaseDadosDEUSUARIO: TWideStringField;
     qrCadBaseDadosDESENHA: TWideStringField;
@@ -22,7 +21,6 @@ type
     upCadSistemas: TZUpdateSQL;
     qrCadSistemasCDSISTEMA: TLargeintField;
     qrCadSistemasDESISTEMA: TWideStringField;
-    qrCadBaseDadosCC_DETPBASEDADOS: TWideStringField;
     qrCadBaseDadosCC_DESISTEMA: TWideStringField;
     qrCadAplicacoes: TZQuery;
     upCadAplicacoes: TZUpdateSQL;
@@ -55,6 +53,8 @@ type
     qrCadSistemasDELISTAEXEARC: TWideStringField;
     qrCadSistemasDELISTAEXEPSS: TWideStringField;
     qrCadSistemasDELISTAEXEEXT: TWideStringField;
+    qrCadBaseDadosTPBASEDADOS: TWideStringField;
+    qrCadBaseDadosCC_DETPBASEDADOS: TWideMemoField;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;
