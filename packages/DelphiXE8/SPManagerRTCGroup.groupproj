@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{3A8291B2-11A4-4BC6-A7DA-D7432879CB43}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SPManagerRTC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Manager.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\third-part\MdDataPack\MdDataPack.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SPManagerRTC">
+        <MSBuild Projects="SPManagerRTC.dproj"/>
+    </Target>
+    <Target Name="SPManagerRTC:Clean">
+        <MSBuild Projects="SPManagerRTC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SPManagerRTC:Make">
+        <MSBuild Projects="SPManagerRTC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Manager">
+        <MSBuild Projects="Manager.dproj"/>
+    </Target>
+    <Target Name="Manager:Clean">
+        <MSBuild Projects="Manager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Manager:Make">
+        <MSBuild Projects="Manager.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MdDataPack">
+        <MSBuild Projects="..\..\third-part\MdDataPack\MdDataPack.dproj"/>
+    </Target>
+    <Target Name="MdDataPack:Clean">
+        <MSBuild Projects="..\..\third-part\MdDataPack\MdDataPack.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MdDataPack:Make">
+        <MSBuild Projects="..\..\third-part\MdDataPack\MdDataPack.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SPManagerRTC;Manager;MdDataPack"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SPManagerRTC:Clean;Manager:Clean;MdDataPack:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SPManagerRTC:Make;Manager:Make;MdDataPack:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

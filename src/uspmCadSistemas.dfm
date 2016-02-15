@@ -13,14 +13,6 @@ inherited spmCadSistemas: TspmCadSistemas
         ExplicitTop = 6
         ExplicitWidth = 610
         ExplicitHeight = 339
-        inherited pnPesquisa: TPanel
-          inherited pnContador: TPanel
-            inherited lbValorRegistros: TJvDBStatusLabel
-              Width = 18
-              ExplicitWidth = 18
-            end
-          end
-        end
       end
       inherited tsDados: TTabSheet
         ExplicitLeft = 4
@@ -248,7 +240,7 @@ inherited spmCadSistemas: TspmCadSistemas
   end
   inherited imFormPadrao32: TImageList
     Bitmap = {
-      494C0101060014007C0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106001400800020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000084000000

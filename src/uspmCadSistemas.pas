@@ -7,7 +7,7 @@ uses
   Vcl.StdCtrls, Vcl.DBCtrls, JvDBCheckBox, JvGroupBox, Data.DB, JvExStdCtrls,
   Vcl.Mask, System.Actions, Vcl.ActnList, Vcl.ImgList, JvLabel, JvDBControls,
   Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ComCtrls, JvExControls,
-  JvButton, JvTransparentButton, Vcl.ExtCtrls;
+  JvButton, JvTransparentButton, Vcl.ExtCtrls, System.ImageList;
 
 type
   TspmCadSistemas = class(TspmFormCadPadrao)

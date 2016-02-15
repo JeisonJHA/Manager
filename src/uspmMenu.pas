@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ActnList,
   Vcl.Menus, Vcl.AppEvnts, Vcl.ComCtrls, Vcl.ExtCtrls, JvComputerInfoEx, JvMenus,
   JvTrayIcon, uspmFrameArvoreWorkSpace, uspmFrameBarraBotoes, JvComponentBase,
-  Vcl.ImgList, System.Actions, Vcl.ToolWin, uspmForm;
+  Vcl.ImgList, System.Actions, Vcl.ToolWin, uspmForm, System.ImageList;
 
 type
   TfrmMenu = class(TspmForm)

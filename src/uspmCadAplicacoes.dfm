@@ -1,6 +1,8 @@
 inherited spmCadAplicacoes: TspmCadAplicacoes
   Caption = 'Cadastro de Aplica'#231#245'es'
   OnCreate = FormCreate
+  ExplicitWidth = 624
+  ExplicitHeight = 453
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnFormPadrao: TPanel
@@ -11,6 +13,17 @@ inherited spmCadAplicacoes: TspmCadAplicacoes
         ExplicitTop = 6
         ExplicitWidth = 610
         ExplicitHeight = 339
+        inherited pnPesquisa: TPanel
+          inherited pnContador: TPanel
+            inherited lbValorRegistros: TJvDBStatusLabel
+              Width = 52
+              Height = 26
+            end
+            inherited lbTituloRegistros: TJvLabel
+              Height = 26
+            end
+          end
+        end
       end
       inherited tsDados: TTabSheet
         ExplicitLeft = 4
@@ -57,6 +70,22 @@ inherited spmCadAplicacoes: TspmCadAplicacoes
           Caption = 'Par'#226'metros'
           FocusControl = DBEdit2
         end
+        object Label4: TLabel
+          Left = 96
+          Top = 80
+          Width = 40
+          Height = 13
+          Caption = 'CDICON'
+          FocusControl = cxDBSpinEdit1
+        end
+        object Label5: TLabel
+          Left = 96
+          Top = 120
+          Width = 74
+          Height = 13
+          Caption = 'FLWORKSPACE'
+          FocusControl = cxDBTextEdit1
+        end
         object DBEdit1: TDBEdit
           Left = 96
           Top = 0
@@ -87,12 +116,28 @@ inherited spmCadAplicacoes: TspmCadAplicacoes
           DataSource = dsFormCadPadrao
           TabOrder = 2
         end
+        object cxDBSpinEdit1: TcxDBSpinEdit
+          Left = 96
+          Top = 96
+          DataBinding.DataField = 'CDICON'
+          DataBinding.DataSource = dsFormCadPadrao
+          TabOrder = 3
+          Width = 121
+        end
+        object cxDBTextEdit1: TcxDBTextEdit
+          Left = 96
+          Top = 136
+          DataBinding.DataField = 'FLWORKSPACE'
+          DataBinding.DataSource = dsFormCadPadrao
+          TabOrder = 4
+          Width = 121
+        end
       end
     end
   end
   inherited imFormPadrao32: TImageList
     Bitmap = {
-      494C010106001400900020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106001400980020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000084000000

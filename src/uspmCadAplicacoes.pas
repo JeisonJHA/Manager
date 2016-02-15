@@ -7,7 +7,10 @@ uses
   uspmFormCadPadrao, Data.DB, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
   JvgSpeedButton, JvDialogs, Winapi.Shellapi, Vcl.Buttons, System.Actions, Vcl.ActnList,
   Vcl.ImgList, JvLabel, JvDBControls, Vcl.Grids, Vcl.DBGrids, JvExDBGrids,
-  JvDBGrid, Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls;
+  JvDBGrid, Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls,
+  System.ImageList, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, cxDBEdit, cxTextEdit,
+  cxMaskEdit, cxSpinEdit;
 
 type
   TspmCadAplicacoes = class(TspmFormCadPadrao)
@@ -19,6 +22,10 @@ type
     btExecutavel: TJvgSpeedButton;
     Label2: TLabel;
     DBEdit2: TDBEdit;
+    Label4: TLabel;
+    cxDBSpinEdit1: TcxDBSpinEdit;
+    Label5: TLabel;
+    cxDBTextEdit1: TcxDBTextEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btExecutavelClick(Sender: TObject);

@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, Vcl.Controls, Vcl.Forms, uspmFormPadrao,
   System.Actions, Vcl.ActnList, JvTransparentButton, Vcl.ExtCtrls, Data.DB,
-  Vcl.ImgList, Vcl.ComCtrls, JvExControls, JvButton;
+  Vcl.ImgList, Vcl.ComCtrls, JvExControls, JvButton, System.ImageList;
 
 type
   TspmFormCfgPadrao = class(TspmFormPadrao)

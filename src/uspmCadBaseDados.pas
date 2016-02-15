@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, JvExStdCtrls,
   JvCombobox, Vcl.Mask, System.Actions, Vcl.ActnList, Vcl.ImgList, JvLabel,
   JvDBControls, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ComCtrls,
-  JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls;
+  JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls, System.ImageList;
 
 type
   TspmCadBaseDados = class(TspmFormCadPadrao)
