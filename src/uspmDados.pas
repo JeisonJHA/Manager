@@ -61,11 +61,14 @@ type
     qrCadSistemasDELISTAEXEEXT: TWideStringField;
     qrCadBaseDadosTPBASEDADOS: TWideStringField;
     qrCadBaseDadosCC_DETPBASEDADOS: TWideMemoField;
+<<<<<<< HEAD
     SmallImageList: TcxImageList;
     LargeImageList: TcxImageList;
     MediumImageList: TcxImageList;
     qrCadAplicacoesCDICON: TLargeintField;
     qrCadAplicacoesFLWORKSPACE: TWideStringField;
+=======
+>>>>>>> origin/master
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;

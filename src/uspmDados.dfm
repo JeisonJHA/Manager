@@ -15,11 +15,19 @@ object dmDados: TdmDados
     DesignConnection = True
     HostName = ''
     Port = 0
+<<<<<<< HEAD
     Database = 'D:\apps\Softplan-Manager\bin\data.db'
     User = ''
     Password = ''
     Protocol = 'sqlite-3'
     LibraryLocation = 'D:\apps\Softplan-Manager\bin\sqlite.dll'
+=======
+    Database = 'D:\apps\Softplan-Manager\bin\SPManager.sqlite3'
+    User = ''
+    Password = ''
+    Protocol = 'sqlite-3'
+    LibraryLocation = 'D:\apps\Softplan-Manager\bin\sqlite3.dll'
+>>>>>>> origin/master
     Left = 16
     Top = 8
   end
