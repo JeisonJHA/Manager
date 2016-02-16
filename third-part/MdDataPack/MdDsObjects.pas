@@ -3,7 +3,8 @@ unit MdDsObjects;
 interface
 
 uses
-  MdDsList, MdDsCustom, TypInfo, db, classes, sysutils, Datasnap.DBClient;
+  MdDsList, MdDsCustom, TypInfo, db, classes, sysutils, Datasnap.DBClient,
+  Contnrs;
 
 type
   TMdObjDataSet = class(TMdListDataSet)
@@ -16,6 +17,9 @@ type
     procedure SetObjClass(const Value: TPersistentClass);
     function GetObjects(I: Integer): TPersistent;
     procedure SetChangeToClone(const Value: Boolean);
+    function GetObjectList: TObjectList;
+    procedure SetObjectList(const Value: TObjectList);
+    function GetCurrentObject: TObject;
   protected
     procedure InternalInitFieldDefs; override;
     procedure InternalClose; override;
@@ -32,6 +36,8 @@ type
     function GetFieldData(Field: TField; var Buffer: TValueBuffer; NativeFormat: Boolean): Boolean; overload; override;
     property Objects [I: Integer]: TPersistent read GetObjects;
     function Add: TPersistent;
+    property ObjectList: TObjectList read GetObjectList write SetObjectList;
+    property CurrentObject: TObject read GetCurrentObject;
   published
     property ObjClass: TPersistentClass read FObjClass write SetObjClass;
     property ChangesToClone: Boolean read FChangeToClone write SetChangeToClone default False;
@@ -205,6 +211,11 @@ begin
   Result := True; // read-write
 end;
 
+function TMdObjDataSet.GetCurrentObject: TObject;
+begin
+  Exit(FList[PRecInfo(ActiveBuffer).RecordNumber] as TPersistent);
+end;
+
 function TMdObjDataSet.GetFieldData(Field: TField; var Buffer: TValueBuffer;
   NativeFormat: Boolean): Boolean;
 var
@@ -239,7 +250,7 @@ begin
         Move (FlValue, Buffer[0], sizeof (Double));
       end;
     tkString, tkLString, tkWString, tkUString:
-      StrCopy (PAnsiChar(Buffer), PAnsiChar(GetStrProp(Obj, PropList [Field.FieldNo-1])));
+      StrCopy (PWideChar(AnsiString(Buffer)), PWideChar(AnsiString(GetStrProp(Obj, PropList [Field.Index]))));
   end;
   Result := True;
 end;
@@ -247,6 +258,16 @@ end;
 procedure TMdObjDataSet.SetObjClass(const Value: TPersistentClass);
 begin
   FObjClass := Value;
+end;
+
+procedure TMdObjDataSet.SetObjectList(const Value: TObjectList);
+begin
+  FList := Value;
+end;
+
+function TMdObjDataSet.GetObjectList: TObjectList;
+begin
+  Exit(FList);
 end;
 
 function TMdObjDataSet.GetObjects(i: Integer): TPersistent;
@@ -317,7 +338,7 @@ begin
         SetFloatProp(Obj, PropList [Field.FieldNo-1], FlValue);
       end;
     tkString, tkLString, tkWString, tkUString:
-      SetStrProp(Obj, PropList [Field.FieldNo-1], PAnsiChar(Buffer));
+      SetStrProp(Obj, PropList [Field.FieldNo-1], AnsiString(PAnsiChar(Buffer)));
   end;
   SetModified (True);
 end;

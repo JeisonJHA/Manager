@@ -66,6 +66,7 @@ type
     MediumImageList: TcxImageList;
     qrCadAplicacoesCDICON: TLargeintField;
     qrCadAplicacoesFLWORKSPACE: TWideStringField;
+    qrCadAplicacoesCDACAO: TLargeintField;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;

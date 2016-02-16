@@ -522,6 +522,10 @@ object dmDados: TdmDados
       FieldName = 'FLWORKSPACE'
       Size = 1
     end
+    object qrCadAplicacoesCDACAO: TLargeintField
+      FieldName = 'CDACAO'
+      Required = True
+    end
   end
   object upCadAplicacoes: TZUpdateSQL
     DeleteSQL.Strings = (

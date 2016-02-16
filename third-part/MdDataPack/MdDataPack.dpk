@@ -37,11 +37,6 @@ requires
   dsnap;
 
 contains
-  MdTrack in 'MdTrack.pas',
-  MdProgr in 'MdProgr.pas',
-  MdRepPr in 'MdRepPr.pas',
-  MdRView in 'MdRView.pas',
-  MdDbGrid in 'MdDbGrid.pas',
   MdDsCustom in 'MdDsCustom.pas',
   MdDsList in 'MdDsList.pas',
   MdDsObjects in 'MdDsObjects.pas';

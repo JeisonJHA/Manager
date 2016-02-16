@@ -10,7 +10,7 @@ uses
   JvDBGrid, Vcl.ComCtrls, JvExControls, JvButton, JvTransparentButton, Vcl.ExtCtrls,
   System.ImageList, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, cxDBEdit, cxTextEdit,
-  cxMaskEdit, cxSpinEdit;
+  cxMaskEdit, cxSpinEdit, cxDropDownEdit;
 
 type
   TspmCadAplicacoes = class(TspmFormCadPadrao)
@@ -26,6 +26,8 @@ type
     cxDBSpinEdit1: TcxDBSpinEdit;
     Label5: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
+    Label6: TLabel;
+    cxDBSpinEdit2: TcxDBSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btExecutavelClick(Sender: TObject);
