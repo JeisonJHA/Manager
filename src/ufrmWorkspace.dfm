@@ -38,7 +38,7 @@ object frmWorkspace: TfrmWorkspace
     DockControlHeights = (
       0
       0
-      26
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       Caption = 'Banco de Dados'
@@ -136,5 +136,9 @@ object frmWorkspace: TfrmWorkspace
     DataSet = dmDados.qrCadBaseDados
     Left = 368
     Top = 336
+  end
+  object ActionList1: TActionList
+    Left = 816
+    Top = 184
   end
 end

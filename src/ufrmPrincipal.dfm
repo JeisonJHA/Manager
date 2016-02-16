@@ -12,6 +12,7 @@ object frmPrincipal: TfrmPrincipal
   Font.Style = []
   FormStyle = fsMDIForm
   OldCreateOrder = True
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -229,92 +230,28 @@ object frmPrincipal: TfrmPrincipal
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        object JvNavigationPane1: TJvNavigationPane
+        object DBGrid1: TDBGrid
           Left = 0
           Top = 0
           Width = 174
           Height = 415
-          ActivePage = JvNavPanelPage1
           Align = alClient
-          BorderWidth = 0
-          Background.Stretch = False
-          Background.Proportional = False
-          Background.Center = False
-          Background.Tile = False
-          Background.Transparent = False
-          Caption = 'JvNavigationPane1'
-          Colors.ButtonColorFrom = clWhite
-          Colors.ButtonColorTo = clWhite
-          Colors.ButtonHotColorFrom = 16578548
-          Colors.ButtonHotColorTo = 16578548
-          Colors.ButtonSelectedColorFrom = 15983576
-          Colors.ButtonSelectedColorTo = 15983576
-          Colors.ButtonSeparatorColor = clWhite
-          Colors.SplitterColorFrom = 10114859
-          Colors.SplitterColorTo = 10114859
-          Colors.DividerColorFrom = 10114859
-          Colors.DividerColorTo = 10114859
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Segoe UI'
-          Font.Style = []
-          ParentFont = False
-          LargeImages = dmDados.MediumImageList
-          MaximizedCount = 3
-          NavPanelFont.Charset = DEFAULT_CHARSET
-          NavPanelFont.Color = clWindowText
-          NavPanelFont.Height = -12
-          NavPanelFont.Name = 'Segoe UI'
-          NavPanelFont.Style = []
-          NavPanelHotTrackFont.Charset = DEFAULT_CHARSET
-          NavPanelHotTrackFont.Color = clWindowText
-          NavPanelHotTrackFont.Height = -12
-          NavPanelHotTrackFont.Name = 'Segoe UI'
-          NavPanelHotTrackFont.Style = []
-          SmallImages = dmDados.SmallImageList
-          object JvNavPanelPage1: TJvNavPanelPage
-            Left = 0
-            Top = 0
-            Width = 174
-            Height = 296
-            Hint = ''
-            Background.Stretch = False
-            Background.Proportional = False
-            Background.Center = False
-            Background.Tile = False
-            Background.Transparent = False
-            Caption = 'Primeiro Grau (PG5)'
-            ImageIndex = 10
-          end
-          object JvNavPanelPage2: TJvNavPanelPage
-            Left = 0
-            Top = 0
-            Width = 174
-            Height = 296
-            Hint = ''
-            Background.Stretch = False
-            Background.Proportional = False
-            Background.Center = False
-            Background.Tile = False
-            Background.Transparent = False
-            Caption = 'Segundo Grau (SG5)'
-            ImageIndex = 10
-          end
-          object JvNavPanelPage3: TJvNavPanelPage
-            Left = 0
-            Top = 0
-            Width = 174
-            Height = 296
-            Hint = ''
-            Background.Stretch = False
-            Background.Proportional = False
-            Background.Center = False
-            Background.Tile = False
-            Background.Transparent = False
-            Caption = 'Minit'#233'rio P'#250'blico (MP)'
-            ImageIndex = 10
-          end
+          DataSource = DataSource1
+          Options = [dgEditing, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OnDblClick = DBGrid1DblClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Descricao'
+              Visible = True
+            end>
         end
       end
     end
@@ -492,5 +429,15 @@ object frmPrincipal: TfrmPrincipal
     Left = 848
     Top = 288
     PixelsPerInch = 96
+  end
+  object MdObjDataSet1: TMdObjDataSet
+    Left = 528
+    Top = 328
+  end
+  object DataSource1: TDataSource
+    AutoEdit = False
+    DataSet = MdObjDataSet1
+    Left = 512
+    Top = 392
   end
 end
