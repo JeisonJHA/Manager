@@ -62,20 +62,13 @@ type
     qrCadBaseDadosTPBASEDADOS: TWideStringField;
     qrCadBaseDadosCC_DETPBASEDADOS: TWideMemoField;
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/DelphiXE8
     SmallImageList: TcxImageList;
     LargeImageList: TcxImageList;
     MediumImageList: TcxImageList;
     qrCadAplicacoesCDICON: TLargeintField;
     qrCadAplicacoesFLWORKSPACE: TWideStringField;
-<<<<<<< HEAD
 =======
 >>>>>>> origin/master
-=======
-    qrCadAplicacoesCDACAO: TLargeintField;
->>>>>>> refs/remotes/origin/DelphiXE8
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;

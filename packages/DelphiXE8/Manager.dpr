@@ -21,18 +21,11 @@ uses
   uspmDados in '..\..\src\uspmDados.pas' {dmDados: TDataModule},
   ufrmConfigDatabase in '..\..\src\ufrmConfigDatabase.pas' {frmConfigDatabase},
   ufrmWorkspace in '..\..\src\ufrmWorkspace.pas' {frmWorkspace},
-  Workspace.Action in '..\..\src\models\Workspace.Action.pas',
-  Workspace.Config in '..\..\src\models\Workspace.Config.pas',
-  Workspace in '..\..\src\models\Workspace.pas',
-  Workspace.Utils in '..\..\src\models\Workspace.Utils.pas',
-  Workspace.Constantes in '..\..\src\models\Workspace.Constantes.pas';
+  AplicacaoAction in '..\..\src\AplicacaoAction.pas';
 
 {$R *.res}
 
 begin
-  {$IFDEF DEBUG}
-  ReportMemoryLeaksOnShutdown := True;
-  {$ENDIF}
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TdmDados, dmDados);

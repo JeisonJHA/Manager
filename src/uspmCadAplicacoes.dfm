@@ -2,7 +2,7 @@ inherited spmCadAplicacoes: TspmCadAplicacoes
   Caption = 'Cadastro de Aplica'#231#245'es'
   OnCreate = FormCreate
   ExplicitWidth = 624
-  ExplicitHeight = 454
+  ExplicitHeight = 453
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnFormPadrao: TPanel
@@ -86,13 +86,6 @@ inherited spmCadAplicacoes: TspmCadAplicacoes
           Caption = 'FLWORKSPACE'
           FocusControl = cxDBTextEdit1
         end
-        object Label6: TLabel
-          Left = 96
-          Top = 160
-          Width = 43
-          Height = 13
-          Caption = 'CDACAO'
-        end
         object DBEdit1: TDBEdit
           Left = 96
           Top = 0
@@ -142,17 +135,9 @@ inherited spmCadAplicacoes: TspmCadAplicacoes
       end
     end
   end
-  object cxDBSpinEdit2: TcxDBSpinEdit [3]
-    Left = 100
-    Top = 238
-    DataBinding.DataField = 'CDACAO'
-    DataBinding.DataSource = dsFormCadPadrao
-    TabOrder = 3
-    Width = 121
-  end
   inherited imFormPadrao32: TImageList
     Bitmap = {
-      494C0101060014009C0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106001400980020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000084000000

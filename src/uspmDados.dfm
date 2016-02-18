@@ -16,15 +16,11 @@ object dmDados: TdmDados
     HostName = ''
     Port = 0
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/DelphiXE8
     Database = 'D:\apps\Softplan-Manager\bin\data.db'
     User = ''
     Password = ''
     Protocol = 'sqlite-3'
     LibraryLocation = 'D:\apps\Softplan-Manager\bin\sqlite.dll'
-<<<<<<< HEAD
 =======
     Database = 'D:\apps\Softplan-Manager\bin\SPManager.sqlite3'
     User = ''
@@ -32,8 +28,6 @@ object dmDados: TdmDados
     Protocol = 'sqlite-3'
     LibraryLocation = 'D:\apps\Softplan-Manager\bin\sqlite3.dll'
 >>>>>>> origin/master
-=======
->>>>>>> refs/remotes/origin/DelphiXE8
     Left = 16
     Top = 8
   end
@@ -535,10 +529,6 @@ object dmDados: TdmDados
     object qrCadAplicacoesFLWORKSPACE: TWideStringField
       FieldName = 'FLWORKSPACE'
       Size = 1
-    end
-    object qrCadAplicacoesCDACAO: TLargeintField
-      FieldName = 'CDACAO'
-      Required = True
     end
   end
   object upCadAplicacoes: TZUpdateSQL
