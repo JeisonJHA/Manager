@@ -31,6 +31,7 @@ uses
   Cadastro.BancoDeDados.MSSQL in '..\..\Source\Commons\Cadastro.BancoDeDados.MSSQL.pas' {frmCadastroBancoDeDadosMSSQL},
   IDE.Utils in '..\..\Source\Commons\IDE.Utils.pas',
   Workspace in '..\..\Source\Models\Workspace.pas',
+  DataModule.Database in '..\..\Source\Commons\DataModule.Database.pas',
   ufrmPrincipal in '..\..\Source\Commons\ufrmPrincipal.pas' {frmPrincipal};
 
 {$R *.res}
