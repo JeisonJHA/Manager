@@ -6,7 +6,7 @@ uses
   Winapi.Windows,
   System.SysUtils,
   uspmMenu in '..\..\src\uspmMenu.pas' {frmMenu},
-  uspmDados in '..\..\src\uspmDados.pas' {dmDados: TDataModule},
+  DataModule.Database in '..\..\src\commons\DataModule.Database.pas' {dtmDatabase: TDataModule},
   uspmFormPadrao in '..\..\src\uspmFormPadrao.pas' {spmFormPadrao},
   uspmFormCadPadrao in '..\..\src\uspmFormCadPadrao.pas' {spmFormCadPadrao},
   uspmFormCfgPadrao in '..\..\src\uspmFormCfgPadrao.pas' {spmFormCfgPadrao},
@@ -36,7 +36,7 @@ begin
       Application.Title := 'SPManagerRTC';
       try
         try
-          Application.CreateForm(TdmDados, dmDados);
+          Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmMenu, frmMenu);
   Application.Run;
         except
