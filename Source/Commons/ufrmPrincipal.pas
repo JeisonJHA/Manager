@@ -32,7 +32,7 @@ uses
   dxSkinWhiteprint, dxSkinXmas2008Blue, cxStyles, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  InstantPresentation;
+  InstantPresentation, IDE.Aplicacao;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)
@@ -74,7 +74,6 @@ type
     dxBarSubItem2: TdxBarSubItem;
     btnCadastroAcaoExecutar: TdxBarButton;
     btnCadastroAcaoCopiar: TdxBarButton;
-    DBGrid1: TDBGrid;
     btnBancoDeDados: TdxBarSubItem;
     btnCadastroBancoDeDadosOracle: TdxBarLargeButton;
     btnCadastroBancoDeDadosMSSQL: TdxBarLargeButton;
@@ -82,10 +81,14 @@ type
     iosWorkspaces: TInstantSelector;
     iosWorkspacesDescricao: TStringField;
     iosWorkspacesDiretorio: TStringField;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1Descricao: TcxGridDBColumn;
+    btnTeste: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure DBGrid1DblClick(Sender: TObject);
     procedure dxBarLargeButton2Click(Sender: TObject);
     procedure btnCadastroAcaoExecutarClick(Sender: TObject);
     procedure btnCadastroAcaoCopiarClick(Sender: TObject);
@@ -93,6 +96,10 @@ type
     procedure btnCadastroBancoDeDadosMSSQLClick(Sender: TObject);
     procedure btnCadastroBancoDeDadosDB2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure btnTesteClick(Sender: TObject);
   private
     { Private declarations }
     procedure Teste;
@@ -138,7 +145,9 @@ begin
   end;
 end;
 
-procedure TfrmPrincipal.DBGrid1DblClick(Sender: TObject);
+procedure TfrmPrincipal.cxGrid1DBTableView1CellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 begin
   if not Assigned(iosWorkspaces.CurrentObject) then
     Exit;
@@ -192,6 +201,11 @@ begin
     ShowModal;
     Free;
   end;
+end;
+
+procedure TfrmPrincipal.btnTesteClick(Sender: TObject);
+begin
+  ShowMessage(Application.Parser.ParserText('Hello {WS_TITLE} | {WS_DIR}'));
 end;
 
 procedure TfrmPrincipal.dxBarLargeButton2Click(Sender: TObject);
@@ -249,6 +263,7 @@ end;
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
   InicializarMainMenu;
+  Application.TabbedMDIManager(dxTabbedMDIManager1);
 
   Teste;
   CarregarVersao;

@@ -1,10 +1,16 @@
 inherited frmCadastroAcao: TfrmCadastroAcao
   Caption = 'Procedimento'
+  ExplicitWidth = 696
+  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     Properties.ActivePage = tabDetalhes
     inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       inherited cxGrid1: TcxGrid
         inherited cxGrid1DBTableView1: TcxGridDBTableView
           object cxGrid1DBTableView1Descricao: TcxGridDBColumn
@@ -15,9 +21,10 @@ inherited frmCadastroAcao: TfrmCadastroAcao
       end
     end
     inherited tabDetalhes: TcxTabSheet
-      ExplicitTop = 24
-      ExplicitWidth = 684
-      ExplicitHeight = 358
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       object Label1: TLabel
         Left = 24
         Top = 24
@@ -42,9 +49,10 @@ inherited frmCadastroAcao: TfrmCadastroAcao
       end
       object cbxIcone: TcxDBImageComboBox
         Left = 480
-        Top = 271
+        Top = 274
         DataBinding.DataField = 'Icone'
         DataBinding.DataSource = dtsMestre
+        Properties.Images = dtmDatabase.LargeImageList
         Properties.Items = <>
         TabOrder = 1
         Width = 57

@@ -8,10 +8,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, JvExControls, JvPageList,
   JvNavigationPane, JvComponentBase, dxSkinsCore, dxSkinsdxBarPainter,
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
-  System.Actions;
+  System.Actions, IDE.IWorkspace;
 
 type
-  TfrmWorkspace = class(TForm)
+  TfrmWorkspace = class(TForm, IWorkspace)
     dxBarManager1: TdxBarManager;
     dxBarManager1Bar1: TdxBar;
     btnSpSQL: TdxBarButton;
@@ -26,6 +26,7 @@ type
     { Private declarations }
     FSandbox: TWorkspace;
     function Parser(const ATexto: string): string;
+    function Sandbox: TWorkspace;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent; ASandbox: TWorkspace); overload;
@@ -44,6 +45,11 @@ uses udtmDatabase, Workspace.Action, Winapi.ShellApi,
 function TfrmWorkspace.Parser(const ATexto: string): string;
 begin
   Exit(StringReplace(ATexto, '{WS_DIR}', FSandbox.Diretorio, [rfReplaceAll]));
+end;
+
+function TfrmWorkspace.Sandbox: TWorkspace;
+begin
+  Exit(FSandbox);
 end;
 
 constructor TfrmWorkspace.Create(AOwner: TComponent; ASandbox: TWorkspace);

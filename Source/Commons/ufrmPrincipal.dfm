@@ -227,28 +227,34 @@ object frmPrincipal: TfrmPrincipal
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        object DBGrid1: TDBGrid
+        object cxGrid1: TcxGrid
           Left = 0
           Top = 0
           Width = 174
           Height = 415
           Align = alClient
-          DataSource = dtsWorkspaces
-          Options = [dgEditing, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-          ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          OnDblClick = DBGrid1DblClick
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'Descricao'
-              Visible = True
-            end>
+          ExplicitLeft = -40
+          ExplicitTop = 104
+          ExplicitWidth = 250
+          ExplicitHeight = 200
+          object cxGrid1DBTableView1: TcxGridDBTableView
+            Navigator.Buttons.CustomButtons = <>
+            OnCellDblClick = cxGrid1DBTableView1CellDblClick
+            DataController.DataSource = dtsWorkspaces
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsSelection.CellSelect = False
+            OptionsView.ColumnAutoWidth = True
+            object cxGrid1DBTableView1Descricao: TcxGridDBColumn
+              Caption = 'Descri'#231#227'o'
+              DataBinding.FieldName = 'Descricao'
+            end
+          end
+          object cxGrid1Level1: TcxGridLevel
+            GridView = cxGrid1DBTableView1
+          end
         end
       end
     end
@@ -317,6 +323,10 @@ object frmPrincipal: TfrmPrincipal
         item
           Visible = True
           ItemName = 'dxBarSubItem1'
+        end
+        item
+          Visible = True
+          ItemName = 'btnTeste'
         end>
       OneOnRow = True
       Row = 0
@@ -422,6 +432,13 @@ object frmPrincipal: TfrmPrincipal
       Hint = 'DB2'
       Visible = ivAlways
       OnClick = btnCadastroBancoDeDadosDB2Click
+    end
+    object btnTeste: TdxBarLargeButton
+      Caption = 'Teste'
+      Category = 0
+      Hint = 'Teste'
+      Visible = ivAlways
+      OnClick = btnTesteClick
     end
   end
   object dxSkinController1: TdxSkinController

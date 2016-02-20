@@ -31,8 +31,12 @@ uses
   Cadastro.BancoDeDados.MSSQL in '..\..\Source\Commons\Cadastro.BancoDeDados.MSSQL.pas' {frmCadastroBancoDeDadosMSSQL},
   IDE.Utils in '..\..\Source\Commons\IDE.Utils.pas',
   Workspace in '..\..\Source\Models\Workspace.pas',
-  DataModule.Database in '..\..\Source\Commons\DataModule.Database.pas',
-  ufrmPrincipal in '..\..\Source\Commons\ufrmPrincipal.pas' {frmPrincipal};
+  ufrmPrincipal in '..\..\Source\Commons\ufrmPrincipal.pas' {frmPrincipal},
+  IDE.Aplicacao in '..\..\Source\Commons\IDE.Aplicacao.pas',
+  IDE.Controller.Parser in '..\..\Source\Controllers\IDE.Controller.Parser.pas',
+  IDE.IParser in '..\..\Source\Commons\IDE.IParser.pas',
+  IDE.Parser.Workspace in '..\..\Source\Commons\IDE.Parser.Workspace.pas',
+  IDE.IWorkspace in '..\..\Source\Commons\IDE.IWorkspace.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
@@ -49,7 +53,8 @@ begin
   {$ENDIF}
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
- Application.CreateForm(TdtmDatabase, dtmDatabase);
+  Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.Parser.Registrar(TIDEParserWorkspace.Create);
   Application.Run;
 end.
