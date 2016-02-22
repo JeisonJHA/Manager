@@ -5,7 +5,6 @@ inherited frmCadastroAcao: TfrmCadastroAcao
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    Properties.ActivePage = tabDetalhes
     inherited tabGrade: TcxTabSheet
       ExplicitLeft = 2
       ExplicitTop = 28
@@ -39,14 +38,6 @@ inherited frmCadastroAcao: TfrmCadastroAcao
         Height = 13
         Caption = #205'cone'
       end
-      object cxDBTextEdit1: TcxDBTextEdit
-        Left = 24
-        Top = 40
-        DataBinding.DataField = 'Descricao'
-        DataBinding.DataSource = dtsMestre
-        TabOrder = 0
-        Width = 633
-      end
       object cbxIcone: TcxDBImageComboBox
         Left = 480
         Top = 274
@@ -54,8 +45,16 @@ inherited frmCadastroAcao: TfrmCadastroAcao
         DataBinding.DataSource = dtsMestre
         Properties.Images = dtmDatabase.LargeImageList
         Properties.Items = <>
-        TabOrder = 1
+        TabOrder = 0
         Width = 57
+      end
+      object edtDescricao: TcxDBTextEdit
+        Left = 24
+        Top = 40
+        DataBinding.DataField = 'Descricao'
+        DataBinding.DataSource = dtsSelecionador
+        TabOrder = 1
+        Width = 633
       end
     end
   end
@@ -72,7 +71,7 @@ inherited frmCadastroAcao: TfrmCadastroAcao
   inherited iosSelecionador: TInstantSelector
     AutoOpen = True
     Command.Strings = (
-      'SELECT * FROM TAcaoCopiar')
+      'SELECT * FROM TAcao')
     ObjectClassName = 'TAcao'
     object iosSelecionadorDescricao: TStringField
       FieldName = 'Descricao'

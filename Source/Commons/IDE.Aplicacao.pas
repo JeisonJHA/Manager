@@ -2,25 +2,36 @@ unit IDE.Aplicacao;
 
 interface
 
-uses Classes, SysUtils, Forms, IDE.Controller.Parser, IDE.IWorkspace, dxTabbedMDI;
+uses Classes, SysUtils, Forms, IDE.Controller.Parser, IDE.IWorkspace, dxTabbedMDI,
+  DosCommand;
 
 type
   TIDEAplicacao = class helper for TApplication
   private
     function GetCurrentWorkspace: IWorkspace;
+    function GetPromptCommand: TDosCommand;
   public
     function Parser: TIDEControllerParser;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
+    property PromptCommand: TDosCommand read GetPromptCommand;
   end;
 
+  procedure Console(ATexto: string);
+
 implementation
+
+procedure Console(ATexto: string);
+begin
+  Application.PromptCommand.OutputLines.Add(Format('%s %s',[FormatDateTime('[dd/MM/yyyy hh:mm:ss]', Date+Time),ATexto]));
+end;
 
 type
   TAplicacao = class(TObject)
   private
     FParser: TIDEControllerParser;
     FTabbedMDIManager: TdxTabbedMDIManager;
+    FPromptCommand: TDosCommand;
     function GetCurrentWorkspace: IWorkspace;
   public
     constructor Create;
@@ -29,6 +40,7 @@ type
     function Parser: TIDEControllerParser;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
+    property PromptCommand: TDosCommand read FPromptCommand;
   end;
 
 var
@@ -39,10 +51,12 @@ var
 constructor TAplicacao.Create;
 begin
   FParser := TIDEControllerParser.Create;
+  FPromptCommand := TDosCommand.Create(nil);
 end;
 
 destructor TAplicacao.Destroy;
 begin
+  FreeAndNil(FPromptCommand);
   FreeAndNil(FParser);
   inherited;
 end;
@@ -84,6 +98,11 @@ begin
   if not Assigned(_aplicacao.CurrentWorkspace) then
     Exit(nil);
   Exit(_aplicacao.CurrentWorkspace);
+end;
+
+function TIDEAplicacao.GetPromptCommand: TDosCommand;
+begin
+  Exit(_aplicacao.PromptCommand);
 end;
 
 function TIDEAplicacao.Parser: TIDEControllerParser;

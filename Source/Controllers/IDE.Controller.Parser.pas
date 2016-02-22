@@ -9,10 +9,10 @@ type
   private
     FParsers: TList<IParser>;
   private
-    procedure ObterChaves(ALista: TStrings);
     function InternalGetInteface(AObject: TObject): IParser;
   public
     constructor Create;
+    procedure Chaves(ALista: TStrings);
     procedure Registrar(AParser: IParser);
     function ParserText(const ATexto: string): string;
   end;
@@ -36,7 +36,7 @@ begin
   Exit(nil);
 end;
 
-procedure TIDEControllerParser.ObterChaves(ALista: TStrings);
+procedure TIDEControllerParser.Chaves(ALista: TStrings);
 var
   I: Integer;
 begin

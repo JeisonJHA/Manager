@@ -23,9 +23,9 @@ type
     ioeMestreNomeDiretorio: TStringField;
     ioeMestreSelf: TIntegerField;
     Label1: TLabel;
-    cxDBTextEdit1: TcxDBTextEdit;
     Label2: TLabel;
-    cxDBTextEdit2: TcxDBTextEdit;
+    edtNomeDiretorio: TcxDBTextEdit;
+    edtDescricao: TcxDBTextEdit;
   private
     { Private declarations }
   public

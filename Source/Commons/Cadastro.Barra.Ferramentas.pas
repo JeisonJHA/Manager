@@ -12,7 +12,8 @@ uses
   cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, cxPC, Vcl.ExtCtrls, cxContainer, cxTextEdit,
   cxDBEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, Vcl.DBActns;
+  cxDBLookupComboBox, Vcl.DBActns, Vcl.Buttons, InstantPersistence,
+  JvExControls, JvSpeedButton;
 
 type
   TfrmCadastroBarraFerramentas = class(TfrmCadastroPaginadoMestreDetalheModelo)
@@ -21,17 +22,9 @@ type
     dtsSelecaoDeAcoes: TDataSource;
     Label1: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
-    Label2: TLabel;
-    btnNovaAcao: TButton;
-    actAdicionarAcao: TAction;
-    cbxSelecaoDeAcao: TcxLookupComboBox;
-    iosSelecionadorAcao: TDataSetField;
-    iosSelecionadorDescricao: TStringField;
-    iosSelecionadorSelf: TIntegerField;
     iosSelecaoDeAcoesDescricao: TStringField;
     iosSelecaoDeAcoesIcone: TIntegerField;
     iosSelecaoDeAcoesSelf: TIntegerField;
-    ioeMestreAcao: TDataSetField;
     ioeMestreDescricao: TStringField;
     ioeMestreSelf: TIntegerField;
     ioeDetalheDescricao: TStringField;
@@ -39,10 +32,13 @@ type
     ioeDetalheSelf: TIntegerField;
     DatasetInsert1: TDataSetInsert;
     DatasetDelete1: TDataSetDelete;
-    Button1: TButton;
+    ioeMestreAcoes: TDataSetField;
+    iosSelecionadorAcoes: TDataSetField;
+    iosSelecionadorDescricao: TStringField;
+    iosSelecionadorSelf: TIntegerField;
     cxGrid2DBTableView1Descricao: TcxGridDBColumn;
-    procedure actAdicionarAcaoUpdate(Sender: TObject);
-    procedure actAdicionarAcaoExecute(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure actDelDetalheExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,21 +52,42 @@ implementation
 
 {$R *.dfm}
 
-uses Acao, BarraFerramenta;
+uses Acao, BarraFerramenta, Acao.Controller;
 
-procedure TfrmCadastroBarraFerramentas.actAdicionarAcaoExecute(Sender: TObject);
+procedure TfrmCadastroBarraFerramentas.actDelDetalheExecute(Sender: TObject);
+var
+  objeto: TObject;
+  barra: TBarraFerramenta;
 begin
   inherited;
-  ioeMestre.Edit;
-  ioeDetalhe.AddObject(iosSelecaoDeAcoes.CurrentObject);
-  ioeMestre.Post;
-  ioeMestre.PostChanges;
+
+  if (MessageDlg('Deseja realmente excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrNo) then
+    Exit;
+
+  barra := TBarraFerramenta(iosSelecionador.CurrentObject);
+  objeto := ioeDetalhe.CurrentObject;
+  if not Assigned(objeto) then
+    Exit;
+
+  barra.RemoveAcao(TAcao(objeto));
+  barra.Store();
+  iosSelecionador.RefreshCurrentObject;
 end;
 
-procedure TfrmCadastroBarraFerramentas.actAdicionarAcaoUpdate(Sender: TObject);
+procedure TfrmCadastroBarraFerramentas.SpeedButton1Click(Sender: TObject);
+var
+  objeto: TObject;
+  barra: TBarraFerramenta;
 begin
   inherited;
-  TAction(Sender).Enabled := (cbxSelecaoDeAcao.Text <> '');
+  barra := TBarraFerramenta(iosSelecionador.CurrentObject);
+  objeto := iosSelecaoDeAcoes.Escolher();
+  if not Assigned(objeto) then
+    Exit;
+
+  barra.AddAcao(TAcao(objeto));
+  barra.Store();
+  iosSelecionador.RefreshCurrentObject;
 end;
 
 end.

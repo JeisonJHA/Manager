@@ -4,52 +4,44 @@ interface
 
 uses
   Classes, SysUtils, Vcl.ActnList, Workspace.Constantes, Winapi.ShellApi,
-  Winapi.Windows;
+  Winapi.Windows, Forms, IDE.Aplicacao, Acao;
 
 type
   TWorkspaceAction = class(TAction)
-  end;
-
-  TWorkspaceActionExecute = class(TWorkspaceAction)
   private
-    FParametros: string;
-    FExecutavel: string;
-  protected
+    FAcao: TAcao;
     procedure InternalOnExecute(Sender: TObject);
   public
     constructor Create(AOwner: TComponent); override;
-    property Executavel: string read FExecutavel write FExecutavel;
-    property Parametros: string read FParametros write FParametros;
+    destructor Destroy; override;
+    property Acao: TAcao read FAcao write FAcao;
   end;
 
-  TWorkspaceActionCopy = class(TWorkspaceAction)
-  private
-    FDestino: string;
-    FOrigem: string;
-  public
-    property Origem: string read FOrigem write FOrigem;
-    property Destino: string read FDestino write FDestino;
-  end;
+  TWorkspaceActionExecute = class(TWorkspaceAction);
+
+  TWorkspaceActionCopy = class(TWorkspaceAction);
 
 implementation
 
-{ TWorkspaceActionExecute }
+{ TWorkspaceAction }
 
-constructor TWorkspaceActionExecute.Create(AOwner: TComponent);
+constructor TWorkspaceAction.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited;
   OnExecute := InternalOnExecute;
 end;
 
-procedure TWorkspaceActionExecute.InternalOnExecute(Sender: TObject);
-var
-  handle: THandle;
-  action: TWorkspaceActionExecute;
+destructor TWorkspaceAction.Destroy;
+begin
+  if Assigned(FAcao) then
+    FreeAndNil(FAcao);
+  inherited;
+end;
+
+procedure TWorkspaceAction.InternalOnExecute(Sender: TObject);
 begin
   try
-    action := TWorkspaceActionExecute(Sender);
-    ShellExecute(handle, nil, PChar(action.Executavel),
-      PChar(action.Parametros), '', SW_SHOWNORMAL);
+    Acao.Executar;
   except
     on E: Exception do
     begin

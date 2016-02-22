@@ -16,13 +16,14 @@ uses
 type
   TfrmCadastroAcaoCopiar = class(TfrmCadastroAcao)
     Label2: TLabel;
-    cxDBTextEdit2: TcxDBTextEdit;
     Label3: TLabel;
-    cxDBTextEdit3: TcxDBTextEdit;
     iosSelecionadorDestino: TStringField;
     iosSelecionadorOrigem: TStringField;
     ioeMestreDestino: TStringField;
     ioeMestreOrigem: TStringField;
+    cbxOrigem: TcxDBComboBox;
+    cbxDestino: TcxDBComboBox;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,5 +36,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmCadastroAcaoCopiar.FormShow(Sender: TObject);
+begin
+  inherited;
+  CarregarChaves([cbxOrigem, cbxDestino]);
+end;
 
 end.

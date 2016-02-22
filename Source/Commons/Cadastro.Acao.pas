@@ -11,12 +11,11 @@ uses
   InstantPresentation, System.Actions, Vcl.ActnList, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, cxPC, Vcl.StdCtrls, Vcl.ExtCtrls, cxContainer, cxTextEdit, cxDBEdit,
-  cxMaskEdit, cxDropDownEdit, cxImageComboBox;
+  cxMaskEdit, cxDropDownEdit, cxImageComboBox, IDE.Aplicacao;
 
 type
   TfrmCadastroAcao = class(TfrmCadastroPaginadoModelo)
     Label1: TLabel;
-    cxDBTextEdit1: TcxDBTextEdit;
     cxGrid1DBTableView1Descricao: TcxGridDBColumn;
     iosSelecionadorDescricao: TStringField;
     iosSelecionadorIcone: TIntegerField;
@@ -25,10 +24,14 @@ type
     ioeMestreIcone: TIntegerField;
     lblIcone: TLabel;
     cbxIcone: TcxDBImageComboBox;
+    edtDescricao: TcxDBTextEdit;
     procedure FormShow(Sender: TObject);
   private
-    procedure CarregarComboIcones;
     { Private declarations }
+    procedure CarregarComboIcones;
+  protected
+    procedure CarregarChaves(AComboBoxes: array of TcxDBComboBox); overload;
+    procedure CarregarChaves(AComboBox: TcxDBComboBox); overload;
   public
     { Public declarations }
   end;
@@ -41,6 +44,30 @@ implementation
 {$R *.dfm}
 
 uses udtmDatabase;
+
+procedure TfrmCadastroAcao.CarregarChaves(AComboBox: TcxDBComboBox);
+var
+  I: Integer;
+  chaves: TStrings;
+begin
+  chaves := TStringList.Create;
+  try
+    Application.Parser.Chaves(chaves);
+    for I := 0 to chaves.Count -1 do
+      AComboBox.Properties.Items.Add(Trim(chaves.Strings[I]));
+    chaves.Clear;
+  finally
+    FreeAndNil(chaves);
+  end;
+end;
+
+procedure TfrmCadastroAcao.CarregarChaves(AComboBoxes: array of TcxDBComboBox);
+var
+  I: Integer;
+begin
+  for I := Low(AComboBoxes) to High(AComboBoxes) do
+    CarregarChaves(AComboBoxes[I])
+end;
 
 procedure TfrmCadastroAcao.CarregarComboIcones;
 var

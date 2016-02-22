@@ -35,7 +35,7 @@ object frmWorkspace: TfrmWorkspace
     DockControlHeights = (
       0
       0
-      28
+      26
       0)
     object dxBarManager1Bar1: TdxBar
       Caption = 'Banco de Dados'
@@ -67,7 +67,7 @@ object frmWorkspace: TfrmWorkspace
       Caption = 'Ambiente'
       CaptionButtons = <>
       DockedDockingStyle = dsTop
-      DockedLeft = 243
+      DockedLeft = 247
       DockedTop = 0
       DockingStyle = dsTop
       FloatLeft = 993

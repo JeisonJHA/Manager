@@ -15,6 +15,9 @@ object frmPrincipal: TfrmPrincipal
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
+  DesignSize = (
+    1071
+    637)
   PixelsPerInch = 96
   TextHeight = 13
   object dxRibbon1: TdxRibbon
@@ -35,7 +38,7 @@ object frmPrincipal: TfrmPrincipal
     TabStop = False
     object ribbonGerenciamento: TdxRibbonTab
       Active = True
-      Caption = 'Gerenciamento'
+      Caption = 'Principal'
       Groups = <
         item
           ToolbarName = 'barCadastros'
@@ -44,8 +47,8 @@ object frmPrincipal: TfrmPrincipal
     end
   end
   object dxRibbonBackstageView1: TdxRibbonBackstageView
-    Left = 8
-    Top = 166
+    Left = 264
+    Top = 174
     Width = 777
     Height = 371
     Buttons = <>
@@ -113,15 +116,15 @@ object frmPrincipal: TfrmPrincipal
         Caption = 'Caminho do workspace local:'
       end
       object SpeedButton1: TSpeedButton
-        Left = 312
-        Top = 84
+        Left = 315
+        Top = 245
         Width = 23
         Height = 22
         Caption = '...'
       end
       object cxTextEdit1: TcxTextEdit
         Left = 20
-        Top = 84
+        Top = 246
         TabOrder = 0
         Text = 'cxTextEdit1'
         Width = 289
@@ -144,6 +147,53 @@ object frmPrincipal: TfrmPrincipal
         Transparent = True
         Height = 26
         Width = 300
+      end
+      object StringGrid1: TStringGrid
+        Left = 21
+        Top = 86
+        Width = 317
+        Height = 154
+        ColCount = 1
+        FixedCols = 0
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+      end
+      object Button1: TButton
+        Left = 20
+        Top = 273
+        Width = 75
+        Height = 25
+        Caption = 'Button1'
+        TabOrder = 6
+      end
+      object Button2: TButton
+        Left = 101
+        Top = 273
+        Width = 75
+        Height = 25
+        Caption = 'Button2'
+        TabOrder = 2
+      end
+      object Button3: TButton
+        Left = 182
+        Top = 273
+        Width = 75
+        Height = 25
+        Caption = 'Button3'
+        TabOrder = 3
+      end
+      object Button4: TButton
+        Left = 263
+        Top = 274
+        Width = 75
+        Height = 25
+        Caption = 'Button4'
+        TabOrder = 5
       end
     end
   end
@@ -180,38 +230,112 @@ object frmPrincipal: TfrmPrincipal
     Font.Name = 'Tahoma'
     Font.Style = []
   end
+  object dxDockSite2: TdxDockSite
+    Left = 0
+    Top = 586
+    Width = 1071
+    Height = 28
+    Align = alBottom
+    AutoSize = True
+    DockingType = 5
+    OriginalWidth = 1071
+    OriginalHeight = 2
+    object dxLayoutDockSite2: TdxLayoutDockSite
+      Left = 0
+      Top = 0
+      Width = 1071
+      Height = 0
+      Visible = False
+      DockingType = 0
+      OriginalWidth = 300
+      OriginalHeight = 140
+    end
+    object dxDockPanel2: TdxDockPanel
+      Left = 0
+      Top = 0
+      Width = 0
+      Height = 140
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ManagerFont = False
+      Visible = False
+      AllowFloating = True
+      AutoHide = True
+      Caption = 'Console'
+      CustomCaptionButtons.Buttons = <>
+      TabsProperties.CustomButtons.Buttons = <>
+      OnActivate = dxDockPanel2Activate
+      AutoHidePosition = 3
+      DockingType = 0
+      OriginalWidth = 185
+      OriginalHeight = 140
+      object txtConsole: TMemo
+        Left = 0
+        Top = 0
+        Width = 0
+        Height = 96
+        Align = alClient
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Color = clGrayText
+        Ctl3D = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Courier New'
+        Font.Style = []
+        Lines.Strings = (
+          'manager/>')
+        ParentCtl3D = False
+        ParentFont = False
+        ScrollBars = ssVertical
+        TabOrder = 0
+        WantReturns = False
+        WordWrap = False
+        OnEnter = txtConsoleEnter
+        OnKeyPress = txtConsoleKeyPress
+      end
+    end
+  end
   object dxDockSite1: TdxDockSite
     Left = 0
     Top = 155
-    Width = 185
-    Height = 459
+    Width = 28
+    Height = 431
     Color = 10114859
     ManagerColor = False
     Align = alLeft
     AutoSize = True
+    ExplicitHeight = 140
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 459
     object dxLayoutDockSite1: TdxLayoutDockSite
       Left = 0
       Top = 0
-      Width = 185
-      Height = 459
+      Width = 0
+      Height = 431
+      Visible = False
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 200
     end
     object dxDockPanel1: TdxDockPanel
-      Left = 0
+      Left = -185
       Top = 0
       Width = 185
-      Height = 459
+      Height = 431
+      Visible = False
       AllowFloating = True
-      AutoHide = False
+      AutoHide = True
       Caption = 'Workspaces'
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
+      AutoHidePosition = 0
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 140
@@ -220,7 +344,7 @@ object frmPrincipal: TfrmPrincipal
         Left = 0
         Top = 0
         Width = 174
-        Height = 415
+        Height = 387
         Margins.Left = 0
         Margins.Top = 0
         Margins.Bottom = 0
@@ -231,13 +355,9 @@ object frmPrincipal: TfrmPrincipal
           Left = 0
           Top = 0
           Width = 174
-          Height = 415
+          Height = 387
           Align = alClient
           TabOrder = 0
-          ExplicitLeft = -40
-          ExplicitTop = 104
-          ExplicitWidth = 250
-          ExplicitHeight = 200
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             OnCellDblClick = cxGrid1DBTableView1CellDblClick
@@ -323,10 +443,6 @@ object frmPrincipal: TfrmPrincipal
         item
           Visible = True
           ItemName = 'dxBarSubItem1'
-        end
-        item
-          Visible = True
-          ItemName = 'btnTeste'
         end>
       OneOnRow = True
       Row = 0
@@ -375,6 +491,14 @@ object frmPrincipal: TfrmPrincipal
         item
           Visible = True
           ItemName = 'btnCadastroAcaoCopiar'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarSeparator2'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton4'
         end>
     end
     object btnCadastroAcaoExecutar: TdxBarButton
@@ -433,12 +557,41 @@ object frmPrincipal: TfrmPrincipal
       Visible = ivAlways
       OnClick = btnCadastroBancoDeDadosDB2Click
     end
-    object btnTeste: TdxBarLargeButton
+    object dxBarSeparator1: TdxBarSeparator
+      Caption = 'Banco de Dados'
+      Category = 0
+      Hint = 'Banco de Dados'
+      Visible = ivAlways
+    end
+    object dxBarLargeButton1: TdxBarLargeButton
+      Caption = 'Configurar Base de Dados'
+      Category = 0
+      Hint = 'btnConfiguracaoBancoDeDados'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton1Click
+      SyncImageIndex = False
+      ImageIndex = 8
+    end
+    object dxBarLargeButton3: TdxBarLargeButton
       Caption = 'Teste'
       Category = 0
       Hint = 'Teste'
       Visible = ivAlways
-      OnClick = btnTesteClick
+    end
+    object dxBarSeparator2: TdxBarSeparator
+      Caption = 'Ambiente'
+      Category = 0
+      Hint = 'Ambiente'
+      Visible = ivAlways
+    end
+    object dxBarLargeButton4: TdxBarLargeButton
+      Caption = 'Montar Ambientes'
+      Category = 0
+      Hint = 'Montar Ambientes'
+      Visible = ivAlways
+      OnClick = dxBarLargeButton4Click
+      SyncImageIndex = False
+      ImageIndex = 10
     end
   end
   object dxSkinController1: TdxSkinController
@@ -534,5 +687,20 @@ object frmPrincipal: TfrmPrincipal
       FieldName = 'Diretorio'
       Size = 255
     end
+  end
+  object JvFormStorage1: TJvFormStorage
+    AppStorage = JvAppIniFileStorage1
+    AppStoragePath = '%FORM_NAME%'
+    StoredValues = <>
+    Left = 952
+    Top = 176
+  end
+  object JvAppIniFileStorage1: TJvAppIniFileStorage
+    StorageOptions.BooleanStringTrueValues = 'TRUE, YES, Y'
+    StorageOptions.BooleanStringFalseValues = 'FALSE, NO, N'
+    FileName = 'style.ini'
+    SubStorages = <>
+    Left = 948
+    Top = 222
   end
 end

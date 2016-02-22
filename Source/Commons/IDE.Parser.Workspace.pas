@@ -3,66 +3,36 @@ unit IDE.Parser.Workspace;
 interface
 
 uses Classes, SysUtils, Forms, IDE.Aplicacao, Generics.Collections, IDE.IParser,
-  IDE.IWorkspace;
+  IDE.IWorkspace, IDE.Parser;
 
 type
-  TIDEParserWorkspace = class(TInterfacedObject, IParser)
-  private
-    procedure Chaves(ALista: TStrings);
-    function ParserText(const ATexto: string): string;
-    function Chave: string;
-    function PegarValor(AWorkspace: IWorkspace; const AChave: string): string;
+  TIDEParserWorkspace = class(TIDEParser, IParser)
+  protected
+    function PegarValor(AWorkspace: IWorkspace; const AChave: string): string; override;
+  public
+    constructor Create; override;
   end;
 
 implementation
 
-var
-  KEYS: array[1..2] of string = ('{WS_DIR}','{WS_TITLE}');
-
 { TIDEParserWorkspace }
 
-function TIDEParserWorkspace.Chave: string;
+constructor TIDEParserWorkspace.Create;
 begin
-  Exit('');
-end;
-
-procedure TIDEParserWorkspace.Chaves(ALista: TStrings);
-var
-  I: Integer;
-begin
-  for I := Low(KEYS) to High(KEYS) do
-  begin
-    ALista.Add(KEYS[I]);
-  end;
-end;
-
-function TIDEParserWorkspace.ParserText(const ATexto: string): string;
-var
-  workspace: IWorkspace;
-  I: Integer;
-  texto: string;
-begin
-  texto := ATexto;
-  workspace := Application.CurrentWorkspace;
-  if not Assigned(workspace) then
-    Exit(ATexto);
-
-  for I := Low(KEYS) to High(KEYS) do
-  begin
-    texto := StringReplace(texto, KEYS[I], PegarValor(workspace, KEYS[I]), []);
-  end;
-
-  Exit(texto);
+  inherited;
+  FChaves.Add('{WS_DIR}');
+  FChaves.Add('{WS_TITLE}');
 end;
 
 function TIDEParserWorkspace.PegarValor(AWorkspace: IWorkspace; const AChave: string): string;
 begin
   if Pos(AChave, '{WS_DIR}') > 0 then
-    Exit(AWorkspace.Sandbox.Diretorio)
+    Exit(IncludeTrailingBackslash(AWorkspace.Sandbox.Diretorio))
   else
   if Pos(AChave, '{WS_TITLE}') > 0 then
     Exit(AWorkspace.Sandbox.Descricao);
-  Exit('');
+
+  Exit(inherited PegarValor(AWorkspace, AChave));
 end;
 
 end.

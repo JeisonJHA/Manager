@@ -17,10 +17,6 @@ inherited frmCadastroSistema: TfrmCadastroSistema
       end
     end
     inherited tabDetalhes: TcxTabSheet
-      ExplicitLeft = 2
-      ExplicitTop = 28
-      ExplicitWidth = 680
-      ExplicitHeight = 352
       object Label1: TLabel
         Left = 24
         Top = 21
@@ -34,23 +30,22 @@ inherited frmCadastroSistema: TfrmCadastroSistema
         Width = 71
         Height = 13
         Caption = 'Nome Diret'#243'rio'
-        FocusControl = cxDBTextEdit2
       end
-      object cxDBTextEdit1: TcxDBTextEdit
-        Left = 24
-        Top = 40
-        DataBinding.DataField = 'Descricao'
-        DataBinding.DataSource = dtsMestre
-        TabOrder = 0
-        Width = 480
-      end
-      object cxDBTextEdit2: TcxDBTextEdit
+      object edtNomeDiretorio: TcxDBTextEdit
         Left = 510
         Top = 40
         DataBinding.DataField = 'NomeDiretorio'
-        DataBinding.DataSource = dtsMestre
+        DataBinding.DataSource = dtsSelecionador
         TabOrder = 1
         Width = 147
+      end
+      object edtDescricao: TcxDBTextEdit
+        Left = 24
+        Top = 40
+        DataBinding.DataField = 'Descricao'
+        DataBinding.DataSource = dtsSelecionador
+        TabOrder = 0
+        Width = 480
       end
     end
   end

@@ -1,16 +1,9 @@
 inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
   Caption = 'Executar Aplicativo'
-  ExplicitWidth = 696
-  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 2
-      ExplicitTop = 28
-      ExplicitWidth = 680
-      ExplicitHeight = 352
-    end
+    Properties.ActivePage = tabDetalhes
     inherited tabDetalhes: TcxTabSheet
       object Label4: TLabel [1]
         Left = 479
@@ -26,7 +19,6 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
         Width = 46
         Height = 13
         Caption = 'Aplicativo'
-        FocusControl = cxDBTextEdit3
       end
       inherited lblIcone: TLabel
         Left = 24
@@ -38,25 +30,28 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
         Left = 479
         Top = 88
         DataBinding.DataField = 'Parametros'
-        DataBinding.DataSource = dtsMestre
+        DataBinding.DataSource = dtsSelecionador
         TabOrder = 1
         Width = 178
-      end
-      object cxDBTextEdit3: TcxDBTextEdit [5]
-        Left = 24
-        Top = 88
-        DataBinding.DataField = 'Aplicativo'
-        DataBinding.DataSource = dtsMestre
-        TabOrder = 2
-        Width = 449
       end
       inherited cbxIcone: TcxDBImageComboBox
         Left = 24
         Top = 135
-        TabOrder = 3
+        DataBinding.DataSource = dtsSelecionador
+        TabOrder = 2
         ExplicitLeft = 24
         ExplicitTop = 135
-        ExplicitHeight = 36
+      end
+      inherited edtDescricao: TcxDBTextEdit
+        TabOrder = 0
+      end
+      object cbxAplicativo: TcxDBComboBox
+        Left = 24
+        Top = 88
+        DataBinding.DataField = 'Aplicativo'
+        DataBinding.DataSource = dtsSelecionador
+        TabOrder = 3
+        Width = 449
       end
     end
   end

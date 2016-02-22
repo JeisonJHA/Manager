@@ -9,24 +9,24 @@ type
   TBarraFerramenta = class(TInstantObject)
   {IOMETADATA stored;
     Descricao: String(255);
-    Acao: References(TAcao) external 'BarraFerramenta_Acao'; }
-    _Acao: TInstantReferences;
+    Acoes: References(TAcao) external 'BarraFerramenta_Acoes'; }
+    _Acoes: TInstantReferences;
     _Descricao: TInstantString;
   private
-    function GetAcao(Index: Integer): TAcao;
-    function GetAcoesCount: Integer;
+    function GetAcaoCount: Integer;
+    function GetAcoes(Index: Integer): TAcao;
     function GetDescricao: string;
-    procedure SetAcao(Index: Integer; Value: TAcao);
+    procedure SetAcoes(Index: Integer; Value: TAcao);
     procedure SetDescricao(const Value: string);
   public
-    function AddAcoes(Acoes: TAcao): Integer;
-    procedure ClearAcao;
-    procedure DeleteAcoes(Index: Integer);
-    function IndexOfAcoes(Acoes: TAcao): Integer;
-    procedure InsertAcoes(Index: Integer; Acoes: TAcao);
-    function RemoveAcoes(Acoes: TAcao): Integer;
-    property Acao[Index: Integer]: TAcao read GetAcao write SetAcao;
-    property AcoesCount: Integer read GetAcoesCount;
+    function AddAcao(Acao: TAcao): Integer;
+    procedure ClearAcoes;
+    procedure DeleteAcao(Index: Integer);
+    function IndexOfAcao(Acao: TAcao): Integer;
+    procedure InsertAcao(Index: Integer; Acao: TAcao);
+    function RemoveAcao(Acao: TAcao): Integer;
+    property AcaoCount: Integer read GetAcaoCount;
+    property Acoes[Index: Integer]: TAcao read GetAcoes write SetAcoes;
   published
     property Descricao: string read GetDescricao write SetDescricao;
   end;
@@ -38,29 +38,29 @@ uses
 
 { TBarraFerramenta }
 
-function TBarraFerramenta.AddAcoes(Acoes: TAcao): Integer;
+function TBarraFerramenta.AddAcao(Acao: TAcao): Integer;
 begin
-  Result := _Acao.Add(Acoes);
+  Result := _Acoes.Add(Acao);
 end;
 
-procedure TBarraFerramenta.ClearAcao;
+procedure TBarraFerramenta.ClearAcoes;
 begin
-  _Acao.Clear;
+  _Acoes.Clear;
 end;
 
-procedure TBarraFerramenta.DeleteAcoes(Index: Integer);
+procedure TBarraFerramenta.DeleteAcao(Index: Integer);
 begin
-  _Acao.Delete(Index);
+  _Acoes.Delete(Index);
 end;
 
-function TBarraFerramenta.GetAcao(Index: Integer): TAcao;
+function TBarraFerramenta.GetAcaoCount: Integer;
 begin
-  Result := _Acao[Index] as TAcao;
+  Result := _Acoes.Count;
 end;
 
-function TBarraFerramenta.GetAcoesCount: Integer;
+function TBarraFerramenta.GetAcoes(Index: Integer): TAcao;
 begin
-  Result := _Acao.Count;
+  Result := _Acoes[Index] as TAcao;
 end;
 
 function TBarraFerramenta.GetDescricao: string;
@@ -68,24 +68,24 @@ begin
   Result := _Descricao.Value;
 end;
 
-function TBarraFerramenta.IndexOfAcoes(Acoes: TAcao): Integer;
+function TBarraFerramenta.IndexOfAcao(Acao: TAcao): Integer;
 begin
-  Result := _Acao.IndexOf(Acoes);
+  Result := _Acoes.IndexOf(Acao);
 end;
 
-procedure TBarraFerramenta.InsertAcoes(Index: Integer; Acoes: TAcao);
+procedure TBarraFerramenta.InsertAcao(Index: Integer; Acao: TAcao);
 begin
-  _Acao.Insert(Index, Acoes);
+  _Acoes.Insert(Index, Acao);
 end;
 
-function TBarraFerramenta.RemoveAcoes(Acoes: TAcao): Integer;
+function TBarraFerramenta.RemoveAcao(Acao: TAcao): Integer;
 begin
-  Result := _Acao.Remove(Acoes);
+  Result := _Acoes.Remove(Acao);
 end;
 
-procedure TBarraFerramenta.SetAcao(Index: Integer; Value: TAcao);
+procedure TBarraFerramenta.SetAcoes(Index: Integer; Value: TAcao);
 begin
-  _Acao[Index] := Value;;
+  _Acoes[Index] := Value;;
 end;
 
 procedure TBarraFerramenta.SetDescricao(const Value: string);

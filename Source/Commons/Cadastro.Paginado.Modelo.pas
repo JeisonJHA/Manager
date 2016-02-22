@@ -32,7 +32,6 @@ type
     procedure actConfirmarExecute(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure cxPageControl1Change(Sender: TObject);
     procedure actExcluirUpdate(Sender: TObject);
     procedure actExcluirExecute(Sender: TObject);
     procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView;
@@ -54,22 +53,19 @@ implementation
 
 procedure TfrmCadastroPaginadoModelo.actCancelarExecute(Sender: TObject);
 begin
-  if (ioeMestre.State in [dsInsert, dsEdit]) then
-    ioeMestre.Cancel;
+  if (iosSelecionador.State in [dsInsert, dsEdit]) then
+    iosSelecionador.Cancel;
   Close;
 end;
 
 procedure TfrmCadastroPaginadoModelo.actConfirmarExecute(Sender: TObject);
 begin
-  ioeMestre.Post;
-  ioeMestre.ApplyChanges;
-  if iosSelecionador.IndexOfObject(ioeMestre.Subject) < 0 then
-    iosSelecionador.AddObject(ioeMestre.Subject);
+  iosSelecionador.Post;
 end;
 
 procedure TfrmCadastroPaginadoModelo.actConfirmarUpdate(Sender: TObject);
 begin
-  TAction(Sender).Enabled := (ioeMestre.State in [dsInsert, dsEdit]);
+  TAction(Sender).Enabled := (iosSelecionador.State in [dsInsert, dsEdit]);
 end;
 
 procedure TfrmCadastroPaginadoModelo.actExcluirExecute(Sender: TObject);
@@ -79,25 +75,24 @@ begin
     Exit;
 
   iosSelecionador.Delete;
-  iosSelecionador.PostChanges;
   cxPageControl1.ActivePageIndex := PAGE_PRINCIPAL;
 end;
 
 procedure TfrmCadastroPaginadoModelo.actExcluirUpdate(Sender: TObject);
 begin
   inherited;
-  TAction(Sender).Enabled := (not iosSelecionador.IsEmpty) and (ioeMestre.State in [dsBrowse]);
+  TAction(Sender).Enabled := (not iosSelecionador.IsEmpty);
 end;
 
 procedure TfrmCadastroPaginadoModelo.actNovoExecute(Sender: TObject);
 begin
-  ioeMestre.Subject := ioeMestre.CreateObject;
+  iosSelecionador.Insert;
   cxPageControl1.ActivePageIndex := PAGE_DETALHE;
 end;
 
 procedure TfrmCadastroPaginadoModelo.actNovoUpdate(Sender: TObject);
 begin
-  TAction(Sender).Enabled := (ioeMestre.State in [dsBrowse]);
+  TAction(Sender).Enabled := (iosSelecionador.State in [dsBrowse]);
 end;
 
 procedure TfrmCadastroPaginadoModelo.cxGrid1DBTableView1CellDblClick(
@@ -105,30 +100,13 @@ procedure TfrmCadastroPaginadoModelo.cxGrid1DBTableView1CellDblClick(
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 begin
   inherited;
-  if iosSelecionador.IsEmpty then
-    Exit;
-  ioeMestre.Subject := iosSelecionador.CurrentObject;
   cxPageControl1.ActivePageIndex := PAGE_DETALHE;
-end;
-
-procedure TfrmCadastroPaginadoModelo.cxPageControl1Change(Sender: TObject);
-begin
-  inherited;
-  case TcxPageControl(Sender).ActivePageIndex of
-    PAGE_PRINCIPAL: iosSelecionador.Refresh;
-    PAGE_DETALHE:
-    begin
-      if iosSelecionador.IndexOfObject(ioeMestre.Subject) > -1 then
-        ioeMestre.Subject := iosSelecionador.CurrentObject;
-    end;
-  end;
 end;
 
 procedure TfrmCadastroPaginadoModelo.FormShow(Sender: TObject);
 begin
   inherited;
   cxPageControl1.ActivePageIndex := PAGE_PRINCIPAL;
-  ioeMestre.Open;
 end;
 
 end.

@@ -32,7 +32,8 @@ uses
   dxSkinWhiteprint, dxSkinXmas2008Blue, cxStyles, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  InstantPresentation, IDE.Aplicacao;
+  InstantPresentation, IDE.Aplicacao, DosCommand, Manager.PromptCommand,
+  JvAppIniStorage, JvFormPlacement;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)
@@ -85,7 +86,22 @@ type
     cxGrid1Level1: TcxGridLevel;
     cxGrid1: TcxGrid;
     cxGrid1DBTableView1Descricao: TcxGridDBColumn;
-    btnTeste: TdxBarLargeButton;
+    dxDockSite2: TdxDockSite;
+    dxDockPanel2: TdxDockPanel;
+    dxLayoutDockSite2: TdxLayoutDockSite;
+    dxBarSeparator1: TdxBarSeparator;
+    dxBarLargeButton1: TdxBarLargeButton;
+    txtConsole: TMemo;
+    dxBarLargeButton3: TdxBarLargeButton;
+    StringGrid1: TStringGrid;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    dxBarSeparator2: TdxBarSeparator;
+    dxBarLargeButton4: TdxBarLargeButton;
+    JvFormStorage1: TJvFormStorage;
+    JvAppIniFileStorage1: TJvAppIniFileStorage;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -99,7 +115,12 @@ type
     procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
-    procedure btnTesteClick(Sender: TObject);
+    procedure dxBarLargeButton1Click(Sender: TObject);
+    procedure txtConsoleKeyPress(Sender: TObject; var Key: Char);
+    procedure dxDockPanel2Activate(Sender: TdxCustomDockControl;
+      Active: Boolean);
+    procedure txtConsoleEnter(Sender: TObject);
+    procedure dxBarLargeButton4Click(Sender: TObject);
   private
     { Private declarations }
     procedure Teste;
@@ -119,8 +140,13 @@ implementation
 
 uses JvTypes, IDE.Workspace, Winapi.ShellApi, udtmDatabase, Workspace.Constantes,
  Cadastro.Barra.Ferramentas, Cadastro.Acao.Executar, Cadastro.Acao.Copiar,
- IDE.Controller.MainMenu, Cadastro.Sistema, Cadastro.BancoDeDados.Oracle,
- Cadastro.BancoDeDados.DB2, Cadastro.BancoDeDados.MSSQL, IDE.Utils;
+ IDE.Controller.MainMenu, Cadastro.Sistema, Cadastro.Acao.Configurar.BaseDeDados.Oracle,
+ Cadastro.Acao.Configurar.BaseDeDados.DB2, Cadastro.Acao.Configurar.BaseDeDados.MSSQL, IDE.Utils,
+ Cadastro.Acao.Configurar.BaseDeDados, IDE.IWorkspace,
+ Cadastro.Acao.MontarAmbiente;
+
+const
+  CONSOLE_TEXTO = 'manager/>';
 
 { TForm1 }
 
@@ -148,9 +174,21 @@ end;
 procedure TfrmPrincipal.cxGrid1DBTableView1CellDblClick(
   Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+var
+  I: Integer;
+  iws: IWorkspace;
+  workspace: TWorkspace;
 begin
-  if not Assigned(iosWorkspaces.CurrentObject) then
+  workspace := TWorkspace(iosWorkspaces.CurrentObject);
+  if not Assigned(workspace) then
     Exit;
+
+  for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount -1 do
+  begin
+    dxTabbedMDIManager1.TabProperties.Pages[I].MDIChild.GetInterface(IWorkspace, iws);
+    if Assigned(iws) and (iws.Sandbox = workspace) then
+      Exit;
+  end;
 
   with TfrmWorkspace.Create(Self, TWorkspace(iosWorkspaces.CurrentObject)) do
   begin
@@ -178,7 +216,7 @@ end;
 
 procedure TfrmPrincipal.btnCadastroBancoDeDadosDB2Click(Sender: TObject);
 begin
-  with TfrmCadastroBancoDeDadosDB2.Create(nil) do
+  with TfrmCadastroAcaoConfigurarBaseDeDadosDB2.Create(nil) do
   begin
     ShowModal;
     Free;
@@ -187,7 +225,7 @@ end;
 
 procedure TfrmPrincipal.btnCadastroBancoDeDadosMSSQLClick(Sender: TObject);
 begin
-  with TfrmCadastroBancoDeDadosMSSQL.Create(nil) do
+  with TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL.Create(nil) do
   begin
     ShowModal;
     Free;
@@ -196,16 +234,20 @@ end;
 
 procedure TfrmPrincipal.btnCadastroBancoDeDadosOracleClick(Sender: TObject);
 begin
-  with TfrmCadastroBancoDeDadosOracle.Create(nil) do
+  with TfrmCadastroAcaoConfigurarBaseDeDadosOracle.Create(nil) do
   begin
     ShowModal;
     Free;
   end;
 end;
 
-procedure TfrmPrincipal.btnTesteClick(Sender: TObject);
+procedure TfrmPrincipal.dxBarLargeButton1Click(Sender: TObject);
 begin
-  ShowMessage(Application.Parser.ParserText('Hello {WS_TITLE} | {WS_DIR}'));
+  with TfrmCadastroAcaoConfigurarBaseDeDados.Create(nil) do
+  begin
+    ShowModal;
+    Free;
+  end;
 end;
 
 procedure TfrmPrincipal.dxBarLargeButton2Click(Sender: TObject);
@@ -215,6 +257,22 @@ begin
     ShowModal;
     Free;
   end;
+end;
+
+procedure TfrmPrincipal.dxBarLargeButton4Click(Sender: TObject);
+begin
+  with TfrmCadastroAcaoMontarAmbiente.Create(nil) do
+  begin
+    ShowModal;
+    Free;
+  end;
+end;
+
+procedure TfrmPrincipal.dxDockPanel2Activate(Sender: TdxCustomDockControl;
+  Active: Boolean);
+begin
+  if txtConsole.CanFocus then
+    txtConsole.SetFocus;
 end;
 
 procedure TfrmPrincipal.InicializarMainMenu;
@@ -260,10 +318,23 @@ begin
   InicializarWorkspaceList;
 end;
 
+function ExcluiQuebra( Str: String ): String;
+var
+  texto: string;
+begin
+  texto := Str;
+  texto := StringReplace(texto, #$D#$A, '', [rfReplaceAll]);
+  texto := StringReplace(texto, #13#10, '', [rfReplaceAll]);
+  Exit(texto);
+end;
+
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
   InicializarMainMenu;
   Application.TabbedMDIManager(dxTabbedMDIManager1);
+  Application.PromptCommand.InputToOutput := True;
+  Application.PromptCommand.OutputLines := txtConsole.Lines;
+  txtConsole.Lines.Delete(Length(txtConsole.Lines.Text)+1);
 
   Teste;
   CarregarVersao;
@@ -276,6 +347,41 @@ begin
   begin
     cxTextEdit1.Text := Diretorio;
     Free;
+  end;
+end;
+
+procedure TfrmPrincipal.txtConsoleEnter(Sender: TObject);
+begin
+  if txtConsole.CanFocus then
+    txtConsole.SetFocus;
+  txtConsole.SelStart := Length(CONSOLE_TEXTO);
+end;
+
+procedure TfrmPrincipal.txtConsoleKeyPress(Sender: TObject; var Key: Char);
+var
+  LineNumber: longint;
+  Texto: string;
+begin
+  if (Key = #13) then
+  begin
+    LineNumber := SendMessage(txtConsole.Handle, EM_LINEFROMCHAR, txtConsole.Selstart, 0);
+    Texto := StringReplace(txtConsole.Lines.Strings[LineNumber], CONSOLE_TEXTO, '', [rfReplaceAll, rfIgnoreCase]);
+    if not Texto.IsEmpty then
+    begin
+      Application.PromptCommand.CommandLine := Texto;
+      Application.PromptCommand.Execute;
+    end;
+    txtConsole.Lines.Add(CONSOLE_TEXTO);
+//    txtConsoleEnter(txtConsole);
+    Abort;
+  end;
+
+  if Key = #8 then
+  begin
+    LineNumber := SendMessage(txtConsole.Handle, EM_LINEFROMCHAR, txtConsole.Selstart, 0);
+    Texto := StringReplace(txtConsole.Lines.Strings[LineNumber], CONSOLE_TEXTO, '', [rfReplaceAll, rfIgnoreCase]);
+    if Length(Texto) <= 0 then
+      Abort;
   end;
 end;
 

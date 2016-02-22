@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, JvExControls, JvPageList,
   JvNavigationPane, JvComponentBase, dxSkinsCore, dxSkinsdxBarPainter,
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
-  System.Actions, IDE.IWorkspace;
+  System.Actions, IDE.IWorkspace, Vcl.ExtCtrls;
 
 type
   TfrmWorkspace = class(TForm, IWorkspace)

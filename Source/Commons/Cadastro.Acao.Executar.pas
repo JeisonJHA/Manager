@@ -19,12 +19,13 @@ type
     Label4: TLabel;
     cxDBTextEdit2: TcxDBTextEdit;
     Label2: TLabel;
-    cxDBTextEdit3: TcxDBTextEdit;
     iosSelecionadorAplicativo: TStringField;
     iosSelecionadorParametros: TStringField;
     ioeMestreAplicativo: TStringField;
     ioeMestreParametros: TStringField;
     ioeMestreSelf: TIntegerField;
+    cbxAplicativo: TcxDBComboBox;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,5 +38,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmCadastroAcaoExecutar.FormShow(Sender: TObject);
+begin
+  inherited;
+  CarregarChaves(cbxAplicativo);
+end;
 
 end.

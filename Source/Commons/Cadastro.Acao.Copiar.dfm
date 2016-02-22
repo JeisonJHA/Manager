@@ -1,16 +1,9 @@
 inherited frmCadastroAcaoCopiar: TfrmCadastroAcaoCopiar
   Caption = 'C'#243'pia de Arquivo'
-  ExplicitWidth = 696
-  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 2
-      ExplicitTop = 28
-      ExplicitWidth = 680
-      ExplicitHeight = 352
-    end
+    Properties.ActivePage = tabDetalhes
     inherited tabDetalhes: TcxTabSheet
       inherited Label1: TLabel
         Top = 21
@@ -22,7 +15,6 @@ inherited frmCadastroAcaoCopiar: TfrmCadastroAcaoCopiar
         Width = 34
         Height = 13
         Caption = 'Origem'
-        FocusControl = cxDBTextEdit2
       end
       object Label3: TLabel [2]
         Left = 327
@@ -30,7 +22,6 @@ inherited frmCadastroAcaoCopiar: TfrmCadastroAcaoCopiar
         Width = 36
         Height = 13
         Caption = 'Destino'
-        FocusControl = cxDBTextEdit3
       end
       inherited lblIcone: TLabel
         Left = 24
@@ -41,24 +32,27 @@ inherited frmCadastroAcaoCopiar: TfrmCadastroAcaoCopiar
       inherited cbxIcone: TcxDBImageComboBox
         Left = 24
         Top = 135
+        DataBinding.DataSource = dtsSelecionador
         TabOrder = 3
         ExplicitLeft = 24
         ExplicitTop = 135
-        ExplicitHeight = 36
       end
-      object cxDBTextEdit2: TcxDBTextEdit
+      inherited edtDescricao: TcxDBTextEdit
+        TabOrder = 0
+      end
+      object cbxOrigem: TcxDBComboBox
         Left = 24
         Top = 88
         DataBinding.DataField = 'Origem'
-        DataBinding.DataSource = dtsMestre
+        DataBinding.DataSource = dtsSelecionador
         TabOrder = 1
         Width = 297
       end
-      object cxDBTextEdit3: TcxDBTextEdit
+      object cbxDestino: TcxDBComboBox
         Left = 327
         Top = 88
         DataBinding.DataField = 'Destino'
-        DataBinding.DataSource = dtsMestre
+        DataBinding.DataSource = dtsSelecionador
         TabOrder = 2
         Width = 330
       end
@@ -80,6 +74,8 @@ inherited frmCadastroAcaoCopiar: TfrmCadastroAcaoCopiar
     Top = 176
   end
   inherited iosSelecionador: TInstantSelector
+    Command.Strings = (
+      'SELECT * FROM TAcaoCopiar')
     ObjectClassName = 'TAcaoCopiar'
     Top = 272
     object iosSelecionadorDestino: TStringField

@@ -9,6 +9,9 @@
         <Projects Include="Manager.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\third-part\ManagerComponentes\Packages\ManagerUtils.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="Manager:Make">
         <MSBuild Projects="Manager.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ManagerUtils">
+        <MSBuild Projects="..\..\third-part\ManagerComponentes\Packages\ManagerUtils.dproj"/>
+    </Target>
+    <Target Name="ManagerUtils:Clean">
+        <MSBuild Projects="..\..\third-part\ManagerComponentes\Packages\ManagerUtils.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ManagerUtils:Make">
+        <MSBuild Projects="..\..\third-part\ManagerComponentes\Packages\ManagerUtils.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="MdDataPack;Manager"/>
+        <CallTarget Targets="MdDataPack;Manager;ManagerUtils"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="MdDataPack:Clean;Manager:Clean"/>
+        <CallTarget Targets="MdDataPack:Clean;Manager:Clean;ManagerUtils:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="MdDataPack:Make;Manager:Make"/>
+        <CallTarget Targets="MdDataPack:Make;Manager:Make;ManagerUtils:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

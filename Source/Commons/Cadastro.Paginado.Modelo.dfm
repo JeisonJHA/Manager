@@ -54,7 +54,6 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
     Properties.CustomButtons.Buttons = <>
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
-    OnChange = cxPageControl1Change
     ClientRectBottom = 380
     ClientRectLeft = 2
     ClientRectRight = 682
@@ -88,10 +87,6 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
     object tabDetalhes: TcxTabSheet
       Caption = 'Detalhes'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   inherited ioeMestre: TInstantExposer
@@ -111,7 +106,7 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
   end
   object iosSelecionador: TInstantSelector [5]
     FieldOptions = [foObjects, foThorough]
-    Connector = dmDados.InstantIBXConnector1
+    Connector = dtmDatabase.InstantIBXConnector1
     Left = 288
     Top = 208
   end

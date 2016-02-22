@@ -2,7 +2,8 @@ unit IDE.Controller.MainMenu;
 
 interface
 
-uses Classes, SysUtils, dxRibbon, dxBar, InstantPresentation, Vcl.ActnList;
+uses Classes, SysUtils, dxRibbon, dxBar, InstantPresentation, Vcl.ActnList,
+  InstantPersistence;
 
 type
   TIDEControllerMainMenu = class(TPersistent)
@@ -41,6 +42,9 @@ begin
     begin
       barra := Objects[I] as TBarraFerramenta;
 
+      if barra.AcaoCount <= 0 then
+        Continue;
+
       { Cria a barra de ferramentas }
       bar := FBarManager.Bars.Add;
       bar.Caption := barra.Descricao;
@@ -53,28 +57,38 @@ begin
       group.Caption := barra.Descricao;
       group.ToolBar := bar;
 
-      for II := 0 to barra.AcoesCount -1 do
+      for II := 0 to barra.AcaoCount -1 do
       begin
-        acao := barra.Acao[II];
+        acao := barra.Acoes[II];
 
-        if acao.InheritsFrom(TAcaoExecutar) then
-        begin
-          action := TWorkspaceActionExecute.Create(FActionList);
-          TWorkspaceActionExecute(action).Executavel := TAcaoExecutar(acao).Aplicativo;
-          TWorkspaceActionExecute(action).Parametros := TAcaoExecutar(acao).Parametros;
-        end
+        if acao.InheritsFrom(TAcaoConfigurarBaseDeDadosDB2) then
+          acao := TAcaoConfigurarBaseDeDadosDB2.Retrieve(acao.Id)
+        else
+        if acao.InheritsFrom(TAcaoConfigurarBaseDeDadosOracle) then
+          acao := TAcaoConfigurarBaseDeDadosOracle.Retrieve(acao.Id)
+        else
+        if acao.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
+          acao := TAcaoConfigurarBaseDeDadosMSSQL.Retrieve(acao.Id)
+        else
+        if acao.InheritsFrom(TAcaoConfigurarBaseDeDados) then
+          acao := TAcaoConfigurarBaseDeDados.Retrieve(acao.Id)
+        else
+        if acao.InheritsFrom(TAcaoMontarAmbiente) then
+          acao := TAcaoMontarAmbiente.Retrieve(acao.Id)
         else
         if acao.InheritsFrom(TAcaoCopiar) then
-        begin
-          action := TWorkspaceActionCopy.Create(FActionList);
-          TWorkspaceActionCopy(action).Origem := TAcaoCopiar(acao).Origem;
-          TWorkspaceActionCopy(action).Destino := TAcaoCopiar(acao).Destino;
-        end
+          acao := TAcaoCopiar.Retrieve(acao.Id)
         else
-        begin
-          action := TWorkspaceAction.Create(FActionList);
-        end;
+        if acao.InheritsFrom(TAcaoExecutar) then
+          acao := TAcaoExecutar.Retrieve(acao.Id)
+        else
+          acao := TAcao.Retrieve(acao.Id);
 
+        if not Assigned(acao) then
+          Exit;
+
+        action := TWorkspaceAction.Create(FActionList);
+        action.Acao := acao;
         action.Category := barra.Descricao;
         action.Caption := acao.Descricao;
         action.ImageIndex := acao.Icone;
@@ -85,6 +99,7 @@ begin
         link.Item.Category := FBarManager.Categories.IndexOf('Default');
       end;
     end;
+    Close;
   finally
     Free;
   end;
