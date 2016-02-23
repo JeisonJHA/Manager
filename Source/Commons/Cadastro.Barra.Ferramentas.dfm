@@ -25,14 +25,13 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
       inherited GroupBox1: TGroupBox
         Caption = 'A'#231#245'es dispon'#237'veis'
         inherited Panel3: TPanel
-          inherited JvSpeedButton1: TJvSpeedButton
+          inherited btnAdd: TJvSpeedButton
             OnClick = SpeedButton1Click
           end
         end
         inherited Panel4: TPanel
           inherited cxGrid2: TcxGrid
             inherited cxGrid2DBTableView1: TcxGridDBTableView
-              DataController.DataSource = dtsDetalhe
               object cxGrid2DBTableView1Descricao: TcxGridDBColumn
                 DataBinding.FieldName = 'Descricao'
               end
@@ -98,9 +97,6 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
     object iosSelecionadorSelf: TIntegerField
       FieldName = 'Self'
     end
-  end
-  inherited dtsSelecionador: TDataSource
-    AutoEdit = False
   end
   inherited ioeDetalhe: TInstantExposer
     ContainerName = 'Acoes'

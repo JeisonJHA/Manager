@@ -46,29 +46,43 @@ Source: ..\bin\Manager.exe; DestDir: {app}; Flags: ignoreversion; DestName: mana
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: ..\bin\data.fdb; DestDir: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data; Flags: uninsneveruninstall onlyifdoesntexist
 ; ### Firebird Embeded ###
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\aliases.conf; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\fbembed.dll; DestDir: {app}; DestName: gds32.dll
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\firebird.conf; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\firebird.msg; DestDir: {app}\fb
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\ib_util.dll; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\icudt30.dll; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\icuin30.dll; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\icuuc30.dll; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\IDPLicense.txt; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\IPLicense.txt; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\Microsoft.VC80.CRT.manifest; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\msvcp80.dll; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\msvcr80.dll; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\Readme.txt; DestDir: {app}
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\intl\fbintl.conf; DestDir: {app}\fb\intl
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\intl\fbintl.dll; DestDir: {app}\fb\intl
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\fbudf.dll; DestDir: {app}\fb\udf
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\fbudf.sql; DestDir: {app}\fb\udf
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\fbudf.txt; DestDir: {app}\fb\udf
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\ib_udf.dll; DestDir: {app}\fb\udf
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\ib_udf.sql; DestDir: {app}\fb\udf
-Source: recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\ib_udf2.sql; DestDir: {app}\fb\udf
-Source: recursos\midas.dll; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\aliases.conf; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\fbembed.dll; DestDir: {app}; DestName: gds32.dll
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\firebird.conf; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\firebird.msg; DestDir: {app}\fb
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\ib_util.dll; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\icudt30.dll; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\icuin30.dll; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\icuuc30.dll; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\IDPLicense.txt; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\IPLicense.txt; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\Microsoft.VC80.CRT.manifest; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\msvcp80.dll; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\msvcr80.dll; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\Readme.txt; DestDir: {app}
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\intl\fbintl.conf; DestDir: {app}\fb\intl
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\intl\fbintl.dll; DestDir: {app}\fb\intl
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\fbudf.dll; DestDir: {app}\fb\udf
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\fbudf.sql; DestDir: {app}\fb\udf
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\fbudf.txt; DestDir: {app}\fb\udf
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\ib_udf.dll; DestDir: {app}\fb\udf
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\ib_udf.sql; DestDir: {app}\fb\udf
+Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\udf\ib_udf2.sql; DestDir: {app}\fb\udf
+; ### Firebird Embeded End ###
+Source: Recursos\midas.dll; DestDir: {app}
+Source: Recursos\style.ini; DestDir: {app}
+Source: Recursos\sandbox.list; DestDir: {app}
+Source: Recursos\config.ini; DestDir: {app}
+Source: Templates\DB\DB2\PG\pg.template; DestDir: {app}\Templates\DB\DB2\PG
+Source: Templates\DB\DB2\PG\pro.template; DestDir: {app}\Templates\DB\DB2\PG
+Source: Templates\DB\DB2\PG\sgc.template; DestDir: {app}\Templates\DB\DB2\PG
+Source: Templates\DB\MSSQL\PG\pg.template; DestDir: {app}\Templates\DB\MSSQL\PG
+Source: Templates\DB\MSSQL\PG\pro.template; DestDir: {app}\Templates\DB\MSSQL\PG
+Source: Templates\DB\MSSQL\PG\sgc.template; DestDir: {app}\Templates\DB\MSSQL\PG
+Source: Templates\DB\Oracle\PG\pg.template; DestDir: {app}\Templates\DB\Oracle\PG
+Source: Templates\DB\Oracle\PG\pro.template; DestDir: {app}\Templates\DB\Oracle\PG
+Source: Templates\DB\Oracle\PG\sgc.template; DestDir: {app}\Templates\DB\Oracle\PG
+
 
 [Icons]
 Name: {group}\{#MyAppName}; Filename: {app}\{#MyAppExeName}
@@ -80,3 +94,4 @@ Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchProgram,{#StringChange(M
 [Registry]
 Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Database\; ValueType: string; ValueName: DatabaseName; ValueData: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data\{#MyAppDatabaseName}; Flags: uninsdeletekey
 Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\SCM\; ValueType: string; ValueName: Workspace; Flags: uninsdeletekeyifempty
+Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\; ValueType: string; ValueName: Caminho; ValueData: {app}

@@ -30,22 +30,22 @@ end;
 
 function TWorkspaceConfig.GetDatabaseName: string;
 begin
-  Exit(ReadString('Database\DatabaseName', ''));
+  Exit(ReadString('Database\DatabaseName', String.Empty));
 end;
 
 function TWorkspaceConfig.GetDiretorio: string;
 begin
-  Exit(IncludeTrailingBackslash(ReadString('SCM\Workspace', '')));
+  Exit(IncludeTrailingBackslash(ReadString('SCM\Workspace', String.Empty)));
 end;
 
 procedure TWorkspaceConfig.SetDatabaseName(const Value: string);
 begin
-  WriteString('Database\DatabaseName', '');
+  WriteString('Database\DatabaseName', Value);
 end;
 
 procedure TWorkspaceConfig.SetDiretorio(const Value: string);
 begin
-  WriteString('SCM\Workspace', '');
+  WriteString('SCM\Workspace', Value);
 end;
 
 end.

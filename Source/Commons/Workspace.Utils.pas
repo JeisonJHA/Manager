@@ -11,21 +11,13 @@ type
     FConfig: TWorkspaceConfig;
   public
     constructor Create(AConfig: TWorkspaceConfig); virtual;
-//    procedure Sandboxes(var ALista: TWorkspaceList); overload;
     procedure Sandboxes(const ADiretorio: string; const AIOSelector: TInstantSelector); overload;
     procedure Sandboxes(AIOSelector: TInstantSelector); overload;
-
-    procedure Sandboxes(const ADataSet: TMdObjDataSet); overload;
   end;
 
 implementation
 
 { TWorkspaceUtils }
-
-//procedure TWorkspaceUtils.Sandboxes(var ALista: TWorkspaceList);
-//begin
-//  Sandboxes(FConfig.Diretorio, ALista);
-//end;
 
 constructor TWorkspaceUtils.Create(AConfig: TWorkspaceConfig);
 begin
@@ -36,47 +28,43 @@ procedure TWorkspaceUtils.Sandboxes(const ADiretorio: string; const AIOSelector:
 var
   SearchRec: TSearchRec;
   I: integer;
+  X: Integer;
+  diretorios: TStrings;
 begin
   if not AIOSelector.Active then
     AIOSelector.Open;
 
-  FindFirst(IncludeTrailingBackslash(ADiretorio) + '*.*', faDirectory, SearchRec);
+  diretorios := TStringList.Create;
+  try
+    diretorios.StrictDelimiter := True;
+    diretorios.Delimiter := ';';
+    diretorios.DelimitedText := ADiretorio;
 
-  while FindNext(SearchRec) = 0 do
-  begin
-    if (SearchRec.Name = '..') then
-      Continue;
+    for X := 0 to diretorios.Count -1 do
+    begin
+      if not DirectoryExists(diretorios[X]) then
+        Continue;
 
-    if not DirectoryExists(IncludeTrailingBackslash(ADiretorio) + SearchRec.Name) then
-      Continue;
+      FindFirst(IncludeTrailingBackslash(diretorios[X]) + '*.*', faDirectory, SearchRec);
 
-    I := AIOSelector.AddObject(TWorkspace.Create);
-    TWorkspace(AIOSelector.Objects[I]).Descricao := ExtractFileName(SearchRec.Name);
-    TWorkspace(AIOSelector.Objects[I]).Diretorio := IncludeTrailingBackslash(ADiretorio) + SearchRec.Name;
+      while FindNext(SearchRec) = 0 do
+      begin
+        if (SearchRec.Name = '..') then
+          Continue;
+
+        if not DirectoryExists(IncludeTrailingBackslash(diretorios[X]) + SearchRec.Name) then
+          Continue;
+
+        I := AIOSelector.AddObject(TWorkspace.Create);
+        TWorkspace(AIOSelector.Objects[I]).Descricao := ExtractFileName(SearchRec.Name);
+        TWorkspace(AIOSelector.Objects[I]).Diretorio := IncludeTrailingBackslash(diretorios[X]) + SearchRec.Name;
+      end;
+    end;
+    diretorios.Clear;
+  finally
+    FreeAndNil(diretorios);
   end;
   AIOSelector.Refresh;
-end;
-
-procedure TWorkspaceUtils.Sandboxes(const ADataSet: TMdObjDataSet);
-var
-  SearchRec: TSearchRec;
-  Sandbox: TWorkspace;
-begin
-  FindFirst(IncludeTrailingBackslash(FConfig.Diretorio) + '*.*', faDirectory, SearchRec);
-
-  while FindNext(SearchRec) = 0 do
-  begin
-    if (SearchRec.Name = '..') then
-      Continue;
-
-    if not DirectoryExists(IncludeTrailingBackslash(FConfig.Diretorio) + SearchRec.Name) then
-      Continue;
-
-    ADataSet.ObjClass := TWorkspace;
-    Sandbox := TWorkspace(ADataSet.Add);
-    Sandbox.Descricao := ExtractFileName(SearchRec.Name);
-    Sandbox.Diretorio := IncludeTrailingBackslash(FConfig.Diretorio) + SearchRec.Name;
-  end;
 end;
 
 procedure TWorkspaceUtils.Sandboxes(AIOSelector: TInstantSelector);

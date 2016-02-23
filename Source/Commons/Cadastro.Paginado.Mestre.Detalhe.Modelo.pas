@@ -23,10 +23,10 @@ type
     cxGrid2: TcxGrid;
     cxGrid2DBTableView1: TcxGridDBTableView;
     cxGrid2Level1: TcxGridLevel;
-    JvSpeedButton1: TJvSpeedButton;
-    JvSpeedButton2: TJvSpeedButton;
     actAddDetalhe: TAction;
     actDelDetalhe: TAction;
+    btnAdd: TJvSpeedButton;
+    btnDel: TJvSpeedButton;
     procedure actAddDetalheUpdate(Sender: TObject);
     procedure actDelDetalheUpdate(Sender: TObject);
   private
@@ -41,8 +41,6 @@ var
 implementation
 
 {$R *.dfm}
-
-uses udtmDatabase;
 
 procedure TfrmCadastroPaginadoMestreDetalheModelo.actAddDetalheUpdate(
   Sender: TObject);

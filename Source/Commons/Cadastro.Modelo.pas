@@ -4,8 +4,9 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Formulario.Modelo, Data.DB,
-  InstantPresentation, Vcl.ExtCtrls, Vcl.StdCtrls, System.Actions, Vcl.ActnList;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Formulario.Modelo, Data.DB, cxImageComboBox,
+  InstantPresentation, Vcl.ExtCtrls, Vcl.StdCtrls, System.Actions, Vcl.ActnList,
+  cxDBEdit;
 
 type
   TfrmCadastroModeloClass = class of TfrmCadastroModelo;
@@ -23,6 +24,8 @@ type
     procedure actCancelarExecute(Sender: TObject);
   private
     { Private declarations }
+  protected
+    procedure CarregarComboIcones(AComboBoxes: array of TcxDBImageComboBox);
   public
     { Public declarations }
   end;
@@ -33,6 +36,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses udtmDatabase;
 
 procedure TfrmCadastroModelo.actCancelarExecute(Sender: TObject);
 begin
@@ -54,6 +59,22 @@ end;
 procedure TfrmCadastroModelo.actConfirmarUpdate(Sender: TObject);
 begin
   TAction(Sender).Enabled := ioeMestre.State in [dsInsert, dsEdit];
+end;
+
+procedure TfrmCadastroModelo.CarregarComboIcones(AComboBoxes: array of TcxDBImageComboBox);
+var
+  I: Integer;
+  item: TcxImageComboBoxItem;
+  X: Integer;
+begin
+  inherited;
+  for X := Low(AComboBoxes) to High(AComboBoxes) do
+    for I := 0 to udtmDatabase.dtmDatabase.SmallImageList.Count -1 do
+    begin
+      item := AComboBoxes[X].Properties.Items.Add;
+      item.ImageIndex := I;
+      item.Value := I;
+    end;
 end;
 
 end.

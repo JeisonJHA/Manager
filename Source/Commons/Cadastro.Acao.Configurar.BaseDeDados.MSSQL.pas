@@ -12,7 +12,7 @@ uses
   cxMaskEdit, cxDropDownEdit, cxImageComboBox, cxTextEdit, Vcl.StdCtrls,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxGridCustomView, cxGrid, cxPC, Vcl.ExtCtrls, cxLookupEdit,
-  cxDBLookupEdit, cxDBLookupComboBox;
+  cxDBLookupEdit, cxDBLookupComboBox, Vcl.Buttons;
 
 type
   TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL = class(TfrmCadastroAcaoConfigurarBaseDeDados)
@@ -22,6 +22,8 @@ type
     edtInstancia: TcxDBTextEdit;
   private
     { Private declarations }
+  protected
+    function PegarCaminhoTemplate: string; override;
   public
     { Public declarations }
   end;
@@ -32,5 +34,12 @@ var
 implementation
 
 {$R *.dfm}
+
+{ TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL }
+
+function TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL.PegarCaminhoTemplate: string;
+begin
+  Exit(inherited PegarCaminhoTemplate + 'MSSQL\');
+end;
 
 end.

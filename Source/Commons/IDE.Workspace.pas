@@ -22,6 +22,8 @@ type
     btnExecutarApp: TdxBarSubItem;
     ActionList1: TActionList;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     FSandbox: TWorkspace;
@@ -41,6 +43,15 @@ implementation
 
 uses udtmDatabase, Workspace.Action, Winapi.ShellApi,
   Workspace.Constantes;
+
+type
+  TSandboxesRecentes = class(TStringList)
+  private
+    FArquivo: string;
+  public
+    constructor Create;
+    procedure Salvar();
+  end;
 
 function TfrmWorkspace.Parser(const ATexto: string): string;
 begin
@@ -62,6 +73,47 @@ end;
 procedure TfrmWorkspace.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
+end;
+
+procedure TfrmWorkspace.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+var
+  sandboxes: TSandboxesRecentes;
+begin
+  sandboxes := TSandboxesRecentes.Create;
+  try
+    sandboxes.Delete(sandboxes.IndexOf(Sandbox.Descricao));
+    sandboxes.Salvar;
+  finally
+    FreeAndNil(sandboxes);
+  end;
+end;
+
+procedure TfrmWorkspace.FormShow(Sender: TObject);
+var
+  sandboxes: TSandboxesRecentes;
+begin
+  sandboxes := TSandboxesRecentes.Create;
+  try
+    sandboxes.Add(Sandbox.Descricao);
+    sandboxes.Salvar;
+  finally
+    FreeAndNil(sandboxes);
+  end;
+end;
+
+{ TSandboxesRecentes }
+
+constructor TSandboxesRecentes.Create;
+begin
+  inherited;
+  FArquivo := ExtractFilePath(Application.ExeName) + 'sandbox.list';
+  if FileExists(FArquivo) then
+    LoadFromFile(FArquivo);
+end;
+
+procedure TSandboxesRecentes.Salvar;
+begin
+  SaveToFile(FArquivo);
 end;
 
 end.

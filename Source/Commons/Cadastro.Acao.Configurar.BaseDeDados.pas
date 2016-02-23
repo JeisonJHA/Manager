@@ -12,7 +12,7 @@ uses
   cxDropDownEdit, cxImageComboBox, cxTextEdit, Vcl.StdCtrls, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxGridCustomView, cxGrid, cxPC, Vcl.ExtCtrls, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, cxSpinEdit;
+  cxDBLookupComboBox, cxSpinEdit, Vcl.Buttons;
 
 type
   TfrmCadastroAcaoConfigurarBaseDeDados = class(TfrmCadastroAcaoCopiar)
@@ -45,8 +45,13 @@ type
     edtSenha: TcxDBTextEdit;
     Label6: TLabel;
     edtUsuario: TcxDBTextEdit;
+    SpeedButton1: TSpeedButton;
+    OpenDialog1: TOpenDialog;
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
+  protected
+    function PegarCaminhoTemplate: string; virtual;
   public
     { Public declarations }
   end;
@@ -57,5 +62,19 @@ var
 implementation
 
 {$R *.dfm}
+
+function TfrmCadastroAcaoConfigurarBaseDeDados.PegarCaminhoTemplate: string;
+begin
+  Exit(ExtractFilePath(Application.ExeName) + 'Templates\DB\');
+end;
+
+procedure TfrmCadastroAcaoConfigurarBaseDeDados.SpeedButton1Click(
+  Sender: TObject);
+begin
+  OpenDialog1.InitialDir := PegarCaminhoTemplate;
+  OpenDialog1.Execute();
+  if not String(OpenDialog1.FileName).IsEmpty then
+    cbxOrigem.Text := OpenDialog1.FileName;
+end;
 
 end.

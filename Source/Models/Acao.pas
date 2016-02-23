@@ -185,6 +185,10 @@ var
 begin
   try
     inherited Executar;
+
+    if Aplicativo.IsEmpty then
+      Exit();
+
     ShellExecute(handle, nil, PChar(Application.Parser.ParserText(Aplicativo)),
       PChar(Parametros), '', SW_SHOWNORMAL);
   except
@@ -326,9 +330,8 @@ end;
 
 procedure TAcaoConfigurarBaseDeDados.InternalConfigurarIni(AArquivo: TIniFile);
 begin
+  AArquivo.WriteString('Cliente', 'LoginAutomatico', Format('%s,%s,1', [Usuario, Senha]));
   AArquivo.WriteString('Database', 'Alias', Alias);
-  AArquivo.WriteString('Database', 'Usuario', Usuario);
-  AArquivo.WriteString('Database', 'Senha', Senha);
 end;
 
 procedure TAcaoConfigurarBaseDeDados.Executar;

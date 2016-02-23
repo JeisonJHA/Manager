@@ -1,11 +1,23 @@
 inherited frmCadastroPaginadoMestreDetalheModelo: TfrmCadastroPaginadoMestreDetalheModelo
   Caption = 'Mestre Detalhe Modelo'
+  ExplicitWidth = 696
+  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     Properties.ActivePage = tabDetalhes
+    inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
+    end
     inherited tabDetalhes: TcxTabSheet
       Caption = 'Formul'#225'rio'
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 3
@@ -23,7 +35,7 @@ inherited frmCadastroPaginadoMestreDetalheModelo: TfrmCadastroPaginadoMestreDeta
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
-          object JvSpeedButton1: TJvSpeedButton
+          object btnAdd: TJvSpeedButton
             Left = 6
             Top = 35
             Width = 25
@@ -65,7 +77,7 @@ inherited frmCadastroPaginadoMestreDetalheModelo: TfrmCadastroPaginadoMestreDeta
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000}
           end
-          object JvSpeedButton2: TJvSpeedButton
+          object btnDel: TJvSpeedButton
             Left = 6
             Top = 66
             Width = 25
@@ -129,6 +141,7 @@ inherited frmCadastroPaginadoMestreDetalheModelo: TfrmCadastroPaginadoMestreDeta
             TabOrder = 0
             object cxGrid2DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = dtsDetalhe
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
               DataController.Summary.SummaryGroups = <>

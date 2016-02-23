@@ -3,6 +3,7 @@ inherited frmFormularioEscolha: TfrmFormularioEscolha
   Caption = 'Selecionar'
   ClientHeight = 419
   ClientWidth = 517
+  Position = poMainFormCenter
   ExplicitWidth = 523
   ExplicitHeight = 448
   PixelsPerInch = 96
@@ -25,8 +26,6 @@ inherited frmFormularioEscolha: TfrmFormularioEscolha
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitTop = 372
-    ExplicitWidth = 461
     object btnSelecionar: TButton
       Left = 345
       Top = 8
@@ -55,8 +54,6 @@ inherited frmFormularioEscolha: TfrmFormularioEscolha
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = -6
-    ExplicitWidth = 461
     object cxGrid1: TcxGrid
       AlignWithMargins = True
       Left = 3
@@ -65,10 +62,6 @@ inherited frmFormularioEscolha: TfrmFormularioEscolha
       Height = 370
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = 136
-      ExplicitTop = 88
-      ExplicitWidth = 250
-      ExplicitHeight = 200
       object cxGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         OnCellDblClick = cxGrid1DBTableView1CellDblClick

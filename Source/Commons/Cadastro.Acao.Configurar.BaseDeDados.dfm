@@ -1,9 +1,15 @@
 inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDeDados
   Caption = 'Configurar Base de Dados'
+  ExplicitWidth = 696
+  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       inherited cxGrid1: TcxGrid
         inherited cxGrid1DBTableView1: TcxGridDBTableView
           inherited cxGrid1DBTableView1Descricao: TcxGridDBColumn
@@ -22,6 +28,10 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       end
     end
     inherited tabDetalhes: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       inherited Label1: TLabel
         Top = 64
         Visible = False
@@ -72,16 +82,25 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         Height = 13
         Caption = 'Usuario'
       end
-      inherited edtDescricao: TcxDBTextEdit [8]
+      object SpeedButton1: TSpeedButton [8]
+        Left = 298
+        Top = 164
+        Width = 23
+        Height = 22
+        Caption = '...'
+        OnClick = SpeedButton1Click
       end
-      inherited cbxIcone: TcxDBImageComboBox [9]
+      inherited edtDescricao: TcxDBTextEdit [9]
+      end
+      inherited cbxIcone: TcxDBImageComboBox [10]
         Left = 25
         Top = 206
         TabOrder = 7
         ExplicitLeft = 25
         ExplicitTop = 206
+        ExplicitHeight = 36
       end
-      object cbxSistema: TcxDBLookupComboBox [10]
+      object cbxSistema: TcxDBLookupComboBox [11]
         Left = 24
         Top = 40
         DataBinding.DataField = 'Sistema'
@@ -95,7 +114,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         TabOrder = 1
         Width = 633
       end
-      object edtAlias: TcxDBTextEdit [11]
+      object edtAlias: TcxDBTextEdit [12]
         Left = 24
         Top = 83
         DataBinding.DataField = 'Alias'
@@ -107,6 +126,8 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         Top = 165
         TabOrder = 5
         ExplicitTop = 165
+        ExplicitWidth = 273
+        Width = 273
       end
       inherited cbxDestino: TcxDBComboBox
         Top = 165
@@ -214,5 +235,9 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
     DataSet = iosSistema
     Left = 520
     Top = 240
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 336
+    Top = 216
   end
 end

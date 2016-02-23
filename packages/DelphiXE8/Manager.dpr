@@ -39,7 +39,10 @@ uses
   Cadastro.Acao.Configurar.BaseDeDados.MSSQL in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas' {frmCadastroAcaoConfigurarBaseDeDadosMSSQL},
   Cadastro.Paginado.Modelo in '..\..\Source\Commons\Cadastro.Paginado.Modelo.pas' {frmCadastroPaginadoModelo},
   Acao.Controller in '..\..\Source\Controllers\Acao.Controller.pas',
-  Formulario.Escolha in '..\..\Source\Commons\Formulario.Escolha.pas' {frmFormularioEscolha};
+  Formulario.Escolha in '..\..\Source\Commons\Formulario.Escolha.pas' {frmFormularioEscolha},
+  Cadastro.SCM in '..\..\Source\Commons\Cadastro.SCM.pas' {frmCadastroSCM},
+  ActiveDs_TLB in '..\..\Source\Commons\ActiveDs_TLB.pas',
+  adshlp in '..\..\Source\Commons\adshlp.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,

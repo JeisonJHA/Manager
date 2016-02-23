@@ -28,7 +28,6 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
-    procedure CarregarComboIcones;
   protected
     procedure CarregarChaves(AComboBoxes: array of TcxDBComboBox); overload;
     procedure CarregarChaves(AComboBox: TcxDBComboBox); overload;
@@ -69,24 +68,10 @@ begin
     CarregarChaves(AComboBoxes[I])
 end;
 
-procedure TfrmCadastroAcao.CarregarComboIcones;
-var
-  I: Integer;
-  item: TcxImageComboBoxItem;
-begin
-  inherited;
-  for I := 0 to udtmDatabase.dtmDatabase.SmallImageList.Count -1 do
-  begin
-    item := cbxIcone.Properties.Items.Add;
-    item.ImageIndex := I;
-    item.Value := I;
-  end;
-end;
-
 procedure TfrmCadastroAcao.FormShow(Sender: TObject);
 begin
   inherited;
-  CarregarComboIcones;
+  CarregarComboIcones([cbxIcone]);
 end;
 
 end.

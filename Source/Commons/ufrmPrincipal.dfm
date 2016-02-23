@@ -117,17 +117,11 @@ object frmPrincipal: TfrmPrincipal
       end
       object SpeedButton1: TSpeedButton
         Left = 315
-        Top = 245
+        Top = 85
         Width = 23
         Height = 22
         Caption = '...'
-      end
-      object cxTextEdit1: TcxTextEdit
-        Left = 20
-        Top = 246
-        TabOrder = 0
-        Text = 'cxTextEdit1'
-        Width = 289
+        OnClick = SpeedButton1Click
       end
       object cxLabel2: TcxLabel
         Left = 20
@@ -148,52 +142,13 @@ object frmPrincipal: TfrmPrincipal
         Height = 26
         Width = 300
       end
-      object StringGrid1: TStringGrid
-        Left = 21
-        Top = 86
-        Width = 317
-        Height = 154
-        ColCount = 1
-        FixedCols = 0
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 4
-      end
-      object Button1: TButton
+      object edtSCMPaths: TcxTextEdit
         Left = 20
-        Top = 273
-        Width = 75
-        Height = 25
-        Caption = 'Button1'
-        TabOrder = 6
-      end
-      object Button2: TButton
-        Left = 101
-        Top = 273
-        Width = 75
-        Height = 25
-        Caption = 'Button2'
-        TabOrder = 2
-      end
-      object Button3: TButton
-        Left = 182
-        Top = 273
-        Width = 75
-        Height = 25
-        Caption = 'Button3'
-        TabOrder = 3
-      end
-      object Button4: TButton
-        Left = 263
-        Top = 274
-        Width = 75
-        Height = 25
-        Caption = 'Button4'
-        TabOrder = 5
+        Top = 86
+        Properties.ReadOnly = False
+        TabOrder = 1
+        Text = 'cxTextEdit1'
+        Width = 289
       end
     end
   end
@@ -207,20 +162,14 @@ object frmPrincipal: TfrmPrincipal
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         PanelStyle.ImageIndex = 1
-        Width = 255
-      end
-      item
-        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.Alignment = taCenter
-      end
-      item
-        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.Alignment = taRightJustify
-        Width = 100
+        MinWidth = 240
+        Width = 600
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         PanelStyle.Alignment = taRightJustify
+        BiDiMode = bdRightToLeft
+        ParentBiDiMode = False
         Width = 20
       end>
     Ribbon = dxRibbon1
@@ -309,7 +258,6 @@ object frmPrincipal: TfrmPrincipal
     ManagerColor = False
     Align = alLeft
     AutoSize = True
-    ExplicitHeight = 140
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 459
@@ -324,11 +272,10 @@ object frmPrincipal: TfrmPrincipal
       OriginalHeight = 200
     end
     object dxDockPanel1: TdxDockPanel
-      Left = -185
+      Left = 0
       Top = 0
       Width = 185
       Height = 431
-      Visible = False
       AllowFloating = True
       AutoHide = True
       Caption = 'Workspaces'
@@ -351,13 +298,18 @@ object frmPrincipal: TfrmPrincipal
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitHeight = 0
         object cxGrid1: TcxGrid
           Left = 0
           Top = 0
           Width = 174
           Height = 387
           Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          BorderStyle = cxcbsNone
           TabOrder = 0
+          ExplicitHeight = 0
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             OnCellDblClick = cxGrid1DBTableView1CellDblClick
@@ -690,7 +642,7 @@ object frmPrincipal: TfrmPrincipal
   end
   object JvFormStorage1: TJvFormStorage
     AppStorage = JvAppIniFileStorage1
-    AppStoragePath = '%FORM_NAME%'
+    AppStoragePath = '%FORM_NAME%\'
     StoredValues = <>
     Left = 952
     Top = 176

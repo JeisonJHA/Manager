@@ -3,7 +3,7 @@ unit IDE.Aplicacao;
 interface
 
 uses Classes, SysUtils, Forms, IDE.Controller.Parser, IDE.IWorkspace, dxTabbedMDI,
-  DosCommand;
+  DosCommand, ActiveX, adshlp, ActiveDs_Tlb, System.Win.ComObj;
 
 type
   TIDEAplicacao = class helper for TApplication
@@ -13,6 +13,7 @@ type
   public
     function Parser: TIDEControllerParser;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
+    function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
     property PromptCommand: TDosCommand read GetPromptCommand;
   end;
@@ -32,10 +33,12 @@ type
     FParser: TIDEControllerParser;
     FTabbedMDIManager: TdxTabbedMDIManager;
     FPromptCommand: TDosCommand;
+    FadObject: IADs;
     function GetCurrentWorkspace: IWorkspace;
   public
     constructor Create;
     destructor Destroy; override;
+    function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
   published
     function Parser: TIDEControllerParser;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
@@ -81,6 +84,25 @@ begin
   Exit(nil);
 end;
 
+function TAplicacao.Login(const AUsuario, ASenha: string;
+  ADominio: string): boolean;
+begin
+  ///Inicialização do COM
+  CoInitialize(nil);
+  try
+    ADsOpenObject(Format('LDAP://%s',[ADominio]), LowerCase(AUsuario), ASenha, ADS_SECURE_AUTHENTICATION, IADs, FadObject);
+    Exit(True);
+  except
+    on e: EOleException do
+    begin
+      if Pos('Falha de logon', e.Message) > 0 then
+        raise Exception.Create('Login inválido!');
+      raise Exception.Create(e.Message);
+    end;
+  end;
+  CoUninitialize;
+end;
+
 function TAplicacao.Parser: TIDEControllerParser;
 begin
   Exit(_aplicacao.FParser);
@@ -103,6 +125,12 @@ end;
 function TIDEAplicacao.GetPromptCommand: TDosCommand;
 begin
   Exit(_aplicacao.PromptCommand);
+end;
+
+function TIDEAplicacao.Login(const AUsuario, ASenha: string;
+  ADominio: string): boolean;
+begin
+  Exit(_aplicacao.Login(AUsuario, ASenha, ADominio));
 end;
 
 function TIDEAplicacao.Parser: TIDEControllerParser;

@@ -21,7 +21,7 @@ var
   form: TfrmFormularioEscolha;
   column: TcxGridDBColumn;
 begin
-  form := TfrmFormularioEscolha.Create(nil);
+  form := TfrmFormularioEscolha.Create(Self);
   try
     column := form.cxGrid1DBTableView1.CreateColumn;
     column.DataBinding.FieldName := 'Descricao';

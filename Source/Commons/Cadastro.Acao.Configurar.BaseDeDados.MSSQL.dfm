@@ -1,21 +1,9 @@
 inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL
   Caption = 'Configurar Base de Dados MSSQL'
-  ExplicitWidth = 696
-  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 2
-      ExplicitTop = 28
-      ExplicitWidth = 680
-      ExplicitHeight = 352
-    end
     inherited tabDetalhes: TcxTabSheet
-      ExplicitLeft = 2
-      ExplicitTop = 28
-      ExplicitWidth = 680
-      ExplicitHeight = 352
       inherited Label2: TLabel
         Top = 148
         ExplicitTop = 148
@@ -45,15 +33,11 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarB
       end
       inherited cbxIcone: TcxDBImageComboBox
         TabOrder = 8
-        ExplicitHeight = 36
       end
       inherited cbxOrigem: TcxDBComboBox
         Top = 166
         TabOrder = 6
         ExplicitTop = 166
-      end
-      inherited cbxDestino: TcxDBComboBox
-        TabOrder = 7
       end
       object edtInstancia: TcxDBTextEdit [15]
         Left = 25
@@ -62,6 +46,9 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarB
         DataBinding.DataSource = dtsSelecionador
         TabOrder = 3
         Width = 378
+      end
+      inherited cbxDestino: TcxDBComboBox
+        TabOrder = 7
       end
       inherited edtSenha: TcxDBTextEdit
         Left = 536

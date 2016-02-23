@@ -15,7 +15,6 @@ uses
 
 type
   TfrmCadastroAcaoMontarAmbiente = class(TfrmCadastroAcao)
-    ioeMestreAcoes: TDataSetField;
     ioeMestreSelf: TIntegerField;
     GroupBox1: TGroupBox;
     Panel3: TPanel;

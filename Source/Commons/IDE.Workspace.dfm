@@ -14,6 +14,8 @@ object frmWorkspace: TfrmWorkspace
   OldCreateOrder = False
   Visible = True
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object dxBarManager1: TdxBarManager

@@ -11,12 +11,15 @@ uses
   InstantPresentation, System.Actions, Vcl.ActnList, cxSpinEdit, cxDBEdit,
   cxMaskEdit, cxDropDownEdit, cxImageComboBox, cxTextEdit, Vcl.StdCtrls,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxClasses, cxGridCustomView, cxGrid, cxPC, Vcl.ExtCtrls;
+  cxClasses, cxGridCustomView, cxGrid, cxPC, Vcl.ExtCtrls, cxLookupEdit,
+  cxDBLookupEdit, cxDBLookupComboBox, Vcl.Buttons;
 
 type
   TfrmCadastroAcaoConfigurarBaseDeDadosOracle = class(TfrmCadastroAcaoConfigurarBaseDeDados)
   private
     { Private declarations }
+  protected
+    function PegarCaminhoTemplate: string; override;
   public
     { Public declarations }
   end;
@@ -27,5 +30,12 @@ var
 implementation
 
 {$R *.dfm}
+
+{ TfrmCadastroAcaoConfigurarBaseDeDadosOracle }
+
+function TfrmCadastroAcaoConfigurarBaseDeDadosOracle.PegarCaminhoTemplate: string;
+begin
+  Exit(inherited PegarCaminhoTemplate + 'Oracle\');
+end;
 
 end.

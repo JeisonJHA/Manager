@@ -18,6 +18,7 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
         DataBinding.DataSource = dtsSelecionador
         ExplicitLeft = 600
         ExplicitTop = 32
+        ExplicitHeight = 21
       end
       inherited edtDescricao: TcxDBTextEdit
         ExplicitWidth = 570
@@ -168,9 +169,6 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
     ContainerName = 'Acoes'
     MasterSource = dtsSelecionador
     Mode = amContent
-    object ioeMestreAcoes: TDataSetField
-      FieldName = 'Acoes'
-    end
     object ioeMestreSelf: TIntegerField
       FieldName = 'Self'
     end

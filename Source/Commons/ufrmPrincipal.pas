@@ -59,7 +59,6 @@ type
     btnCadSistemas: TdxBarLargeButton;
     tabOpcoes: TdxRibbonBackstageViewTabSheet;
     regStorage: TJvAppRegistryStorage;
-    cxTextEdit1: TcxTextEdit;
     Label1: TLabel;
     cxLabel2: TcxLabel;
     SpeedButton1: TSpeedButton;
@@ -93,15 +92,11 @@ type
     dxBarLargeButton1: TdxBarLargeButton;
     txtConsole: TMemo;
     dxBarLargeButton3: TdxBarLargeButton;
-    StringGrid1: TStringGrid;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
     dxBarSeparator2: TdxBarSeparator;
     dxBarLargeButton4: TdxBarLargeButton;
     JvFormStorage1: TJvFormStorage;
     JvAppIniFileStorage1: TJvAppIniFileStorage;
+    edtSCMPaths: TcxTextEdit;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -121,9 +116,9 @@ type
       Active: Boolean);
     procedure txtConsoleEnter(Sender: TObject);
     procedure dxBarLargeButton4Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
-    procedure Teste;
     procedure CarregarVersao;
     procedure InicializarMainMenu;
     procedure InicializarWorkspaceList;
@@ -143,7 +138,7 @@ uses JvTypes, IDE.Workspace, Winapi.ShellApi, udtmDatabase, Workspace.Constantes
  IDE.Controller.MainMenu, Cadastro.Sistema, Cadastro.Acao.Configurar.BaseDeDados.Oracle,
  Cadastro.Acao.Configurar.BaseDeDados.DB2, Cadastro.Acao.Configurar.BaseDeDados.MSSQL, IDE.Utils,
  Cadastro.Acao.Configurar.BaseDeDados, IDE.IWorkspace,
- Cadastro.Acao.MontarAmbiente;
+ Cadastro.Acao.MontarAmbiente, Cadastro.SCM;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -162,7 +157,7 @@ end;
 procedure TfrmPrincipal.CarregarVersao;
 begin
   try
-    dxRibbonStatusBar1.Panels[2].Text := 'Versão: ' + IDE.Utils.PegarVersaoAplicacao;
+    dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + IDE.Utils.PegarVersaoAplicacao + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32);
   except
     on E: Exception do
     begin
@@ -306,6 +301,11 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
+begin
+  edtSCMPaths.Text := TfrmCadastroSCM.Configurar(edtSCMPaths.Text);
+end;
+
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if iosWorkspaces.Active then
@@ -336,18 +336,10 @@ begin
   Application.PromptCommand.OutputLines := txtConsole.Lines;
   txtConsole.Lines.Delete(Length(txtConsole.Lines.Text)+1);
 
-  Teste;
-  CarregarVersao;
-  dxRibbonStatusBar1.Panels[0].Text := dtmDatabase.IBDatabase1.DatabaseName;
-end;
 
-procedure TfrmPrincipal.Teste;
-begin
-  with TWorkspaceConfig.Create(nil) do
-  begin
-    cxTextEdit1.Text := Diretorio;
-    Free;
-  end;
+  edtSCMPaths.Text := TfrmCadastroSCM.Pegar;
+  CarregarVersao;
+  dxRibbonStatusBar1.Panels[0].Text := AnsiLowerCase(dtmDatabase.IBDatabase1.DatabaseName);
 end;
 
 procedure TfrmPrincipal.txtConsoleEnter(Sender: TObject);
