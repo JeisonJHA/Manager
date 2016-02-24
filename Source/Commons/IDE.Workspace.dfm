@@ -18,6 +18,17 @@ object frmWorkspace: TfrmWorkspace
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object dxTileControl1: TdxTileControl
+    Left = 0
+    Top = 0
+    Width = 959
+    Height = 633
+    Images = dtmDatabase.SmallImageList
+    OptionsView.CenterContentVert = True
+    TabOrder = 4
+    Title.Text = 'Hello World'
+    ExplicitLeft = -8
+  end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -37,60 +48,8 @@ object frmWorkspace: TfrmWorkspace
     DockControlHeights = (
       0
       0
-      26
+      0
       0)
-    object dxBarManager1Bar1: TdxBar
-      Caption = 'Banco de Dados'
-      CaptionButtons = <>
-      DockedDockingStyle = dsTop
-      DockedLeft = 0
-      DockedTop = 0
-      DockingStyle = dsTop
-      FloatLeft = 993
-      FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarLookupCombo1'
-        end
-        item
-          Visible = True
-          ItemName = 'btnSpSQL'
-        end>
-      OneOnRow = False
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object barAmbiente: TdxBar
-      Caption = 'Ambiente'
-      CaptionButtons = <>
-      DockedDockingStyle = dsTop
-      DockedLeft = 247
-      DockedTop = 0
-      DockingStyle = dsTop
-      FloatLeft = 993
-      FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'btnExecutarApp'
-        end
-        item
-          Visible = True
-          ItemName = 'btnMontarAmbiente'
-        end>
-      OneOnRow = False
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
     object btnSpSQL: TdxBarButton
       Caption = 'spSQL'
       Category = 0

@@ -38,18 +38,24 @@ type
   TAcaoExecutar = class(TAcao)
   {IOMETADATA stored;
     Parametros: String(255);
-    Aplicativo: String(255); }
+    Aplicativo: String(255);
+    IsAdmin: Boolean; }
     _Aplicativo: TInstantString;
+    _IsAdmin: TInstantBoolean;
     _Parametros: TInstantString;
   private
     function GetAplicativo: string;
+    function GetIsAdmin: Boolean;
     function GetParametros: string;
     procedure SetAplicativo(const Value: string);
+    procedure SetIsAdmin(Value: Boolean);
     procedure SetParametros(const Value: string);
+    function RunAsAdmin(hWnd: HWND; filename: string; Parameters: string): Boolean;
   public
     procedure Executar; override;
   published
     property Aplicativo: string read GetAplicativo write SetAplicativo;
+    property IsAdmin: Boolean read GetIsAdmin write SetIsAdmin;
     property Parametros: string read GetParametros write SetParametros;
   end;
 
@@ -97,18 +103,22 @@ type
     Sistema: Reference(TSistema);
     Alias: String(255);
     Usuario: String(255);
-    Senha: String(255); }
+    Senha: String(255);
+    Server: String(255); }
     _Alias: TInstantString;
     _Senha: TInstantString;
+    _Server: TInstantString;
     _Sistema: TInstantReference;
     _Usuario: TInstantString;
   private
     function GetAlias: string;
     function GetSenha: string;
+    function GetServer: string;
     function GetSistema: TSistema;
     function GetUsuario: string;
     procedure SetAlias(const Value: string);
     procedure SetSenha(const Value: string);
+    procedure SetServer(const Value: string);
     procedure SetSistema(Value: TSistema);
     procedure SetUsuario(const Value: string);
   protected
@@ -120,6 +130,7 @@ type
   published
     property Alias: string read GetAlias write SetAlias;
     property Senha: string read GetSenha write SetSenha;
+    property Server: string read GetServer write SetServer;
     property Sistema: TSistema read GetSistema write SetSistema;
     property Usuario: string read GetUsuario write SetUsuario;
   end;
@@ -138,16 +149,9 @@ type
   end;
 
   TAcaoConfigurarBaseDeDadosMSSQL = class(TAcaoConfigurarBaseDeDados)
-  {IOMETADATA stored;
-    Instancia: String(255); }
-    _Instancia: TInstantString;
-  private
-    function GetInstancia: string;
-    procedure SetInstancia(const Value: string);
+  {IOMETADATA stored; }
   protected
     procedure InternalConfigurarIni(AArquivo: TIniFile); override;
-  published
-    property Instancia: string read GetInstancia write SetInstancia;
   end;
 
 implementation
@@ -159,7 +163,7 @@ uses
 
 procedure TAcao.Executar;
 begin
-  Console(Descricao);
+  Console(Application.Parser.ParserText(Descricao));
 end;
 
 function TAcao.GetDescricao: string;
@@ -189,6 +193,12 @@ begin
     if Aplicativo.IsEmpty then
       Exit();
 
+    if IsAdmin then
+    begin
+      RunAsAdmin(handle, Application.Parser.ParserText(Aplicativo), Application.Parser.ParserText(Parametros));
+      Exit;
+    end;
+
     ShellExecute(handle, nil, PChar(Application.Parser.ParserText(Aplicativo)),
       PChar(Parametros), '', SW_SHOWNORMAL);
   except
@@ -204,14 +214,46 @@ begin
   Result := _Aplicativo.Value;
 end;
 
+function TAcaoExecutar.GetIsAdmin: Boolean;
+begin
+  Result := _IsAdmin.Value;
+end;
+
 function TAcaoExecutar.GetParametros: string;
 begin
   Result := _Parametros.Value;
 end;
 
+function TAcaoExecutar.RunAsAdmin(hWnd: HWND; filename,
+  Parameters: string): Boolean;
+{
+    See Step 3: Redesign for UAC Compatibility (UAC)
+    http://msdn.microsoft.com/en-us/library/bb756922.aspx
+}
+var
+    sei: TShellExecuteInfo;
+begin
+    ZeroMemory(@sei, SizeOf(sei));
+    sei.cbSize := SizeOf(TShellExecuteInfo);
+    sei.Wnd := hwnd;
+    sei.fMask := SEE_MASK_FLAG_DDEWAIT or SEE_MASK_FLAG_NO_UI;
+    sei.lpVerb := PChar('runas');
+    sei.lpFile := PChar(Filename); // PAnsiChar;
+    if parameters <> '' then
+        sei.lpParameters := PChar(parameters); // PAnsiChar;
+    sei.nShow := SW_SHOWNORMAL; //Integer;
+
+    Result := ShellExecuteEx(@sei);
+end;
+
 procedure TAcaoExecutar.SetAplicativo(const Value: string);
 begin
   _Aplicativo.Value := Value;;
+end;
+
+procedure TAcaoExecutar.SetIsAdmin(Value: Boolean);
+begin
+  _IsAdmin.Value := Value;;
 end;
 
 procedure TAcaoExecutar.SetParametros(const Value: string);
@@ -241,6 +283,11 @@ begin
   Result := _Senha.Value;
 end;
 
+function TAcaoConfigurarBaseDeDados.GetServer: string;
+begin
+  Result := _Server.Value;
+end;
+
 function TAcaoConfigurarBaseDeDados.GetSistema: TSistema;
 begin
   Result := _Sistema.Value as TSistema;
@@ -265,6 +312,11 @@ end;
 procedure TAcaoConfigurarBaseDeDados.SetSenha(const Value: string);
 begin
   _Senha.Value := Value;;
+end;
+
+procedure TAcaoConfigurarBaseDeDados.SetServer(const Value: string);
+begin
+  _Server.Value := Value;;
 end;
 
 procedure TAcaoConfigurarBaseDeDados.SetSistema(Value: TSistema);
@@ -332,6 +384,7 @@ procedure TAcaoConfigurarBaseDeDados.InternalConfigurarIni(AArquivo: TIniFile);
 begin
   AArquivo.WriteString('Cliente', 'LoginAutomatico', Format('%s,%s,1', [Usuario, Senha]));
   AArquivo.WriteString('Database', 'Alias', Alias);
+  AArquivo.WriteString('Database', 'Server', Server);
 end;
 
 procedure TAcaoConfigurarBaseDeDados.Executar;
@@ -409,22 +462,11 @@ end;
 
 { TAcaoConfigurarBaseDeDadosMSSQL }
 
-function TAcaoConfigurarBaseDeDadosMSSQL.GetInstancia: string;
-begin
-  Result := _Instancia.Value;
-end;
-
 procedure TAcaoConfigurarBaseDeDadosMSSQL.InternalConfigurarIni(
   AArquivo: TIniFile);
 begin
   inherited InternalConfigurarIni(AArquivo);
   AArquivo.WriteString('Database', 'TipoBanco', 'SQLServer');
-  AArquivo.WriteString('Database', 'Server', Instancia);
-end;
-
-procedure TAcaoConfigurarBaseDeDadosMSSQL.SetInstancia(const Value: string);
-begin
-  _Instancia.Value := Value;;
 end;
 
 { TAcaoConfigurarBaseDeDadosOracle }

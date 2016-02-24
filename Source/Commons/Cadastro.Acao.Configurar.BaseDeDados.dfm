@@ -33,75 +33,90 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       ExplicitWidth = 680
       ExplicitHeight = 352
       inherited Label1: TLabel
+        Left = 25
         Top = 64
         Visible = False
+        ExplicitLeft = 25
         ExplicitTop = 64
       end
       inherited Label2: TLabel
-        Top = 147
+        Left = 25
+        Top = 187
         Width = 163
         Caption = 'Template de arquivo ini (Opcional)'
-        ExplicitTop = 147
+        ExplicitLeft = 25
+        ExplicitTop = 187
         ExplicitWidth = 163
       end
       inherited Label3: TLabel
-        Top = 147
-        ExplicitTop = 147
+        Top = 187
+        ExplicitTop = 187
       end
       inherited lblIcone: TLabel
         Left = 25
-        Top = 190
+        Top = 230
         ExplicitLeft = 25
-        ExplicitTop = 190
+        ExplicitTop = 230
       end
       object Label7: TLabel [4]
-        Left = 24
+        Left = 25
         Top = 24
         Width = 37
         Height = 13
         Caption = 'Sistema'
       end
       object Label4: TLabel [5]
-        Left = 24
-        Top = 64
+        Left = 25
+        Top = 104
         Width = 22
         Height = 13
         Caption = 'Alias'
       end
       object Label5: TLabel [6]
-        Left = 152
-        Top = 107
+        Left = 536
+        Top = 147
         Width = 30
         Height = 13
         Caption = 'Senha'
       end
       object Label6: TLabel [7]
-        Left = 25
-        Top = 107
+        Left = 409
+        Top = 147
         Width = 36
-        Height = 13
+        Height = 14
         Caption = 'Usuario'
       end
       object SpeedButton1: TSpeedButton [8]
         Left = 298
-        Top = 164
+        Top = 204
         Width = 23
         Height = 22
         Caption = '...'
         OnClick = SpeedButton1Click
       end
-      inherited edtDescricao: TcxDBTextEdit [9]
-      end
-      inherited cbxIcone: TcxDBImageComboBox [10]
+      object Label8: TLabel [9]
         Left = 25
-        Top = 206
+        Top = 147
+        Width = 32
+        Height = 13
+        Caption = 'Server'
+      end
+      inherited edtDescricao: TcxDBTextEdit [10]
+        Left = 25
+        Top = 79
+        ExplicitLeft = 25
+        ExplicitTop = 79
+      end
+      inherited cbxIcone: TcxDBImageComboBox [11]
+        Left = 25
+        Top = 246
         TabOrder = 7
         ExplicitLeft = 25
-        ExplicitTop = 206
+        ExplicitTop = 246
         ExplicitHeight = 36
       end
-      object cbxSistema: TcxDBLookupComboBox [11]
-        Left = 24
+      object cbxSistema: TcxDBLookupComboBox [12]
+        Left = 25
         Top = 40
         DataBinding.DataField = 'Sistema'
         DataBinding.DataSource = dtsSelecionador
@@ -114,41 +129,51 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         TabOrder = 1
         Width = 633
       end
-      object edtAlias: TcxDBTextEdit [12]
-        Left = 24
-        Top = 83
+      object edtAlias: TcxDBTextEdit [13]
+        Left = 25
+        Top = 120
         DataBinding.DataField = 'Alias'
         DataBinding.DataSource = dtsSelecionador
         TabOrder = 2
         Width = 633
       end
       inherited cbxOrigem: TcxDBComboBox
-        Top = 165
+        Left = 25
+        Top = 205
         TabOrder = 5
-        ExplicitTop = 165
+        ExplicitLeft = 25
+        ExplicitTop = 205
         ExplicitWidth = 273
         Width = 273
       end
       inherited cbxDestino: TcxDBComboBox
-        Top = 165
+        Top = 205
         TabOrder = 6
-        ExplicitTop = 165
+        ExplicitTop = 205
       end
       object edtSenha: TcxDBTextEdit
-        Left = 152
-        Top = 123
+        Left = 536
+        Top = 163
         DataBinding.DataField = 'Senha'
         DataBinding.DataSource = dtsSelecionador
         TabOrder = 4
         Width = 121
       end
       object edtUsuario: TcxDBTextEdit
-        Left = 25
-        Top = 123
+        Left = 409
+        Top = 163
         DataBinding.DataField = 'Usuario'
         DataBinding.DataSource = dtsSelecionador
         TabOrder = 3
         Width = 121
+      end
+      object edtServer: TcxDBTextEdit
+        Left = 25
+        Top = 163
+        DataBinding.DataField = 'Server'
+        DataBinding.DataSource = dtsSelecionador
+        TabOrder = 8
+        Width = 378
       end
     end
   end
@@ -182,6 +207,10 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       Size = 255
     end
   end
+  inherited ActionList: TActionList
+    Left = 424
+    Top = 272
+  end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
       'SELECT * FROM TAcaoConfigurarBaseDeDados')
@@ -209,6 +238,14 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       FieldName = 'Usuario'
       Size = 255
     end
+    object iosSelecionadorServer: TStringField
+      FieldName = 'Server'
+      Size = 255
+    end
+  end
+  inherited dtsSelecionador: TDataSource
+    Left = 384
+    Top = 320
   end
   object iosSistema: TInstantSelector
     FieldOptions = [foObjects, foThorough]
@@ -217,8 +254,8 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       'SELECT * FROM TSistema')
     Connector = dtmDatabase.InstantIBXConnector1
     ObjectClassName = 'TSistema'
-    Left = 520
-    Top = 192
+    Left = 560
+    Top = 288
     object iosSistemaDescricao: TStringField
       FieldName = 'Descricao'
       Size = 255
@@ -233,11 +270,11 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
   end
   object dtsSistema: TDataSource
     DataSet = iosSistema
-    Left = 520
-    Top = 240
+    Left = 560
+    Top = 336
   end
   object OpenDialog1: TOpenDialog
-    Left = 336
-    Top = 216
+    Left = 432
+    Top = 312
   end
 end

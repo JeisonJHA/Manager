@@ -47,6 +47,9 @@ type
     edtUsuario: TcxDBTextEdit;
     SpeedButton1: TSpeedButton;
     OpenDialog1: TOpenDialog;
+    iosSelecionadorServer: TStringField;
+    Label8: TLabel;
+    edtServer: TcxDBTextEdit;
     procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }

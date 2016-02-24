@@ -6,12 +6,11 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
     Properties.ActivePage = tabDetalhes
     inherited tabDetalhes: TcxTabSheet
       object Label4: TLabel [1]
-        Left = 479
-        Top = 72
+        Left = 24
+        Top = 116
         Width = 55
         Height = 13
         Caption = 'Par'#226'metros'
-        FocusControl = cxDBTextEdit2
       end
       object Label2: TLabel [2]
         Left = 24
@@ -22,25 +21,18 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
       end
       inherited lblIcone: TLabel
         Left = 24
-        Top = 119
+        Top = 159
         ExplicitLeft = 24
-        ExplicitTop = 119
-      end
-      object cxDBTextEdit2: TcxDBTextEdit [4]
-        Left = 479
-        Top = 88
-        DataBinding.DataField = 'Parametros'
-        DataBinding.DataSource = dtsSelecionador
-        TabOrder = 1
-        Width = 178
+        ExplicitTop = 159
       end
       inherited cbxIcone: TcxDBImageComboBox
         Left = 24
-        Top = 135
+        Top = 175
         DataBinding.DataSource = dtsSelecionador
-        TabOrder = 2
+        TabOrder = 4
         ExplicitLeft = 24
-        ExplicitTop = 135
+        ExplicitTop = 175
+        ExplicitHeight = 36
       end
       inherited edtDescricao: TcxDBTextEdit
         TabOrder = 0
@@ -50,8 +42,26 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
         Top = 88
         DataBinding.DataField = 'Aplicativo'
         DataBinding.DataSource = dtsSelecionador
+        TabOrder = 1
+        Width = 633
+      end
+      object edtParametros: TcxDBTextEdit
+        Left = 24
+        Top = 132
+        DataBinding.DataField = 'Parametros'
+        DataBinding.DataSource = dtsSelecionador
+        TabOrder = 2
+        Width = 633
+      end
+      object chkIsAdmin: TcxDBCheckBox
+        Left = 502
+        Top = 318
+        Caption = 'Executar como administrador'
+        DataBinding.DataField = 'IsAdmin'
+        DataBinding.DataSource = dtsSelecionador
         TabOrder = 3
-        Width = 449
+        Transparent = True
+        Width = 164
       end
     end
   end
@@ -81,6 +91,9 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
     object iosSelecionadorParametros: TStringField
       FieldName = 'Parametros'
       Size = 255
+    end
+    object iosSelecionadorIsAdmin: TBooleanField
+      FieldName = 'IsAdmin'
     end
   end
 end

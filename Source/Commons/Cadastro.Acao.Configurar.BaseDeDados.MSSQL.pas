@@ -18,8 +18,7 @@ type
   TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL = class(TfrmCadastroAcaoConfigurarBaseDeDados)
     ioeMestreInstancia: TStringField;
     iosSelecionadorInstancia: TStringField;
-    Label8: TLabel;
-    edtInstancia: TcxDBTextEdit;
+    Label9: TLabel;
   private
     { Private declarations }
   protected

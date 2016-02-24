@@ -11,6 +11,7 @@ type
   private
     FAcao: TAcao;
     procedure InternalOnExecute(Sender: TObject);
+    procedure InternalOnUpdate(Sender: TObject);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -29,6 +30,7 @@ constructor TWorkspaceAction.Create(AOwner: TComponent);
 begin
   inherited;
   OnExecute := InternalOnExecute;
+//  OnUpdate := InternalOnUpdate;
 end;
 
 destructor TWorkspaceAction.Destroy;
@@ -48,6 +50,11 @@ begin
       raise Exception.Create(E.Message);
     end;
   end;
+end;
+
+procedure TWorkspaceAction.InternalOnUpdate(Sender: TObject);
+begin
+  TAction(Sender).Enabled := Assigned(Application.CurrentWorkspace);
 end;
 
 end.

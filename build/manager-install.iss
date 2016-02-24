@@ -92,6 +92,7 @@ Name: {commondesktop}\{#MyAppName}; Filename: {app}\{#MyAppExeName}; Tasks: desk
 [Run]
 Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}; Flags: nowait postinstall skipifsilent
 [Registry]
-Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Database\; ValueType: string; ValueName: DatabaseName; ValueData: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data\{#MyAppDatabaseName}; Flags: uninsdeletekey
-Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\SCM\; ValueType: string; ValueName: Workspace; Flags: uninsdeletekeyifempty
-Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\; ValueType: string; ValueName: Caminho; ValueData: {app}
+Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Database\; ValueType: string; ValueName: DatabaseName; ValueData: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data\{#MyAppDatabaseName}; Flags: createvalueifdoesntexist uninsdeletekey
+Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\SCM\; ValueType: string; ValueName: Workspace; Flags: createvalueifdoesntexist uninsdeletekey; ValueData: c:\
+Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\; ValueType: string; ValueName: Caminho; ValueData: {app}; Flags: createvalueifdoesntexist uninsdeletekey
+Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Sandbox\; ValueType: string; ValueName: ArquivosIni; ValueData: "{WS_DIR}bin\spcfg.ini;{WS_DIR}bin\pro\spcfg.ini;{WS_DIR}bin\sgc\spcfg.ini"; Flags: createvalueifdoesntexist uninsdeletekey

@@ -3,24 +3,28 @@ unit IDE.Aplicacao;
 interface
 
 uses Classes, SysUtils, Forms, IDE.Controller.Parser, IDE.IWorkspace, dxTabbedMDI,
-  DosCommand, ActiveX, adshlp, ActiveDs_Tlb, System.Win.ComObj;
+  DosCommand, ActiveX, adshlp, ActiveDs_Tlb, System.Win.ComObj, Workspace.Config;
 
 type
   TIDEAplicacao = class helper for TApplication
   private
     function GetCurrentWorkspace: IWorkspace;
     function GetPromptCommand: TDosCommand;
+    function GetConfiguracoes: TWorkspaceConfig;
   public
     function Parser: TIDEControllerParser;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
     property PromptCommand: TDosCommand read GetPromptCommand;
+    property Configuracoes: TWorkspaceConfig read GetConfiguracoes;
   end;
 
   procedure Console(ATexto: string);
 
 implementation
+
+uses IDE.Workspace, Workspace;
 
 procedure Console(ATexto: string);
 begin
@@ -34,6 +38,7 @@ type
     FTabbedMDIManager: TdxTabbedMDIManager;
     FPromptCommand: TDosCommand;
     FadObject: IADs;
+    FConfiguracoes: TWorkspaceConfig;
     function GetCurrentWorkspace: IWorkspace;
   public
     constructor Create;
@@ -44,6 +49,7 @@ type
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
     property PromptCommand: TDosCommand read FPromptCommand;
+    property Configuracoes: TWorkspaceConfig read FConfiguracoes;
   end;
 
 var
@@ -55,10 +61,12 @@ constructor TAplicacao.Create;
 begin
   FParser := TIDEControllerParser.Create;
   FPromptCommand := TDosCommand.Create(nil);
+  FConfiguracoes := TWorkspaceConfig.Create(nil);
 end;
 
 destructor TAplicacao.Destroy;
 begin
+  FreeAndNil(FConfiguracoes);
   FreeAndNil(FPromptCommand);
   FreeAndNil(FParser);
   inherited;
@@ -69,15 +77,16 @@ var
   I: Integer;
   workspace: IWorkspace;
   form: TForm;
+  page: TdxTabbedMDIPage;
 begin
   if not Assigned(FTabbedMDIManager) then
     Exit(nil);
 
-  if not Assigned(FTabbedMDIManager.TabProperties.ActivePage) then
+  page := FTabbedMDIManager.TabProperties.Pages[FTabbedMDIManager.TabProperties.PageIndex];
+  if not Assigned(page) then
     Exit(nil);
 
-  form := FTabbedMDIManager.TabProperties.ActivePage.MDIChild;
-  form.GetInterface(IWorkspace, workspace);
+  workspace := (page.MDIChild as IWorkspace);
   if Assigned(workspace) then
     Exit(workspace);
 
@@ -114,6 +123,11 @@ begin
 end;
 
 { TIDEAplicacao }
+
+function TIDEAplicacao.GetConfiguracoes: TWorkspaceConfig;
+begin
+  Exit(_aplicacao.Configuracoes);
+end;
 
 function TIDEAplicacao.GetCurrentWorkspace: IWorkspace;
 begin

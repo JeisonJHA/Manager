@@ -12,12 +12,11 @@ uses
   cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, cxPC, Vcl.ExtCtrls, cxMaskEdit, cxSpinEdit,
   cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  cxImageComboBox;
+  cxImageComboBox, cxCheckBox;
 
 type
   TfrmCadastroAcaoExecutar = class(TfrmCadastroAcao)
     Label4: TLabel;
-    cxDBTextEdit2: TcxDBTextEdit;
     Label2: TLabel;
     iosSelecionadorAplicativo: TStringField;
     iosSelecionadorParametros: TStringField;
@@ -25,6 +24,9 @@ type
     ioeMestreParametros: TStringField;
     ioeMestreSelf: TIntegerField;
     cbxAplicativo: TcxDBComboBox;
+    iosSelecionadorIsAdmin: TBooleanField;
+    edtParametros: TcxDBTextEdit;
+    chkIsAdmin: TcxDBCheckBox;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }

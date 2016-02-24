@@ -106,7 +106,6 @@ object frmPrincipal: TfrmPrincipal
     object tabOpcoes: TdxRibbonBackstageViewTabSheet
       Left = 132
       Top = 0
-      Active = True
       Caption = 'Op'#231#245'es'
       object Label1: TLabel
         Left = 20
@@ -145,11 +144,17 @@ object frmPrincipal: TfrmPrincipal
       object edtSCMPaths: TcxTextEdit
         Left = 20
         Top = 86
-        Properties.ReadOnly = False
+        Properties.ReadOnly = True
         TabOrder = 1
         Text = 'cxTextEdit1'
         Width = 289
       end
+    end
+    object tabSandbox: TdxRibbonBackstageViewTabSheet
+      Left = 132
+      Top = 0
+      Active = True
+      Caption = 'Sandbox'
     end
   end
   object dxRibbonStatusBar1: TdxRibbonStatusBar
@@ -272,10 +277,11 @@ object frmPrincipal: TfrmPrincipal
       OriginalHeight = 200
     end
     object dxDockPanel1: TdxDockPanel
-      Left = 0
+      Left = -185
       Top = 0
       Width = 185
-      Height = 431
+      Height = 0
+      Visible = False
       AllowFloating = True
       AutoHide = True
       Caption = 'Workspaces'
@@ -291,25 +297,23 @@ object frmPrincipal: TfrmPrincipal
         Left = 0
         Top = 0
         Width = 174
-        Height = 387
+        Height = 0
         Margins.Left = 0
         Margins.Top = 0
         Margins.Bottom = 0
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 0
         object cxGrid1: TcxGrid
           Left = 0
           Top = 0
           Width = 174
-          Height = 387
+          Height = 0
           Align = alClient
           BevelInner = bvNone
           BevelOuter = bvNone
           BorderStyle = cxcbsNone
           TabOrder = 0
-          ExplicitHeight = 0
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             OnCellDblClick = cxGrid1DBTableView1CellDblClick
@@ -395,6 +399,10 @@ object frmPrincipal: TfrmPrincipal
         item
           Visible = True
           ItemName = 'dxBarSubItem1'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton3'
         end>
       OneOnRow = True
       Row = 0
@@ -529,6 +537,7 @@ object frmPrincipal: TfrmPrincipal
       Category = 0
       Hint = 'Teste'
       Visible = ivAlways
+      OnClick = dxBarLargeButton3Click
     end
     object dxBarSeparator2: TdxBarSeparator
       Caption = 'Ambiente'
@@ -640,19 +649,19 @@ object frmPrincipal: TfrmPrincipal
       Size = 255
     end
   end
-  object JvFormStorage1: TJvFormStorage
-    AppStorage = JvAppIniFileStorage1
-    AppStoragePath = '%FORM_NAME%\'
-    StoredValues = <>
-    Left = 952
-    Top = 176
-  end
   object JvAppIniFileStorage1: TJvAppIniFileStorage
     StorageOptions.BooleanStringTrueValues = 'TRUE, YES, Y'
     StorageOptions.BooleanStringFalseValues = 'FALSE, NO, N'
     FileName = 'style.ini'
     SubStorages = <>
-    Left = 948
-    Top = 222
+    Left = 964
+    Top = 262
+  end
+  object JvFormStorage1: TJvFormStorage
+    AppStorage = JvAppIniFileStorage1
+    AppStoragePath = '%FORM_NAME%'
+    StoredValues = <>
+    Left = 960
+    Top = 312
   end
 end

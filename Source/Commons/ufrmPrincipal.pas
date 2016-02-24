@@ -94,9 +94,10 @@ type
     dxBarLargeButton3: TdxBarLargeButton;
     dxBarSeparator2: TdxBarSeparator;
     dxBarLargeButton4: TdxBarLargeButton;
-    JvFormStorage1: TJvFormStorage;
     JvAppIniFileStorage1: TJvAppIniFileStorage;
     edtSCMPaths: TcxTextEdit;
+    JvFormStorage1: TJvFormStorage;
+    tabSandbox: TdxRibbonBackstageViewTabSheet;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -117,6 +118,7 @@ type
     procedure txtConsoleEnter(Sender: TObject);
     procedure dxBarLargeButton4Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure dxBarLargeButton3Click(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarVersao;
@@ -185,7 +187,7 @@ begin
       Exit;
   end;
 
-  with TfrmWorkspace.Create(Self, TWorkspace(iosWorkspaces.CurrentObject)) do
+  with TfrmWorkspace.Create(Self, workspace) do
   begin
     Show;
   end;
@@ -254,6 +256,12 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.dxBarLargeButton3Click(Sender: TObject);
+begin
+
+  ShowMessage(IntToStr(dxTabbedMDIManager1.TabProperties.PageIndex));
+end;
+
 procedure TfrmPrincipal.dxBarLargeButton4Click(Sender: TObject);
 begin
   with TfrmCadastroAcaoMontarAmbiente.Create(nil) do
@@ -285,19 +293,13 @@ end;
 procedure TfrmPrincipal.InicializarWorkspaceList;
 var
   utils: TWorkspaceUtils;
-  config: TWorkspaceConfig;
   I: integer;
   sandbox: TWorkspace;
 begin
-  config := TWorkspaceConfig.Create(nil);
-  try
-    with TWorkspaceUtils.Create(config) do
-    begin
-      Sandboxes(iosWorkspaces);
-      Free;
-    end;
-  finally
-    FreeAndNil(config);
+  with TWorkspaceUtils.Create(Application.Configuracoes) do
+  begin
+    Sandboxes(iosWorkspaces);
+    Free;
   end;
 end;
 

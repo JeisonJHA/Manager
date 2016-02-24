@@ -4,65 +4,22 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarB
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     inherited tabDetalhes: TcxTabSheet
-      inherited Label2: TLabel
-        Top = 148
-        ExplicitTop = 148
-      end
-      inherited lblIcone: TLabel
-        Top = 191
-        ExplicitTop = 191
-      end
-      object Label8: TLabel [6]
-        Left = 25
-        Top = 106
-        Width = 44
-        Height = 13
-        Caption = 'Instancia'
-      end
-      inherited Label5: TLabel
-        Left = 536
-        Top = 106
-        ExplicitLeft = 536
-        ExplicitTop = 106
-      end
       inherited Label6: TLabel
-        Left = 409
-        Top = 106
-        ExplicitLeft = 409
-        ExplicitTop = 106
+        Height = 13
+        ExplicitHeight = 13
       end
-      inherited cbxIcone: TcxDBImageComboBox
-        TabOrder = 8
+      inherited Label8: TLabel
+        Width = 44
+        Caption = 'Inst'#226'ncia'
+        ExplicitWidth = 44
       end
-      inherited cbxOrigem: TcxDBComboBox
-        Top = 166
-        TabOrder = 6
-        ExplicitTop = 166
-      end
-      object edtInstancia: TcxDBTextEdit [15]
-        Left = 25
-        Top = 122
-        DataBinding.DataField = 'Instancia'
-        DataBinding.DataSource = dtsSelecionador
-        TabOrder = 3
-        Width = 378
-      end
-      inherited cbxDestino: TcxDBComboBox
-        TabOrder = 7
-      end
-      inherited edtSenha: TcxDBTextEdit
-        Left = 536
-        Top = 122
-        TabOrder = 5
-        ExplicitLeft = 536
-        ExplicitTop = 122
-      end
-      inherited edtUsuario: TcxDBTextEdit
-        Left = 409
-        Top = 122
-        TabOrder = 4
-        ExplicitLeft = 409
-        ExplicitTop = 122
+      object Label9: TLabel [10]
+        Left = 369
+        Top = 187
+        Width = 134
+        Height = 13
+        Caption = ' ex.: {WS_DIR}bin\spcfg.ini'
+        Enabled = False
       end
     end
   end
@@ -73,13 +30,35 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarB
       Size = 255
     end
   end
+  inherited ActionList: TActionList
+    Left = 400
+    Top = 296
+  end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
       'SELECT * FROM TAcaoConfigurarBaseDeDadosMSSQL')
     ObjectClassName = 'TAcaoConfigurarBaseDeDadosMSSQL'
+    Left = 280
+    Top = 344
     object iosSelecionadorInstancia: TStringField
       FieldName = 'Instancia'
       Size = 255
     end
+  end
+  inherited dtsSelecionador: TDataSource
+    Left = 280
+    Top = 296
+  end
+  inherited iosSistema: TInstantSelector
+    Left = 512
+    Top = 264
+  end
+  inherited dtsSistema: TDataSource
+    Left = 512
+    Top = 312
+  end
+  inherited OpenDialog1: TOpenDialog
+    Left = 328
+    Top = 288
   end
 end
