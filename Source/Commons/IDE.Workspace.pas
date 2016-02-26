@@ -10,7 +10,7 @@ uses
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
   System.Actions, IDE.IWorkspace, Vcl.ExtCtrls, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, dxCustomTileControl, dxTileControl,
-  InstantPresentation;
+  InstantPresentation, Vcl.StdCtrls;
 
 type
   TfrmWorkspace = class(TForm, IWorkspace)
@@ -143,7 +143,7 @@ var
   sorteio: integer;
 begin
   dxTileControl1.Title.Text :=
-    PrepararTitulo(Application.CurrentWorkspace.Sandbox.Descricao);
+    PrepararTitulo(Sandbox.Descricao);
 
   arquivos := TStringList.Create;
   try
@@ -158,20 +158,19 @@ begin
 
     for I := 0 to arquivos.Count - 1 do
     begin
-      path := Application.Parser.ParserText(arquivos.Strings[I]);
+      path := Application.Parser.ParserText(Sandbox, arquivos.Strings[I]);
       if not FileExists(path) then
         Continue;
 
       ini := TIniFile.Create(path);
       try
         Randomize;
-        sorteio := Random(3);
         item := dxTileControl1.Items.Add;
         item.GroupIndex := grupo.Index;
-        item.Size := TdxTileControlItemSize(sorteio + 1);
+        item.Size := tcisExtraLarge;
         item.Text1.Value := ini.ReadString('Database', 'Alias', String.Empty);
         item.Text4.Value := ini.ReadString('Database', 'Server', String.Empty);
-        item.Style.GradientBeginColor := BoxColors[sorteio];
+        item.Style.GradientBeginColor := BoxColors[1];
         // grupo.Add(item);
 
         // grupo.Add(TdxTileControl.Create(dxTileControl1));

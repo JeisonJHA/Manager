@@ -3,15 +3,16 @@ unit IDE.Parser;
 interface
 
 uses Classes, SysUtils, Forms, IDE.Aplicacao, Generics.Collections, IDE.IParser,
-  IDE.IWorkspace;
+  Workspace;
 
 type
   TIDEParser = class(TInterfacedObject)
   protected
     FChaves: TStrings;
-    function ParserText(const ATexto: string): string;
+    function ParserText(ASandbox: TWorkspace; const ATexto: string): string; overload;
+    function ParserText(const ATexto: string): string; overload;
     procedure Chaves(ALista: TStrings); virtual;
-    function PegarValor(AWorkspace: IWorkspace; const AChave: string): string; virtual; abstract;
+    function PegarValor(ASandbox: TWorkspace; const AChave: string): string; virtual; abstract;
   public
     constructor Create; virtual;
     destructor Destroy; override;
@@ -38,18 +39,24 @@ end;
 
 function TIDEParser.ParserText(const ATexto: string): string;
 var
-  workspace: IWorkspace;
+  sandbox: TWorkspace;
+begin
+  sandbox := Application.CurrentWorkspace.Sandbox;
+  if not Assigned(sandbox) then
+    Exit(ATexto);
+
+  Exit(ParserText(sandbox, ATexto));
+end;
+
+function TIDEParser.ParserText(ASandbox: TWorkspace; const ATexto: string): string;
+var
   I: Integer;
   texto: string;
 begin
   texto := ATexto;
-  workspace := Application.CurrentWorkspace;
-  if not Assigned(workspace) then
-    Exit(ATexto);
-
   for I := 0 to FChaves.Count -1 do
   begin
-    texto := StringReplace(texto, FChaves.Strings[I], PegarValor(workspace, FChaves.Strings[I]), []);
+    texto := StringReplace(texto, FChaves.Strings[I], PegarValor(ASandbox, FChaves.Strings[I]), []);
   end;
 
   Exit(texto);

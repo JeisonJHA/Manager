@@ -33,7 +33,7 @@ uses
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   InstantPresentation, IDE.Aplicacao, DosCommand, Manager.PromptCommand,
-  JvAppIniStorage, JvFormPlacement;
+  JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)
@@ -184,7 +184,10 @@ begin
   begin
     dxTabbedMDIManager1.TabProperties.Pages[I].MDIChild.GetInterface(IWorkspace, iws);
     if Assigned(iws) and (iws.Sandbox = workspace) then
+    begin
+      dxTabbedMDIManager1.TabProperties.PageIndex := I;
       Exit;
+    end;
   end;
 
   with TfrmWorkspace.Create(Self, workspace) do

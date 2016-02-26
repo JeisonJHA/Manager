@@ -3,12 +3,12 @@ unit IDE.Parser.Workspace;
 interface
 
 uses Classes, SysUtils, Forms, IDE.Aplicacao, Generics.Collections, IDE.IParser,
-  IDE.IWorkspace, IDE.Parser;
+  Workspace, IDE.Parser;
 
 type
   TIDEParserWorkspace = class(TIDEParser, IParser)
   protected
-    function PegarValor(AWorkspace: IWorkspace; const AChave: string): string; override;
+    function PegarValor(ASandbox: TWorkspace; const AChave: string): string; override;
   public
     constructor Create; override;
   end;
@@ -24,15 +24,15 @@ begin
   FChaves.Add('{WS_TITLE}');
 end;
 
-function TIDEParserWorkspace.PegarValor(AWorkspace: IWorkspace; const AChave: string): string;
+function TIDEParserWorkspace.PegarValor(ASandbox: TWorkspace; const AChave: string): string;
 begin
   if Pos(AChave, '{WS_DIR}') > 0 then
-    Exit(IncludeTrailingBackslash(AWorkspace.Sandbox.Diretorio))
+    Exit(IncludeTrailingBackslash(ASandbox.Diretorio))
   else
   if Pos(AChave, '{WS_TITLE}') > 0 then
-    Exit(AWorkspace.Sandbox.Descricao);
+    Exit(ASandbox.Descricao);
 
-  Exit(inherited PegarValor(AWorkspace, AChave));
+  Exit(inherited PegarValor(ASandbox, AChave));
 end;
 
 end.

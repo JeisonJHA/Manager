@@ -27,7 +27,6 @@ object frmWorkspace: TfrmWorkspace
     OptionsView.CenterContentVert = True
     TabOrder = 4
     Title.Text = 'Hello World'
-    ExplicitLeft = -8
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
