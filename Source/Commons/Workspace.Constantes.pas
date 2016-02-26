@@ -6,7 +6,7 @@ type
   TTipoAcao = (actExecute, actCopy);
 
 const
-  WIN_KEY = 'SOFTWARE\Softplan\Manager XE8\1.0';
+  WIN_KEY = 'SOFTWARE\Softplan\Manager\1.0';
 
 implementation
 

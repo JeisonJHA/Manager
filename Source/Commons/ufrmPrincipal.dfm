@@ -1,7 +1,7 @@
 object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'Manager XE8'
+  Caption = 'Manager'
   ClientHeight = 637
   ClientWidth = 1071
   Color = clBtnFace
@@ -42,6 +42,9 @@ object frmPrincipal: TfrmPrincipal
       Groups = <
         item
           ToolbarName = 'barCadastros'
+        end
+        item
+          ToolbarName = 'barDebug'
         end>
       Index = 0
     end
@@ -106,6 +109,7 @@ object frmPrincipal: TfrmPrincipal
     object tabOpcoes: TdxRibbonBackstageViewTabSheet
       Left = 132
       Top = 0
+      Active = True
       Caption = 'Op'#231#245'es'
       object Label1: TLabel
         Left = 20
@@ -153,7 +157,6 @@ object frmPrincipal: TfrmPrincipal
     object tabSandbox: TdxRibbonBackstageViewTabSheet
       Left = 132
       Top = 0
-      Active = True
       Caption = 'Sandbox'
     end
   end
@@ -399,7 +402,23 @@ object frmPrincipal: TfrmPrincipal
         item
           Visible = True
           ItemName = 'dxBarSubItem1'
-        end
+        end>
+      OneOnRow = True
+      Row = 1
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object barDebug: TdxBar
+      Caption = 'Debug'
+      CaptionButtons = <>
+      DockedLeft = 231
+      DockedTop = 0
+      FloatLeft = 1105
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
         item
           Visible = True
           ItemName = 'dxBarLargeButton3'
@@ -659,9 +678,32 @@ object frmPrincipal: TfrmPrincipal
   end
   object JvFormStorage1: TJvFormStorage
     AppStorage = JvAppIniFileStorage1
-    AppStoragePath = '%FORM_NAME%'
+    AppStoragePath = '%FORM_NAME%\'
     StoredValues = <>
     Left = 960
     Top = 312
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnMinimize = ApplicationEvents1Minimize
+    Left = 128
+    Top = 416
+  end
+  object TrayIcon1: TTrayIcon
+    BalloonTitle = 'Manager'
+    PopupMenu = PopupMenu1
+    OnClick = TrayIcon1Click
+    Left = 128
+    Top = 368
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 200
+    Top = 368
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object mnuFechar: TMenuItem
+      Caption = 'Fechar aplica'#231#227'o'
+      OnClick = mnuFecharClick
+    end
   end
 end

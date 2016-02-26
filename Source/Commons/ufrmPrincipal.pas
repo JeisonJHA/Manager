@@ -33,7 +33,7 @@ uses
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   InstantPresentation, IDE.Aplicacao, DosCommand, Manager.PromptCommand,
-  JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts;
+  JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts, Vcl.Menus;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)
@@ -98,6 +98,12 @@ type
     edtSCMPaths: TcxTextEdit;
     JvFormStorage1: TJvFormStorage;
     tabSandbox: TdxRibbonBackstageViewTabSheet;
+    ApplicationEvents1: TApplicationEvents;
+    TrayIcon1: TTrayIcon;
+    PopupMenu1: TPopupMenu;
+    mnuFechar: TMenuItem;
+    N1: TMenuItem;
+    barDebug: TdxBar;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -119,6 +125,9 @@ type
     procedure dxBarLargeButton4Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
+    procedure ApplicationEvents1Minimize(Sender: TObject);
+    procedure TrayIcon1Click(Sender: TObject);
+    procedure mnuFecharClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarVersao;
@@ -194,6 +203,15 @@ begin
   begin
     Show;
   end;
+end;
+
+procedure TfrmPrincipal.ApplicationEvents1Minimize(Sender: TObject);
+begin
+  Self.Hide();
+  Self.WindowState := wsMinimized;
+  TrayIcon1.Visible := True;
+  TrayIcon1.Animate := True;
+  TrayIcon1.ShowBalloonHint;
 end;
 
 procedure TfrmPrincipal.btnCadastroAcaoCopiarClick(Sender: TObject);
@@ -306,9 +324,22 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.mnuFecharClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
 procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
 begin
   edtSCMPaths.Text := TfrmCadastroSCM.Configurar(edtSCMPaths.Text);
+end;
+
+procedure TfrmPrincipal.TrayIcon1Click(Sender: TObject);
+begin
+  TrayIcon1.Visible := False;
+  Show();
+  WindowState := wsNormal;
+  Application.BringToFront();
 end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -335,6 +366,13 @@ end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
+  {$IFDEF DEBUG}
+  barDebug.Visible := True;
+  {$ELSE}
+  barDebug.Visible := False;
+  {$ENDIF}
+  Self.Caption := Application.Title;
+
   InicializarMainMenu;
   Application.TabbedMDIManager(dxTabbedMDIManager1);
   Application.PromptCommand.InputToOutput := True;

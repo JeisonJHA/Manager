@@ -35,7 +35,6 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       inherited Label1: TLabel
         Left = 25
         Top = 64
-        Visible = False
         ExplicitLeft = 25
         ExplicitTop = 64
       end
@@ -83,7 +82,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         Left = 409
         Top = 147
         Width = 36
-        Height = 14
+        Height = 13
         Caption = 'Usuario'
       end
       object SpeedButton1: TSpeedButton [8]

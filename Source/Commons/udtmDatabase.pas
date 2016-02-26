@@ -45,7 +45,11 @@ var
 begin
   Config := TWorkspaceConfig.Create(nil);
   try
+    {$IFDEF DEBUG}
+    IBDatabase1.DatabaseName := 'DATA.FDB';
+    {$ELSE}
     IBDatabase1.DatabaseName := Config.DatabaseName;
+    {$ENDIF}
     IBDatabase1.Open;
   finally
     FreeAndNil(Config);

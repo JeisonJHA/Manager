@@ -29,7 +29,7 @@ inherited frmCadastroSCM: TfrmCadastroSCM
     Width = 399
     Height = 344
     Align = alClient
-    Caption = 'GroupBox1'
+    Caption = 'Diret'#243'rios'
     TabOrder = 1
     object Panel3: TPanel
       Left = 2

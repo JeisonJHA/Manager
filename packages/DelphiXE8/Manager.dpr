@@ -57,6 +57,7 @@ begin
   {$ENDIF}
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Manager';
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Parser.Registrar(TIDEParserWorkspace.Create);

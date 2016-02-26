@@ -137,7 +137,8 @@ end;
 procedure TfrmCadastroSCM.lstPathClick(Sender: TObject);
 begin
   inherited;
-  edtPath.Text := lstPath.Items.Strings[lstPath.ItemIndex];
+  if lstPath.ItemIndex > -1 then
+    edtPath.Text := lstPath.Items.Strings[lstPath.ItemIndex];
 end;
 
 class function TfrmCadastroSCM.Pegar: string;
