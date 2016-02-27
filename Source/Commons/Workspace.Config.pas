@@ -24,12 +24,18 @@ type
     procedure SetDiretorio(const Value: string);
     function GetDatabaseName: string;
     procedure SetDatabaseName(const Value: string);
+    function GetSpSQL: string;
+    procedure SetSpSQL(const Value: string);
+    function GetPrimeiraExecucao: boolean;
+    procedure SetPrimeiraExecucao(const Value: boolean);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   published
     property Diretorio: string read GetDiretorio write SetDiretorio;
     property DatabaseName: string read GetDatabaseName write SetDatabaseName;
+    property SpSQL: string read GetSpSQL write SetSpSQL;
+    property PrimeiraExecucao: boolean read GetPrimeiraExecucao write SetPrimeiraExecucao;
     property Sandbox: TWorkspaceConfigSandbox read FSandbox;
   end;
 
@@ -60,6 +66,16 @@ begin
   Exit(IncludeTrailingBackslash(ReadString('SCM\Workspace', String.Empty)));
 end;
 
+function TWorkspaceConfig.GetPrimeiraExecucao: boolean;
+begin
+  Exit(ReadInteger('Utils\PrimeiraExecucao', True.ToInteger).ToBoolean());
+end;
+
+function TWorkspaceConfig.GetSpSQL: string;
+begin
+  Exit(ReadString('Utils\spSQL', String.Empty));
+end;
+
 procedure TWorkspaceConfig.SetDatabaseName(const Value: string);
 begin
   WriteString('Database\DatabaseName', Value);
@@ -68,6 +84,16 @@ end;
 procedure TWorkspaceConfig.SetDiretorio(const Value: string);
 begin
   WriteString('SCM\Workspace', Value);
+end;
+
+procedure TWorkspaceConfig.SetPrimeiraExecucao(const Value: boolean);
+begin
+  WriteInteger('Utils\PrimeiraExecucao', Value.ToInteger);
+end;
+
+procedure TWorkspaceConfig.SetSpSQL(const Value: string);
+begin
+  WriteString('Utils\spSQL', Value);
 end;
 
 { TWorkspaceConfigSandbox }

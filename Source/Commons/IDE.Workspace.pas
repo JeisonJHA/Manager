@@ -10,7 +10,7 @@ uses
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
   System.Actions, IDE.IWorkspace, Vcl.ExtCtrls, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, dxCustomTileControl, dxTileControl,
-  InstantPresentation, Vcl.StdCtrls;
+  InstantPresentation, Vcl.StdCtrls, Acao;
 
 type
   TfrmWorkspace = class(TForm, IWorkspace)
@@ -31,6 +31,10 @@ type
     function Parser(const ATexto: string): string;
     procedure Inicializar;
     function PrepararTitulo(const ATexto: string): string;
+    procedure BaseDeDadosClick(Sender: TdxTileControlItem);
+    function EncontrarConfiguracaoBase(const AAlias,
+      AServer: string): TAcaoConfigurarBaseDeDados;
+    function BuscarAcao(AAcao: TAcao): TAcao;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent; ASandbox: TWorkspace); overload;
@@ -45,7 +49,8 @@ implementation
 {$R *.dfm}
 
 uses udtmDatabase, Workspace.Action, Winapi.ShellApi,
-  Workspace.Constantes, Sistema;
+  Workspace.Constantes, Sistema, Workspace.Config,
+  Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoCatalogoDeBases;
 
 type
   TSandboxesRecentes = class(TStringList)
@@ -69,6 +74,86 @@ end;
 function TfrmWorkspace.Sandbox: TWorkspace;
 begin
   Exit(FSandbox);
+end;
+
+function TfrmWorkspace.BuscarAcao(AAcao: TAcao): TAcao;
+begin
+  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosDB2) then
+    Exit(TAcaoConfigurarBaseDeDadosDB2.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosOracle) then
+    Exit(TAcaoConfigurarBaseDeDadosOracle.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
+    Exit(TAcaoConfigurarBaseDeDadosMSSQL.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDados) then
+    Exit(TAcaoConfigurarBaseDeDados.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoMontarAmbiente) then
+    Exit(TAcaoMontarAmbiente.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoCatalogoDeBases) then
+    Exit(TAcaoCatalogoDeBases.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoCopiar) then
+    Exit(TAcaoCopiar.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoExecutar) then
+    Exit(TAcaoExecutar.Retrieve(AAcao.Id));
+
+  Exit(TAcao.Retrieve(AAcao.Id));
+end;
+
+function TfrmWorkspace.EncontrarConfiguracaoBase(const AAlias: string; const AServer: string): TAcaoConfigurarBaseDeDados;
+begin
+  with TInstantSelector.Create(nil) do
+  try
+    Connector := dtmDatabase.InstantIBXConnector1;
+    Command.Text := Format('SELECT * FROM ANY %s WHERE Alias = %s AND Server = %s', ['TAcaoConfigurarBaseDeDados',
+      QuotedStr(AAlias), QuotedStr(AServer)]);
+    Open;
+
+    if IsEmpty then
+      Exit(nil);
+
+    Exit(BuscarAcao(TAcao(CurrentObject)) as TAcaoConfigurarBaseDeDados);
+  finally
+    Free;
+  end;
+end;
+
+procedure TfrmWorkspace.BaseDeDadosClick(Sender: TdxTileControlItem);
+var
+  dbconfig: TAcaoConfigurarBaseDeDados;
+  config: TWorkspaceConfig;
+  aplicativo: string;
+  paramentro: string;
+begin
+  dbconfig := EncontrarConfiguracaoBase(Sender.Text1.Value, Sender.Text4.Value);
+  if not Assigned(dbconfig) then
+    Exit;
+
+  config :=  TWorkspaceConfig.Create(nil);
+  try
+    aplicativo := config.SpSQL.Trim;
+    if Trim(aplicativo).IsEmpty then
+      Exit;
+
+    if not FileExists(aplicativo) then
+      Exit;
+
+    paramentro := Format('%s %s', [dbconfig.TipoBanco, dbconfig.Alias]);
+    if dbconfig.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
+      paramentro := Format('SQLSERVER %s:%s %s %s', [dbconfig.Server, dbconfig.Alias, dbconfig.DBUsuario, dbconfig.DBSenha]);
+
+    if ShellExecute(Handle, 'open', PChar(aplicativo), PChar(paramentro), nil, SW_SHOWNORMAL) <= 32 then
+    begin
+      ShowMessage(SysErrorMessage(GetLastError));
+    end;
+  finally
+    FreeAndNil(config);
+  end;
 end;
 
 constructor TfrmWorkspace.Create(AOwner: TComponent; ASandbox: TWorkspace);
@@ -171,6 +256,7 @@ begin
         item.Text1.Value := ini.ReadString('Database', 'Alias', String.Empty);
         item.Text4.Value := ini.ReadString('Database', 'Server', String.Empty);
         item.Style.GradientBeginColor := BoxColors[1];
+        item.OnClick := BaseDeDadosClick;
         // grupo.Add(item);
 
         // grupo.Add(TdxTileControl.Create(dxTileControl1));

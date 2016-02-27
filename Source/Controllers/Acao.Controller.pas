@@ -24,6 +24,9 @@ begin
   form := TfrmFormularioEscolha.Create(Self);
   try
     column := form.cxGrid1DBTableView1.CreateColumn;
+    column.DataBinding.FieldName := 'TipoAcao';
+
+    column := form.cxGrid1DBTableView1.CreateColumn;
     column.DataBinding.FieldName := 'Descricao';
 
     form.dtsMestre.DataSet := Self;

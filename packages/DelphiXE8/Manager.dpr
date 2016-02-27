@@ -1,7 +1,11 @@
 program Manager;
 
 uses
+  ShellApi,
+  Messages,
   Vcl.Forms,
+  Windows,
+  SysUtils,
   udtmDatabase in '..\..\Source\Commons\udtmDatabase.pas' {dtmDatabase: TDataModule},
   IDE.Workspace in '..\..\Source\Commons\IDE.Workspace.pas' {frmWorkspace},
   Workspace.Action in '..\..\Source\Commons\Workspace.Action.pas',
@@ -33,7 +37,7 @@ uses
   IDE.Parser.Aplicacao in '..\..\Source\Commons\IDE.Parser.Aplicacao.pas',
   IDE.Parser in '..\..\Source\Commons\IDE.Parser.pas',
   Cadastro.Acao.Configurar.BaseDeDados in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.pas' {frmCadastroAcaoConfigurarBaseDeDados},
-  Cadastro.Acao.MontarAmbiente in '..\..\Source\Commons\Cadastro.Acao.MontarAmbiente.pas' {frmCadastroAcaoMontarAmbiente},
+  Cadastro.CatalogoDeBase in '..\..\Source\Commons\Cadastro.CatalogoDeBase.pas' {frmCadastroCatalogoDeBase},
   Cadastro.Acao.Configurar.BaseDeDados.Oracle in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas' {frmCadastroAcaoConfigurarBaseDeDadosOracle},
   Cadastro.Acao.Configurar.BaseDeDados.DB2 in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas' {frmCadastroAcaoConfigurarBaseDeDadosDB2},
   Cadastro.Acao.Configurar.BaseDeDados.MSSQL in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas' {frmCadastroAcaoConfigurarBaseDeDadosMSSQL},
@@ -42,22 +46,39 @@ uses
   Formulario.Escolha in '..\..\Source\Commons\Formulario.Escolha.pas' {frmFormularioEscolha},
   Cadastro.SCM in '..\..\Source\Commons\Cadastro.SCM.pas' {frmCadastroSCM},
   ActiveDs_TLB in '..\..\Source\Commons\ActiveDs_TLB.pas',
-  adshlp in '..\..\Source\Commons\adshlp.pas';
+  adshlp in '..\..\Source\Commons\adshlp.pas',
+  IDE.IBarraFerramenta in '..\..\Source\Commons\IDE.IBarraFerramenta.pas',
+  AcaoCatalogoDeBases in '..\..\Source\Models\AcaoCatalogoDeBases.pas',
+  Cadastro.Acao.MontarAmbiente in '..\..\Source\Commons\Cadastro.Acao.MontarAmbiente.pas' {frmCadastroAcaoMontarAmbiente},
+  Configuracao.Inicial in '..\..\Source\Commons\Configuracao.Inicial.pas' {frmConfiguracaoInicial};
 
 {$R *.res}
 {$R *.mdr} {Acao,
+            AcaoCatalogoDeBases,
             Ambiente,
             BarraFerramenta,
             Sistema,
             Workspace}
 
+var
+  Instancia: THandle;
+
 begin
+  Instancia := CreateMutex(nil, false, '{21A25300-6171-4137-B570-13A291665FF5}');
+  if WaitForSingleObject(Instancia, 0) = wait_Timeout then
+  begin
+    Application.MessageBox('Atenção o programa já está aberto!','Atenção',MB_ICONINFORMATION);
+    if not IsWindowVisible(Instancia) then
+      ShowWindow(Instancia, SW_RESTORE);
+    Exit;
+  end;
   {$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown := True;
   {$ENDIF}
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Manager';
+  Application.Inicializar;
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Parser.Registrar(TIDEParserWorkspace.Create);

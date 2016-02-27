@@ -7,7 +7,7 @@ uses Classes, SysUtils, Forms, IDE.Aplicacao, Generics.Collections, IDE.IParser,
 
 type
   TIDEParserAplicacao = class(TIDEParser, IParser)
-  private
+  protected
     function PegarValor(ASandbox: TWorkspace; const AChave: string): string; override;
   public
     constructor Create; override;

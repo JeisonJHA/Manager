@@ -43,17 +43,17 @@ procedure TdtmDatabase.Conectar;
 var
   Config: TWorkspaceConfig;
 begin
+  {$IFDEF DEBUG}
+  IBDatabase1.DatabaseName := ExtractFilePath(Application.ExeName) + 'DATA.FDB';
+  {$ELSE}
   Config := TWorkspaceConfig.Create(nil);
   try
-    {$IFDEF DEBUG}
-    IBDatabase1.DatabaseName := 'DATA.FDB';
-    {$ELSE}
     IBDatabase1.DatabaseName := Config.DatabaseName;
-    {$ENDIF}
-    IBDatabase1.Open;
   finally
     FreeAndNil(Config);
   end;
+  {$ENDIF}
+  IBDatabase1.Open;
 end;
 
 end.

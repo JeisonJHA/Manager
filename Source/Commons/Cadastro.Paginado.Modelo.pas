@@ -10,7 +10,7 @@ uses
   dxSkinscxPCPainter, dxBarBuiltInMenu, cxPC, cxStyles, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxEdit, cxNavigator, cxDBData, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid;
+  cxGrid, InstantPersistence;
 
 type
   TfrmCadastroPaginadoModelo = class(TfrmCadastroModelo)
@@ -60,7 +60,7 @@ end;
 
 procedure TfrmCadastroPaginadoModelo.actConfirmarExecute(Sender: TObject);
 begin
-  iosSelecionador.Post;
+  iosSelecionador.PostChanges;
 end;
 
 procedure TfrmCadastroPaginadoModelo.actConfirmarUpdate(Sender: TObject);

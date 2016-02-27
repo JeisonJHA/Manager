@@ -131,6 +131,10 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
     object iosSelecaoDeAcoesSelf: TIntegerField
       FieldName = 'Self'
     end
+    object iosSelecaoDeAcoesTipoAcao: TStringField
+      FieldName = 'TipoAcao'
+      Size = 255
+    end
   end
   object dtsSelecaoDeAcoes: TDataSource
     AutoEdit = False

@@ -3,7 +3,7 @@
         <ProjectGuid>{7F4C148F-5CAB-43E2-AFD2-141B83F45EE0}</ProjectGuid>
         <MainSource>Manager.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
@@ -83,10 +83,10 @@
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>4</VerInfo_Build>
+        <VerInfo_Build>7</VerInfo_Build>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.7;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
@@ -94,13 +94,13 @@
         <DCC_Optimize>false</DCC_Optimize>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Build>2</VerInfo_Build>
+        <VerInfo_Build>10</VerInfo_Build>
         <DCC_BplOutput>..\..\lib</DCC_BplOutput>
         <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
         <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
         <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.10;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -163,39 +163,41 @@
         <DCCReference Include="..\..\Source\Commons\IDE.Parser.pas"/>
         <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDados</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.MontarAmbiente.pas">
-            <Form>frmCadastroAcaoMontarAmbiente</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="..\..\Source\Commons\Cadastro.CatalogoDeBase.pas">
+            <Form>frmCadastroCatalogoDeBase</Form>
         </DCCReference>
         <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDadosOracle</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDadosDB2</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDadosMSSQL</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Commons\Cadastro.Paginado.Modelo.pas">
             <Form>frmCadastroPaginadoModelo</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Controllers\Acao.Controller.pas"/>
         <DCCReference Include="..\..\Source\Commons\Formulario.Escolha.pas">
             <Form>frmFormularioEscolha</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Commons\Cadastro.SCM.pas">
             <Form>frmCadastroSCM</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Commons\ActiveDs_TLB.pas"/>
         <DCCReference Include="..\..\Source\Commons\adshlp.pas"/>
+        <DCCReference Include="..\..\Source\Commons\IDE.IBarraFerramenta.pas"/>
+        <DCCReference Include="..\..\Source\Models\AcaoCatalogoDeBases.pas"/>
+        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.MontarAmbiente.pas">
+            <Form>frmCadastroAcaoMontarAmbiente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Commons\Configuracao.Inicial.pas">
+            <Form>frmConfiguracaoInicial</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -227,6 +229,12 @@
             </Platforms>
             <Deployment Version="1">
                 <DeployFile LocalName="..\..\bin\Manager.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Manager.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\bin\Manager.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Manager.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -608,12 +616,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>

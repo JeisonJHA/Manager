@@ -105,7 +105,6 @@ end;
 class function TfrmCadastroSCM.Configurar(const APath: string): string;
 var
   form: TfrmCadastroSCM;
-  I: Integer;
 begin
   form := TfrmCadastroSCM.Create(nil);
   try

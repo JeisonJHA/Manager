@@ -37,6 +37,7 @@ type
     iosSelecionadorDescricao: TStringField;
     iosSelecionadorSelf: TIntegerField;
     cxGrid2DBTableView1Descricao: TcxGridDBColumn;
+    iosSelecaoDeAcoesTipoAcao: TStringField;
     procedure SpeedButton1Click(Sender: TObject);
     procedure actDelDetalheExecute(Sender: TObject);
   private

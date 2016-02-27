@@ -100,10 +100,15 @@ type
     tabSandbox: TdxRibbonBackstageViewTabSheet;
     ApplicationEvents1: TApplicationEvents;
     TrayIcon1: TTrayIcon;
-    PopupMenu1: TPopupMenu;
+    ppmTrayIcon: TPopupMenu;
     mnuFechar: TMenuItem;
     N1: TMenuItem;
     barDebug: TdxBar;
+    btnConfigToolbarWorkspace: TdxBarButton;
+    btnCriarCatalogoBases: TdxBarButton;
+    dxBarSeparator3: TdxBarSeparator;
+    barCatalogoDeBases: TdxBar;
+    btnCatalogar: TdxBarSubItem;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -128,6 +133,7 @@ type
     procedure ApplicationEvents1Minimize(Sender: TObject);
     procedure TrayIcon1Click(Sender: TObject);
     procedure mnuFecharClick(Sender: TObject);
+    procedure btnCriarCatalogoBasesClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarVersao;
@@ -149,7 +155,7 @@ uses JvTypes, IDE.Workspace, Winapi.ShellApi, udtmDatabase, Workspace.Constantes
  IDE.Controller.MainMenu, Cadastro.Sistema, Cadastro.Acao.Configurar.BaseDeDados.Oracle,
  Cadastro.Acao.Configurar.BaseDeDados.DB2, Cadastro.Acao.Configurar.BaseDeDados.MSSQL, IDE.Utils,
  Cadastro.Acao.Configurar.BaseDeDados, IDE.IWorkspace,
- Cadastro.Acao.MontarAmbiente, Cadastro.SCM;
+ Cadastro.Acao.MontarAmbiente, Cadastro.SCM, Cadastro.CatalogoDeBase;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -259,6 +265,15 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.btnCriarCatalogoBasesClick(Sender: TObject);
+begin
+  with TfrmCadastroCatalogoDeBase.Create(nil) do
+  begin
+    ShowModal;
+    Free;
+  end;
+end;
+
 procedure TfrmPrincipal.dxBarLargeButton1Click(Sender: TObject);
 begin
   with TfrmCadastroAcaoConfigurarBaseDeDados.Create(nil) do
@@ -301,21 +316,19 @@ end;
 
 procedure TfrmPrincipal.InicializarMainMenu;
 var
-  controller: TIDEControllerMainMenu;
+  controller: TBarraFerramentaController;
 begin
-  controller := TIDEControllerMainMenu.Create(dxRibbon1, dxBarManager1, ActionList1);
+  controller := TBarraFerramentaController.Create(ActionList1);
   try
-    controller.CarregarBarrasFerramentas(ribbonGerenciamento);
+    controller.CarregarMenuPrincipal(ribbonGerenciamento);
+    controller.CarregarPopupMenuTrayIcon(ppmTrayIcon);
+    controller.CarregarCatalogo(btnCatalogar);
   finally
     FreeAndNil(controller);
   end;
 end;
 
 procedure TfrmPrincipal.InicializarWorkspaceList;
-var
-  utils: TWorkspaceUtils;
-  I: integer;
-  sandbox: TWorkspace;
 begin
   with TWorkspaceUtils.Create(Application.Configuracoes) do
   begin
@@ -352,6 +365,7 @@ procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   DisableAero := True;
   InicializarWorkspaceList;
+  InicializarMainMenu;
 end;
 
 function ExcluiQuebra( Str: String ): String;
@@ -373,7 +387,6 @@ begin
   {$ENDIF}
   Self.Caption := Application.Title;
 
-  InicializarMainMenu;
   Application.TabbedMDIManager(dxTabbedMDIManager1);
   Application.PromptCommand.InputToOutput := True;
   Application.PromptCommand.OutputLines := txtConsole.Lines;

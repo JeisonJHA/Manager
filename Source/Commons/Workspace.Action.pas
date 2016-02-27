@@ -30,7 +30,7 @@ constructor TWorkspaceAction.Create(AOwner: TComponent);
 begin
   inherited;
   OnExecute := InternalOnExecute;
-//  OnUpdate := InternalOnUpdate;
+  OnUpdate := InternalOnUpdate;
 end;
 
 destructor TWorkspaceAction.Destroy;

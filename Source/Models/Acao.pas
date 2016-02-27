@@ -26,6 +26,7 @@ type
     function GetIcone: Integer;
     procedure SetIcone(Value: Integer);
   protected
+    function GetTipoAcao: string; virtual;
     function GetDescricao: string; virtual;
     procedure SetDescricao(const Value: string); virtual;
   public
@@ -33,6 +34,7 @@ type
   published
     property Descricao: string read GetDescricao write SetDescricao;
     property Icone: Integer read GetIcone write SetIcone;
+    property TipoAcao: string read GetTipoAcao;
   end;
 
   TAcaoExecutar = class(TAcao)
@@ -51,6 +53,8 @@ type
     procedure SetIsAdmin(Value: Boolean);
     procedure SetParametros(const Value: string);
     function RunAsAdmin(hWnd: HWND; filename: string; Parameters: string): Boolean;
+  protected
+    function GetTipoAcao: string; override;
   public
     procedure Executar; override;
   published
@@ -71,6 +75,8 @@ type
     function GetOrigem: string;
     procedure SetDestino(const Value: string);
     procedure SetOrigem(const Value: string);
+  protected
+    function GetTipoAcao: string; override;
   public
     procedure Executar; override;
   published
@@ -86,6 +92,8 @@ type
     function GetAcaoCount: Integer;
     function GetAcoes(Index: Integer): TAcao;
     procedure SetAcoes(Index: Integer; Value: TAcao);
+  protected
+    function GetTipoAcao: string; override;
   public
     procedure Executar; override;
     function AddAcao(Acao: TAcao): Integer;
@@ -104,54 +112,68 @@ type
     Alias: String(255);
     Usuario: String(255);
     Senha: String(255);
-    Server: String(255); }
+    Server: String(255);
+    DBUsuario: String(255);
+    DBSenha: String(255); }
     _Alias: TInstantString;
+    _DBSenha: TInstantString;
+    _DBUsuario: TInstantString;
     _Senha: TInstantString;
     _Server: TInstantString;
     _Sistema: TInstantReference;
     _Usuario: TInstantString;
   private
     function GetAlias: string;
+    function GetDBSenha: string;
+    function GetDBUsuario: string;
     function GetSenha: string;
     function GetServer: string;
     function GetSistema: TSistema;
     function GetUsuario: string;
     procedure SetAlias(const Value: string);
+    procedure SetDBSenha(const Value: string);
+    procedure SetDBUsuario(const Value: string);
     procedure SetSenha(const Value: string);
     procedure SetServer(const Value: string);
     procedure SetSistema(Value: TSistema);
     procedure SetUsuario(const Value: string);
   protected
-    function GetDescricao: string; override;
-    procedure SetDescricao(const Value: string); override;
+    function GetTipoAcao: string; override;
     procedure InternalConfigurarIni(AArquivo: TIniFile); virtual;
+    function GetTipoBanco: string; virtual;
   public
     procedure Executar; override;
   published
     property Alias: string read GetAlias write SetAlias;
+    property DBSenha: string read GetDBSenha write SetDBSenha;
+    property DBUsuario: string read GetDBUsuario write SetDBUsuario;
     property Senha: string read GetSenha write SetSenha;
     property Server: string read GetServer write SetServer;
     property Sistema: TSistema read GetSistema write SetSistema;
     property Usuario: string read GetUsuario write SetUsuario;
+    property TipoBanco: string read GetTipoBanco;
   end;
 
 
   TAcaoConfigurarBaseDeDadosOracle = class(TAcaoConfigurarBaseDeDados)
   {IOMETADATA stored; }
   protected
-    procedure InternalConfigurarIni(AArquivo: TIniFile); override;
+    function GetTipoAcao: string; override;
+    function GetTipoBanco: string; override;
   end;
 
   TAcaoConfigurarBaseDeDadosDB2 = class(TAcaoConfigurarBaseDeDados)
   {IOMETADATA stored; }
   protected
-    procedure InternalConfigurarIni(AArquivo: TIniFile); override;
+    function GetTipoAcao: string; override;
+    function GetTipoBanco: string; override;
   end;
 
   TAcaoConfigurarBaseDeDadosMSSQL = class(TAcaoConfigurarBaseDeDados)
   {IOMETADATA stored; }
   protected
-    procedure InternalConfigurarIni(AArquivo: TIniFile); override;
+    function GetTipoAcao: string; override;
+    function GetTipoBanco: string; override;
   end;
 
 implementation
@@ -174,6 +196,11 @@ end;
 function TAcao.GetIcone: Integer;
 begin
   Result := _Icone.Value;
+end;
+
+function TAcao.GetTipoAcao: string;
+begin
+  Exit('Indefinida');
 end;
 
 procedure TAcao.SetDescricao(const Value: string);
@@ -222,6 +249,11 @@ end;
 function TAcaoExecutar.GetParametros: string;
 begin
   Result := _Parametros.Value;
+end;
+
+function TAcaoExecutar.GetTipoAcao: string;
+begin
+  Exit('Executar');
 end;
 
 function TAcaoExecutar.RunAsAdmin(hWnd: HWND; filename,
@@ -273,9 +305,14 @@ begin
   Result := _Alias.Value;
 end;
 
-function TAcaoConfigurarBaseDeDados.GetDescricao: string;
+function TAcaoConfigurarBaseDeDados.GetDBSenha: string;
 begin
-  Exit(Alias);
+  Result := _DBSenha.Value;
+end;
+
+function TAcaoConfigurarBaseDeDados.GetDBUsuario: string;
+begin
+  Result := _DBUsuario.Value;
 end;
 
 function TAcaoConfigurarBaseDeDados.GetSenha: string;
@@ -293,6 +330,16 @@ begin
   Result := _Sistema.Value as TSistema;
 end;
 
+function TAcaoConfigurarBaseDeDados.GetTipoAcao: string;
+begin
+  Exit('Configuração de base de dados');
+end;
+
+function TAcaoConfigurarBaseDeDados.GetTipoBanco: string;
+begin
+  Exit('Indefinido');
+end;
+
 function TAcaoConfigurarBaseDeDados.GetUsuario: string;
 begin
   Result := _Usuario.Value;
@@ -303,10 +350,14 @@ begin
   _Alias.Value := Value;;
 end;
 
-procedure TAcaoConfigurarBaseDeDados.SetDescricao(const Value: string);
+procedure TAcaoConfigurarBaseDeDados.SetDBSenha(const Value: string);
 begin
-  inherited;
-  Alias := Value;
+  _DBSenha.Value := Value;;
+end;
+
+procedure TAcaoConfigurarBaseDeDados.SetDBUsuario(const Value: string);
+begin
+  _DBUsuario.Value := Value;;
 end;
 
 procedure TAcaoConfigurarBaseDeDados.SetSenha(const Value: string);
@@ -368,6 +419,11 @@ begin
   Result := _Origem.Value;
 end;
 
+function TAcaoCopiar.GetTipoAcao: string;
+begin
+  Exit('Copiar');
+end;
+
 procedure TAcaoCopiar.SetDestino(const Value: string);
 begin
   _Destino.Value := Value;;
@@ -385,6 +441,7 @@ begin
   AArquivo.WriteString('Cliente', 'LoginAutomatico', Format('%s,%s,1', [Usuario, Senha]));
   AArquivo.WriteString('Database', 'Alias', Alias);
   AArquivo.WriteString('Database', 'Server', Server);
+  AArquivo.WriteString('Database', 'TipoBanco', TipoBanco);
 end;
 
 procedure TAcaoConfigurarBaseDeDados.Executar;
@@ -440,6 +497,11 @@ begin
   Result := _Acoes[Index] as TAcao;
 end;
 
+function TAcaoMontarAmbiente.GetTipoAcao: string;
+begin
+  Exit('Montagem de ambiente');
+end;
+
 function TAcaoMontarAmbiente.IndexOfAcao(Acao: TAcao): Integer;
 begin
   Result := _Acoes.IndexOf(Acao);
@@ -462,29 +524,38 @@ end;
 
 { TAcaoConfigurarBaseDeDadosMSSQL }
 
-procedure TAcaoConfigurarBaseDeDadosMSSQL.InternalConfigurarIni(
-  AArquivo: TIniFile);
+function TAcaoConfigurarBaseDeDadosMSSQL.GetTipoAcao: string;
 begin
-  inherited InternalConfigurarIni(AArquivo);
-  AArquivo.WriteString('Database', 'TipoBanco', 'SQLServer');
+  Exit('Configuração de base de dados MSSQL');
+end;
+
+function TAcaoConfigurarBaseDeDadosMSSQL.GetTipoBanco: string;
+begin
+  Exit('SQLServer');
 end;
 
 { TAcaoConfigurarBaseDeDadosOracle }
 
-procedure TAcaoConfigurarBaseDeDadosOracle.InternalConfigurarIni(
-  AArquivo: TIniFile);
+function TAcaoConfigurarBaseDeDadosOracle.GetTipoAcao: string;
 begin
-  inherited InternalConfigurarIni(AArquivo);
-  AArquivo.WriteString('Database', 'TipoBanco', 'Oracle');
+  Exit('Configuração de base de dados Oracle');
+end;
+
+function TAcaoConfigurarBaseDeDadosOracle.GetTipoBanco: string;
+begin
+  Exit('Oracle');
 end;
 
 { TAcaoConfigurarBaseDeDadosDB2 }
 
-procedure TAcaoConfigurarBaseDeDadosDB2.InternalConfigurarIni(
-  AArquivo: TIniFile);
+function TAcaoConfigurarBaseDeDadosDB2.GetTipoAcao: string;
 begin
-  inherited InternalConfigurarIni(AArquivo);
-  AArquivo.WriteString('Database', 'TipoBanco', 'DB2');
+  Exit('Configuração de base de dados DB2');
+end;
+
+function TAcaoConfigurarBaseDeDadosDB2.GetTipoBanco: string;
+begin
+  Exit('DB2');
 end;
 
 initialization
@@ -498,5 +569,7 @@ initialization
     TAcaoExecutar,
     TAcaoMontarAmbiente
   ]);
+
+end.
 
 end.

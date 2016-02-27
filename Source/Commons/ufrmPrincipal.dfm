@@ -44,6 +44,9 @@ object frmPrincipal: TfrmPrincipal
           ToolbarName = 'barCadastros'
         end
         item
+          ToolbarName = 'barCatalogoDeBases'
+        end
+        item
           ToolbarName = 'barDebug'
         end>
       Index = 0
@@ -283,7 +286,7 @@ object frmPrincipal: TfrmPrincipal
       Left = -185
       Top = 0
       Width = 185
-      Height = 0
+      Height = 140
       Visible = False
       AllowFloating = True
       AutoHide = True
@@ -403,8 +406,8 @@ object frmPrincipal: TfrmPrincipal
           Visible = True
           ItemName = 'dxBarSubItem1'
         end>
-      OneOnRow = True
-      Row = 1
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -412,7 +415,7 @@ object frmPrincipal: TfrmPrincipal
     object barDebug: TdxBar
       Caption = 'Debug'
       CaptionButtons = <>
-      DockedLeft = 231
+      DockedLeft = 338
       DockedTop = 0
       FloatLeft = 1105
       FloatTop = 8
@@ -423,7 +426,27 @@ object frmPrincipal: TfrmPrincipal
           Visible = True
           ItemName = 'dxBarLargeButton3'
         end>
-      OneOnRow = True
+      OneOnRow = False
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object barCatalogoDeBases: TdxBar
+      Caption = '   Bases de dados   '
+      CaptionButtons = <>
+      DockedLeft = 231
+      DockedTop = 0
+      FloatLeft = 1105
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnCatalogar'
+        end>
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -441,21 +464,25 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Menu'
       Category = 0
       Visible = ivAlways
-      ImageIndex = 15
+      ImageIndex = 17
       ItemLinks = <
         item
           Visible = True
           ItemName = 'dxBarLargeButton2'
+        end
+        item
+          Visible = True
+          ItemName = 'btnConfigToolbarWorkspace'
         end>
     end
     object dxBarLargeButton2: TdxBarLargeButton
-      Caption = 'Barra de ferramentas'
+      Caption = 'Menu principal'
       Category = 0
-      Hint = 'Barra de ferramentas'
+      Hint = 'Menu principal'
       Visible = ivAlways
       OnClick = dxBarLargeButton2Click
       SyncImageIndex = False
-      ImageIndex = 14
+      ImageIndex = 15
     end
     object dxBarSubItem2: TdxBarSubItem
       Caption = 'A'#231#245'es'
@@ -478,6 +505,14 @@ object frmPrincipal: TfrmPrincipal
         item
           Visible = True
           ItemName = 'dxBarLargeButton4'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarSeparator3'
+        end
+        item
+          Visible = True
+          ItemName = 'btnCriarCatalogoBases'
         end>
     end
     object btnCadastroAcaoExecutar: TdxBarButton
@@ -572,6 +607,34 @@ object frmPrincipal: TfrmPrincipal
       OnClick = dxBarLargeButton4Click
       SyncImageIndex = False
       ImageIndex = 10
+    end
+    object btnConfigToolbarWorkspace: TdxBarButton
+      Caption = 'Workspace'
+      Category = 0
+      Hint = 'Workspace'
+      Visible = ivAlways
+      ImageIndex = 9
+    end
+    object btnCriarCatalogoBases: TdxBarButton
+      Caption = 'Cat'#225'logo de bases'
+      Category = 0
+      Hint = 'Cat'#225'logo de bases'
+      Visible = ivAlways
+      ImageIndex = 1
+      OnClick = btnCriarCatalogoBasesClick
+    end
+    object dxBarSeparator3: TdxBarSeparator
+      Caption = 'Banco de dados'
+      Category = 0
+      Hint = 'Banco de dados'
+      Visible = ivAlways
+    end
+    object btnCatalogar: TdxBarSubItem
+      Caption = 'Catalogar'
+      Category = 0
+      Visible = ivAlways
+      ImageIndex = 12
+      ItemLinks = <>
     end
   end
   object dxSkinController1: TdxSkinController
@@ -690,12 +753,12 @@ object frmPrincipal: TfrmPrincipal
   end
   object TrayIcon1: TTrayIcon
     BalloonTitle = 'Manager'
-    PopupMenu = PopupMenu1
+    PopupMenu = ppmTrayIcon
     OnClick = TrayIcon1Click
     Left = 128
     Top = 368
   end
-  object PopupMenu1: TPopupMenu
+  object ppmTrayIcon: TPopupMenu
     Left = 200
     Top = 368
     object N1: TMenuItem

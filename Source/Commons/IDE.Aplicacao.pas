@@ -12,6 +12,7 @@ type
     function GetPromptCommand: TDosCommand;
     function GetConfiguracoes: TWorkspaceConfig;
   public
+    procedure Inicializar;
     function Parser: TIDEControllerParser;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
@@ -24,7 +25,7 @@ type
 
 implementation
 
-uses IDE.Workspace, Workspace;
+uses IDE.Workspace, Workspace, Configuracao.Inicial;
 
 procedure Console(ATexto: string);
 begin
@@ -139,6 +140,23 @@ end;
 function TIDEAplicacao.GetPromptCommand: TDosCommand;
 begin
   Exit(_aplicacao.PromptCommand);
+end;
+
+procedure TIDEAplicacao.Inicializar;
+var
+  config: TWorkspaceConfig;
+begin
+  config := TWorkspaceConfig.Create(nil);
+  try
+    if config.PrimeiraExecucao then
+      with TfrmConfiguracaoInicial.Create(nil) do
+      begin
+        ShowModal;
+        Free;
+      end;
+  finally
+    FreeAndNil(config);
+  end;
 end;
 
 function TIDEAplicacao.Login(const AUsuario, ASenha: string;
