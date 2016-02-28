@@ -50,7 +50,7 @@ implementation
 
 uses udtmDatabase, Workspace.Action, Winapi.ShellApi,
   Workspace.Constantes, Sistema, Workspace.Config,
-  Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoCatalogoDeBases;
+  Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoConjuntoDeBases;
 
 type
   TSandboxesRecentes = class(TStringList)
@@ -93,8 +93,8 @@ begin
   if AAcao.InheritsFrom(TAcaoMontarAmbiente) then
     Exit(TAcaoMontarAmbiente.Retrieve(AAcao.Id));
 
-  if AAcao.InheritsFrom(TAcaoCatalogoDeBases) then
-    Exit(TAcaoCatalogoDeBases.Retrieve(AAcao.Id));
+  if AAcao.InheritsFrom(TAcaoConjuntoDeBases) then
+    Exit(TAcaoConjuntoDeBases.Retrieve(AAcao.Id));
 
   if AAcao.InheritsFrom(TAcaoCopiar) then
     Exit(TAcaoCopiar.Retrieve(AAcao.Id));
@@ -254,8 +254,9 @@ begin
         item.GroupIndex := grupo.Index;
         item.Size := tcisExtraLarge;
         item.Text1.Value := ini.ReadString('Database', 'Alias', String.Empty);
+        item.Text1.Font.Size := 16;
         item.Text4.Value := ini.ReadString('Database', 'Server', String.Empty);
-        item.Style.GradientBeginColor := BoxColors[1];
+        item.Style.GradientBeginColor := BoxColors[2];
         item.OnClick := BaseDeDadosClick;
         // grupo.Add(item);
 

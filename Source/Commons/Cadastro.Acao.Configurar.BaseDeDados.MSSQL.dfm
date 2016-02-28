@@ -3,23 +3,17 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarB
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
+    inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
+    end
     inherited tabDetalhes: TcxTabSheet
-      inherited Label6: TLabel
-        Height = 13
-        ExplicitHeight = 13
-      end
       inherited Label8: TLabel
         Width = 44
         Caption = 'Inst'#226'ncia'
         ExplicitWidth = 44
-      end
-      object Label9: TLabel [10]
-        Left = 369
-        Top = 187
-        Width = 134
-        Height = 13
-        Caption = ' ex.: {WS_DIR}bin\spcfg.ini'
-        Enabled = False
       end
     end
   end

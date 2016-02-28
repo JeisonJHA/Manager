@@ -1,21 +1,13 @@
-inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
-  Caption = 'Cat'#225'logo de Bases'
+inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
+  Caption = 'Conjunto de Bases'
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     Properties.ActivePage = cxTabSheet1
-    inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 24
-      ExplicitWidth = 684
-      ExplicitHeight = 358
-      inherited cxGrid1: TcxGrid
-        ExplicitWidth = 678
-        ExplicitHeight = 352
-      end
-    end
+    ExplicitLeft = -29
+    ExplicitTop = 2
     inherited tabDetalhes: TcxTabSheet
-      Caption = 'Base de dados'
+      Caption = 'Informa'#231#245'es'
       inherited lblIcone: TLabel
         Left = 610
         Top = 3
@@ -29,31 +21,38 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
         DataBinding.DataSource = dtsSelecionador
         ExplicitLeft = 600
         ExplicitTop = 32
+        ExplicitHeight = 36
       end
       inherited edtDescricao: TcxDBTextEdit
         ExplicitWidth = 570
         Width = 570
       end
+    end
+    object cxTabSheet2: TcxTabSheet
+      Caption = 'Base de dados'
+      ImageIndex = 3
+      ExplicitLeft = 3
+      ExplicitTop = 29
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 3
-        Top = 86
+        Top = 3
         Width = 674
-        Height = 263
-        Align = alBottom
+        Height = 346
+        Align = alClient
         Caption = 'Sele'#231#227'o de bases para o conjunto'
-        TabOrder = 2
-        ExplicitTop = 92
-        ExplicitWidth = 678
+        TabOrder = 0
+        ExplicitTop = 86
+        ExplicitHeight = 263
         object Panel3: TPanel
           Left = 637
           Top = 15
           Width = 35
-          Height = 246
+          Height = 329
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitLeft = 641
+          ExplicitHeight = 246
           object JvSpeedButton1: TJvSpeedButton
             Left = 6
             Top = 35
@@ -143,23 +142,23 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
           Left = 2
           Top = 15
           Width = 635
-          Height = 246
+          Height = 329
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 639
+          ExplicitHeight = 246
           object cxGrid2: TcxGrid
             AlignWithMargins = True
             Left = 3
             Top = 3
             Width = 629
-            Height = 240
+            Height = 323
             Align = alClient
             BevelInner = bvNone
             BevelOuter = bvNone
             BorderStyle = cxcbsNone
             TabOrder = 0
-            ExplicitWidth = 633
+            ExplicitHeight = 240
             object cxGrid2DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dtsMestre
@@ -180,7 +179,7 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
       end
     end
     object cxTabSheet1: TcxTabSheet
-      Caption = 'Comandos'
+      Caption = 'Cat'#225'logo'
       ImageIndex = 2
       object GroupBox2: TGroupBox
         AlignWithMargins = True
@@ -189,11 +188,8 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
         Width = 674
         Height = 346
         Align = alClient
-        Caption = 'Comandos'
+        Caption = 'Comandos para catalogar bases'
         TabOrder = 0
-        ExplicitLeft = 6
-        ExplicitTop = 89
-        ExplicitHeight = 263
         object Panel5: TPanel
           Left = 637
           Top = 15
@@ -202,7 +198,6 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitHeight = 246
           object btnAddComando: TJvSpeedButton
             Left = 6
             Top = 35
@@ -296,7 +291,6 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitHeight = 246
           object cxGrid3: TcxGrid
             AlignWithMargins = True
             Left = 3
@@ -308,10 +302,9 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
             BevelOuter = bvNone
             BorderStyle = cxcbsNone
             TabOrder = 0
-            ExplicitHeight = 240
             object cxGridDBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
-              DataController.DataSource = dtsComandos
+              DataController.DataSource = dtsCatalogos
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
               DataController.Summary.SummaryGroups = <>
@@ -350,17 +343,17 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
-      'SELECT * FROM TAcaoCatalogoDeBases')
-    ObjectClassName = 'TAcaoCatalogoDeBases'
+      'SELECT * FROM TAcaoConjuntoDeBases')
+    ObjectClassName = 'TAcaoConjuntoDeBases'
     object iosSelecionadorAcoes: TDataSetField
       FieldName = 'Acoes'
-    end
-    object iosSelecionadorComandos: TDataSetField
-      FieldName = 'Comandos'
     end
     object iosSelecionadorTipoAcao: TStringField
       FieldName = 'TipoAcao'
       Size = 255
+    end
+    object iosSelecionadorCatalogos: TDataSetField
+      FieldName = 'Catalogos'
     end
   end
   object iosAcoes: TInstantSelector
@@ -387,12 +380,12 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
       Size = 255
     end
   end
-  object iosComandos: TInstantSelector
+  object iosCatalogo: TInstantSelector
     FieldOptions = [foObjects, foThorough]
     Filtered = True
     AutoOpen = True
     Command.Strings = (
-      'SELECT * FROM ANY TAcaoExecutar')
+      'SELECT * FROM TAcaoCatalogoDeBases')
     Connector = dtmDatabase.InstantIBXConnector1
     Left = 600
     Top = 176
@@ -411,42 +404,42 @@ inherited frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase
       Size = 255
     end
   end
-  object ioeComandos: TInstantExposer
+  object ioeCatalogos: TInstantExposer
     FieldOptions = [foObjects, foThorough]
-    ContainerName = 'Comandos'
+    ContainerName = 'Catalogos'
     MasterSource = dtsSelecionador
     Mode = amContent
-    ObjectClassName = 'TAcaoExecutar'
+    ObjectClassName = 'TAcaoCatalogoDeBases'
     Left = 120
     Top = 256
-    object ioeComandosAplicativo: TStringField
+    object ioeCatalogosAplicativo: TStringField
       FieldName = 'Aplicativo'
       Size = 255
     end
-    object ioeComandosDescricao: TStringField
+    object ioeCatalogosDescricao: TStringField
       FieldName = 'Descricao'
       Size = 255
     end
-    object ioeComandosIcone: TIntegerField
+    object ioeCatalogosIcone: TIntegerField
       FieldName = 'Icone'
     end
-    object ioeComandosIsAdmin: TBooleanField
+    object ioeCatalogosIsAdmin: TBooleanField
       FieldName = 'IsAdmin'
     end
-    object ioeComandosParametros: TStringField
+    object ioeCatalogosParametros: TStringField
       FieldName = 'Parametros'
       Size = 255
     end
-    object ioeComandosSelf: TIntegerField
+    object ioeCatalogosSelf: TIntegerField
       FieldName = 'Self'
     end
-    object ioeComandosTipoAcao: TStringField
+    object ioeCatalogosTipoAcao: TStringField
       FieldName = 'TipoAcao'
       Size = 255
     end
   end
-  object dtsComandos: TDataSource
-    DataSet = ioeComandos
+  object dtsCatalogos: TDataSource
+    DataSet = ioeCatalogos
     Left = 120
     Top = 304
   end

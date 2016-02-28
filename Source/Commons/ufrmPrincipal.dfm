@@ -1,4 +1,4 @@
-object frmPrincipal: TfrmPrincipal
+﻿object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Manager'
@@ -36,6 +36,7 @@ object frmPrincipal: TfrmPrincipal
     Contexts = <>
     TabOrder = 0
     TabStop = False
+    ExplicitTop = -6
     object ribbonGerenciamento: TdxRibbonTab
       Active = True
       Caption = 'Principal'
@@ -225,6 +226,7 @@ object frmPrincipal: TfrmPrincipal
       AllowFloating = True
       AutoHide = True
       Caption = 'Console'
+      CaptionButtons = [cbMaximize, cbHide]
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       OnActivate = dxDockPanel2Activate
@@ -286,11 +288,12 @@ object frmPrincipal: TfrmPrincipal
       Left = -185
       Top = 0
       Width = 185
-      Height = 140
+      Height = 0
       Visible = False
       AllowFloating = True
       AutoHide = True
       Caption = 'Workspaces'
+      CaptionButtons = [cbMaximize, cbHide]
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
@@ -415,7 +418,7 @@ object frmPrincipal: TfrmPrincipal
     object barDebug: TdxBar
       Caption = 'Debug'
       CaptionButtons = <>
-      DockedLeft = 338
+      DockedLeft = 377
       DockedTop = 0
       FloatLeft = 1105
       FloatTop = 8
@@ -442,6 +445,10 @@ object frmPrincipal: TfrmPrincipal
       FloatClientWidth = 0
       FloatClientHeight = 0
       ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnConjuntoDeBases'
+        end
         item
           Visible = True
           ItemName = 'btnCatalogar'
@@ -500,6 +507,10 @@ object frmPrincipal: TfrmPrincipal
         end
         item
           Visible = True
+          ItemName = 'btnExclusao'
+        end
+        item
+          Visible = True
           ItemName = 'dxBarSeparator2'
         end
         item
@@ -512,7 +523,11 @@ object frmPrincipal: TfrmPrincipal
         end
         item
           Visible = True
-          ItemName = 'btnCriarCatalogoBases'
+          ItemName = 'btnCriarCatalogoDeBases'
+        end
+        item
+          Visible = True
+          ItemName = 'btnCriarConjuntoDeBases'
         end>
     end
     object btnCadastroAcaoExecutar: TdxBarButton
@@ -535,7 +550,7 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Banco de dados'
       Category = 0
       Visible = ivAlways
-      ImageIndex = 1
+      ImageIndex = 28
       ItemLinks = <
         item
           Visible = True
@@ -606,22 +621,22 @@ object frmPrincipal: TfrmPrincipal
       Visible = ivAlways
       OnClick = dxBarLargeButton4Click
       SyncImageIndex = False
-      ImageIndex = 10
+      ImageIndex = 20
     end
     object btnConfigToolbarWorkspace: TdxBarButton
       Caption = 'Workspace'
       Category = 0
       Hint = 'Workspace'
       Visible = ivAlways
-      ImageIndex = 9
+      ImageIndex = 22
     end
-    object btnCriarCatalogoBases: TdxBarButton
-      Caption = 'Cat'#225'logo de bases'
+    object btnCriarConjuntoDeBases: TdxBarButton
+      Caption = 'Conjunto de bases'
       Category = 0
-      Hint = 'Cat'#225'logo de bases'
+      Hint = 'Conjunto de bases'
       Visible = ivAlways
       ImageIndex = 1
-      OnClick = btnCriarCatalogoBasesClick
+      OnClick = btnCriarConjuntoDeBasesClick
     end
     object dxBarSeparator3: TdxBarSeparator
       Caption = 'Banco de dados'
@@ -633,8 +648,53 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Catalogar'
       Category = 0
       Visible = ivAlways
-      ImageIndex = 12
+      ImageIndex = 36
       ItemLinks = <>
+    end
+    object btnCriarCatalogoDeBases: TdxBarLargeButton
+      Caption = 'Cat'#225'logo de bases'
+      Category = 0
+      Hint = 'Cat'#225'logo de bases'
+      Visible = ivAlways
+      OnClick = btnCriarCatalogoDeBasesClick
+      SyncImageIndex = False
+      ImageIndex = 1
+    end
+    object btnConjuntoDeBases: TdxBarSubItem
+      Caption = 'Conjunto de bases'
+      Category = 0
+      Visible = ivAlways
+      ImageIndex = 37
+      ItemLinks = <>
+    end
+    object btnExclusao: TdxBarSubItem
+      Caption = 'Exclus'#227'o'
+      Category = 0
+      Visible = ivAlways
+      ImageIndex = 35
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnExclusaoDeArquivo'
+        end
+        item
+          Visible = True
+          ItemName = 'btnExclusaoDeDiret'#243'rio'
+        end>
+    end
+    object btnExclusaoDeArquivo: TdxBarButton
+      Caption = 'Arquivo(s)'
+      Category = 0
+      Hint = 'Arquivo(s)'
+      Visible = ivAlways
+      ImageIndex = 29
+    end
+    object btnExclusaoDeDiretório: TdxBarButton
+      Caption = 'Diret'#243'rio'
+      Category = 0
+      Hint = 'Diret'#243'rio'
+      Visible = ivAlways
+      ImageIndex = 30
     end
   end
   object dxSkinController1: TdxSkinController
@@ -759,13 +819,15 @@ object frmPrincipal: TfrmPrincipal
     Top = 368
   end
   object ppmTrayIcon: TPopupMenu
+    Images = dtmDatabase.SmallImageList
     Left = 200
     Top = 368
     object N1: TMenuItem
       Caption = '-'
     end
     object mnuFechar: TMenuItem
-      Caption = 'Fechar aplica'#231#227'o'
+      Caption = 'Fechar'
+      ImageIndex = 38
       OnClick = mnuFecharClick
     end
   end

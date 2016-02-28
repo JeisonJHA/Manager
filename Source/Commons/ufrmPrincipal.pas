@@ -105,10 +105,15 @@ type
     N1: TMenuItem;
     barDebug: TdxBar;
     btnConfigToolbarWorkspace: TdxBarButton;
-    btnCriarCatalogoBases: TdxBarButton;
+    btnCriarConjuntoDeBases: TdxBarButton;
     dxBarSeparator3: TdxBarSeparator;
     barCatalogoDeBases: TdxBar;
     btnCatalogar: TdxBarSubItem;
+    btnCriarCatalogoDeBases: TdxBarLargeButton;
+    btnConjuntoDeBases: TdxBarSubItem;
+    btnExclusao: TdxBarSubItem;
+    btnExclusaoDeArquivo: TdxBarButton;
+    btnExclusaoDeDiretório: TdxBarButton;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -133,7 +138,8 @@ type
     procedure ApplicationEvents1Minimize(Sender: TObject);
     procedure TrayIcon1Click(Sender: TObject);
     procedure mnuFecharClick(Sender: TObject);
-    procedure btnCriarCatalogoBasesClick(Sender: TObject);
+    procedure btnCriarConjuntoDeBasesClick(Sender: TObject);
+    procedure btnCriarCatalogoDeBasesClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarVersao;
@@ -155,7 +161,8 @@ uses JvTypes, IDE.Workspace, Winapi.ShellApi, udtmDatabase, Workspace.Constantes
  IDE.Controller.MainMenu, Cadastro.Sistema, Cadastro.Acao.Configurar.BaseDeDados.Oracle,
  Cadastro.Acao.Configurar.BaseDeDados.DB2, Cadastro.Acao.Configurar.BaseDeDados.MSSQL, IDE.Utils,
  Cadastro.Acao.Configurar.BaseDeDados, IDE.IWorkspace,
- Cadastro.Acao.MontarAmbiente, Cadastro.SCM, Cadastro.CatalogoDeBase;
+ Cadastro.Acao.MontarAmbiente, Cadastro.SCM, Cadastro.Acao.Conjunto.Bases,
+ Cadastro.Acao.Catalogo.Bases;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -265,9 +272,9 @@ begin
   end;
 end;
 
-procedure TfrmPrincipal.btnCriarCatalogoBasesClick(Sender: TObject);
+procedure TfrmPrincipal.btnCriarConjuntoDeBasesClick(Sender: TObject);
 begin
-  with TfrmCadastroCatalogoDeBase.Create(nil) do
+  with TfrmCadastroAcaoConjuntoBases.Create(nil) do
   begin
     ShowModal;
     Free;
@@ -307,6 +314,15 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.btnCriarCatalogoDeBasesClick(Sender: TObject);
+begin
+  with TfrmCadastroAcaoCatalogoBases.Create(nil) do
+  begin
+    ShowModal;
+    Free;
+  end;
+end;
+
 procedure TfrmPrincipal.dxDockPanel2Activate(Sender: TdxCustomDockControl;
   Active: Boolean);
 begin
@@ -322,7 +338,8 @@ begin
   try
     controller.CarregarMenuPrincipal(ribbonGerenciamento);
     controller.CarregarPopupMenuTrayIcon(ppmTrayIcon);
-    controller.CarregarCatalogo(btnCatalogar);
+    controller.CarregarConjuntoDeBases(btnConjuntoDeBases);
+    controller.CarregarCatalogoDeBases(btnCatalogar);
   finally
     FreeAndNil(controller);
   end;

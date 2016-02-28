@@ -37,7 +37,7 @@ uses
   IDE.Parser.Aplicacao in '..\..\Source\Commons\IDE.Parser.Aplicacao.pas',
   IDE.Parser in '..\..\Source\Commons\IDE.Parser.pas',
   Cadastro.Acao.Configurar.BaseDeDados in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.pas' {frmCadastroAcaoConfigurarBaseDeDados},
-  Cadastro.CatalogoDeBase in '..\..\Source\Commons\Cadastro.CatalogoDeBase.pas' {frmCadastroCatalogoDeBase},
+  Cadastro.Acao.Conjunto.Bases in '..\..\Source\Commons\Cadastro.Acao.Conjunto.Bases.pas' {frmCadastroAcaoConjuntoBases},
   Cadastro.Acao.Configurar.BaseDeDados.Oracle in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas' {frmCadastroAcaoConfigurarBaseDeDadosOracle},
   Cadastro.Acao.Configurar.BaseDeDados.DB2 in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas' {frmCadastroAcaoConfigurarBaseDeDadosDB2},
   Cadastro.Acao.Configurar.BaseDeDados.MSSQL in '..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas' {frmCadastroAcaoConfigurarBaseDeDadosMSSQL},
@@ -48,13 +48,18 @@ uses
   ActiveDs_TLB in '..\..\Source\Commons\ActiveDs_TLB.pas',
   adshlp in '..\..\Source\Commons\adshlp.pas',
   IDE.IBarraFerramenta in '..\..\Source\Commons\IDE.IBarraFerramenta.pas',
-  AcaoCatalogoDeBases in '..\..\Source\Models\AcaoCatalogoDeBases.pas',
+  AcaoConjuntoDeBases in '..\..\Source\Models\AcaoConjuntoDeBases.pas',
   Cadastro.Acao.MontarAmbiente in '..\..\Source\Commons\Cadastro.Acao.MontarAmbiente.pas' {frmCadastroAcaoMontarAmbiente},
-  Configuracao.Inicial in '..\..\Source\Commons\Configuracao.Inicial.pas' {frmConfiguracaoInicial};
+  Configuracao.Inicial in '..\..\Source\Commons\Configuracao.Inicial.pas' {frmConfiguracaoInicial},
+  AcaoCatalogoDeBases in '..\..\Source\Models\AcaoCatalogoDeBases.pas',
+  Cadastro.Acao.Catalogo.Bases in '..\..\Source\Commons\Cadastro.Acao.Catalogo.Bases.pas' {frmCadastroAcaoCatalogoBases},
+  AcaoExclusao in '..\..\Source\Models\AcaoExclusao.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
             AcaoCatalogoDeBases,
+            AcaoConjuntoDeBases,
+            AcaoExclusao,
             Ambiente,
             BarraFerramenta,
             Sistema,

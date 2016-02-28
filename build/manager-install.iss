@@ -96,3 +96,5 @@ Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Dat
 Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\SCM\; ValueType: string; ValueName: Workspace; Flags: createvalueifdoesntexist uninsdeletekey; ValueData: c:\
 Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\; ValueType: string; ValueName: Caminho; ValueData: {app}; Flags: createvalueifdoesntexist uninsdeletekey
 Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Sandbox\; ValueType: string; ValueName: ArquivosIni; Flags: createvalueifdoesntexist uninsdeletekey
+Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Utils\; ValueType: dword; ValueName: PrimeiraExecucao; Flags: createvalueifdoesntexist uninsdeletekey; ValueData: 1
+Root: HKCU; Subkey: SOFTWARE\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Utils\; ValueType: string; ValueName: spSQL; Flags: createvalueifdoesntexist uninsdeletekey

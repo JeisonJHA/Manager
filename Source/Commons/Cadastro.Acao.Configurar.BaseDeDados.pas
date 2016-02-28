@@ -41,15 +41,24 @@ type
     iosSistemaSelf: TIntegerField;
     cbxSistema: TcxDBLookupComboBox;
     edtAlias: TcxDBTextEdit;
-    Label5: TLabel;
-    edtSenha: TcxDBTextEdit;
-    Label6: TLabel;
-    edtUsuario: TcxDBTextEdit;
     SpeedButton1: TSpeedButton;
     OpenDialog1: TOpenDialog;
     iosSelecionadorServer: TStringField;
     Label8: TLabel;
     edtServer: TcxDBTextEdit;
+    iosSelecionadorDBSenha: TStringField;
+    iosSelecionadorDBUsuario: TStringField;
+    iosSelecionadorTipoAcao: TStringField;
+    iosSelecionadorTipoBanco: TStringField;
+    Label10: TLabel;
+    edtDBUsuario: TcxDBTextEdit;
+    Label9: TLabel;
+    edtDBSenha: TcxDBTextEdit;
+    GroupBox1: TGroupBox;
+    Label6: TLabel;
+    edtUsuario: TcxDBTextEdit;
+    Label5: TLabel;
+    edtSenha: TcxDBTextEdit;
     procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }

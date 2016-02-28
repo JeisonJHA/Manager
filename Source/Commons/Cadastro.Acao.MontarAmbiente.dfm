@@ -4,6 +4,18 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     Properties.ActivePage = tabDetalhes
+    inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 0
+      ExplicitTop = 24
+      ExplicitWidth = 684
+      ExplicitHeight = 358
+      inherited cxGrid1: TcxGrid
+        Width = 678
+        Height = 352
+        ExplicitWidth = 678
+        ExplicitHeight = 352
+      end
+    end
     inherited tabDetalhes: TcxTabSheet
       inherited lblIcone: TLabel
         Left = 610
@@ -18,7 +30,6 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
         DataBinding.DataSource = dtsSelecionador
         ExplicitLeft = 600
         ExplicitTop = 32
-        ExplicitHeight = 21
       end
       inherited edtDescricao: TcxDBTextEdit
         ExplicitWidth = 570
@@ -27,20 +38,23 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 3
-        Top = 86
-        Width = 674
+        Top = 92
+        Width = 678
         Height = 263
         Align = alBottom
         Caption = 'A'#231#245'es dispon'#237'veis'
         TabOrder = 2
+        ExplicitTop = 86
+        ExplicitWidth = 674
         object Panel3: TPanel
-          Left = 637
+          Left = 641
           Top = 15
           Width = 35
           Height = 246
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitLeft = 637
           object JvSpeedButton1: TJvSpeedButton
             Left = 6
             Top = 35
@@ -128,22 +142,24 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
         object Panel4: TPanel
           Left = 2
           Top = 15
-          Width = 635
+          Width = 639
           Height = 246
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 635
           object cxGrid2: TcxGrid
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 629
+            Width = 633
             Height = 240
             Align = alClient
             BevelInner = bvNone
             BevelOuter = bvNone
             BorderStyle = cxcbsNone
             TabOrder = 0
+            ExplicitWidth = 629
             object cxGrid2DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dtsMestre
@@ -189,6 +205,10 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
     ObjectClassName = 'TAcaoMontarAmbiente'
     object iosSelecionadorAcoes: TDataSetField
       FieldName = 'Acoes'
+    end
+    object iosSelecionadorTipoAcao: TStringField
+      FieldName = 'TipoAcao'
+      Size = 255
     end
   end
   object iosAcoes: TInstantSelector

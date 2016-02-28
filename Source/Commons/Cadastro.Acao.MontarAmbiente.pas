@@ -29,10 +29,11 @@ type
     dtsAcoes: TDataSource;
     iosAcoesDescricao: TStringField;
     iosAcoesIcone: TIntegerField;
-    iosSelecionadorAcoes: TDataSetField;
     iosAcoesSelf: TIntegerField;
     actAddDetalhe: TAction;
     actDelDetalhe: TAction;
+    iosSelecionadorAcoes: TDataSetField;
+    iosSelecionadorTipoAcao: TStringField;
     procedure JvSpeedButton1Click(Sender: TObject);
     procedure actAddDetalheUpdate(Sender: TObject);
     procedure actDelDetalheUpdate(Sender: TObject);

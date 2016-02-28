@@ -3,7 +3,7 @@ unit IDE.Controller.MainMenu;
 interface
 
 uses Classes, SysUtils, dxRibbon, dxBar, InstantPresentation, Vcl.ActnList,
-  InstantPersistence, Acao, AcaoCatalogoDeBases, BarraFerramenta, Vcl.Menus;
+  InstantPersistence, Acao, AcaoConjuntoDeBases, BarraFerramenta, Vcl.Menus;
 
 type
   TBarraFerramentaController = class(TPersistent)
@@ -11,16 +11,18 @@ type
     FActionList: TActionList;
     function BuscarAcao(AAcao: TAcao): TAcao;
     procedure AdicionarItem(AToolBar: TdxBar; ABarra: TBarraFerramenta; AAcao: TAcao);
+    procedure InternalCarregar(const AClasse: string; ABarSubItem: TdxBarSubItem);
   public
     constructor Create(AActionList: TActionList);
     procedure CarregarMenuPrincipal(ATab: TdxRibbonTab);
     procedure CarregarPopupMenuTrayIcon(APopupMenu: TPopupMenu);
-    procedure CarregarCatalogo(ABarSubItem: TdxBarSubItem);
+    procedure CarregarConjuntoDeBases(ABarSubItem: TdxBarSubItem);
+    procedure CarregarCatalogoDeBases(ABarSubItem: TdxBarSubItem);
   end;
 
 implementation
 
-uses udtmDatabase, Workspace.Action;
+uses udtmDatabase, Workspace.Action, AcaoCatalogoDeBases;
 
 { TIDEControllerMainMenu }
 
@@ -41,6 +43,9 @@ begin
   if AAcao.InheritsFrom(TAcaoMontarAmbiente) then
     Exit(TAcaoMontarAmbiente.Retrieve(AAcao.Id));
 
+  if AAcao.InheritsFrom(TAcaoConjuntoDeBases) then
+    Exit(TAcaoConjuntoDeBases.Retrieve(AAcao.Id));
+
   if AAcao.InheritsFrom(TAcaoCatalogoDeBases) then
     Exit(TAcaoCatalogoDeBases.Retrieve(AAcao.Id));
 
@@ -53,7 +58,19 @@ begin
   Exit(TAcao.Retrieve(AAcao.Id));
 end;
 
-procedure TBarraFerramentaController.CarregarCatalogo(
+procedure TBarraFerramentaController.CarregarCatalogoDeBases(
+  ABarSubItem: TdxBarSubItem);
+begin
+  InternalCarregar('TAcaoCatalogoDeBases', ABarSubItem);
+end;
+
+procedure TBarraFerramentaController.CarregarConjuntoDeBases(
+  ABarSubItem: TdxBarSubItem);
+begin
+  InternalCarregar('TAcaoConjuntoDeBases', ABarSubItem);
+end;
+
+procedure TBarraFerramentaController.InternalCarregar(const AClasse: string;
   ABarSubItem: TdxBarSubItem);
 var
   I: integer;
@@ -64,7 +81,7 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM TAcaoCatalogoDeBases';
+    Command.Text := Format('SELECT * FROM %s', [AClasse]);
     Open;
 
     for I := 0 to Pred(ObjectCount) do
@@ -140,11 +157,45 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
+    Command.Text := 'SELECT * FROM TAcaoConjuntoDeBases';
+    Open;
+
+    itemBase := TMenuItem.Create(APopupMenu);
+    itemBase.Caption := 'Conjunto de Bases';
+    itemBase.ImageIndex := 37;
+    APopupMenu.Items.Insert(0, itemBase);
+
+    item := TMenuItem.Create(APopupMenu);
+    item.Caption := '-';
+    APopupMenu.Items.Insert(0, item);
+
+    for I := 0 to Pred(ObjectCount) do
+    begin
+      acao := BuscarAcao(Objects[I] as TAcao);
+
+      action := TWorkspaceAction.Create(FActionList);
+      action.Acao := acao;
+      action.Caption := acao.Descricao;
+      action.ImageIndex := acao.Icone;
+
+      item := TMenuItem.Create(itemBase);
+      item.Action := action;
+      item.Caption := acao.Descricao;
+      itemBase.Insert(0, item);
+    end;
+  finally
+    Free;
+  end;
+
+  with TInstantSelector.Create(nil) do
+  try
+    Connector := dtmDatabase.InstantIBXConnector1;
     Command.Text := 'SELECT * FROM TAcaoCatalogoDeBases';
     Open;
 
     itemBase := TMenuItem.Create(APopupMenu);
     itemBase.Caption := 'Catálogo de Bases';
+    itemBase.ImageIndex := 36;
     APopupMenu.Items.Insert(0, itemBase);
 
     item := TMenuItem.Create(APopupMenu);
@@ -177,6 +228,9 @@ begin
 
     for I := 0 to Pred(ObjectCount) do
     begin
+      if Objects[I].InheritsFrom(TAcaoCatalogoDeBases) then
+        Continue;
+
       acao := BuscarAcao(Objects[I] as TAcao);
 
       action := TWorkspaceAction.Create(FActionList);

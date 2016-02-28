@@ -4,7 +4,13 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 0
+      ExplicitTop = 24
+      ExplicitWidth = 684
+      ExplicitHeight = 358
       inherited cxGrid1: TcxGrid
+        ExplicitWidth = 678
+        ExplicitHeight = 352
         inherited cxGrid1DBTableView1: TcxGridDBTableView
           object cxGrid1DBTableView1Descricao: TcxGridDBColumn
             Caption = 'Descri'#231#227'o'
@@ -114,13 +120,12 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
     end
   end
   object iosSelecaoDeAcoes: TInstantSelector
-    FieldOptions = [foObjects, foThorough]
     AutoOpen = True
     Command.Strings = (
       'SELECT * FROM ANY TAcao')
     Connector = dtmDatabase.InstantIBXConnector1
-    Left = 592
-    Top = 32
+    Left = 600
+    Top = 40
     object iosSelecaoDeAcoesDescricao: TStringField
       FieldName = 'Descricao'
       Size = 255
@@ -128,18 +133,9 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
     object iosSelecaoDeAcoesIcone: TIntegerField
       FieldName = 'Icone'
     end
-    object iosSelecaoDeAcoesSelf: TIntegerField
-      FieldName = 'Self'
-    end
     object iosSelecaoDeAcoesTipoAcao: TStringField
       FieldName = 'TipoAcao'
       Size = 255
     end
-  end
-  object dtsSelecaoDeAcoes: TDataSource
-    AutoEdit = False
-    DataSet = iosSelecaoDeAcoes
-    Left = 592
-    Top = 80
   end
 end

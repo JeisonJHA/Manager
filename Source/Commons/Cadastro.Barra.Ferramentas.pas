@@ -18,13 +18,8 @@ uses
 type
   TfrmCadastroBarraFerramentas = class(TfrmCadastroPaginadoMestreDetalheModelo)
     cxGrid1DBTableView1Descricao: TcxGridDBColumn;
-    iosSelecaoDeAcoes: TInstantSelector;
-    dtsSelecaoDeAcoes: TDataSource;
     Label1: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
-    iosSelecaoDeAcoesDescricao: TStringField;
-    iosSelecaoDeAcoesIcone: TIntegerField;
-    iosSelecaoDeAcoesSelf: TIntegerField;
     ioeMestreDescricao: TStringField;
     ioeMestreSelf: TIntegerField;
     ioeDetalheDescricao: TStringField;
@@ -37,6 +32,9 @@ type
     iosSelecionadorDescricao: TStringField;
     iosSelecionadorSelf: TIntegerField;
     cxGrid2DBTableView1Descricao: TcxGridDBColumn;
+    iosSelecaoDeAcoes: TInstantSelector;
+    iosSelecaoDeAcoesDescricao: TStringField;
+    iosSelecaoDeAcoesIcone: TIntegerField;
     iosSelecaoDeAcoesTipoAcao: TStringField;
     procedure SpeedButton1Click(Sender: TObject);
     procedure actDelDetalheExecute(Sender: TObject);
@@ -72,7 +70,6 @@ begin
 
   barra.RemoveAcao(TAcao(objeto));
   barra.Store();
-  iosSelecionador.RefreshCurrentObject;
 end;
 
 procedure TfrmCadastroBarraFerramentas.SpeedButton1Click(Sender: TObject);
@@ -88,7 +85,6 @@ begin
 
   barra.AddAcao(TAcao(objeto));
   barra.Store();
-  iosSelecionador.RefreshCurrentObject;
 end;
 
 end.

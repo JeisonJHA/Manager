@@ -1,4 +1,4 @@
-unit Cadastro.CatalogoDeBase;
+unit Cadastro.Acao.Conjunto.Bases;
 
 interface
 
@@ -14,17 +14,8 @@ uses
   Vcl.ExtCtrls, JvExControls, JvSpeedButton;
 
 type
-  TfrmCadastroCatalogoDeBase = class(TfrmCadastroAcao)
+  TfrmCadastroAcaoConjuntoBases = class(TfrmCadastroAcao)
     ioeMestreSelf: TIntegerField;
-    GroupBox1: TGroupBox;
-    Panel3: TPanel;
-    JvSpeedButton1: TJvSpeedButton;
-    JvSpeedButton2: TJvSpeedButton;
-    Panel4: TPanel;
-    cxGrid2: TcxGrid;
-    cxGrid2DBTableView1: TcxGridDBTableView;
-    cxGrid2DBTableView1Descricao: TcxGridDBColumn;
-    cxGrid2Level1: TcxGridLevel;
     iosAcoes: TInstantSelector;
     iosAcoesDescricao: TStringField;
     iosAcoesIcone: TIntegerField;
@@ -43,22 +34,32 @@ type
     cxGridDBTableView1: TcxGridDBTableView;
     cxGridDBColumn1: TcxGridDBColumn;
     cxGridLevel1: TcxGridLevel;
-    iosSelecionadorComandos: TDataSetField;
     iosSelecionadorTipoAcao: TStringField;
-    iosComandos: TInstantSelector;
+    iosCatalogo: TInstantSelector;
     StringField1: TStringField;
     IntegerField1: TIntegerField;
     IntegerField2: TIntegerField;
     StringField2: TStringField;
-    ioeComandos: TInstantExposer;
-    dtsComandos: TDataSource;
-    ioeComandosAplicativo: TStringField;
-    ioeComandosDescricao: TStringField;
-    ioeComandosIcone: TIntegerField;
-    ioeComandosIsAdmin: TBooleanField;
-    ioeComandosParametros: TStringField;
-    ioeComandosSelf: TIntegerField;
-    ioeComandosTipoAcao: TStringField;
+    ioeCatalogos: TInstantExposer;
+    dtsCatalogos: TDataSource;
+    ioeCatalogosAplicativo: TStringField;
+    ioeCatalogosDescricao: TStringField;
+    ioeCatalogosIcone: TIntegerField;
+    ioeCatalogosIsAdmin: TBooleanField;
+    ioeCatalogosParametros: TStringField;
+    ioeCatalogosSelf: TIntegerField;
+    ioeCatalogosTipoAcao: TStringField;
+    iosSelecionadorCatalogos: TDataSetField;
+    cxTabSheet2: TcxTabSheet;
+    GroupBox1: TGroupBox;
+    Panel3: TPanel;
+    JvSpeedButton1: TJvSpeedButton;
+    JvSpeedButton2: TJvSpeedButton;
+    Panel4: TPanel;
+    cxGrid2: TcxGrid;
+    cxGrid2DBTableView1: TcxGridDBTableView;
+    cxGrid2DBTableView1Descricao: TcxGridDBColumn;
+    cxGrid2Level1: TcxGridLevel;
     procedure JvSpeedButton1Click(Sender: TObject);
     procedure actAddDetalheUpdate(Sender: TObject);
     procedure actDelDetalheUpdate(Sender: TObject);
@@ -72,67 +73,68 @@ type
   end;
 
 var
-  frmCadastroCatalogoDeBase: TfrmCadastroCatalogoDeBase;
+  frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases;
 
 implementation
 
 {$R *.dfm}
 
-uses Acao.Controller, AcaoCatalogoDeBases, Acao, Formulario.Escolha;
+uses Acao.Controller, AcaoConjuntoDeBases, Acao, Formulario.Escolha,
+  AcaoCatalogoDeBases;
 
-procedure TfrmCadastroCatalogoDeBase.actAddDetalheUpdate(Sender: TObject);
+procedure TfrmCadastroAcaoConjuntoBases.actAddDetalheUpdate(Sender: TObject);
 begin
   inherited;
   TAction(Sender).Enabled := Assigned(iosSelecionador.CurrentObject);
 end;
 
-procedure TfrmCadastroCatalogoDeBase.actDelDetalheUpdate(Sender: TObject);
+procedure TfrmCadastroAcaoConjuntoBases.actDelDetalheUpdate(Sender: TObject);
 begin
   inherited;
   TAction(Sender).Enabled := not ioeMestre.IsEmpty;
 end;
 
-procedure TfrmCadastroCatalogoDeBase.btnAddComandoClick(Sender: TObject);
+procedure TfrmCadastroAcaoConjuntoBases.btnAddComandoClick(Sender: TObject);
 var
   objeto: TObject;
-  catalogo: TAcaoCatalogoDeBases;
+  catalogo: TAcaoConjuntoDeBases;
 begin
   inherited;
-  catalogo := TAcaoCatalogoDeBases(iosSelecionador.CurrentObject);
-  objeto := iosComandos.Escolher();
+  catalogo := TAcaoConjuntoDeBases(iosSelecionador.CurrentObject);
+  objeto := iosCatalogo.Escolher();
   if not Assigned(objeto) then
     Exit;
 
-  catalogo.AddComando(TAcaoExecutar(objeto));
+  catalogo.AddCatalogo(TAcaoCatalogoDeBases(objeto));
   catalogo.Store();
 end;
 
-procedure TfrmCadastroCatalogoDeBase.btnDelComandoClick(Sender: TObject);
+procedure TfrmCadastroAcaoConjuntoBases.btnDelComandoClick(Sender: TObject);
 var
   objeto: TObject;
-  catalogo: TAcaoCatalogoDeBases;
+  catalogo: TAcaoConjuntoDeBases;
 begin
   inherited;
 
   if (MessageDlg('Deseja realmente excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrNo) then
     Exit;
 
-  catalogo := TAcaoCatalogoDeBases(iosSelecionador.CurrentObject);
-  objeto := ioeComandos.CurrentObject;
+  catalogo := TAcaoConjuntoDeBases(iosSelecionador.CurrentObject);
+  objeto := ioeCatalogos.CurrentObject;
   if not Assigned(objeto) then
     Exit;
 
-  catalogo.RemoveComando(TAcaoExecutar(objeto));
+  catalogo.RemoveCatalogo(TAcaoCatalogoDeBases(objeto));
   catalogo.Store();
 end;
 
-procedure TfrmCadastroCatalogoDeBase.JvSpeedButton1Click(Sender: TObject);
+procedure TfrmCadastroAcaoConjuntoBases.JvSpeedButton1Click(Sender: TObject);
 var
   objeto: TObject;
-  catalogo: TAcaoCatalogoDeBases;
+  catalogo: TAcaoConjuntoDeBases;
 begin
   inherited;
-  catalogo := TAcaoCatalogoDeBases(iosSelecionador.CurrentObject);
+  catalogo := TAcaoConjuntoDeBases(iosSelecionador.CurrentObject);
   objeto := iosAcoes.Escolher();
   if not Assigned(objeto) then
     Exit;
@@ -141,17 +143,17 @@ begin
   catalogo.Store();
 end;
 
-procedure TfrmCadastroCatalogoDeBase.JvSpeedButton2Click(Sender: TObject);
+procedure TfrmCadastroAcaoConjuntoBases.JvSpeedButton2Click(Sender: TObject);
 var
   objeto: TObject;
-  catalogo: TAcaoCatalogoDeBases;
+  catalogo: TAcaoConjuntoDeBases;
 begin
   inherited;
 
   if (MessageDlg('Deseja realmente excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrNo) then
     Exit;
 
-  catalogo := TAcaoCatalogoDeBases(iosSelecionador.CurrentObject);
+  catalogo := TAcaoConjuntoDeBases(iosSelecionador.CurrentObject);
   objeto := ioeMestre.CurrentObject;
   if not Assigned(objeto) then
     Exit;
