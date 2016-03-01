@@ -6,3 +6,6 @@
 *.bak*
 /packages/DelphiXE3/*.stat
 /lib/*.dcu
+*.local
+*.identcache
+*.stat
