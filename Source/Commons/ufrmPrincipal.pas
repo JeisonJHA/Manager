@@ -17,7 +17,7 @@ uses
   Vcl.ExtCtrls, cxMaskEdit, cxSpinEdit, cxSpinButton, JvExControls, JvPageList,
   JvNavigationPane, dxSkinsdxDockControlPainter, dxDockControl, dxDockPanel,
   Workspace.Utils, Workspace.Config, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  MdDsCustom, MdDsList, MdDsObjects, Workspace, Datasnap.DBClient, dxSkinBlack,
+  Workspace, Datasnap.DBClient, dxSkinBlack,
   dxSkinBlue, dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
   dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
   dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLiquidSky,

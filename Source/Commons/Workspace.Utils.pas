@@ -3,7 +3,7 @@ unit Workspace.Utils;
 interface
 
 uses Classes, SysUtils, Workspace.Config, Workspace, Shellapi, filectrl,
-  Contnrs, MdDsObjects, InstantPresentation;
+  Contnrs, InstantPresentation;
 
 type
   TWorkspaceUtils = class(TObject)

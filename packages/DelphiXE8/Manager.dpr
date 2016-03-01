@@ -53,7 +53,9 @@ uses
   Configuracao.Inicial in '..\..\Source\Commons\Configuracao.Inicial.pas' {frmConfiguracaoInicial},
   AcaoCatalogoDeBases in '..\..\Source\Models\AcaoCatalogoDeBases.pas',
   Cadastro.Acao.Catalogo.Bases in '..\..\Source\Commons\Cadastro.Acao.Catalogo.Bases.pas' {frmCadastroAcaoCatalogoBases},
-  AcaoExclusao in '..\..\Source\Models\AcaoExclusao.pas';
+  AcaoExclusao in '..\..\Source\Models\AcaoExclusao.pas',
+  DosCommand in '..\..\Source\Commons\DosCommand.pas',
+  Manager.PromptCommand in '..\..\Source\Commons\Manager.PromptCommand.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,

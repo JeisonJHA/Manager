@@ -4,11 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, Vcl.Forms, Data.DB,
-  InstantPersistence, InstantBrokers, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
-  FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
-  InstantFireDAC, FireDAC.Comp.Client, System.ImageList, Vcl.ImgList,
+  InstantPersistence, InstantBrokers, System.ImageList, Vcl.ImgList,
   Vcl.Controls, cxGraphics, IBX.IBDatabase, Workspace.Config, InstantIBX;
 
 type

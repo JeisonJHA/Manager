@@ -36,7 +36,6 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitTop = -6
     object ribbonGerenciamento: TdxRibbonTab
       Active = True
       Caption = 'Principal'
@@ -214,7 +213,7 @@
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 0
+      Width = 185
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -237,8 +236,8 @@
       object txtConsole: TMemo
         Left = 0
         Top = 0
-        Width = 0
-        Height = 96
+        Width = 1063
+        Height = 0
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -288,7 +287,7 @@
       Left = -185
       Top = 0
       Width = 185
-      Height = 0
+      Height = 140
       Visible = False
       AllowFloating = True
       AutoHide = True
