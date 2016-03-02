@@ -3,7 +3,8 @@ unit IDE.Aplicacao;
 interface
 
 uses Classes, SysUtils, Forms, IDE.Controller.Parser, IDE.IWorkspace, dxTabbedMDI,
-  DosCommand, ActiveX, adshlp, ActiveDs_Tlb, System.Win.ComObj, Workspace.Config;
+  DosCommand, ActiveX, adshlp, ActiveDs_Tlb, System.Win.ComObj, Workspace.Config,
+  IDE.Inicializador;
 
 type
   TIDEAplicacao = class helper for TApplication
@@ -14,6 +15,7 @@ type
   public
     procedure Inicializar;
     function Parser: TIDEControllerParser;
+    function Inicializador: TInicializador;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
@@ -35,6 +37,7 @@ end;
 type
   TAplicacao = class(TObject)
   private
+    FInicializador: TInicializador;
     FParser: TIDEControllerParser;
     FTabbedMDIManager: TdxTabbedMDIManager;
     FPromptCommand: TDosCommand;
@@ -47,6 +50,7 @@ type
     function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
   published
     function Parser: TIDEControllerParser;
+    function Inicializador: TInicializador;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
     property PromptCommand: TDosCommand read FPromptCommand;
@@ -60,6 +64,7 @@ var
 
 constructor TAplicacao.Create;
 begin
+  FInicializador := TInicializador.Create;
   FParser := TIDEControllerParser.Create;
   FPromptCommand := TDosCommand.Create(nil);
   FConfiguracoes := TWorkspaceConfig.Create(nil);
@@ -70,6 +75,7 @@ begin
   FreeAndNil(FConfiguracoes);
   FreeAndNil(FPromptCommand);
   FreeAndNil(FParser);
+  FreeAndNil(FInicializador);
   inherited;
 end;
 
@@ -92,6 +98,11 @@ begin
     Exit(workspace);
 
   Exit(nil);
+end;
+
+function TAplicacao.Inicializador: TInicializador;
+begin
+  Exit(_aplicacao.FInicializador);
 end;
 
 function TAplicacao.Login(const AUsuario, ASenha: string;
@@ -142,10 +153,16 @@ begin
   Exit(_aplicacao.PromptCommand);
 end;
 
+function TIDEAplicacao.Inicializador: TInicializador;
+begin
+  Exit(_aplicacao.Inicializador);
+end;
+
 procedure TIDEAplicacao.Inicializar;
 var
   config: TWorkspaceConfig;
 begin
+  Inicializador.Executar;
   config := TWorkspaceConfig.Create(nil);
   try
     if config.PrimeiraExecucao then

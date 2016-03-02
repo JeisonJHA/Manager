@@ -55,7 +55,10 @@ uses
   Cadastro.Acao.Catalogo.Bases in '..\..\Source\Commons\Cadastro.Acao.Catalogo.Bases.pas' {frmCadastroAcaoCatalogoBases},
   AcaoExclusao in '..\..\Source\Models\AcaoExclusao.pas',
   DosCommand in '..\..\Source\Commons\DosCommand.pas',
-  Manager.PromptCommand in '..\..\Source\Commons\Manager.PromptCommand.pas';
+  Manager.PromptCommand in '..\..\Source\Commons\Manager.PromptCommand.pas',
+  IDE.Inicializador in '..\..\Source\Commons\IDE.Inicializador.pas',
+  IDE.Inicializador.Intf in '..\..\Source\Commons\IDE.Inicializador.Intf.pas',
+  IDE.Update in '..\..\Source\Commons\IDE.Update.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
@@ -85,6 +88,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Manager';
+  Application.Inicializador.Registrar(TUpdate.Create);
   Application.Inicializar;
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);

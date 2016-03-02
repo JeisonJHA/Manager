@@ -6,6 +6,9 @@
         <Projects Include="Manager.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\third-part\Updater\Updater.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -23,14 +26,23 @@
     <Target Name="Manager:Make">
         <MSBuild Projects="Manager.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Updater">
+        <MSBuild Projects="..\..\third-part\Updater\Updater.dproj"/>
+    </Target>
+    <Target Name="Updater:Clean">
+        <MSBuild Projects="..\..\third-part\Updater\Updater.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Updater:Make">
+        <MSBuild Projects="..\..\third-part\Updater\Updater.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Manager"/>
+        <CallTarget Targets="Manager;Updater"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Manager:Clean"/>
+        <CallTarget Targets="Manager:Clean;Updater:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Manager:Make"/>
+        <CallTarget Targets="Manager:Make;Updater:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

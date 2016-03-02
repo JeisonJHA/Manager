@@ -237,7 +237,7 @@ procedure TFrmMain.Download;
 begin
   try
     PbGeneral.Style:=pbstNormal;
-    AddLog('Getting Application information');
+    AddLog('Obtendo informações de aplicativos');
     FTempInstallerFileName:=IncludeTrailingPathDelimiter(TPath.GetTempPath())+InstallerFileName;
     DeleteFile(TempInstallerFileName);
 
@@ -284,7 +284,7 @@ begin
     Caption :=Format('Updater %s',[FApplicationName]);
 
     ReadLocalInfo();
-    AddLog(Format('Current Version %s',[LocalVersion]));
+    AddLog(Format('Versão Atual %s',[LocalVersion]));
 
     PbGeneral.Style:=pbstMarquee;
     BtnCheckUpdates.Enabled:=False;
@@ -292,7 +292,7 @@ begin
       if not UpdateAvailable then
       begin
        if not FErrorUpdate and not FSilent then
-        MessageDlg(Format('%s is up to date',[FApplicationName]), mtInformation, [mbOK], 0);
+        MessageDlg(Format('%s está atualizado',[FApplicationName]), mtInformation, [mbOK], 0);
        Close;
       end
       else
@@ -300,7 +300,7 @@ begin
        if not Visible then
          Show;
 
-         if MessageDlg(Format('A new version (%s) of the %s was found. Do you want download and install?',[FRemoteVersion, FApplicationName]),  mtConfirmation, [mbYes,
+         if MessageDlg(Format('Uma nova versão (%s) do %s foi encontrado. Você quer baixar e instalar?',[FRemoteVersion, FApplicationName]),  mtConfirmation, [mbYes,
            mbNo], 0) = mrYes then
            Download
          else
@@ -369,11 +369,11 @@ begin
  try
    if RemoteVersion='' then
      ReadRemoteInfo;
-   {$IFDEF DEBUG}
-     Result:=True;
-   {$ELSE}
+//   {$IFDEF DEBUG}
+//     Result:=True;
+//   {$ELSE}
      Result:=(FRemoteVersion>FLocalVersion);
-   {$ENDIF}
+//   {$ENDIF}
  except on E : Exception do
    begin
     FErrorUpdate:=True;
@@ -489,14 +489,14 @@ begin
 end;
 
 procedure TFrmMain.ReadLocalInfo;
-{$IFNDEF DEBUG}
+//{$IFNDEF DEBUG}
 var
   LBinaryFile : string;
-{$ENDIF}
+//{$ENDIF}
 begin
-   {$IFDEF DEBUG}
-   FLocalVersion:='0.0.0.0';
-   {$ELSE}
+//   {$IFDEF DEBUG}
+//   FLocalVersion:='0.0.0.0';
+//   {$ELSE}
    LBinaryFile:=ParamStr(1);
    if not FileExists(LBinaryFile) then
     begin
@@ -506,7 +506,7 @@ begin
 
    AddLog(Format('Reading version info from %s', [LBinaryFile]));
    FLocalVersion:=GetFileVersionStr(LBinaryFile);
-   {$ENDIF}
+//   {$ENDIF}
 end;
 
 procedure TFrmMain.ReadRemoteInfo;
@@ -517,7 +517,7 @@ begin
   XmlDoc       := CreateOleObject('Msxml2.DOMDocument.6.0');
   XmlDoc.Async := False;
   try
-    AddLog('Getting remote version info');
+    AddLog('Obtendo informação remota da versão');
     FXmlVersionInfo:=LHttpGet(FRemoteVersionFile);
     XmlDoc.LoadXml(XmlVersionInfo);
     XmlDoc.SetProperty('SelectionLanguage','XPath');
@@ -526,7 +526,7 @@ begin
 
      Node:=XmlDoc.selectSingleNode(sXPathVersionNumber);
      if not VarIsClear(Node) then FRemoteVersion:=Node.Text;
-     AddLog(Format('Version found %s',[FRemoteVersion]));
+     AddLog(Format('Versão encontrada %s',[FRemoteVersion]));
 
      Node:=XmlDoc.selectSingleNode(sXPathUrlInstaller);
      if not VarIsClear(Node) then FUrlInstaller:=Node.Text;
