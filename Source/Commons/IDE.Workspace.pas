@@ -256,7 +256,7 @@ begin
         item.Text1.Value := ini.ReadString('Database', 'Alias', String.Empty);
         item.Text1.Font.Size := 16;
         item.Text4.Value := ini.ReadString('Database', 'Server', String.Empty);
-        item.Style.GradientBeginColor := BoxColors[2];
+        item.Style.GradientBeginColor := BoxColors[1];
         item.OnClick := BaseDeDadosClick;
         // grupo.Add(item);
 

@@ -56,6 +56,9 @@ begin
         if (SearchRec.Name = '..') then
           Continue;
 
+        if (Copy(SearchRec.Name, 1, 1) = '.') then
+          Continue;
+
         if not DirectoryExists(IncludeTrailingBackslash(diretorios[X]) +
           SearchRec.Name) then
           Continue;

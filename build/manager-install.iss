@@ -73,6 +73,8 @@ Source: Recursos\midas.dll; DestDir: {app}
 Source: Recursos\style.ini; DestDir: {app}
 Source: Recursos\sandbox.list; DestDir: {app}
 Source: Recursos\config.ini; DestDir: {app}
+Source: Recursos\libeay32.dll; DestDir: {app}
+Source: Recursos\ssleay32.dll; DestDir: {app}
 Source: Recursos\DownloadInfo.xml; DestDir: {app}
 Source: Recursos\data.fdb; DestDir: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data; Permissions: everyone-modify; Flags: uninsneveruninstall onlyifdoesntexist
 Source: Templates\DB\DB2\PG\pg.template; DestDir: {app}\Templates\DB\DB2\PG
