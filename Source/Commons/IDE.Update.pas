@@ -21,7 +21,7 @@ var
   updateapp: string;
 begin
   updateapp := Format('%s', [ExtractFilePath(Application.ExeName) + 'Updater.exe']);
-  ShellExecute(handle, 'open' , PWideChar(updateapp), PWideChar(Application.ExeName), String.Empty, SW_SHOWNORMAL);
+  ShellExecute(handle, 'open' , PWideChar(updateapp), PWideChar(Chr(34) + Application.ExeName + Chr(34)), String.Empty, SW_SHOWNORMAL);
 end;
 
 end.

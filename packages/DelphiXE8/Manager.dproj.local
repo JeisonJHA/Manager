@@ -1,2 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject/>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/03/01 22:45:20.000.913,=D:\Manager\packages\DelphiXE8\Unit1.pas</Transaction>
+    <Transaction>2016/03/01 22:45:40.000.426,D:\Manager\Source\Commons\IDE.Inicializa.pas=D:\Manager\packages\DelphiXE8\Unit1.pas</Transaction>
+    <Transaction>2016/03/01 22:46:22.000.308,=D:\Manager\packages\DelphiXE8\Unit1.pas</Transaction>
+    <Transaction>2016/03/01 22:46:46.000.400,D:\Manager\Source\Commons\IDE.Inicializa.Intf.pas=D:\Manager\packages\DelphiXE8\Unit1.pas</Transaction>
+    <Transaction>2016/03/01 22:50:51.000.085,D:\Manager\Source\Commons\IDE.Inicializador.pas=D:\Manager\Source\Commons\IDE.Inicializa.pas</Transaction>
+    <Transaction>2016/03/01 22:50:58.000.902,D:\Manager\Source\Commons\IDE.Inicializador.Intf.pas=D:\Manager\Source\Commons\IDE.Inicializa.Intf.pas</Transaction>
+    <Transaction>2016/03/01 22:52:17.000.447,=D:\Manager\packages\DelphiXE8\Unit1.pas</Transaction>
+    <Transaction>2016/03/01 22:52:37.000.906,D:\Manager\Source\Commons\IDE.Update.pas=D:\Manager\packages\DelphiXE8\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
