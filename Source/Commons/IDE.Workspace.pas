@@ -106,20 +106,30 @@ begin
 end;
 
 function TfrmWorkspace.EncontrarConfiguracaoBase(const AAlias: string; const AServer: string): TAcaoConfigurarBaseDeDados;
+var
+  query: TInstantSelector;
 begin
-  with TInstantSelector.Create(nil) do
+  query := TInstantSelector.Create(nil);
   try
-    Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := Format('SELECT * FROM ANY %s WHERE Alias = %s AND Server = %s', ['TAcaoConfigurarBaseDeDados',
+    query.Connector := dtmDatabase.InstantIBXConnector1;
+    query.Command.Text := Format('SELECT * FROM ANY %s WHERE Alias = %s AND Server = %s', ['TAcaoConfigurarBaseDeDados',
       QuotedStr(AAlias), QuotedStr(AServer)]);
-    Open;
+    query.Open;
 
-    if IsEmpty then
+    if query.IsEmpty then
+    begin
+      query.Close;
+      query.Command.Text := Format('SELECT * FROM ANY %s WHERE Alias = %s', ['TAcaoConfigurarBaseDeDados',
+      QuotedStr(AAlias)]);
+      query.Open;
+    end;
+
+    if query.IsEmpty then
       Exit(nil);
 
-    Exit(BuscarAcao(TAcao(CurrentObject)) as TAcaoConfigurarBaseDeDados);
+    Exit(BuscarAcao(TAcao(query.CurrentObject)) as TAcaoConfigurarBaseDeDados);
   finally
-    Free;
+    FreeAndNil(query);
   end;
 end;
 
