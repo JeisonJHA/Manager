@@ -95,13 +95,13 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DCC_Namespace>IBX;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Build>26</VerInfo_Build>
+        <VerInfo_Build>27</VerInfo_Build>
         <DCC_BplOutput>..\..\lib</DCC_BplOutput>
         <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
         <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
         <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.26;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.27;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
