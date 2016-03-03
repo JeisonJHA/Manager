@@ -60,7 +60,8 @@ uses
   IDE.Inicializador.Intf in '..\..\Source\Commons\IDE.Inicializador.Intf.pas',
   IDE.Update in '..\..\Source\Commons\IDE.Update.pas',
   Updater.Core in '..\..\third-part\Updater\Source\Updater.Core.pas',
-  Updater.HttpDownload in '..\..\third-part\Updater\Source\Updater.HttpDownload.pas';
+  Updater.HttpDownload in '..\..\third-part\Updater\Source\Updater.HttpDownload.pas',
+  IDE.Criptografia in '..\..\Source\Commons\IDE.Criptografia.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,

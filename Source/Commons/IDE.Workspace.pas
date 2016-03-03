@@ -10,7 +10,7 @@ uses
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
   System.Actions, IDE.IWorkspace, Vcl.ExtCtrls, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, dxCustomTileControl, dxTileControl,
-  InstantPresentation, Vcl.StdCtrls, Acao;
+  InstantPresentation, Vcl.StdCtrls, Acao, IDE.Criptografia;
 
 type
   TfrmWorkspace = class(TForm, IWorkspace)
@@ -143,9 +143,9 @@ begin
     if not FileExists(aplicativo) then
       Exit;
 
-    paramentro := Format('%s %s', [dbconfig.TipoBanco, dbconfig.Alias]);
+    paramentro := Format('%s %s %s %s', [dbconfig.TipoBanco, dbconfig.Alias, dbconfig.DBUsuario, CriptografaPalavra(dbconfig.DBSenha)]);
     if dbconfig.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
-      paramentro := Format('SQLSERVER %s:%s %s %s', [dbconfig.Server, dbconfig.Alias, dbconfig.DBUsuario, dbconfig.DBSenha]);
+      paramentro := Format('SQLSERVER %s:%s %s %s', [dbconfig.Server, dbconfig.Alias, dbconfig.DBUsuario, CriptografaPalavra(dbconfig.DBSenha)]);
 
     if ShellExecute(Handle, 'open', PChar(aplicativo), PChar(paramentro), nil, SW_SHOWNORMAL) <= 32 then
     begin
