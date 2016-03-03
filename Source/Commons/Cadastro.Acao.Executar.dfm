@@ -3,7 +3,6 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    Properties.ActivePage = tabDetalhes
     inherited tabDetalhes: TcxTabSheet
       object Label4: TLabel [1]
         Left = 24
@@ -29,10 +28,9 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
         Left = 24
         Top = 175
         DataBinding.DataSource = dtsSelecionador
-        TabOrder = 4
+        TabOrder = 3
         ExplicitLeft = 24
         ExplicitTop = 175
-        ExplicitHeight = 36
       end
       inherited edtDescricao: TcxDBTextEdit
         TabOrder = 0
@@ -45,23 +43,23 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
         TabOrder = 1
         Width = 633
       end
-      object edtParametros: TcxDBTextEdit
-        Left = 24
-        Top = 132
-        DataBinding.DataField = 'Parametros'
-        DataBinding.DataSource = dtsSelecionador
-        TabOrder = 2
-        Width = 633
-      end
       object chkIsAdmin: TcxDBCheckBox
         Left = 502
         Top = 318
         Caption = 'Executar como administrador'
         DataBinding.DataField = 'IsAdmin'
         DataBinding.DataSource = dtsSelecionador
-        TabOrder = 3
+        TabOrder = 4
         Transparent = True
         Width = 164
+      end
+      object cbxParametros: TcxDBComboBox
+        Left = 24
+        Top = 132
+        DataBinding.DataField = 'Parametros'
+        DataBinding.DataSource = dtsSelecionador
+        TabOrder = 2
+        Width = 633
       end
     end
   end

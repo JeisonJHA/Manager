@@ -1,11 +1,11 @@
 inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
   Caption = 'Montar Ambiente'
+  ExplicitWidth = 696
+  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    Properties.ActivePage = tabDetalhes
     inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 0
       ExplicitTop = 24
       ExplicitWidth = 684
       ExplicitHeight = 358
@@ -17,6 +17,10 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
       end
     end
     inherited tabDetalhes: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       inherited lblIcone: TLabel
         Left = 610
         Top = 3
@@ -28,33 +32,33 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
         Left = 600
         Top = 32
         DataBinding.DataSource = dtsSelecionador
+        TabOrder = 1
         ExplicitLeft = 600
         ExplicitTop = 32
+        ExplicitHeight = 36
       end
       inherited edtDescricao: TcxDBTextEdit
+        TabOrder = 0
         ExplicitWidth = 570
         Width = 570
       end
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 3
-        Top = 92
-        Width = 678
+        Top = 86
+        Width = 674
         Height = 263
         Align = alBottom
         Caption = 'A'#231#245'es dispon'#237'veis'
         TabOrder = 2
-        ExplicitTop = 86
-        ExplicitWidth = 674
         object Panel3: TPanel
-          Left = 641
+          Left = 637
           Top = 15
           Width = 35
           Height = 246
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitLeft = 637
           object JvSpeedButton1: TJvSpeedButton
             Left = 6
             Top = 35
@@ -142,24 +146,22 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
         object Panel4: TPanel
           Left = 2
           Top = 15
-          Width = 639
+          Width = 635
           Height = 246
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 635
           object cxGrid2: TcxGrid
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 633
+            Width = 629
             Height = 240
             Align = alClient
             BevelInner = bvNone
             BevelOuter = bvNone
             BorderStyle = cxcbsNone
             TabOrder = 0
-            ExplicitWidth = 629
             object cxGrid2DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dtsMestre

@@ -1,8 +1,6 @@
 inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
   Caption = 'Cadastro Paginado Modelo'
   OnShow = FormShow
-  ExplicitWidth = 320
-  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -52,7 +50,7 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
     Height = 382
     Align = alClient
     TabOrder = 1
-    Properties.ActivePage = tabGrade
+    Properties.ActivePage = tabDetalhes
     Properties.CustomButtons.Buttons = <>
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
@@ -63,10 +61,6 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
     object tabGrade: TcxTabSheet
       Caption = 'Principal'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         AlignWithMargins = True
         Left = 3
@@ -93,10 +87,6 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
     object tabDetalhes: TcxTabSheet
       Caption = 'Detalhes'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   inherited ioeMestre: TInstantExposer

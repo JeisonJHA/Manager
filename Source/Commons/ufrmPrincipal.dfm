@@ -37,6 +37,7 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
+    ExplicitTop = 13
     object ribbonGerenciamento: TdxRibbonTab
       Active = True
       Caption = 'Principal'
