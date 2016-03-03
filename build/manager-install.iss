@@ -45,7 +45,6 @@ Name: {app}; Permissions: everyone-modify; Flags: uninsalwaysuninstall
 Source: ..\bin\Manager.exe; DestDir: {app}; Permissions: everyone-modify; Flags: ignoreversion; DestName: manager.exe
 Source: ..\bin\Updater.exe; DestDir: {app}; Permissions: everyone-modify; Flags: ignoreversion; DestName: updater.exe
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: ..\bin\data.fdb; DestDir: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data; Permissions: everyone-modify; Flags: uninsneveruninstall onlyifdoesntexist
 ; ### Firebird Embeded ###
 Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\aliases.conf; DestDir: {app}
 Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\fbembed.dll; DestDir: {app}; DestName: gds32.dll
@@ -75,6 +74,7 @@ Source: Recursos\style.ini; DestDir: {app}
 Source: Recursos\sandbox.list; DestDir: {app}
 Source: Recursos\config.ini; DestDir: {app}
 Source: Recursos\DownloadInfo.xml; DestDir: {app}
+Source: Recursos\data.fdb; DestDir: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data; Permissions: everyone-modify; Flags: uninsneveruninstall onlyifdoesntexist
 Source: Templates\DB\DB2\PG\pg.template; DestDir: {app}\Templates\DB\DB2\PG
 Source: Templates\DB\DB2\PG\pro.template; DestDir: {app}\Templates\DB\DB2\PG
 Source: Templates\DB\DB2\PG\sgc.template; DestDir: {app}\Templates\DB\DB2\PG
