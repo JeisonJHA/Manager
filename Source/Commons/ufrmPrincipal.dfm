@@ -12,6 +12,7 @@
   Font.Style = []
   FormStyle = fsMDIForm
   OldCreateOrder = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -213,7 +214,7 @@
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 185
+      Width = 0
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -236,8 +237,8 @@
       object txtConsole: TMemo
         Left = 0
         Top = 0
-        Width = 1063
-        Height = 0
+        Width = 0
+        Height = 96
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -264,7 +265,7 @@
   object dxDockSite1: TdxDockSite
     Left = 0
     Top = 155
-    Width = 28
+    Width = 185
     Height = 431
     Color = 10114859
     ManagerColor = False
@@ -276,27 +277,24 @@
     object dxLayoutDockSite1: TdxLayoutDockSite
       Left = 0
       Top = 0
-      Width = 0
+      Width = 185
       Height = 431
-      Visible = False
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 200
     end
     object dxDockPanel1: TdxDockPanel
-      Left = -185
+      Left = 0
       Top = 0
       Width = 185
-      Height = 140
-      Visible = False
+      Height = 431
       AllowFloating = True
-      AutoHide = True
+      AutoHide = False
       Caption = 'Workspaces'
       CaptionButtons = [cbMaximize, cbHide]
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
-      AutoHidePosition = 0
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 140
@@ -305,7 +303,7 @@
         Left = 0
         Top = 0
         Width = 174
-        Height = 0
+        Height = 387
         Margins.Left = 0
         Margins.Top = 0
         Margins.Bottom = 0
@@ -316,7 +314,7 @@
           Left = 0
           Top = 0
           Width = 174
-          Height = 0
+          Height = 387
           Align = alClient
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -795,8 +793,8 @@
     StorageOptions.BooleanStringFalseValues = 'FALSE, NO, N'
     FileName = 'style.ini'
     SubStorages = <>
-    Left = 964
-    Top = 262
+    Left = 968
+    Top = 264
   end
   object JvFormStorage1: TJvFormStorage
     AppStorage = JvAppIniFileStorage1

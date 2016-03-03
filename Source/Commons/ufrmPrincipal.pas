@@ -368,7 +368,7 @@ procedure TfrmPrincipal.TrayIcon1Click(Sender: TObject);
 begin
   TrayIcon1.Visible := False;
   Show();
-  WindowState := wsNormal;
+  WindowState := wsMaximized;
   Application.BringToFront();
 end;
 
