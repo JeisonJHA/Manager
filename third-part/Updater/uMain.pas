@@ -25,7 +25,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, IdComponent, Diagnostics, uHttpDownload,
+  Dialogs, StdCtrls, ComCtrls, IdComponent, Diagnostics, Updater.HttpDownload,
   pngimage, ExtCtrls, AppEvnts;
 
 const
@@ -276,7 +276,7 @@ begin
   try
    if not Visible and not FSilent then
    begin
-     Application.ShowMainForm:=True;
+     Application.ShowMainForm := True;
      Show;
    end;
 

@@ -3,10 +3,12 @@ unit IDE.Update;
 interface
 
 uses Classes, SysUtils, IDE.Inicializador.Intf, Forms, Dialogs, ShellApi,
-  Windows;
+  Windows, System.UITypes;
 
 type
   TUpdate = class(TInterfacedObject, IInicializador)
+  private
+    procedure InternalExecute;
   public
     procedure Executar();
   end;
@@ -15,7 +17,34 @@ implementation
 
 { TUpdate }
 
+uses Updater.Core;
+
 procedure TUpdate.Executar;
+const
+  text = 'Uma nova versão (%s) do %s foi encontrado. Você quer baixar e instalar?';
+
+var
+  updater: TUpdaterCore;
+
+begin
+  updater := TUpdaterCore.Create;
+  try
+    updater.ApplicationFileName := Application.ExeName;
+    if not updater.UpdateAvailable then
+      Exit;
+
+    if MessageDlg(Format(text,[updater.RemoteVersion, updater.ApplicationName]),  mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+
+    Application.Terminate;
+
+    InternalExecute;
+  finally
+    FreeAndNil(updater);
+  end;
+end;
+
+procedure TUpdate.InternalExecute;
 var
   handle: THandle;
   updateapp: string;

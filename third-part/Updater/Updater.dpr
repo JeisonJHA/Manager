@@ -6,7 +6,8 @@ program Updater;
 uses
   Forms,
   uMain in 'uMain.pas' {FrmMain},
-  uHttpDownload in 'uHttpDownload.pas';
+  Updater.HttpDownload in 'Source\Updater.HttpDownload.pas',
+  Updater.Core in 'Source\Updater.Core.pas';
 
 {$R *.res}
 
