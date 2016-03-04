@@ -25,8 +25,8 @@ type
     ioeMestreSelf: TIntegerField;
     cbxAplicativo: TcxDBComboBox;
     iosSelecionadorIsAdmin: TBooleanField;
-    edtParametros: TcxDBTextEdit;
     chkIsAdmin: TcxDBCheckBox;
+    cbxParametros: TcxDBComboBox;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -45,6 +45,7 @@ procedure TfrmCadastroAcaoExecutar.FormShow(Sender: TObject);
 begin
   inherited;
   CarregarChaves(cbxAplicativo);
+  CarregarChaves(cbxParametros);
 end;
 
 end.

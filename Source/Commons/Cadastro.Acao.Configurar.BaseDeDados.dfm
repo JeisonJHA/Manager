@@ -103,13 +103,14 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       inherited edtDescricao: TcxDBTextEdit [10]
         Left = 25
         Top = 79
+        TabOrder = 2
         ExplicitLeft = 25
         ExplicitTop = 79
       end
       inherited cbxIcone: TcxDBImageComboBox [11]
         Left = 600
         Top = 37
-        TabOrder = 5
+        TabOrder = 1
         ExplicitLeft = 600
         ExplicitTop = 37
         ExplicitHeight = 36
@@ -125,7 +126,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
             FieldName = 'Descricao'
           end>
         Properties.ListSource = dtsSistema
-        TabOrder = 1
+        TabOrder = 0
         Width = 569
       end
       object edtAlias: TcxDBTextEdit [13]
@@ -133,13 +134,13 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         Top = 120
         DataBinding.DataField = 'Alias'
         DataBinding.DataSource = dtsSelecionador
-        TabOrder = 2
+        TabOrder = 3
         Width = 633
       end
       inherited cbxOrigem: TcxDBComboBox
         Left = 25
         Top = 205
-        TabOrder = 3
+        TabOrder = 7
         ExplicitLeft = 25
         ExplicitTop = 205
         ExplicitWidth = 273
@@ -147,7 +148,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       end
       inherited cbxDestino: TcxDBComboBox
         Top = 205
-        TabOrder = 4
+        TabOrder = 8
         ExplicitTop = 205
       end
       object edtServer: TcxDBTextEdit
@@ -155,7 +156,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         Top = 163
         DataBinding.DataField = 'Server'
         DataBinding.DataSource = dtsSelecionador
-        TabOrder = 6
+        TabOrder = 4
         Width = 378
       end
       object edtDBUsuario: TcxDBTextEdit
@@ -163,7 +164,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         Top = 163
         DataBinding.DataField = 'DBUsuario'
         DataBinding.DataSource = dtsSelecionador
-        TabOrder = 7
+        TabOrder = 5
         Width = 121
       end
       object edtDBSenha: TcxDBTextEdit
@@ -171,7 +172,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
         Top = 163
         DataBinding.DataField = 'DBSenha'
         DataBinding.DataSource = dtsSelecionador
-        TabOrder = 8
+        TabOrder = 6
         Width = 121
       end
       object GroupBox1: TGroupBox

@@ -1,15 +1,9 @@
 inherited frmCadastroAcao: TfrmCadastroAcao
   Caption = 'Procedimento'
-  ExplicitWidth = 696
-  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 2
-      ExplicitTop = 28
-      ExplicitWidth = 680
-      ExplicitHeight = 352
       inherited cxGrid1: TcxGrid
         inherited cxGrid1DBTableView1: TcxGridDBTableView
           object cxGrid1DBTableView1Descricao: TcxGridDBColumn
@@ -20,10 +14,6 @@ inherited frmCadastroAcao: TfrmCadastroAcao
       end
     end
     inherited tabDetalhes: TcxTabSheet
-      ExplicitLeft = 2
-      ExplicitTop = 28
-      ExplicitWidth = 680
-      ExplicitHeight = 352
       object Label1: TLabel
         Left = 24
         Top = 24

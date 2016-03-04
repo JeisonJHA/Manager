@@ -37,7 +37,11 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
+<<<<<<< HEAD
     ExplicitWidth = 1071
+=======
+    ExplicitTop = 13
+>>>>>>> eb4f5eed7792290dee3b489c782c762bf1922420
     object ribbonGerenciamento: TdxRibbonTab
       Active = True
       Caption = 'Principal'

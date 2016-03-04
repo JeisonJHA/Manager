@@ -227,7 +227,7 @@ begin
     end;
 
     ShellExecute(handle, nil, PChar(Application.Parser.ParserText(Aplicativo)),
-      PChar(Parametros), '', SW_SHOWNORMAL);
+      PChar(Application.Parser.ParserText(Parametros)), String.Empty, SW_SHOWNORMAL);
   except
     on E: Exception do
     begin
@@ -271,7 +271,7 @@ begin
     sei.fMask := SEE_MASK_FLAG_DDEWAIT or SEE_MASK_FLAG_NO_UI;
     sei.lpVerb := PChar('runas');
     sei.lpFile := PChar(Filename); // PAnsiChar;
-    if parameters <> '' then
+    if not parameters.IsEmpty then
         sei.lpParameters := PChar(parameters); // PAnsiChar;
     sei.nShow := SW_SHOWNORMAL; //Integer;
 

@@ -13,7 +13,6 @@ object FrmMain: TFrmMain
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnActivate = FormActivate
   OnCreate = FormCreate
   DesignSize = (
     602

@@ -42,6 +42,7 @@ Name: {app}; Permissions: everyone-modify; Flags: uninsalwaysuninstall
 
 [Files]
 Source: ..\bin\Manager.exe; DestDir: {app}; Permissions: everyone-modify; Flags: ignoreversion; DestName: manager.exe
+Source: ..\bin\Updater.exe; DestDir: {app}; Permissions: everyone-modify; DestName: updater.exe
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Run]
