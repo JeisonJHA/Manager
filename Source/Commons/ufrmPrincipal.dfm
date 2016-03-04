@@ -37,8 +37,6 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
-    ExplicitWidth = 1071
-    ExplicitTop = 13
     object ribbonGerenciamento: TdxRibbonTab
       Active = True
       Caption = 'Principal'
@@ -192,7 +190,6 @@
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitWidth = 1071
   end
   object dxDockSite2: TdxDockSite
     Left = 0
@@ -201,7 +198,6 @@
     Height = 28
     Align = alBottom
     AutoSize = True
-    ExplicitWidth = 1071
     DockingType = 5
     OriginalWidth = 1071
     OriginalHeight = 2
@@ -211,7 +207,6 @@
       Width = 1110
       Height = 0
       Visible = False
-      ExplicitWidth = 1071
       DockingType = 0
       OriginalWidth = 300
       OriginalHeight = 140
@@ -219,7 +214,7 @@
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 39
+      Width = 0
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -242,7 +237,7 @@
       object txtConsole: TMemo
         Left = 0
         Top = 0
-        Width = 31
+        Width = 0
         Height = 96
         Align = alClient
         BevelInner = bvNone
@@ -264,7 +259,6 @@
         WordWrap = False
         OnEnter = txtConsoleEnter
         OnKeyPress = txtConsoleKeyPress
-        ExplicitWidth = 0
       end
     end
   end
@@ -817,6 +811,7 @@
   object tiPrincipal: TTrayIcon
     BalloonTitle = 'Manager'
     PopupMenu = ppmTrayIcon
+    Visible = True
     OnClick = tiPrincipalClick
     Left = 440
     Top = 64

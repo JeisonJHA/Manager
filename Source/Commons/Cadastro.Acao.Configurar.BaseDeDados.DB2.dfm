@@ -99,19 +99,16 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
       inherited edtDescricao: TcxDBTextEdit
         Left = 24
         Top = 67
-        TabOrder = 2
         ExplicitLeft = 24
         ExplicitTop = 67
       end
       inherited cbxIcone: TcxDBImageComboBox
         Top = 30
-        TabOrder = 1
         ExplicitTop = 30
       end
       inherited cbxSistema: TcxDBLookupComboBox
         Left = 24
         Top = 30
-        TabOrder = 0
         ExplicitLeft = 24
         ExplicitTop = 30
       end
@@ -119,37 +116,31 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
         Left = 24
         Top = 104
         Properties.CharCase = ecUpperCase
-        TabOrder = 3
         ExplicitLeft = 24
         ExplicitTop = 104
       end
       inherited cbxOrigem: TcxDBComboBox
         Left = 24
         Top = 178
-        TabOrder = 7
         ExplicitLeft = 24
         ExplicitTop = 178
       end
       inherited cbxDestino: TcxDBComboBox
         Top = 178
-        TabOrder = 8
         ExplicitTop = 178
       end
       inherited edtServer: TcxDBTextEdit
         Left = 24
         Top = 141
-        TabOrder = 4
         ExplicitLeft = 24
         ExplicitTop = 141
       end
       inherited edtDBUsuario: TcxDBTextEdit
         Top = 141
-        TabOrder = 5
         ExplicitTop = 141
       end
       inherited edtDBSenha: TcxDBTextEdit
         Top = 141
-        TabOrder = 6
         ExplicitTop = 141
       end
       inherited GroupBox1: TGroupBox
@@ -187,18 +178,18 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
     Top = 328
   end
   inherited ActionList: TActionList
-    Left = 232
+    Left = 256
     Top = 328
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
       'SELECT * FROM TAcaoConfigurarBaseDeDadosDB2')
     ObjectClassName = 'TAcaoConfigurarBaseDeDadosDB2'
-    Left = 88
+    Left = 96
     Top = 328
   end
   inherited dtsSelecionador: TDataSource
-    Left = 120
+    Left = 128
     Top = 328
   end
   inherited dtsMestre: TDataSource
@@ -206,15 +197,15 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
     Top = 328
   end
   inherited iosSistema: TInstantSelector
-    Left = 192
+    Left = 208
     Top = 328
   end
   inherited dtsSistema: TDataSource
-    Left = 160
+    Left = 176
     Top = 328
   end
   inherited OpenDialog1: TOpenDialog
-    Left = 264
+    Left = 288
     Top = 328
   end
 end
