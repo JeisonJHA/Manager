@@ -35,6 +35,7 @@ type
     function EncontrarConfiguracaoBase(const AAlias,
       AServer: string): TAcaoConfigurarBaseDeDados;
     function BuscarAcao(AAcao: TAcao): TAcao;
+    function CriptografaPalavra(psPalavra: string): string;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent; ASandbox: TWorkspace); overload;
@@ -50,7 +51,8 @@ implementation
 
 uses udtmDatabase, Workspace.Action, Winapi.ShellApi,
   Workspace.Constantes, Sistema, Workspace.Config,
-  Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoConjuntoDeBases;
+  Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoConjuntoDeBases, LbCipher,
+  LbProc, LbString, LbUtils;
 
 type
   TSandboxesRecentes = class(TStringList)
@@ -131,21 +133,32 @@ var
   paramentro: string;
 begin
   dbconfig := EncontrarConfiguracaoBase(Sender.Text1.Value, Sender.Text4.Value);
+
   if not Assigned(dbconfig) then
+  begin
     Exit;
+  end;
 
   config :=  TWorkspaceConfig.Create(nil);
   try
     aplicativo := config.SpSQL.Trim;
+
     if Trim(aplicativo).IsEmpty then
+    begin
       Exit;
+    end;
 
     if not FileExists(aplicativo) then
+    begin
       Exit;
+    end;
 
-    paramentro := Format('%s %s', [dbconfig.TipoBanco, dbconfig.Alias]);
+    paramentro := Format('%s %s %s %s', [dbconfig.TipoBanco, dbconfig.Alias, dbconfig.DBUsuario, CriptografaPalavra(dbconfig.DBSenha)]);
+
     if dbconfig.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
-      paramentro := Format('SQLSERVER %s:%s %s %s', [dbconfig.Server, dbconfig.Alias, dbconfig.DBUsuario, dbconfig.DBSenha]);
+    begin
+      paramentro := Format('SQLSERVER %s:%s %s %s', [dbconfig.Server, dbconfig.Alias, dbconfig.DBUsuario, CriptografaPalavra(dbconfig.DBSenha)]);
+    end;
 
     if ShellExecute(Handle, 'open', PChar(aplicativo), PChar(paramentro), nil, SW_SHOWNORMAL) <= 32 then
     begin
@@ -154,6 +167,18 @@ begin
   finally
     FreeAndNil(config);
   end;
+end;
+
+function TfrmWorkspace.CriptografaPalavra(psPalavra: string): string;
+var
+  resp: string;
+  chave: TKey128;
+//  sChave2: string;
+begin
+  FillChar(chave, SizeOf(chave), 0);
+  GenerateMD5Key(chave, '070823303253122433363957');
+  RDLEncryptString(psPalavra, resp, chave, SizeOf(chave), true);
+  result := resp;
 end;
 
 constructor TfrmWorkspace.Create(AOwner: TComponent; ASandbox: TWorkspace);

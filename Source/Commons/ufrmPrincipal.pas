@@ -48,7 +48,7 @@ type
     dxRibbonBackstageViewGalleryControl1Group1: TdxRibbonBackstageViewGalleryGroup;
     dxSkinController1: TdxSkinController;
     dxRibbonBackstageViewGalleryControl1Group1Item1: TdxRibbonBackstageViewGalleryItem;
-    ActionList1: TActionList;
+    alPrincipal: TActionList;
     actOpcoes: TAction;
     btnOpcoes: TdxBarLargeButton;
     ribbonGerenciamento: TdxRibbonTab;
@@ -98,8 +98,8 @@ type
     edtSCMPaths: TcxTextEdit;
     JvFormStorage1: TJvFormStorage;
     tabSandbox: TdxRibbonBackstageViewTabSheet;
-    ApplicationEvents1: TApplicationEvents;
-    TrayIcon1: TTrayIcon;
+    aePrincipal: TApplicationEvents;
+    tiPrincipal: TTrayIcon;
     ppmTrayIcon: TPopupMenu;
     mnuFechar: TMenuItem;
     N1: TMenuItem;
@@ -135,8 +135,8 @@ type
     procedure dxBarLargeButton4Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
-    procedure ApplicationEvents1Minimize(Sender: TObject);
-    procedure TrayIcon1Click(Sender: TObject);
+    procedure aePrincipalMinimize(Sender: TObject);
+    procedure tiPrincipalClick(Sender: TObject);
     procedure mnuFecharClick(Sender: TObject);
     procedure btnCriarConjuntoDeBasesClick(Sender: TObject);
     procedure btnCriarCatalogoDeBasesClick(Sender: TObject);
@@ -218,13 +218,13 @@ begin
   end;
 end;
 
-procedure TfrmPrincipal.ApplicationEvents1Minimize(Sender: TObject);
+procedure TfrmPrincipal.aePrincipalMinimize(Sender: TObject);
 begin
   Self.Hide();
   Self.WindowState := wsMinimized;
-  TrayIcon1.Visible := True;
-  TrayIcon1.Animate := True;
-  TrayIcon1.ShowBalloonHint;
+  Self.tiPrincipal.Visible := True;
+  Self.tiPrincipal.Animate := True;
+  Self.tiPrincipal.ShowBalloonHint;
 end;
 
 procedure TfrmPrincipal.btnCadastroAcaoCopiarClick(Sender: TObject);
@@ -334,7 +334,7 @@ procedure TfrmPrincipal.InicializarMainMenu;
 var
   controller: TBarraFerramentaController;
 begin
-  controller := TBarraFerramentaController.Create(ActionList1);
+  controller := TBarraFerramentaController.Create(Self.alPrincipal);
   try
     controller.CarregarMenuPrincipal(ribbonGerenciamento);
     controller.CarregarPopupMenuTrayIcon(ppmTrayIcon);
@@ -364,10 +364,10 @@ begin
   edtSCMPaths.Text := TfrmCadastroSCM.Configurar(edtSCMPaths.Text);
 end;
 
-procedure TfrmPrincipal.TrayIcon1Click(Sender: TObject);
+procedure TfrmPrincipal.tiPrincipalClick(Sender: TObject);
 begin
-  TrayIcon1.Visible := False;
-  Show();
+  Self.tiPrincipal.Visible := False;
+  Self.Show();
   WindowState := wsMaximized;
   Application.BringToFront();
 end;

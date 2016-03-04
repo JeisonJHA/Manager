@@ -3,7 +3,7 @@
   Top = 0
   Caption = 'Manager'
   ClientHeight = 637
-  ClientWidth = 1071
+  ClientWidth = 1110
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,14 +17,14 @@
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    1071
+    1110
     637)
   PixelsPerInch = 96
   TextHeight = 13
   object dxRibbon1: TdxRibbon
     Left = 0
     Top = 0
-    Width = 1071
+    Width = 1110
     Height = 155
     ApplicationButton.Menu = dxRibbonBackstageView1
     ApplicationButton.Text = 'Ferramentas'
@@ -37,6 +37,7 @@
     Contexts = <>
     TabOrder = 0
     TabStop = False
+    ExplicitWidth = 1071
     object ribbonGerenciamento: TdxRibbonTab
       Active = True
       Caption = 'Principal'
@@ -167,7 +168,7 @@
   object dxRibbonStatusBar1: TdxRibbonStatusBar
     Left = 0
     Top = 614
-    Width = 1071
+    Width = 1110
     Height = 23
     Images = dtmDatabase.SmallImageList
     Panels = <
@@ -190,23 +191,26 @@
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
+    ExplicitWidth = 1071
   end
   object dxDockSite2: TdxDockSite
     Left = 0
     Top = 586
-    Width = 1071
+    Width = 1110
     Height = 28
     Align = alBottom
     AutoSize = True
+    ExplicitWidth = 1071
     DockingType = 5
     OriginalWidth = 1071
     OriginalHeight = 2
     object dxLayoutDockSite2: TdxLayoutDockSite
       Left = 0
       Top = 0
-      Width = 1071
+      Width = 1110
       Height = 0
       Visible = False
+      ExplicitWidth = 1071
       DockingType = 0
       OriginalWidth = 300
       OriginalHeight = 140
@@ -214,7 +218,7 @@
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 0
+      Width = 39
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -237,7 +241,7 @@
       object txtConsole: TMemo
         Left = 0
         Top = 0
-        Width = 0
+        Width = 31
         Height = 96
         Align = alClient
         BevelInner = bvNone
@@ -259,6 +263,7 @@
         WordWrap = False
         OnEnter = txtConsoleEnter
         OnKeyPress = txtConsoleKeyPress
+        ExplicitWidth = 0
       end
     end
   end
@@ -357,7 +362,7 @@
     ImageOptions.LargeImages = dtmDatabase.LargeImageList
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 568
+    Left = 504
     Top = 8
     DockControlHeights = (
       0
@@ -697,13 +702,13 @@
   object dxSkinController1: TdxSkinController
     NativeStyle = False
     SkinName = 'Office2013White'
-    Left = 536
+    Left = 472
     Top = 8
   end
-  object ActionList1: TActionList
+  object alPrincipal: TActionList
     Images = dtmDatabase.SmallImageList
-    Left = 640
-    Top = 8
+    Left = 536
+    Top = 64
     object actOpcoes: TAction
       Category = 'Ferramentas'
       Caption = 'Op'#231#245'es'
@@ -769,8 +774,8 @@
   object dtsWorkspaces: TDataSource
     AutoEdit = False
     DataSet = iosWorkspaces
-    Left = 512
-    Top = 400
+    Left = 480
+    Top = 352
   end
   object iosWorkspaces: TInstantSelector
     Command.Strings = (
@@ -803,22 +808,22 @@
     Left = 960
     Top = 312
   end
-  object ApplicationEvents1: TApplicationEvents
-    OnMinimize = ApplicationEvents1Minimize
-    Left = 128
-    Top = 416
+  object aePrincipal: TApplicationEvents
+    OnMinimize = aePrincipalMinimize
+    Left = 504
+    Top = 64
   end
-  object TrayIcon1: TTrayIcon
+  object tiPrincipal: TTrayIcon
     BalloonTitle = 'Manager'
     PopupMenu = ppmTrayIcon
-    OnClick = TrayIcon1Click
-    Left = 128
-    Top = 368
+    OnClick = tiPrincipalClick
+    Left = 440
+    Top = 64
   end
   object ppmTrayIcon: TPopupMenu
     Images = dtmDatabase.SmallImageList
-    Left = 200
-    Top = 368
+    Left = 472
+    Top = 64
     object N1: TMenuItem
       Caption = '-'
     end
