@@ -16,6 +16,7 @@ type
     constructor Create;
     procedure Registrar(AInicializador: IInicializador);
     procedure Executar;
+    property Splash: TfrmSplash read FSplash;
   end;
 
 implementation
@@ -25,23 +26,15 @@ implementation
 constructor TInicializador.Create;
 begin
   FInicializadores := TList<IInicializador>.Create;
-  FSplash := TfrmSplash.Create(nil);
-  FSplash.Show;
-  Application.ProcessMessages;
+  FSplash := TfrmSplash.Create(Application);
 end;
 
 procedure TInicializador.Executar;
 var
   I: Integer;
 begin
-  try
-    for I := 0 to FInicializadores.Count -1 do
-      FInicializadores.Items[I].Executar;
-
-    FSplash.Close;
-  finally
-    FreeAndNil(FSplash);
-  end;
+  for I := 0 to FInicializadores.Count -1 do
+    FInicializadores.Items[I].Executar;
 end;
 
 function TInicializador.InternalGetInteface(AObject: TObject): IInicializador;

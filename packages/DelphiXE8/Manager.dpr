@@ -92,12 +92,14 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Manager';
+  Application.Inicializador.Splash.Show;
+  Application.Inicializador.Splash.Refresh;
   Application.Inicializador.Registrar(TUpdate.Create);
   Application.Inicializar;
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TfrmSplash, frmSplash);
   Application.Parser.Registrar(TIDEParserWorkspace.Create);
   Application.Parser.Registrar(TIDEParserAplicacao.Create);
+  Application.Inicializador.Splash.Hide;
   Application.Run;
 end.
