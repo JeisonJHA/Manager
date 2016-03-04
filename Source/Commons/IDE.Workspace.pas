@@ -35,7 +35,6 @@ type
     function EncontrarConfiguracaoBase(const AAlias,
       AServer: string): TAcaoConfigurarBaseDeDados;
     function BuscarAcao(AAcao: TAcao): TAcao;
-    function CriptografaPalavra(psPalavra: string): string;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent; ASandbox: TWorkspace); overload;
@@ -52,7 +51,7 @@ implementation
 uses udtmDatabase, Workspace.Action, Winapi.ShellApi,
   Workspace.Constantes, Sistema, Workspace.Config,
   Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoConjuntoDeBases, LbCipher,
-  LbProc, LbString, LbUtils;
+  LbProc, LbString, LbUtils, IDE.Criptografia;
 
 type
   TSandboxesRecentes = class(TStringList)
@@ -167,18 +166,6 @@ begin
   finally
     FreeAndNil(config);
   end;
-end;
-
-function TfrmWorkspace.CriptografaPalavra(psPalavra: string): string;
-var
-  resp: string;
-  chave: TKey128;
-//  sChave2: string;
-begin
-  FillChar(chave, SizeOf(chave), 0);
-  GenerateMD5Key(chave, '070823303253122433363957');
-  RDLEncryptString(psPalavra, resp, chave, SizeOf(chave), true);
-  result := resp;
 end;
 
 constructor TfrmWorkspace.Create(AOwner: TComponent; ASandbox: TWorkspace);
