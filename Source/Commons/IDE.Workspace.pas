@@ -157,7 +157,7 @@ begin
     if dbconfig.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
       paramentro := Format('SQLSERVER %s:%s %s %s', [dbconfig.Server, dbconfig.Alias, dbconfig.DBUsuario, CriptografaPalavra(dbconfig.DBSenha)]);
 
-    if ShellExecute(Handle, 'open', PWideChar(aplicativo), PWideChar(paramentro), nil, SW_SHOWNORMAL) <= 32 then
+    if ShellExecute(Handle, 'open', PChar(aplicativo), PChar(paramentro), nil, SW_SHOWNORMAL) <= 32 then
     begin
       Application.PromptCommand.OutputLines.Add(SysErrorMessage(GetLastError));
     end;
