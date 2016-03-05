@@ -94,7 +94,7 @@ begin
   Application.Title := 'Manager';
   Application.Inicializador.Splash.Show;
   Application.Inicializador.Splash.Refresh;
-  Application.Inicializador.Registrar(TUpdate.Create);
+//  Application.Inicializador.Registrar(TUpdate.Create(nil));
   Application.Inicializar;
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);

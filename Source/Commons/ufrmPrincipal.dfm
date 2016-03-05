@@ -373,7 +373,11 @@
       FloatTop = 0
       FloatClientWidth = 0
       FloatClientHeight = 0
-      ItemLinks = <>
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarButton1'
+        end>
       OneOnRow = True
       Row = 0
       UseOwnFont = False
@@ -693,6 +697,10 @@
       Visible = ivAlways
       ImageIndex = 30
     end
+    object dxBarButton1: TdxBarButton
+      Action = actUpdate
+      Category = 0
+    end
   end
   object dxSkinController1: TdxSkinController
     NativeStyle = False
@@ -724,6 +732,11 @@
       Category = 'Cadastros'
       Caption = 'Aplicativos'
       ImageIndex = 2
+    end
+    object actUpdate: TAction
+      Caption = 'actUpdate'
+      Hint = 'Atualiza'#231#227'o dispon'#237'vel'
+      ImageIndex = 25
     end
   end
   object regStorage: TJvAppRegistryStorage
@@ -828,5 +841,37 @@
       ImageIndex = 38
       OnClick = mnuFecharClick
     end
+  end
+  object dxAlertWindowManager1: TdxAlertWindowManager
+    OptionsAnimate.AlphaBlendValue = 255
+    OptionsButtons.Buttons = <
+      item
+        Hint = 'Atualizar'
+        ImageIndex = 25
+      end>
+    OptionsButtons.Images = dtmDatabase.SmallImageList
+    OptionsMessage.Caption.Font.Charset = DEFAULT_CHARSET
+    OptionsMessage.Caption.Font.Color = clWindowText
+    OptionsMessage.Caption.Font.Height = -13
+    OptionsMessage.Caption.Font.Name = 'Tahoma'
+    OptionsMessage.Caption.Font.Style = [fsBold]
+    OptionsMessage.Text.Font.Charset = DEFAULT_CHARSET
+    OptionsMessage.Text.Font.Color = clWindowText
+    OptionsMessage.Text.Font.Height = -11
+    OptionsMessage.Text.Font.Name = 'Tahoma'
+    OptionsMessage.Text.Font.Style = []
+    OptionsNavigationPanel.Font.Charset = DEFAULT_CHARSET
+    OptionsNavigationPanel.Font.Color = clWindowText
+    OptionsNavigationPanel.Font.Height = -11
+    OptionsNavigationPanel.Font.Name = 'Tahoma'
+    OptionsNavigationPanel.Font.Style = []
+    OnButtonClick = dxAlertWindowManager1ButtonClick
+    Left = 756
+    Top = 62
+    PixelsPerInch = 96
+  end
+  object Timer1: TTimer
+    Left = 552
+    Top = 328
   end
 end

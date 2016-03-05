@@ -33,7 +33,8 @@ uses
   cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   InstantPresentation, IDE.Aplicacao, DosCommand, Manager.PromptCommand,
-  JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts, Vcl.Menus;
+  JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts, Vcl.Menus, IDE.Update,
+  dxAlertWindow;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)
@@ -114,6 +115,10 @@ type
     btnExclusao: TdxBarSubItem;
     btnExclusaoDeArquivo: TdxBarButton;
     btnExclusaoDeDiretório: TdxBarButton;
+    dxBarButton1: TdxBarButton;
+    actUpdate: TAction;
+    dxAlertWindowManager1: TdxAlertWindowManager;
+    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -140,8 +145,12 @@ type
     procedure mnuFecharClick(Sender: TObject);
     procedure btnCriarConjuntoDeBasesClick(Sender: TObject);
     procedure btnCriarCatalogoDeBasesClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure dxAlertWindowManager1ButtonClick(Sender: TObject;
+      AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
   private
     { Private declarations }
+    FUpdate: TUpdate;
     procedure CarregarVersao;
     procedure InicializarMainMenu;
     procedure InicializarWorkspaceList;
@@ -281,6 +290,14 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.dxAlertWindowManager1ButtonClick(Sender: TObject;
+  AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
+begin
+  case AButtonIndex of
+    0: FUpdate.Executar;
+  end;
+end;
+
 procedure TfrmPrincipal.dxBarLargeButton1Click(Sender: TObject);
 begin
   with TfrmCadastroAcaoConfigurarBaseDeDados.Create(nil) do
@@ -364,6 +381,14 @@ begin
   edtSCMPaths.Text := TfrmCadastroSCM.Configurar(edtSCMPaths.Text);
 end;
 
+procedure TfrmPrincipal.Timer1Timer(Sender: TObject);
+begin
+  if not TUpdate(Sender).UpdateAvailable then
+    Exit;
+
+  dxAlertWindowManager1.Show('Atualização','Uma nova versão foi encontrado. Você quer baixar e instalar?')
+end;
+
 procedure TfrmPrincipal.tiPrincipalClick(Sender: TObject);
 begin
   Self.tiPrincipal.Visible := False;
@@ -374,8 +399,10 @@ end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  Action := caFree;
   if iosWorkspaces.Active then
     iosWorkspaces.Close;
+  FreeAndNil(FUpdate);
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
@@ -383,6 +410,11 @@ begin
   DisableAero := True;
   InicializarWorkspaceList;
   InicializarMainMenu;
+  FUpdate := TUpdate.Create(actUpdate);
+  FUpdate.OnTimer := Timer1Timer;
+  FUpdate.Interval := 14400000;
+  FUpdate.Enabled := True;
+  FUpdate.OnTimer(FUpdate);
 end;
 
 function ExcluiQuebra( Str: String ): String;
