@@ -384,7 +384,7 @@ begin
   if not TUpdate(Sender).HasUpdateAvailable then
     Exit;
 
-  dxAlertWindowManager1.Show(Application.Title, 'Uma nova versão foi encontrado. Você quer baixar e instalar?')
+  dxAlertWindowManager1.Show(TUpdate(Sender).ApplicationName, Format('Uma nova versão (%s) foi encontrado. Você quer baixar e instalar?', [TUpdate(Sender).ApplicationVersion]))
 end;
 
 procedure TfrmPrincipal.tiPrincipalClick(Sender: TObject);

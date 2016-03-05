@@ -12,11 +12,15 @@ type
     FUpdateAvailable: boolean;
     procedure OnExecute(Sender: TObject);
     procedure OnUpdate(Sender: TObject);
+    function GetApplicationName: string;
+    function GetApplicationVersion: string;
   public
     constructor Create(AAction: TAction);
     destructor Destroy; override;
     procedure Executar();
     function HasUpdateAvailable: boolean;
+    property ApplicationName: string read GetApplicationName;
+    property ApplicationVersion: string read GetApplicationVersion;
   end;
 
 implementation
@@ -59,6 +63,16 @@ begin
   Application.Terminate;
 
   OnExecute(Owner);
+end;
+
+function TUpdate.GetApplicationName: string;
+begin
+  Exit(FUpdater.ApplicationName);
+end;
+
+function TUpdate.GetApplicationVersion: string;
+begin
+  Exit(FUpdater.RemoteVersion);
 end;
 
 procedure TUpdate.OnExecute(Sender: TObject);
