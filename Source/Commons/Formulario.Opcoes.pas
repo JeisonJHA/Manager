@@ -8,7 +8,8 @@ uses
   System.Actions, Vcl.ActnList, InstantPresentation, JvExControls, JvPageList,
   Vcl.ComCtrls, JvExComCtrls, JvPageListTreeView, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.Buttons, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
-  cxContainer, cxEdit, dxSkinsCore, cxCheckBox, Workspace.Config, cxTextEdit;
+  cxContainer, cxEdit, dxSkinsCore, cxCheckBox, Workspace.Config, cxTextEdit,
+  cxMaskEdit, cxSpinEdit;
 
 type
   TfrmFormularioOpcoes = class(TfrmModelo)
@@ -21,7 +22,7 @@ type
     Panel4: TPanel;
     btnConfirmar: TButton;
     btnCancelar: TButton;
-    JvStandardPage1: TJvStandardPage;
+    pageDiretorios: TJvStandardPage;
     Panel5: TPanel;
     GroupBox1: TGroupBox;
     Panel6: TPanel;
@@ -32,15 +33,18 @@ type
     btnExcluirInvalidos: TButton;
     edtPath: TEdit;
     lstPath: TListBox;
-    JvStandardPage2: TJvStandardPage;
+    pageAtualizacao: TJvStandardPage;
     Panel7: TPanel;
     cbxVerificarAtualizacaoAuto: TcxCheckBox;
-    JvStandardPage3: TJvStandardPage;
+    pageBancoDeDados: TJvStandardPage;
     Panel8: TPanel;
     SpeedButton1: TSpeedButton;
     edtAplicacaoSQL: TcxTextEdit;
     Label1: TLabel;
     OpenDialog1: TOpenDialog;
+    Label2: TLabel;
+    Label3: TLabel;
+    edtTempoVerificacaoAtualizacao: TcxSpinEdit;
     procedure lstPathClick(Sender: TObject);
     procedure btnSubscreverClick(Sender: TObject);
     procedure btnExcluirInvalidosClick(Sender: TObject);
@@ -80,11 +84,13 @@ implementation
 procedure TfrmFormularioOpcoes.AplicacaoLoad;
 begin
   cbxVerificarAtualizacaoAuto.Checked := FConfig.Aplicacao.VerificarAtualizacaoAuto;
+  edtTempoVerificacaoAtualizacao.Value := FConfig.Aplicacao.TempoVerificaoAtualizacaoAuto;
 end;
 
 procedure TfrmFormularioOpcoes.AplicacaoSave;
 begin
   FConfig.Aplicacao.VerificarAtualizacaoAuto := cbxVerificarAtualizacaoAuto.Checked;
+  FConfig.Aplicacao.TempoVerificaoAtualizacaoAuto := edtTempoVerificacaoAtualizacao.Value;
 end;
 
 procedure TfrmFormularioOpcoes.BancoDeDadosLoad;

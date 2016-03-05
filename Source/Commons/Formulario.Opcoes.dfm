@@ -87,12 +87,12 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
       TabOrder = 0
       Items.NodeData = {
         0303000000320000000000000000000000FFFFFFFFFFFFFFFF00000000000000
-        0000000000010A57006F0072006B007300700061006300650073003000000000
-        00000000000000FFFFFFFFFFFFFFFF0000000001000000000000000109410070
-        006C00690063006100E700E3006F003A0000000000000000000000FFFFFFFFFF
-        FFFFFF000000000200000000000000010E420061006E0063006F002000640065
-        0020006400610064006F007300}
-      Items.Links = {03000000000000000100000002000000}
+        0000000000010A57006F0072006B007300700061006300650073003A00000000
+        00000000000000FFFFFFFFFFFFFFFF000000000200000000000000010E420061
+        006E0063006F0020006400650020006400610064006F00730034000000000000
+        0000000000FFFFFFFFFFFFFFFF000000000100000000000000010B4100740075
+        0061006C0069007A006100E700E3006F00}
+      Items.Links = {03000000000000000200000001000000}
       ExplicitTop = 2
     end
   end
@@ -115,19 +115,19 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
       Width = 487
       Height = 368
       Margins.Left = 0
-      ActivePage = JvStandardPage3
+      ActivePage = pageDiretorios
       PropagateEnable = False
       Align = alClient
       ExplicitLeft = 88
       ExplicitTop = 80
       ExplicitWidth = 300
       ExplicitHeight = 200
-      object JvStandardPage1: TJvStandardPage
+      object pageDiretorios: TJvStandardPage
         Left = 0
         Top = 0
         Width = 487
         Height = 368
-        Caption = 'JvStandardPage1'
+        Caption = 'pageDiretorios'
         ParentBackground = True
         ExplicitWidth = 0
         ExplicitHeight = 0
@@ -243,14 +243,34 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           end
         end
       end
-      object JvStandardPage2: TJvStandardPage
+      object pageAtualizacao: TJvStandardPage
         Left = 0
         Top = 0
         Width = 487
         Height = 368
-        Caption = 'JvStandardPage2'
+        Caption = 'pageAtualizacao'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = #39
+        Font.Style = []
+        ParentFont = False
         ExplicitWidth = 0
         ExplicitHeight = 0
+        object Label2: TLabel
+          Left = 24
+          Top = 76
+          Width = 135
+          Height = 14
+          Caption = 'Verificar atualiza'#231#227'o a cada'
+        end
+        object Label3: TLabel
+          Left = 239
+          Top = 76
+          Width = 45
+          Height = 14
+          Caption = 'minuto(s)'
+        end
         object Panel7: TPanel
           Left = 0
           Top = 0
@@ -259,7 +279,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           Align = alTop
           Alignment = taLeftJustify
           BevelOuter = bvNone
-          Caption = '   Aplica'#231#227'o'
+          Caption = '   Atualiza'#231#227'o'
           Color = clGray
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
@@ -279,13 +299,19 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           TabOrder = 1
           Width = 441
         end
+        object edtTempoVerificacaoAtualizacao: TcxSpinEdit
+          Left = 161
+          Top = 73
+          TabOrder = 2
+          Width = 72
+        end
       end
-      object JvStandardPage3: TJvStandardPage
+      object pageBancoDeDados: TJvStandardPage
         Left = 0
         Top = 0
         Width = 487
         Height = 368
-        Caption = 'JvStandardPage3'
+        Caption = 'pageBancoDeDados'
         ExplicitLeft = 3
         ExplicitTop = -1
         object SpeedButton1: TSpeedButton

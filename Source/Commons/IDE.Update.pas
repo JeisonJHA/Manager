@@ -23,6 +23,8 @@ implementation
 
 { TUpdate }
 
+uses IDE.Aplicacao;
+
 const
   MESSAGE_UPDATE = 'Uma nova versão (%s) do %s foi encontrado. Você quer baixar e instalar?';
 

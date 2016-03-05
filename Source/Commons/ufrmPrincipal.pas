@@ -384,7 +384,7 @@ begin
   if not TUpdate(Sender).HasUpdateAvailable then
     Exit;
 
-  dxAlertWindowManager1.Show('Atualização','Uma nova versão foi encontrado. Você quer baixar e instalar?')
+  dxAlertWindowManager1.Show(Application.Title, 'Uma nova versão foi encontrado. Você quer baixar e instalar?')
 end;
 
 procedure TfrmPrincipal.tiPrincipalClick(Sender: TObject);
@@ -410,9 +410,13 @@ begin
   InicializarMainMenu;
   FUpdate := TUpdate.Create(actUpdate);
   FUpdate.OnTimer := Timer1Timer;
-  FUpdate.Interval := 14400000;
-  FUpdate.Enabled := True;
-  FUpdate.OnTimer(FUpdate);
+  FUpdate.Interval := Trunc(Application.Configuracoes.Aplicacao.TempoVerificaoAtualizacaoAuto * 60000);
+
+  if Application.Configuracoes.Aplicacao.VerificarAtualizacaoAuto then
+  begin
+    FUpdate.Enabled := True;
+    FUpdate.OnTimer(FUpdate);
+  end;
 end;
 
 function ExcluiQuebra( Str: String ): String;

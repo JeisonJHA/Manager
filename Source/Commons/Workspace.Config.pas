@@ -26,8 +26,11 @@ type
   private
     function GetVerificarAtualizacaoAuto: boolean;
     procedure SetVerificarAtualizacaoAuto(const Value: boolean);
+    function GetTempoVerificaoAtualizacaoAuto: integer;
+    procedure SetTempoVerificaoAtualizacaoAuto(const Value: integer);
   public
     property VerificarAtualizacaoAuto: boolean read GetVerificarAtualizacaoAuto write SetVerificarAtualizacaoAuto;
+    property TempoVerificaoAtualizacaoAuto: integer read GetTempoVerificaoAtualizacaoAuto write SetTempoVerificaoAtualizacaoAuto;
   end;
 
   TWorkspaceConfig = class(TJvAppRegistryStorage)
@@ -134,9 +137,20 @@ end;
 
 { TWorkspaceConfigAplicacao }
 
+function TWorkspaceConfigAplicacao.GetTempoVerificaoAtualizacaoAuto: integer;
+begin
+  Exit(FOwner.ReadInteger('Utils\TempoVerificaoAtualizacaoAuto', 60));
+end;
+
 function TWorkspaceConfigAplicacao.GetVerificarAtualizacaoAuto: boolean;
 begin
   Exit(FOwner.ReadInteger('Utils\VerificarAtualizacaoAuto', True.ToInteger).ToBoolean());
+end;
+
+procedure TWorkspaceConfigAplicacao.SetTempoVerificaoAtualizacaoAuto(
+  const Value: integer);
+begin
+  FOwner.WriteInteger('Utils\TempoVerificaoAtualizacaoAuto', Value);
 end;
 
 procedure TWorkspaceConfigAplicacao.SetVerificarAtualizacaoAuto(
