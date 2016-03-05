@@ -44,7 +44,6 @@ uses
   Cadastro.Paginado.Modelo in '..\..\Source\Commons\Cadastro.Paginado.Modelo.pas' {frmCadastroPaginadoModelo},
   Acao.Controller in '..\..\Source\Controllers\Acao.Controller.pas',
   Formulario.Escolha in '..\..\Source\Commons\Formulario.Escolha.pas' {frmFormularioEscolha},
-  Cadastro.SCM in '..\..\Source\Commons\Cadastro.SCM.pas' {frmCadastroSCM},
   ActiveDs_TLB in '..\..\Source\Commons\ActiveDs_TLB.pas',
   adshlp in '..\..\Source\Commons\adshlp.pas',
   IDE.IBarraFerramenta in '..\..\Source\Commons\IDE.IBarraFerramenta.pas',
@@ -59,10 +58,11 @@ uses
   IDE.Inicializador in '..\..\Source\Commons\IDE.Inicializador.pas',
   IDE.Inicializador.Intf in '..\..\Source\Commons\IDE.Inicializador.Intf.pas',
   IDE.Update in '..\..\Source\Commons\IDE.Update.pas',
+  IDE.Forms.Splash in '..\..\Source\Commons\IDE.Forms.Splash.pas' {frmSplash},
+  IDE.Criptografia in '..\..\Source\Commons\IDE.Criptografia.pas',
   Updater.Core in '..\..\third-part\Updater\Source\Updater.Core.pas',
   Updater.HttpDownload in '..\..\third-part\Updater\Source\Updater.HttpDownload.pas',
-  IDE.Forms.Splash in '..\..\Source\Commons\IDE.Forms.Splash.pas' {frmSplash},
-  IDE.Criptografia in '..\..\Source\Commons\IDE.Criptografia.pas';
+  Formulario.Opcoes in '..\..\Source\Commons\Formulario.Opcoes.pas' {frmFormularioOpcoes};
 
 {$R *.res}
 {$R *.mdr} {Acao,
