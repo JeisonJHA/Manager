@@ -58,11 +58,7 @@ type
     actCadBaseDados: TAction;
     actCadAplicacoes: TAction;
     btnCadSistemas: TdxBarLargeButton;
-    tabOpcoes: TdxRibbonBackstageViewTabSheet;
     regStorage: TJvAppRegistryStorage;
-    Label1: TLabel;
-    cxLabel2: TcxLabel;
-    SpeedButton1: TSpeedButton;
     dxTabbedMDIManager1: TdxTabbedMDIManager;
     dxDockingManager1: TdxDockingManager;
     dxDockSite1: TdxDockSite;
@@ -96,9 +92,7 @@ type
     dxBarSeparator2: TdxBarSeparator;
     dxBarLargeButton4: TdxBarLargeButton;
     JvAppIniFileStorage1: TJvAppIniFileStorage;
-    edtSCMPaths: TcxTextEdit;
     JvFormStorage1: TJvFormStorage;
-    tabSandbox: TdxRibbonBackstageViewTabSheet;
     aePrincipal: TApplicationEvents;
     tiPrincipal: TTrayIcon;
     ppmTrayIcon: TPopupMenu;
@@ -138,7 +132,6 @@ type
       Active: Boolean);
     procedure txtConsoleEnter(Sender: TObject);
     procedure dxBarLargeButton4Click(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
     procedure aePrincipalMinimize(Sender: TObject);
     procedure tiPrincipalClick(Sender: TObject);
@@ -148,6 +141,7 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure dxAlertWindowManager1ButtonClick(Sender: TObject;
       AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
+    procedure actOpcoesExecute(Sender: TObject);
   private
     { Private declarations }
     FUpdate: TUpdate;
@@ -170,8 +164,8 @@ uses JvTypes, IDE.Workspace, Winapi.ShellApi, udtmDatabase, Workspace.Constantes
  IDE.Controller.MainMenu, Cadastro.Sistema, Cadastro.Acao.Configurar.BaseDeDados.Oracle,
  Cadastro.Acao.Configurar.BaseDeDados.DB2, Cadastro.Acao.Configurar.BaseDeDados.MSSQL, IDE.Utils,
  Cadastro.Acao.Configurar.BaseDeDados, IDE.IWorkspace,
- Cadastro.Acao.MontarAmbiente, Cadastro.SCM, Cadastro.Acao.Conjunto.Bases,
- Cadastro.Acao.Catalogo.Bases;
+ Cadastro.Acao.MontarAmbiente, Cadastro.Acao.Conjunto.Bases,
+ Cadastro.Acao.Catalogo.Bases, Formulario.Opcoes;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -224,6 +218,15 @@ begin
   with TfrmWorkspace.Create(Self, workspace) do
   begin
     Show;
+  end;
+end;
+
+procedure TfrmPrincipal.actOpcoesExecute(Sender: TObject);
+begin
+  with TfrmFormularioOpcoes.Create(nil) do
+  begin
+    ShowModal;
+    Free;
   end;
 end;
 
@@ -376,11 +379,6 @@ begin
   Application.Terminate;
 end;
 
-procedure TfrmPrincipal.SpeedButton1Click(Sender: TObject);
-begin
-  edtSCMPaths.Text := TfrmCadastroSCM.Configurar(edtSCMPaths.Text);
-end;
-
 procedure TfrmPrincipal.Timer1Timer(Sender: TObject);
 begin
   if not TUpdate(Sender).HasUpdateAvailable then
@@ -442,7 +440,6 @@ begin
   txtConsole.Lines.Delete(Length(txtConsole.Lines.Text)+1);
 
 
-  edtSCMPaths.Text := TfrmCadastroSCM.Pegar;
   CarregarVersao;
   dxRibbonStatusBar1.Panels[0].Text := AnsiLowerCase(dtmDatabase.IBDatabase1.DatabaseName);
 end;

@@ -7,19 +7,33 @@ uses Classes, SysUtils, JvAppRegistryStorage, Workspace.Constantes;
 type
   TWorkspaceConfig = class;
 
-  TWorkspaceConfigSandbox = class(TObject)
-  private
+  TWorkspaceConfigItem = class(TObject)
+  protected
     FOwner: TWorkspaceConfig;
+  public
+    constructor Create(AOwner: TWorkspaceConfig);
+  end;
+
+  TWorkspaceConfigSandbox = class(TWorkspaceConfigItem)
+  private
     function GetArquivosIni: string;
     procedure SetArquivosIni(const Value: string);
   public
-    constructor Create(AOwner: TWorkspaceConfig);
     property ArquivosIni: string read GetArquivosIni write SetArquivosIni;
+  end;
+
+  TWorkspaceConfigAplicacao = class(TWorkspaceConfigItem)
+  private
+    function GetVerificarAtualizacaoAuto: boolean;
+    procedure SetVerificarAtualizacaoAuto(const Value: boolean);
+  public
+    property VerificarAtualizacaoAuto: boolean read GetVerificarAtualizacaoAuto write SetVerificarAtualizacaoAuto;
   end;
 
   TWorkspaceConfig = class(TJvAppRegistryStorage)
   private
     FSandbox: TWorkspaceConfigSandbox;
+    FAplicacao: TWorkspaceConfigAplicacao;
     function GetDiretorio: string;
     procedure SetDiretorio(const Value: string);
     function GetDatabaseName: string;
@@ -37,6 +51,7 @@ type
     property SpSQL: string read GetSpSQL write SetSpSQL;
     property PrimeiraExecucao: boolean read GetPrimeiraExecucao write SetPrimeiraExecucao;
     property Sandbox: TWorkspaceConfigSandbox read FSandbox;
+    property Aplicacao: TWorkspaceConfigAplicacao read FAplicacao;
   end;
 
 implementation
@@ -48,10 +63,12 @@ begin
   inherited;
   Root := WIN_KEY;
   FSandbox := TWorkspaceConfigSandbox.Create(Self);
+  FAplicacao := TWorkspaceConfigAplicacao.Create(Self);
 end;
 
 destructor TWorkspaceConfig.Destroy;
 begin
+  FreeAndNil(FAplicacao);
   FreeAndNil(FSandbox);
   inherited;
 end;
@@ -98,11 +115,6 @@ end;
 
 { TWorkspaceConfigSandbox }
 
-constructor TWorkspaceConfigSandbox.Create(AOwner: TWorkspaceConfig);
-begin
-  FOwner := AOwner;
-end;
-
 function TWorkspaceConfigSandbox.GetArquivosIni: string;
 begin
   Exit(FOwner.ReadString('Sandbox\ArquivosIni', String.Empty));
@@ -111,6 +123,26 @@ end;
 procedure TWorkspaceConfigSandbox.SetArquivosIni(const Value: string);
 begin
   FOwner.WriteString('Sandbox\ArquivosIni', Value);
+end;
+
+{ TWorkspaceConfigItem }
+
+constructor TWorkspaceConfigItem.Create(AOwner: TWorkspaceConfig);
+begin
+  FOwner := AOwner;
+end;
+
+{ TWorkspaceConfigAplicacao }
+
+function TWorkspaceConfigAplicacao.GetVerificarAtualizacaoAuto: boolean;
+begin
+  Exit(FOwner.ReadInteger('Utils\VerificarAtualizacaoAuto', True.ToInteger).ToBoolean());
+end;
+
+procedure TWorkspaceConfigAplicacao.SetVerificarAtualizacaoAuto(
+  const Value: boolean);
+begin
+  FOwner.WriteInteger('Utils\VerificarAtualizacaoAuto', Value.ToInteger);
 end;
 
 end.

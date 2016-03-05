@@ -58,11 +58,15 @@
     Top = 174
     Width = 777
     Height = 371
-    Buttons = <>
+    Buttons = <
+      item
+        Item = btnOpcoes
+      end>
     Ribbon = dxRibbon1
     object dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet
       Left = 132
       Top = 0
+      Active = True
       Caption = 'Recent'
       DesignSize = (
         645
@@ -109,59 +113,6 @@
         Height = 26
         Width = 300
       end
-    end
-    object tabOpcoes: TdxRibbonBackstageViewTabSheet
-      Left = 132
-      Top = 0
-      Active = True
-      Caption = 'Op'#231#245'es'
-      object Label1: TLabel
-        Left = 20
-        Top = 67
-        Width = 138
-        Height = 13
-        Caption = 'Caminho do workspace local:'
-      end
-      object SpeedButton1: TSpeedButton
-        Left = 315
-        Top = 85
-        Width = 23
-        Height = 22
-        Caption = '...'
-        OnClick = SpeedButton1Click
-      end
-      object cxLabel2: TcxLabel
-        Left = 20
-        Top = 20
-        AutoSize = False
-        Caption = 'Source Control Manager'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -16
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.TransparentBorder = False
-        Style.IsFontAssigned = True
-        Properties.LineOptions.Alignment = cxllaBottom
-        Properties.LineOptions.Visible = True
-        Transparent = True
-        Height = 26
-        Width = 300
-      end
-      object edtSCMPaths: TcxTextEdit
-        Left = 20
-        Top = 86
-        Properties.ReadOnly = True
-        TabOrder = 1
-        Text = 'cxTextEdit1'
-        Width = 289
-      end
-    end
-    object tabSandbox: TdxRibbonBackstageViewTabSheet
-      Left = 132
-      Top = 0
-      Caption = 'Sandbox'
     end
   end
   object dxRibbonStatusBar1: TdxRibbonStatusBar
@@ -715,7 +666,7 @@
     object actOpcoes: TAction
       Category = 'Ferramentas'
       Caption = 'Op'#231#245'es'
-      ImageIndex = 0
+      OnExecute = actOpcoesExecute
     end
     object actCadSistemas: TAction
       Category = 'Cadastros'
