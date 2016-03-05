@@ -26,7 +26,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, IdComponent, Diagnostics, Updater.HttpDownload,
-  pngimage, ExtCtrls, AppEvnts;
+  pngimage, ExtCtrls, AppEvnts, dxGDIPlusClasses;
 
 const
   WM_ALL_SEGMENTS_DONE = WM_USER + 666;

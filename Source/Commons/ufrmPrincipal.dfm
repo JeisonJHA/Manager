@@ -687,7 +687,7 @@
     object actUpdate: TAction
       Caption = 'actUpdate'
       Hint = 'Atualiza'#231#227'o dispon'#237'vel'
-      ImageIndex = 25
+      ImageIndex = 39
     end
   end
   object regStorage: TJvAppRegistryStorage
@@ -798,7 +798,7 @@
     OptionsButtons.Buttons = <
       item
         Hint = 'Atualizar'
-        ImageIndex = 25
+        ImageIndex = 39
       end>
     OptionsButtons.Images = dtmDatabase.SmallImageList
     OptionsMessage.Caption.Font.Charset = DEFAULT_CHARSET
