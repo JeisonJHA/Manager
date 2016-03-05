@@ -383,7 +383,7 @@ end;
 
 procedure TfrmPrincipal.Timer1Timer(Sender: TObject);
 begin
-  if not TUpdate(Sender).UpdateAvailable then
+  if not TUpdate(Sender).HasUpdateAvailable then
     Exit;
 
   dxAlertWindowManager1.Show('Atualização','Uma nova versão foi encontrado. Você quer baixar e instalar?')

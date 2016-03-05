@@ -16,7 +16,7 @@ type
     constructor Create(AAction: TAction);
     destructor Destroy; override;
     procedure Executar();
-    function UpdateAvailable: boolean;
+    function HasUpdateAvailable: boolean;
   end;
 
 implementation
@@ -36,7 +36,8 @@ begin
   end;
   FUpdater := TUpdaterCore.Create;
   FUpdater.ApplicationFileName := Application.ExeName;
-  FUpdateAvailable := FUpdater.UpdateAvailable;
+  FUpdater.Silent := True;
+  FUpdateAvailable := HasUpdateAvailable;
 end;
 
 destructor TUpdate.Destroy;
@@ -47,7 +48,7 @@ end;
 
 procedure TUpdate.Executar;
 begin
-  if not FUpdater.UpdateAvailable then
+  if not HasUpdateAvailable then
     Exit;
 
   if MessageDlg(Format(MESSAGE_UPDATE,[FUpdater.RemoteVersion, FUpdater.ApplicationName]),  mtConfirmation, [mbYes, mbNo], 0) = mrNo then
@@ -63,7 +64,7 @@ var
   handle: THandle;
   updateapp: string;
 begin
-  if not FUpdater.UpdateAvailable then
+  if not HasUpdateAvailable then
     Exit;
 
   if MessageDlg(Format(MESSAGE_UPDATE,[FUpdater.RemoteVersion, FUpdater.ApplicationName]),  mtConfirmation, [mbYes, mbNo], 0) = mrNo then
@@ -80,9 +81,13 @@ begin
   TAction(Sender).Visible := FUpdateAvailable;
 end;
 
-function TUpdate.UpdateAvailable: boolean;
+function TUpdate.HasUpdateAvailable: boolean;
 begin
-  Exit(FUpdater.UpdateAvailable);
+  try
+    Exit(FUpdater.UpdateAvailable);
+  except
+    Exit(False);
+  end;
 end;
 
 end.

@@ -34,6 +34,7 @@ type
     property UrlInstaller: string read FUrlInstaller write FUrlInstaller;
     property ApplicationName: string read FApplicationName write FApplicationName;
     property ApplicationFileName: string read FApplicationFileName write FApplicationFileName;
+    property Silent: boolean read FSilent write FSilent;
   end;
 
 implementation
@@ -181,10 +182,9 @@ begin
     begin
       FErrorUpdate := True;
       if FSilent then
-        Halt(0)
-      else
-        MessageDlg(Format('Error checking updates %s', [E.Message]), mtWarning,
-          [mbOK], 0);
+        Exit;
+
+      MessageDlg(Format('Error checking updates %s', [E.Message]), mtWarning, [mbOK], 0);
     end;
   end;
 end;

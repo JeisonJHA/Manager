@@ -10,7 +10,7 @@ uses
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
   System.Actions, IDE.IWorkspace, Vcl.ExtCtrls, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, dxCustomTileControl, dxTileControl,
-  InstantPresentation, Vcl.StdCtrls, Acao;
+  InstantPresentation, Vcl.StdCtrls, Acao, dxGDIPlusClasses;
 
 type
   TfrmWorkspace = class(TForm, IWorkspace)
@@ -265,6 +265,7 @@ begin
         item := dxTileControl1.Items.Add;
         item.GroupIndex := grupo.Index;
         item.Size := tcisExtraLarge;
+        item.Glyph.ImageIndex := 0;
         item.Text1.Value := ini.ReadString('Database', 'Alias', String.Empty);
         item.Text1.Font.Size := 16;
         item.Text4.Value := ini.ReadString('Database', 'Server', String.Empty);

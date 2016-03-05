@@ -23,7 +23,7 @@ object frmWorkspace: TfrmWorkspace
     Top = 0
     Width = 959
     Height = 633
-    Images = dtmDatabase.SmallImageList
+    Images = dtmDatabase.XLargeImageList
     OptionsView.CenterContentVert = True
     TabOrder = 4
     Title.Text = 'Hello World'

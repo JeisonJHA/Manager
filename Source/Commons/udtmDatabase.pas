@@ -15,6 +15,7 @@ type
     SmallImageList: TcxImageList;
     MediumImageList: TcxImageList;
     LargeImageList: TcxImageList;
+    XLargeImageList: TcxImageList;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;
