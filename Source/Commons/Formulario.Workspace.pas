@@ -1,4 +1,4 @@
-unit IDE.Workspace;
+unit Formulario.Workspace;
 
 interface
 
@@ -10,10 +10,10 @@ uses
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
   System.Actions, IDE.IWorkspace, Vcl.ExtCtrls, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, dxCustomTileControl, dxTileControl,
-  InstantPresentation, Vcl.StdCtrls, Acao, dxGDIPlusClasses;
+  InstantPresentation, Vcl.StdCtrls, Acao, dxGDIPlusClasses, Formulario.Modelo;
 
 type
-  TfrmWorkspace = class(TForm, IWorkspace)
+  TfrmWorkspace = class(TfrmModelo, IWorkspace)
     dxBarManager1: TdxBarManager;
     btnSpSQL: TdxBarButton;
     dxBarLookupCombo1: TdxBarLookupCombo;
@@ -37,7 +37,7 @@ type
     function BuscarAcao(AAcao: TAcao): TAcao;
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent; ASandbox: TWorkspace); overload;
+    constructor Create(AOwner: TComponent; var ASubject: TObject); override;
     function Sandbox: TWorkspace;
   end;
 
@@ -51,7 +51,7 @@ implementation
 uses udtmDatabase, Workspace.Action, Winapi.ShellApi,
   Workspace.Constantes, Sistema, Workspace.Config,
   Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoConjuntoDeBases, LbCipher,
-  LbProc, LbString, LbUtils, IDE.Criptografia;
+  LbProc, LbString, LbUtils, IDE.Criptografia, Formulario.Utils;
 
 type
   TSandboxesRecentes = class(TStringList)
@@ -168,11 +168,11 @@ begin
   end;
 end;
 
-constructor TfrmWorkspace.Create(AOwner: TComponent; ASandbox: TWorkspace);
+constructor TfrmWorkspace.Create(AOwner: TComponent; var ASubject: TObject);
 begin
   inherited Create(AOwner);
-  FSandbox := ASandbox;
-  Caption := PrepararTitulo(ASandbox.Descricao);
+  FSandbox := TWorkspace(ASubject);
+  Caption := PrepararTitulo(TWorkspace(ASubject).Descricao);
 end;
 
 function TfrmWorkspace.PrepararTitulo(const ATexto: string): string;
@@ -302,5 +302,8 @@ procedure TSandboxesRecentes.Salvar;
 begin
   SaveToFile(FArquivo);
 end;
+
+initialization
+  RegisterForm(TfrmWorkspace);
 
 end.

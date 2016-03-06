@@ -51,7 +51,7 @@ implementation
 
 {$R *.dfm}
 
-uses Acao, BarraFerramenta, Acao.Controller;
+uses Acao, BarraFerramenta, Acao.Controller, Formulario.Utils;
 
 procedure TfrmCadastroBarraFerramentas.actDelDetalheExecute(Sender: TObject);
 var
@@ -86,5 +86,8 @@ begin
   barra.AddAcao(TAcao(objeto));
   barra.Store();
 end;
+
+initialization
+  RegisterForm(TfrmCadastroBarraFerramentas);
 
 end.

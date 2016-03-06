@@ -159,13 +159,8 @@ implementation
 
 {$R *.dfm}
 
-uses JvTypes, IDE.Workspace, Winapi.ShellApi, udtmDatabase, Workspace.Constantes,
- Cadastro.Barra.Ferramentas, Cadastro.Acao.Executar, Cadastro.Acao.Copiar,
- IDE.Controller.MainMenu, Cadastro.Sistema, Cadastro.Acao.Configurar.BaseDeDados.Oracle,
- Cadastro.Acao.Configurar.BaseDeDados.DB2, Cadastro.Acao.Configurar.BaseDeDados.MSSQL, IDE.Utils,
- Cadastro.Acao.Configurar.BaseDeDados, IDE.IWorkspace,
- Cadastro.Acao.MontarAmbiente, Cadastro.Acao.Conjunto.Bases,
- Cadastro.Acao.Catalogo.Bases, Formulario.Opcoes;
+uses JvTypes, Winapi.ShellApi, udtmDatabase, Workspace.Constantes,
+ IDE.Controller.MainMenu, IDE.Utils, IDE.IWorkspace, Formulario.Utils;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -174,11 +169,7 @@ const
 
 procedure TfrmPrincipal.actCadSistemasExecute(Sender: TObject);
 begin
-  with TfrmCadastroSistema.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroSistema').ShowModal;
 end;
 
 procedure TfrmPrincipal.CarregarVersao;
@@ -215,19 +206,12 @@ begin
     end;
   end;
 
-  with TfrmWorkspace.Create(Self, workspace) do
-  begin
-    Show;
-  end;
+  CreateFormWithSubject('TfrmWorkspace', TObject(workspace)).Show;
 end;
 
 procedure TfrmPrincipal.actOpcoesExecute(Sender: TObject);
 begin
-  with TfrmFormularioOpcoes.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmFormularioOpcoes').ShowModal;
 end;
 
 procedure TfrmPrincipal.aePrincipalMinimize(Sender: TObject);
@@ -241,56 +225,32 @@ end;
 
 procedure TfrmPrincipal.btnCadastroAcaoCopiarClick(Sender: TObject);
 begin
-  with TfrmCadastroAcaoCopiar.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoCopiar').ShowModal;
 end;
 
 procedure TfrmPrincipal.btnCadastroAcaoExecutarClick(Sender: TObject);
 begin
-  with TfrmCadastroAcaoExecutar.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoExecutar').ShowModal;
 end;
 
 procedure TfrmPrincipal.btnCadastroBancoDeDadosDB2Click(Sender: TObject);
 begin
-  with TfrmCadastroAcaoConfigurarBaseDeDadosDB2.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoConfigurarBaseDeDadosDB2').ShowModal;
 end;
 
 procedure TfrmPrincipal.btnCadastroBancoDeDadosMSSQLClick(Sender: TObject);
 begin
-  with TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL').ShowModal;
 end;
 
 procedure TfrmPrincipal.btnCadastroBancoDeDadosOracleClick(Sender: TObject);
 begin
-  with TfrmCadastroAcaoConfigurarBaseDeDadosOracle.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoConfigurarBaseDeDadosOracle').ShowModal;
 end;
 
 procedure TfrmPrincipal.btnCriarConjuntoDeBasesClick(Sender: TObject);
 begin
-  with TfrmCadastroAcaoConjuntoBases.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoConjuntoBases').ShowModal;
 end;
 
 procedure TfrmPrincipal.dxAlertWindowManager1ButtonClick(Sender: TObject;
@@ -303,44 +263,27 @@ end;
 
 procedure TfrmPrincipal.dxBarLargeButton1Click(Sender: TObject);
 begin
-  with TfrmCadastroAcaoConfigurarBaseDeDados.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoConfigurarBaseDeDados').ShowModal;
 end;
 
 procedure TfrmPrincipal.dxBarLargeButton2Click(Sender: TObject);
 begin
-  with TfrmCadastroBarraFerramentas.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroBarraFerramentas').ShowModal;
 end;
 
 procedure TfrmPrincipal.dxBarLargeButton3Click(Sender: TObject);
 begin
-
   ShowMessage(IntToStr(dxTabbedMDIManager1.TabProperties.PageIndex));
 end;
 
 procedure TfrmPrincipal.dxBarLargeButton4Click(Sender: TObject);
 begin
-  with TfrmCadastroAcaoMontarAmbiente.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoMontarAmbiente').ShowModal;
 end;
 
 procedure TfrmPrincipal.btnCriarCatalogoDeBasesClick(Sender: TObject);
 begin
-  with TfrmCadastroAcaoCatalogoBases.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+  CreateForm('TfrmCadastroAcaoCatalogoBases').ShowModal;
 end;
 
 procedure TfrmPrincipal.dxDockPanel2Activate(Sender: TdxCustomDockControl;

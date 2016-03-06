@@ -31,11 +31,16 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
 { TfrmCadastroAcaoConfigurarBaseDeDadosOracle }
 
 function TfrmCadastroAcaoConfigurarBaseDeDadosOracle.PegarCaminhoTemplate: string;
 begin
   Exit(inherited PegarCaminhoTemplate + 'Oracle\');
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoConfigurarBaseDeDadosOracle);
 
 end.

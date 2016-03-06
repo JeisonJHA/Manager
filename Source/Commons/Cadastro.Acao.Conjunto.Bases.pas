@@ -80,7 +80,7 @@ implementation
 {$R *.dfm}
 
 uses Acao.Controller, AcaoConjuntoDeBases, Acao, Formulario.Escolha,
-  AcaoCatalogoDeBases;
+  AcaoCatalogoDeBases, Formulario.Utils;
 
 procedure TfrmCadastroAcaoConjuntoBases.actAddDetalheUpdate(Sender: TObject);
 begin
@@ -161,5 +161,8 @@ begin
   catalogo.RemoveAcao(TAcaoConfigurarBaseDeDados(objeto));
   catalogo.Store();
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoConjuntoBases);
 
 end.

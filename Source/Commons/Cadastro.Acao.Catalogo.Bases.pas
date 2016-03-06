@@ -28,4 +28,9 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoCatalogoBases);
+
 end.

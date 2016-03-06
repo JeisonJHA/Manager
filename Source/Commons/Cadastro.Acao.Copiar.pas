@@ -37,10 +37,15 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
 procedure TfrmCadastroAcaoCopiar.FormShow(Sender: TObject);
 begin
   inherited;
   CarregarChaves([cbxOrigem, cbxDestino]);
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoCopiar);
 
 end.

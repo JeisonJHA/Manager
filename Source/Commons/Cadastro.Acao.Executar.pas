@@ -41,11 +41,16 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
 procedure TfrmCadastroAcaoExecutar.FormShow(Sender: TObject);
 begin
   inherited;
   CarregarChaves(cbxAplicativo);
   CarregarChaves(cbxParametros);
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoExecutar);
 
 end.

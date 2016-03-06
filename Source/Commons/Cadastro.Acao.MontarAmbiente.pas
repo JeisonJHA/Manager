@@ -50,7 +50,7 @@ implementation
 
 {$R *.dfm}
 
-uses Acao.Controller, Acao, Formulario.Escolha;
+uses Acao.Controller, Acao, Formulario.Escolha, Formulario.Utils;
 
 procedure TfrmCadastroAcaoMontarAmbiente.actAddDetalheUpdate(Sender: TObject);
 begin
@@ -79,5 +79,8 @@ begin
   ambiente.Store();
   iosSelecionador.RefreshCurrentObject;
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoMontarAmbiente);
 
 end.

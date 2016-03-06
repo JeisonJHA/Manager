@@ -8,8 +8,6 @@ uses
   System.Actions, Vcl.ActnList;
 
 type
-  TfrmModeloClass = class of TfrmModelo;
-
   TfrmModelo = class(TForm)
     ioeMestre: TInstantExposer;
     ActionList: TActionList;
@@ -22,7 +20,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent; var ASubject: TObject); overload;
+    constructor Create(AOwner: TComponent; var ASubject: TObject); virtual; overload;
     property Subject: TObject read GetSubject;
     property AtribuicaoExterna: boolean read GetAtribuicaoExterna write FAtribuicaoExterna;
   end;

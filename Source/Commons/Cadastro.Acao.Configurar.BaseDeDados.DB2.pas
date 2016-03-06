@@ -31,11 +31,16 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
 { TfrmCadastroAcaoConfigurarBaseDeDadosDB2 }
 
 function TfrmCadastroAcaoConfigurarBaseDeDadosDB2.PegarCaminhoTemplate: string;
 begin
   Exit(inherited PegarCaminhoTemplate + 'DB2\');
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoConfigurarBaseDeDadosDB2);
 
 end.

@@ -7,7 +7,7 @@ uses
   Windows,
   SysUtils,
   udtmDatabase in '..\..\Source\Commons\udtmDatabase.pas' {dtmDatabase: TDataModule},
-  IDE.Workspace in '..\..\Source\Commons\IDE.Workspace.pas' {frmWorkspace},
+  Formulario.Workspace in '..\..\Source\Commons\Formulario.Workspace.pas' {frmWorkspace},
   Workspace.Action in '..\..\Source\Commons\Workspace.Action.pas',
   Workspace.Config in '..\..\Source\Commons\Workspace.Config.pas',
   Workspace.Utils in '..\..\Source\Commons\Workspace.Utils.pas',
@@ -62,7 +62,8 @@ uses
   IDE.Criptografia in '..\..\Source\Commons\IDE.Criptografia.pas',
   Updater.Core in '..\..\third-part\Updater\Source\Updater.Core.pas',
   Updater.HttpDownload in '..\..\third-part\Updater\Source\Updater.HttpDownload.pas',
-  Formulario.Opcoes in '..\..\Source\Commons\Formulario.Opcoes.pas' {frmFormularioOpcoes};
+  Formulario.Opcoes in '..\..\Source\Commons\Formulario.Opcoes.pas' {frmFormularioOpcoes},
+  Formulario.Utils in '..\..\Source\Commons\Formulario.Utils.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,

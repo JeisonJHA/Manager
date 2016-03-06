@@ -27,7 +27,7 @@ type
 
 implementation
 
-uses IDE.Workspace, Workspace, Configuracao.Inicial;
+uses Formulario.Workspace, Workspace, Configuracao.Inicial;
 
 procedure Console(ATexto: string);
 begin

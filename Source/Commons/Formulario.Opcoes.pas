@@ -81,6 +81,8 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
 procedure TfrmFormularioOpcoes.AplicacaoLoad;
 begin
   cbxVerificarAtualizacaoAuto.Checked := FConfig.Aplicacao.VerificarAtualizacaoAuto;
@@ -206,5 +208,8 @@ procedure TfrmFormularioOpcoes.WorkspaceSave;
 begin
   Fconfig.Diretorio := lstPath.Items.CommaText;
 end;
+
+initialization
+  RegisterForm(TfrmFormularioOpcoes);
 
 end.

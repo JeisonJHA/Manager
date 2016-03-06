@@ -33,11 +33,16 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
 { TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL }
 
 function TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL.PegarCaminhoTemplate: string;
 begin
   Exit(inherited PegarCaminhoTemplate + 'MSSQL\');
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL);
 
 end.

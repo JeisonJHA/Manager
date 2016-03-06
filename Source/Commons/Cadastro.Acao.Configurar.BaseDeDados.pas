@@ -75,6 +75,8 @@ implementation
 
 {$R *.dfm}
 
+uses Formulario.Utils;
+
 function TfrmCadastroAcaoConfigurarBaseDeDados.PegarCaminhoTemplate: string;
 begin
   Exit(ExtractFilePath(Application.ExeName) + 'Templates\DB\');
@@ -88,5 +90,8 @@ begin
   if not String(OpenDialog1.FileName).IsEmpty then
     cbxOrigem.Text := OpenDialog1.FileName;
 end;
+
+initialization
+  RegisterForm(TfrmCadastroAcaoConfigurarBaseDeDados);
 
 end.
