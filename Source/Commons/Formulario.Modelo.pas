@@ -20,7 +20,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent; var ASubject: TObject); virtual; overload;
+    constructor Create(AOwner: TComponent; var ASubject: TObject); overload; virtual;
     property Subject: TObject read GetSubject;
     property AtribuicaoExterna: boolean read GetAtribuicaoExterna write FAtribuicaoExterna;
   end;
