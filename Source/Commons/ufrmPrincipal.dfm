@@ -14,6 +14,7 @@
   OldCreateOrder = True
   WindowState = wsMaximized
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
@@ -142,13 +143,100 @@
     Font.Name = 'Tahoma'
     Font.Style = []
   end
-  object dxDockSite2: TdxDockSite
+  object dxDockSite1: TdxDockSite
+    Left = 0
+    Top = 155
+    Width = 185
+    Height = 431
+    Color = 10114859
+    ManagerColor = False
+    Align = alLeft
+    AutoSize = True
+    DockingType = 5
+    OriginalWidth = 1
+    OriginalHeight = 319
+    object dxLayoutDockSite1: TdxLayoutDockSite
+      Left = 0
+      Top = 0
+      Width = 185
+      Height = 431
+      ExplicitWidth = 300
+      ExplicitHeight = 200
+      DockingType = 0
+      OriginalWidth = 185
+      OriginalHeight = 200
+    end
+    object dxDockPanel1: TdxDockPanel
+      Left = 0
+      Top = 0
+      Width = 185
+      Height = 431
+      AllowFloating = True
+      AutoHide = False
+      Caption = 'Workspaces'
+      CaptionButtons = [cbMaximize, cbHide]
+      CustomCaptionButtons.Buttons = <>
+      TabsProperties.CustomButtons.Buttons = <>
+      TabsProperties.Style = 6
+      ExplicitHeight = 97
+      DockingType = 0
+      OriginalWidth = 185
+      OriginalHeight = 97
+      object Panel1: TPanel
+        AlignWithMargins = True
+        Left = 0
+        Top = 0
+        Width = 174
+        Height = 387
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Bottom = 0
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        ExplicitWidth = 1099
+        ExplicitHeight = 53
+        object cxGrid1: TcxGrid
+          Left = 0
+          Top = 0
+          Width = 174
+          Height = 387
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          BorderStyle = cxcbsNone
+          TabOrder = 0
+          ExplicitWidth = 1099
+          ExplicitHeight = 53
+          object cxGrid1DBTableView1: TcxGridDBTableView
+            Navigator.Buttons.CustomButtons = <>
+            OnCellDblClick = cxGrid1DBTableView1CellDblClick
+            DataController.DataSource = dtsWorkspaces
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsSelection.CellSelect = False
+            OptionsView.ColumnAutoWidth = True
+            object cxGrid1DBTableView1Descricao: TcxGridDBColumn
+              Caption = 'Descri'#231#227'o'
+              DataBinding.FieldName = 'Descricao'
+            end
+          end
+          object cxGrid1Level1: TcxGridLevel
+            GridView = cxGrid1DBTableView1
+          end
+        end
+      end
+    end
+  end
+  object dockPromptCommand: TdxDockSite
     Left = 0
     Top = 586
     Width = 1110
     Height = 28
     Align = alBottom
     AutoSize = True
+    ExplicitWidth = 185
     DockingType = 5
     OriginalWidth = 1071
     OriginalHeight = 2
@@ -165,7 +253,7 @@
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 0
+      Width = 1110
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -188,7 +276,7 @@
       object txtConsole: TMemo
         Left = 0
         Top = 0
-        Width = 0
+        Width = 1102
         Height = 96
         Align = alClient
         BevelInner = bvNone
@@ -210,85 +298,6 @@
         WordWrap = False
         OnEnter = txtConsoleEnter
         OnKeyPress = txtConsoleKeyPress
-      end
-    end
-  end
-  object dxDockSite1: TdxDockSite
-    Left = 0
-    Top = 155
-    Width = 185
-    Height = 431
-    Color = 10114859
-    ManagerColor = False
-    Align = alLeft
-    AutoSize = True
-    DockingType = 5
-    OriginalWidth = 1
-    OriginalHeight = 459
-    object dxLayoutDockSite1: TdxLayoutDockSite
-      Left = 0
-      Top = 0
-      Width = 185
-      Height = 431
-      DockingType = 0
-      OriginalWidth = 185
-      OriginalHeight = 200
-    end
-    object dxDockPanel1: TdxDockPanel
-      Left = 0
-      Top = 0
-      Width = 185
-      Height = 431
-      AllowFloating = True
-      AutoHide = False
-      Caption = 'Workspaces'
-      CaptionButtons = [cbMaximize, cbHide]
-      CustomCaptionButtons.Buttons = <>
-      TabsProperties.CustomButtons.Buttons = <>
-      TabsProperties.Style = 6
-      DockingType = 0
-      OriginalWidth = 185
-      OriginalHeight = 140
-      object Panel1: TPanel
-        AlignWithMargins = True
-        Left = 0
-        Top = 0
-        Width = 174
-        Height = 387
-        Margins.Left = 0
-        Margins.Top = 0
-        Margins.Bottom = 0
-        Align = alClient
-        BevelOuter = bvNone
-        TabOrder = 0
-        object cxGrid1: TcxGrid
-          Left = 0
-          Top = 0
-          Width = 174
-          Height = 387
-          Align = alClient
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          BorderStyle = cxcbsNone
-          TabOrder = 0
-          object cxGrid1DBTableView1: TcxGridDBTableView
-            Navigator.Buttons.CustomButtons = <>
-            OnCellDblClick = cxGrid1DBTableView1CellDblClick
-            DataController.DataSource = dtsWorkspaces
-            DataController.Summary.DefaultGroupSummaryItems = <>
-            DataController.Summary.FooterSummaryItems = <>
-            DataController.Summary.SummaryGroups = <>
-            OptionsSelection.CellSelect = False
-            OptionsView.ColumnAutoWidth = True
-            object cxGrid1DBTableView1Descricao: TcxGridDBColumn
-              Caption = 'Descri'#231#227'o'
-              DataBinding.FieldName = 'Descricao'
-            end
-          end
-          object cxGrid1Level1: TcxGridLevel
-            GridView = cxGrid1DBTableView1
-          end
-        end
       end
     end
   end

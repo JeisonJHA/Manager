@@ -64,7 +64,6 @@ type
     dxDockSite1: TdxDockSite;
     dxDockPanel1: TdxDockPanel;
     Panel1: TPanel;
-    dxLayoutDockSite1: TdxLayoutDockSite;
     dtsWorkspaces: TDataSource;
     dxBarSubItem1: TdxBarSubItem;
     dxBarLargeButton2: TdxBarLargeButton;
@@ -82,12 +81,8 @@ type
     cxGrid1Level1: TcxGridLevel;
     cxGrid1: TcxGrid;
     cxGrid1DBTableView1Descricao: TcxGridDBColumn;
-    dxDockSite2: TdxDockSite;
-    dxDockPanel2: TdxDockPanel;
-    dxLayoutDockSite2: TdxLayoutDockSite;
     dxBarSeparator1: TdxBarSeparator;
     dxBarLargeButton1: TdxBarLargeButton;
-    txtConsole: TMemo;
     dxBarLargeButton3: TdxBarLargeButton;
     dxBarSeparator2: TdxBarSeparator;
     dxBarLargeButton4: TdxBarLargeButton;
@@ -113,6 +108,11 @@ type
     actUpdate: TAction;
     dxAlertWindowManager1: TdxAlertWindowManager;
     Timer1: TTimer;
+    dockPromptCommand: TdxDockSite;
+    dxLayoutDockSite2: TdxLayoutDockSite;
+    dxDockPanel2: TdxDockPanel;
+    txtConsole: TMemo;
+    dxLayoutDockSite1: TdxLayoutDockSite;
     procedure FormCreate(Sender: TObject);
     procedure actCadSistemasExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -142,12 +142,15 @@ type
     procedure dxAlertWindowManager1ButtonClick(Sender: TObject;
       AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
     procedure actOpcoesExecute(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     FUpdate: TUpdate;
     procedure CarregarVersao;
     procedure InicializarMainMenu;
     procedure InicializarWorkspaceList;
+    procedure CarregarWorkspaceRecentes;
+    procedure AbriAbaWorkspace(AWorkspace: TWorkspace);
   public
     { Public declarations }
   end;
@@ -160,10 +163,16 @@ implementation
 {$R *.dfm}
 
 uses JvTypes, Winapi.ShellApi, udtmDatabase, Workspace.Constantes,
- IDE.Controller.MainMenu, IDE.Utils, IDE.IWorkspace, Formulario.Utils;
+ IDE.Controller.MainMenu, IDE.Utils, IDE.IWorkspace, Formulario.Utils,
+ Workspace.Recentes;
 
 const
   CONSOLE_TEXTO = 'manager/>';
+
+function ToWorkspace(APage: TdxTabbedMDIPage): IWorkspace;
+begin
+  Exit(APage.MDIChild as IWorkspace);
+end;
 
 { TForm1 }
 
@@ -184,29 +193,32 @@ begin
   end;
 end;
 
-procedure TfrmPrincipal.cxGrid1DBTableView1CellDblClick(
-  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
-  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+procedure TfrmPrincipal.AbriAbaWorkspace(AWorkspace: TWorkspace);
 var
   I: Integer;
   iws: IWorkspace;
-  workspace: TWorkspace;
 begin
-  workspace := TWorkspace(iosWorkspaces.CurrentObject);
-  if not Assigned(workspace) then
+  if not Assigned(AWorkspace) then
     Exit;
 
   for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount -1 do
   begin
     dxTabbedMDIManager1.TabProperties.Pages[I].MDIChild.GetInterface(IWorkspace, iws);
-    if Assigned(iws) and (iws.Sandbox = workspace) then
+    if Assigned(iws) and (iws.Sandbox = AWorkspace) then
     begin
       dxTabbedMDIManager1.TabProperties.PageIndex := I;
       Exit;
     end;
   end;
 
-  CreateFormWithSubject('TfrmWorkspace', TObject(workspace)).Show;
+  CreateFormWithSubject('TfrmWorkspace', TObject(AWorkspace)).Show;
+end;
+
+procedure TfrmPrincipal.cxGrid1DBTableView1CellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+begin
+  AbriAbaWorkspace(TWorkspace(iosWorkspaces.CurrentObject));
 end;
 
 procedure TfrmPrincipal.actOpcoesExecute(Sender: TObject);
@@ -273,7 +285,10 @@ end;
 
 procedure TfrmPrincipal.dxBarLargeButton3Click(Sender: TObject);
 begin
-  ShowMessage(IntToStr(dxTabbedMDIManager1.TabProperties.PageIndex));
+//  ShowMessage(IntToStr(dxTabbedMDIManager1.TabProperties.PageIndex));
+  dockPromptCommand.AutoHide := False;
+//  dxLayoutDockSite2.Visible := True;
+  dxDockPanel2.Visible := True;
 end;
 
 procedure TfrmPrincipal.dxBarLargeButton4Click(Sender: TObject);
@@ -346,6 +361,25 @@ begin
   FreeAndNil(FUpdate);
 end;
 
+procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+var
+  recentes: TSandboxesRecentes;
+  I: Integer;
+begin
+  recentes := TSandboxesRecentes.Create;
+  try
+    recentes.Clear;
+    for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount -1 do
+    if dxTabbedMDIManager1.TabProperties.ActivePage.Index = I then
+      recentes.Add(Format('%s=%s',[ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]).Sandbox.Descricao, 'True']))
+    else
+      recentes.Add(Format('%s=%s',[ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]).Sandbox.Descricao, 'False']));
+    recentes.Salvar;
+  finally
+    FreeAndNil(recentes);
+  end;
+end;
+
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   DisableAero := True;
@@ -389,6 +423,42 @@ begin
 
   CarregarVersao;
   dxRibbonStatusBar1.Panels[0].Text := AnsiLowerCase(dtmDatabase.IBDatabase1.DatabaseName);
+
+  CarregarWorkspaceRecentes
+end;
+
+procedure TfrmPrincipal.CarregarWorkspaceRecentes;
+
+var
+  recentes: TSandboxesRecentes;
+  I: Integer;
+  workspace: IWorkspace;
+  X: Integer;
+begin
+  recentes := TSandboxesRecentes.Create;
+  try
+    for I := 0 to recentes.Count -1 do
+    begin
+      for X := 0 to iosWorkspaces.ObjectCount -1 do
+      begin
+        if TWorkspace(iosWorkspaces.Objects[X]).Descricao.Equals(recentes.Names[I]) then
+          AbriAbaWorkspace(TWorkspace(iosWorkspaces.Objects[X]));
+      end;
+    end;
+
+    for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount -1 do
+    begin
+      workspace := ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]);
+      if recentes.Values[workspace.Sandbox.Descricao].Equals('True') then
+      begin
+        dxTabbedMDIManager1.TabProperties.PageIndex := dxTabbedMDIManager1.TabProperties.Pages[I].Index;
+        Break;
+      end;
+    end;
+
+  finally
+    FreeAndNil(recentes);
+  end;
 end;
 
 procedure TfrmPrincipal.txtConsoleEnter(Sender: TObject);

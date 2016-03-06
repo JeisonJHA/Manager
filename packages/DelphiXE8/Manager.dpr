@@ -63,7 +63,8 @@ uses
   Updater.Core in '..\..\third-part\Updater\Source\Updater.Core.pas',
   Updater.HttpDownload in '..\..\third-part\Updater\Source\Updater.HttpDownload.pas',
   Formulario.Opcoes in '..\..\Source\Commons\Formulario.Opcoes.pas' {frmFormularioOpcoes},
-  Formulario.Utils in '..\..\Source\Commons\Formulario.Utils.pas';
+  Formulario.Utils in '..\..\Source\Commons\Formulario.Utils.pas',
+  Workspace.Recentes in '..\..\Source\Controllers\Workspace.Recentes.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
