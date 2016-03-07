@@ -160,8 +160,6 @@
       Top = 0
       Width = 185
       Height = 431
-      ExplicitWidth = 300
-      ExplicitHeight = 200
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 200
@@ -178,7 +176,6 @@
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
-      ExplicitHeight = 97
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 97
@@ -194,8 +191,6 @@
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1099
-        ExplicitHeight = 53
         object cxGrid1: TcxGrid
           Left = 0
           Top = 0
@@ -206,8 +201,6 @@
           BevelOuter = bvNone
           BorderStyle = cxcbsNone
           TabOrder = 0
-          ExplicitWidth = 1099
-          ExplicitHeight = 53
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             OnCellDblClick = cxGrid1DBTableView1CellDblClick
@@ -236,7 +229,6 @@
     Height = 28
     Align = alBottom
     AutoSize = True
-    ExplicitWidth = 185
     DockingType = 5
     OriginalWidth = 1071
     OriginalHeight = 2
@@ -253,7 +245,7 @@
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 1110
+      Width = 185
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -277,7 +269,7 @@
         Left = 0
         Top = 0
         Width = 1102
-        Height = 96
+        Height = 0
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
