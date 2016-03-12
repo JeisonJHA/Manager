@@ -29,9 +29,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 48
-    ExplicitTop = 296
-    ExplicitWidth = 185
     object Panel4: TPanel
       Left = 386
       Top = 0
@@ -40,7 +37,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 376
       object btnConfirmar: TButton
         Left = 120
         Top = 9
@@ -71,9 +67,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitHeight = 41
     object JvPageListTreeView1: TJvPageListTreeView
       AlignWithMargins = True
       Left = 3
@@ -93,7 +86,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         0000000000FFFFFFFFFFFFFFFF000000000100000000000000010B4100740075
         0061006C0069007A006100E700E3006F00}
       Items.Links = {03000000000000000200000001000000}
-      ExplicitTop = 2
     end
   end
   object Panel3: TPanel [3]
@@ -104,10 +96,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitLeft = 177
-    ExplicitTop = -4
-    ExplicitWidth = 480
-    ExplicitHeight = 364
     object JvPageList1: TJvPageList
       AlignWithMargins = True
       Left = 0
@@ -118,10 +106,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
       ActivePage = pageDiretorios
       PropagateEnable = False
       Align = alClient
-      ExplicitLeft = 88
-      ExplicitTop = 80
-      ExplicitWidth = 300
-      ExplicitHeight = 200
+      ParentBackground = True
       object pageDiretorios: TJvStandardPage
         Left = 0
         Top = 0
@@ -129,8 +114,8 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         Height = 368
         Caption = 'pageDiretorios'
         ParentBackground = True
-        ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitLeft = 3
+        ExplicitTop = -1
         object Panel5: TPanel
           Left = 0
           Top = 0
@@ -149,32 +134,30 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           ParentBackground = False
           ParentFont = False
           TabOrder = 0
-          ExplicitWidth = 484
         end
         object GroupBox1: TGroupBox
           AlignWithMargins = True
           Left = 3
-          Top = 28
+          Top = 84
           Width = 481
-          Height = 337
+          Height = 281
           Align = alClient
           Caption = 'Diret'#243'rios'
           TabOrder = 1
-          ExplicitTop = 3
-          ExplicitWidth = 399
-          ExplicitHeight = 344
+          ExplicitTop = 72
+          ExplicitHeight = 273
           object Panel6: TPanel
             Left = 2
-            Top = 257
+            Top = 201
             Width = 477
             Height = 78
             Align = alBottom
             BevelOuter = bvNone
             ParentColor = True
             TabOrder = 0
-            ExplicitWidth = 474
+            ExplicitTop = 257
             object btnDiretorio: TSpeedButton
-              Left = 367
+              Left = 447
               Top = 12
               Width = 23
               Height = 22
@@ -182,7 +165,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
               OnClick = btnDiretorioClick
             end
             object btnSubscrever: TButton
-              Left = 5
+              Left = 85
               Top = 40
               Width = 75
               Height = 25
@@ -191,7 +174,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
               OnClick = btnSubscreverClick
             end
             object btnAdicionar: TButton
-              Left = 86
+              Left = 166
               Top = 40
               Width = 75
               Height = 25
@@ -200,7 +183,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
               OnClick = btnAdicionarClick
             end
             object btnExcluir: TButton
-              Left = 167
+              Left = 247
               Top = 40
               Width = 75
               Height = 25
@@ -209,7 +192,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
               OnClick = btnExcluirClick
             end
             object btnExcluirInvalidos: TButton
-              Left = 248
+              Left = 328
               Top = 40
               Width = 142
               Height = 25
@@ -220,7 +203,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
             object edtPath: TEdit
               Left = 5
               Top = 13
-              Width = 356
+              Width = 436
               Height = 21
               TabOrder = 4
             end
@@ -230,7 +213,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
             Left = 7
             Top = 20
             Width = 467
-            Height = 232
+            Height = 176
             Margins.Left = 5
             Margins.Top = 5
             Margins.Right = 5
@@ -239,7 +222,32 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
             ItemHeight = 13
             TabOrder = 1
             OnClick = lstPathClick
-            ExplicitWidth = 464
+            ExplicitHeight = 232
+          end
+        end
+        object Panel9: TPanel
+          Left = 0
+          Top = 25
+          Width = 487
+          Height = 56
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 2
+          object cbxEstruturaTFS: TCheckBox
+            Left = 15
+            Top = 13
+            Width = 427
+            Height = 17
+            Caption = 'Considerar a estrutura de pasta semelhante ao TFS'
+            TabOrder = 0
+          end
+          object cbxJazzOnly: TCheckBox
+            Left = 15
+            Top = 36
+            Width = 427
+            Height = 17
+            Caption = 'Suporte somente para diret'#243'rios da plataforma JAZZ'
+            TabOrder = 1
           end
         end
       end
@@ -249,26 +257,19 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         Width = 487
         Height = 368
         Caption = 'pageAtualizacao'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = #39
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 0
-        ExplicitHeight = 0
+        ParentBackground = True
         object Label2: TLabel
           Left = 24
           Top = 76
-          Width = 135
-          Height = 14
+          Width = 131
+          Height = 13
           Caption = 'Verificar atualiza'#231#227'o a cada'
         end
         object Label3: TLabel
           Left = 239
           Top = 76
           Width = 45
-          Height = 14
+          Height = 13
           Caption = 'minuto(s)'
         end
         object Panel7: TPanel
@@ -289,8 +290,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           ParentBackground = False
           ParentFont = False
           TabOrder = 0
-          ExplicitTop = 8
-          ExplicitWidth = 484
         end
         object cbxVerificarAtualizacaoAuto: TcxCheckBox
           Left = 24
@@ -312,8 +311,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         Width = 487
         Height = 368
         Caption = 'pageBancoDeDados'
-        ExplicitLeft = 3
-        ExplicitTop = -1
         object SpeedButton1: TSpeedButton
           Left = 439
           Top = 64
@@ -347,7 +344,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           ParentBackground = False
           ParentFont = False
           TabOrder = 0
-          ExplicitTop = 8
         end
         object edtAplicacaoSQL: TcxTextEdit
           Left = 24

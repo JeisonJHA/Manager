@@ -14,6 +14,17 @@ type
     constructor Create(AOwner: TWorkspaceConfig);
   end;
 
+  TWorkspaceConfigWorkspace = class(TWorkspaceConfigItem)
+  private
+    function GetEstruturaTFS: boolean;
+    procedure SetEstruturaTFS(const Value: boolean);
+    function GetJazzOnly: boolean;
+    procedure SetJazzOnly(const Value: boolean);
+  public
+    property JazzOnly: boolean read GetJazzOnly write SetJazzOnly;
+    property EstruturaTFS: boolean read GetEstruturaTFS write SetEstruturaTFS;
+  end;
+
   TWorkspaceConfigSandbox = class(TWorkspaceConfigItem)
   private
     function GetArquivosIni: string;
@@ -37,6 +48,7 @@ type
   private
     FSandbox: TWorkspaceConfigSandbox;
     FAplicacao: TWorkspaceConfigAplicacao;
+    FWorkspace: TWorkspaceConfigWorkspace;
     function GetDiretorio: string;
     procedure SetDiretorio(const Value: string);
     function GetDatabaseName: string;
@@ -53,6 +65,7 @@ type
     property DatabaseName: string read GetDatabaseName write SetDatabaseName;
     property SpSQL: string read GetSpSQL write SetSpSQL;
     property PrimeiraExecucao: boolean read GetPrimeiraExecucao write SetPrimeiraExecucao;
+    property Workspace: TWorkspaceConfigWorkspace read FWorkspace;
     property Sandbox: TWorkspaceConfigSandbox read FSandbox;
     property Aplicacao: TWorkspaceConfigAplicacao read FAplicacao;
   end;
@@ -65,6 +78,7 @@ constructor TWorkspaceConfig.Create(AOwner: TComponent);
 begin
   inherited;
   Root := WIN_KEY;
+  FWorkspace := TWorkspaceConfigWorkspace.Create(Self);
   FSandbox := TWorkspaceConfigSandbox.Create(Self);
   FAplicacao := TWorkspaceConfigAplicacao.Create(Self);
 end;
@@ -73,6 +87,7 @@ destructor TWorkspaceConfig.Destroy;
 begin
   FreeAndNil(FAplicacao);
   FreeAndNil(FSandbox);
+  FreeAndNil(FWorkspace);
   inherited;
 end;
 
@@ -157,6 +172,28 @@ procedure TWorkspaceConfigAplicacao.SetVerificarAtualizacaoAuto(
   const Value: boolean);
 begin
   FOwner.WriteInteger('Utils\VerificarAtualizacaoAuto', Value.ToInteger);
+end;
+
+{ TWorkspaceConfigWorkspace }
+
+function TWorkspaceConfigWorkspace.GetEstruturaTFS: boolean;
+begin
+  Exit(FOwner.ReadInteger('Workspace\EstruturaTFS', False.ToInteger).ToBoolean());
+end;
+
+function TWorkspaceConfigWorkspace.GetJazzOnly: boolean;
+begin
+  Exit(FOwner.ReadInteger('Workspace\JazzOnly', False.ToInteger).ToBoolean());
+end;
+
+procedure TWorkspaceConfigWorkspace.SetEstruturaTFS(const Value: boolean);
+begin
+  FOwner.WriteInteger('Workspace\EstruturaTFS', Value.ToInteger);
+end;
+
+procedure TWorkspaceConfigWorkspace.SetJazzOnly(const Value: boolean);
+begin
+  FOwner.WriteInteger('Workspace\JazzOnly', Value.ToInteger);
 end;
 
 end.

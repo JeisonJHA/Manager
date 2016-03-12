@@ -327,7 +327,7 @@ procedure TfrmPrincipal.InicializarWorkspaceList;
 begin
   with TWorkspaceUtils.Create(Application.Configuracoes) do
   begin
-    Sandboxes(iosWorkspaces);
+    Sandboxes(iosWorkspaces, Application.Configuracoes.Workspace.EstruturaTFS);
     Free;
   end;
 end;

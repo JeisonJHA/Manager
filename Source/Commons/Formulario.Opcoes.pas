@@ -45,6 +45,9 @@ type
     Label2: TLabel;
     Label3: TLabel;
     edtTempoVerificacaoAtualizacao: TcxSpinEdit;
+    Panel9: TPanel;
+    cbxEstruturaTFS: TCheckBox;
+    cbxJazzOnly: TCheckBox;
     procedure lstPathClick(Sender: TObject);
     procedure btnSubscreverClick(Sender: TObject);
     procedure btnExcluirInvalidosClick(Sender: TObject);
@@ -180,6 +183,8 @@ end;
 procedure TfrmFormularioOpcoes.WorkspaceLoad;
 begin
   lstPath.Items.DelimitedText := FConfig.Diretorio;
+  cbxEstruturaTFS.Checked := FConfig.Workspace.EstruturaTFS;
+  cbxJazzOnly.Checked := FConfig.Workspace.JazzOnly;
 end;
 
 procedure TfrmFormularioOpcoes.lstPathClick(Sender: TObject);
@@ -207,6 +212,8 @@ end;
 procedure TfrmFormularioOpcoes.WorkspaceSave;
 begin
   Fconfig.Diretorio := lstPath.Items.CommaText;
+  FConfig.Workspace.EstruturaTFS := cbxEstruturaTFS.Checked;
+  FConfig.Workspace.JazzOnly := cbxJazzOnly.Checked;
 end;
 
 initialization
