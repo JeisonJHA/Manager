@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Manager"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 #define MySoftHouseName "Softplan"
 #define MyAppPublisher "Softplan"
 #define MyAppURL "http://www.softplan.com.br/"
