@@ -126,7 +126,7 @@ begin
   dtsBarraFerramenta := TDataSource.Create(nil);
   try
     qryBarraFerramenta.Connector := dtmDatabase.InstantIBXConnector1;
-    qryBarraFerramenta.Command.Text := 'SELECT * FROM TBarraFerramenta';
+    qryBarraFerramenta.Command.Text := 'SELECT * FROM TBarraFerramenta ORDER BY Descricao';
     qryBarraFerramenta.Open;
 
     dtsBarraFerramenta.DataSet := qryBarraFerramenta;
