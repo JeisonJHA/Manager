@@ -11,10 +11,10 @@ uses
   System.Actions, Vcl.ActnList, cxTextEdit, cxDBEdit, Vcl.StdCtrls, cxGridLevel,
   cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, cxPC, Vcl.ExtCtrls, cxMaskEdit, cxSpinEdit,
-  cxDropDownEdit, cxImageComboBox;
+  cxDropDownEdit, cxImageComboBox, Cadastro.Acao.Comando;
 
 type
-  TfrmCadastroAcaoCopiar = class(TfrmCadastroAcao)
+  TfrmCadastroAcaoCopiar = class(TfrmCadastroAcaoComando)
     Label2: TLabel;
     Label3: TLabel;
     iosSelecionadorDestino: TStringField;

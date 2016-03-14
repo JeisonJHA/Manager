@@ -80,7 +80,7 @@ implementation
 {$R *.dfm}
 
 uses Acao.Controller, AcaoConjuntoDeBases, Acao, Formulario.Escolha,
-  AcaoCatalogoDeBases, Formulario.Utils;
+  AcaoCatalogoDeBases, Formulario.Utils, AcaoConfigurarBaseDeDados;
 
 procedure TfrmCadastroAcaoConjuntoBases.actAddDetalheUpdate(Sender: TObject);
 begin

@@ -12,10 +12,11 @@ uses
   cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, cxPC, Vcl.ExtCtrls, cxMaskEdit, cxSpinEdit,
   cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  cxImageComboBox, cxCheckBox;
+  cxImageComboBox, cxCheckBox, JvExControls, JvSpeedButton, Acao.Controller,
+  Cadastro.Acao.Comando;
 
 type
-  TfrmCadastroAcaoExecutar = class(TfrmCadastroAcao)
+  TfrmCadastroAcaoExecutar = class(TfrmCadastroAcaoComando)
     Label4: TLabel;
     Label2: TLabel;
     iosSelecionadorAplicativo: TStringField;

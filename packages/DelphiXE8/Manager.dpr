@@ -64,13 +64,23 @@ uses
   Updater.HttpDownload in '..\..\third-part\Updater\Source\Updater.HttpDownload.pas',
   Formulario.Opcoes in '..\..\Source\Commons\Formulario.Opcoes.pas' {frmFormularioOpcoes},
   Formulario.Utils in '..\..\Source\Commons\Formulario.Utils.pas',
-  Workspace.Recentes in '..\..\Source\Controllers\Workspace.Recentes.pas';
+  Workspace.Recentes in '..\..\Source\Controllers\Workspace.Recentes.pas',
+  AcaoItem in '..\..\Source\Models\AcaoItem.pas',
+  AcaoComando in '..\..\Source\Models\AcaoComando.pas',
+  AcaoExecutar in '..\..\Source\Models\AcaoExecutar.pas',
+  AcaoCopiar in '..\..\Source\Models\AcaoCopiar.pas',
+  AcaoConfigurarBaseDeDados in '..\..\Source\Models\AcaoConfigurarBaseDeDados.pas',
+  Cadastro.Acao.Comando in '..\..\Source\Commons\Cadastro.Acao.Comando.pas' {frmCadastroAcaoComando};
 
 {$R *.res}
 {$R *.mdr} {Acao,
             AcaoCatalogoDeBases,
+            AcaoComando,
             AcaoConjuntoDeBases,
+            AcaoCopiar,
             AcaoExclusao,
+            AcaoExecutar,
+            AcaoItem,
             Ambiente,
             BarraFerramenta,
             Sistema,
@@ -104,4 +114,5 @@ begin
   Application.Parser.Registrar(TIDEParserAplicacao.Create);
   Application.Inicializador.Splash.Hide;
   Application.Run;
+
 end.

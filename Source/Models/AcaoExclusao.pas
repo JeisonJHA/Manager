@@ -3,7 +3,7 @@ unit AcaoExclusao;
 interface
 
 uses
-  Acao, InstantPersistence, InstantTypes;
+  Acao, InstantPersistence, InstantTypes, AcaoExecutar;
 
 type
   TAcaoExclusaoArquivo = class;

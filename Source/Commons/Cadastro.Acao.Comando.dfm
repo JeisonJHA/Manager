@@ -1,61 +1,46 @@
-inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
-  Caption = 'Conjunto de Bases'
+inherited frmCadastroAcaoComando: TfrmCadastroAcaoComando
+  Caption = 'frmCadastroAcaoComando'
+  ExplicitWidth = 696
+  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     Properties.ActivePage = cxTabSheet1
-    ExplicitLeft = -29
-    ExplicitTop = 2
-    inherited tabDetalhes: TcxTabSheet
-      Caption = 'Informa'#231#245'es'
-      inherited lblIcone: TLabel
-        Left = 610
-        Top = 3
-        Visible = False
-        ExplicitLeft = 610
-        ExplicitTop = 3
-      end
-      inherited cbxIcone: TcxDBImageComboBox
-        Left = 600
-        Top = 32
-        DataBinding.DataSource = dtsSelecionador
-        ExplicitLeft = 600
-        ExplicitTop = 32
-        ExplicitHeight = 36
-      end
-      inherited edtDescricao: TcxDBTextEdit
-        ExplicitWidth = 570
-        Width = 570
-      end
+    inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
     end
-    object cxTabSheet2: TcxTabSheet
-      Caption = 'Base de dados'
-      ImageIndex = 3
-      ExplicitLeft = 3
-      ExplicitTop = 29
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+    inherited tabDetalhes: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
+    end
+    object cxTabSheet1: TcxTabSheet
+      Caption = 'Instru'#231#245'es'
+      ImageIndex = 2
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 3
         Top = 3
         Width = 674
-        Height = 346
-        Align = alClient
-        Caption = 'Sele'#231#227'o de bases para o conjunto'
+        Height = 174
+        Align = alTop
+        Caption = 'Pr'#233'-a'#231#245'es dispon'#237'veis'
         TabOrder = 0
-        ExplicitTop = 86
-        ExplicitHeight = 263
+        ExplicitLeft = 6
+        ExplicitTop = 11
         object Panel3: TPanel
           Left = 637
           Top = 15
           Width = 35
-          Height = 329
+          Height = 157
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitHeight = 246
-          object JvSpeedButton1: TJvSpeedButton
+          object btnAddPreAcao: TJvSpeedButton
             Left = 6
             Top = 35
             Width = 25
@@ -95,9 +80,9 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
               39BF234C216F050B051000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000}
-            OnClick = JvSpeedButton1Click
+            OnClick = btnAddPreAcaoClick
           end
-          object JvSpeedButton2: TJvSpeedButton
+          object btnDelPreAcao: TJvSpeedButton
             Left = 6
             Top = 66
             Width = 25
@@ -137,40 +122,38 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
               C6CF1B217A7F0304101000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000}
-            OnClick = JvSpeedButton2Click
+            OnClick = btnDelPreAcaoClick
           end
         end
         object Panel4: TPanel
           Left = 2
           Top = 15
           Width = 635
-          Height = 329
+          Height = 157
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitHeight = 246
           object cxGrid2: TcxGrid
             AlignWithMargins = True
             Left = 3
             Top = 3
             Width = 629
-            Height = 323
+            Height = 151
             Align = alClient
             BevelInner = bvNone
             BevelOuter = bvNone
             BorderStyle = cxcbsNone
             TabOrder = 0
-            ExplicitHeight = 240
             object cxGrid2DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
-              DataController.DataSource = dtsMestre
+              DataController.DataSource = dtsPreAcoes
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
               DataController.Summary.SummaryGroups = <>
               OptionsSelection.CellSelect = False
               OptionsView.ColumnAutoWidth = True
-              object cxGrid2DBTableView1Descricao: TcxGridDBColumn
-                DataBinding.FieldName = 'Descricao'
+              object cxGrid2DBTableView1AcaoDescricao: TcxGridDBColumn
+                DataBinding.FieldName = 'Acao.Descricao'
               end
             end
             object cxGrid2Level1: TcxGridLevel
@@ -179,32 +162,27 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
           end
         end
       end
-    end
-    object cxTabSheet1: TcxTabSheet
-      Caption = 'Cat'#225'logo'
-      ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox2: TGroupBox
         AlignWithMargins = True
         Left = 3
-        Top = 3
+        Top = 183
         Width = 674
-        Height = 346
+        Height = 166
         Align = alClient
-        Caption = 'Comandos para catalogar bases'
-        TabOrder = 0
+        Caption = 'P'#243's-a'#231#245'es dispon'#237'veis'
+        TabOrder = 1
+        ExplicitLeft = 6
+        ExplicitTop = 11
+        ExplicitHeight = 206
         object Panel5: TPanel
           Left = 637
           Top = 15
           Width = 35
-          Height = 329
+          Height = 149
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
-          object btnAddComando: TJvSpeedButton
+          object btnAddPosAcao: TJvSpeedButton
             Left = 6
             Top = 35
             Width = 25
@@ -244,9 +222,9 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
               39BF234C216F050B051000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000}
-            OnClick = btnAddComandoClick
+            OnClick = btnAddPosAcaoClick
           end
-          object btnDelComando: TJvSpeedButton
+          object btnDelPosAcao: TJvSpeedButton
             Left = 6
             Top = 66
             Width = 25
@@ -286,14 +264,14 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
               C6CF1B217A7F0304101000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000}
-            OnClick = btnDelComandoClick
+            OnClick = btnDelPosAcaoClick
           end
         end
         object Panel6: TPanel
           Left = 2
           Top = 15
           Width = 635
-          Height = 329
+          Height = 149
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
@@ -302,7 +280,7 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
             Left = 3
             Top = 3
             Width = 629
-            Height = 323
+            Height = 143
             Align = alClient
             BevelInner = bvNone
             BevelOuter = bvNone
@@ -310,14 +288,14 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
             TabOrder = 0
             object cxGridDBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
-              DataController.DataSource = dtsCatalogos
+              DataController.DataSource = dtsPosAcoes
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
               DataController.Summary.SummaryGroups = <>
               OptionsSelection.CellSelect = False
               OptionsView.ColumnAutoWidth = True
-              object cxGridDBColumn1: TcxGridDBColumn
-                DataBinding.FieldName = 'Descricao'
+              object cxGridDBTableView1AcaoDescricao: TcxGridDBColumn
+                DataBinding.FieldName = 'Acao.Descricao'
               end
             end
             object cxGridLevel1: TcxGridLevel
@@ -328,125 +306,104 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
       end
     end
   end
-  inherited ioeMestre: TInstantExposer
-    FieldOptions = [foObjects, foThorough]
-    ContainerName = 'Acoes'
-    MasterSource = dtsSelecionador
-    Mode = amContent
-    object ioeMestreSelf: TIntegerField
-      FieldName = 'Self'
-    end
-  end
-  inherited ActionList: TActionList
-    object actAddDetalhe: TAction
-      Caption = 'Adicionar'
-      OnUpdate = actAddDetalheUpdate
-    end
-    object actDelDetalhe: TAction
-      Caption = 'Excluir'
-      OnUpdate = actDelDetalheUpdate
-    end
-  end
   inherited iosSelecionador: TInstantSelector
-    Command.Strings = (
-      'SELECT * FROM TAcaoConjuntoDeBases')
-    ObjectClassName = 'TAcaoConjuntoDeBases'
-    object iosSelecionadorAcoes: TDataSetField
-      FieldName = 'Acoes'
+    ObjectClassName = 'TAcaoComando'
+    object iosSelecionadorPosAcoes: TDataSetField
+      FieldName = 'PosAcoes'
+    end
+    object iosSelecionadorPreAcoes: TDataSetField
+      FieldName = 'PreAcoes'
     end
     object iosSelecionadorTipoAcao: TStringField
       FieldName = 'TipoAcao'
       Size = 255
     end
-    object iosSelecionadorCatalogos: TDataSetField
-      FieldName = 'Catalogos'
-    end
   end
-  object iosAcoes: TInstantSelector
-    FieldOptions = [foObjects, foThorough]
-    Filtered = True
+  object iosSelecaoDeAcoes: TInstantSelector
     AutoOpen = True
     Command.Strings = (
-      'SELECT * FROM ANY TAcaoConfigurarBaseDeDados')
+      'SELECT * FROM ANY TAcao')
     Connector = dtmDatabase.InstantIBXConnector1
-    Left = 544
-    Top = 96
-    object iosAcoesDescricao: TStringField
+    Left = 568
+    Top = 136
+    object iosSelecaoDeAcoesDescricao: TStringField
       FieldName = 'Descricao'
       Size = 255
     end
-    object iosAcoesIcone: TIntegerField
+    object iosSelecaoDeAcoesIcone: TIntegerField
       FieldName = 'Icone'
     end
-    object iosAcoesSelf: TIntegerField
-      FieldName = 'Self'
-    end
-    object iosAcoesTipoAcao: TStringField
+    object iosSelecaoDeAcoesTipoAcao: TStringField
       FieldName = 'TipoAcao'
       Size = 255
     end
   end
-  object iosCatalogo: TInstantSelector
+  object ioePreAcoes: TInstantExposer
     FieldOptions = [foObjects, foThorough]
-    Filtered = True
-    AutoOpen = True
-    Command.Strings = (
-      'SELECT * FROM TAcaoCatalogoDeBases')
-    Connector = dtmDatabase.InstantIBXConnector1
-    Left = 600
-    Top = 176
-    object StringField1: TStringField
-      FieldName = 'Descricao'
-      Size = 255
-    end
-    object IntegerField1: TIntegerField
-      FieldName = 'Icone'
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'Self'
-    end
-    object StringField2: TStringField
-      FieldName = 'TipoAcao'
-      Size = 255
-    end
-  end
-  object ioeCatalogos: TInstantExposer
-    FieldOptions = [foObjects, foThorough]
-    ContainerName = 'Catalogos'
+    ContainerName = 'PreAcoes'
     MasterSource = dtsSelecionador
     Mode = amContent
-    ObjectClassName = 'TAcaoCatalogoDeBases'
-    Left = 120
-    Top = 256
-    object ioeCatalogosAplicativo: TStringField
-      FieldName = 'Aplicativo'
+    ObjectClassName = 'TAcaoItem'
+    Left = 112
+    Top = 232
+    object ioePreAcoesAcao: TIntegerField
+      FieldName = 'Acao'
+    end
+    object ioePreAcoesAcaoDescricao: TStringField
+      FieldName = 'Acao.Descricao'
       Size = 255
     end
-    object ioeCatalogosDescricao: TStringField
-      FieldName = 'Descricao'
+    object ioePreAcoesAcaoIcone: TIntegerField
+      FieldName = 'Acao.Icone'
+    end
+    object ioePreAcoesAcaoTipoAcao: TStringField
+      FieldName = 'Acao.TipoAcao'
       Size = 255
     end
-    object ioeCatalogosIcone: TIntegerField
-      FieldName = 'Icone'
+    object ioePreAcoesOrdenacao: TIntegerField
+      FieldName = 'Ordenacao'
     end
-    object ioeCatalogosIsAdmin: TBooleanField
-      FieldName = 'IsAdmin'
-    end
-    object ioeCatalogosParametros: TStringField
-      FieldName = 'Parametros'
-      Size = 255
-    end
-    object ioeCatalogosSelf: TIntegerField
+    object ioePreAcoesSelf: TIntegerField
       FieldName = 'Self'
     end
-    object ioeCatalogosTipoAcao: TStringField
-      FieldName = 'TipoAcao'
+  end
+  object dtsPreAcoes: TDataSource
+    DataSet = ioePreAcoes
+    Left = 112
+    Top = 280
+  end
+  object ioePosAcoes: TInstantExposer
+    FieldOptions = [foObjects, foThorough]
+    ContainerName = 'PosAcoes'
+    MasterSource = dtsSelecionador
+    Mode = amContent
+    ObjectClassName = 'TAcaoItem'
+    Left = 176
+    Top = 232
+    object ioePosAcoesAcao: TIntegerField
+      FieldName = 'Acao'
+    end
+    object ioePosAcoesAcaoDescricao: TStringField
+      FieldName = 'Acao.Descricao'
       Size = 255
     end
+    object ioePosAcoesAcaoIcone: TIntegerField
+      FieldName = 'Acao.Icone'
+    end
+    object ioePosAcoesAcaoTipoAcao: TStringField
+      FieldName = 'Acao.TipoAcao'
+      Size = 255
+    end
+    object ioePosAcoesOrdenacao: TIntegerField
+      FieldName = 'Ordenacao'
+    end
+    object ioePosAcoesSelf: TIntegerField
+      FieldName = 'Self'
+    end
   end
-  object dtsCatalogos: TDataSource
-    DataSet = ioeCatalogos
-    Left = 120
-    Top = 304
+  object dtsPosAcoes: TDataSource
+    DataSet = ioePosAcoes
+    Left = 176
+    Top = 280
   end
 end

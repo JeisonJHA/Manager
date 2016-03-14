@@ -3,7 +3,8 @@ unit AcaoConjuntoDeBases;
 interface
 
 uses
-  Acao, InstantPersistence, InstantTypes, AcaoCatalogoDeBases;
+  Acao, InstantPersistence, InstantTypes, AcaoCatalogoDeBases,
+  AcaoConfigurarBaseDeDados;
 
 type
   TAcaoConjuntoDeBases = class(TAcao)

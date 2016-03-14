@@ -10,7 +10,8 @@ uses
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
   System.Actions, IDE.IWorkspace, Vcl.ExtCtrls, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, dxCustomTileControl, dxTileControl,
-  InstantPresentation, Vcl.StdCtrls, Acao, dxGDIPlusClasses, Formulario.Modelo;
+  InstantPresentation, Vcl.StdCtrls, Acao, dxGDIPlusClasses, Formulario.Modelo,
+  AcaoConfigurarBaseDeDados, AcaoCopiar, AcaoExecutar;
 
 type
   TfrmWorkspace = class(TfrmModelo, IWorkspace)

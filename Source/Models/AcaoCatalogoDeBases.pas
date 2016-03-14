@@ -3,7 +3,7 @@ unit AcaoCatalogoDeBases;
 interface
 
 uses
-  Acao, InstantPersistence, InstantTypes;
+  Acao, InstantPersistence, InstantTypes, AcaoExecutar;
 
 type
   TAcaoCatalogoDeBases = class(TAcaoExecutar)

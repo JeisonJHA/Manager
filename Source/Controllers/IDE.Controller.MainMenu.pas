@@ -25,7 +25,8 @@ type
 
 implementation
 
-uses udtmDatabase, Workspace.Action, AcaoCatalogoDeBases;
+uses udtmDatabase, Workspace.Action, AcaoCatalogoDeBases,
+  AcaoConfigurarBaseDeDados, AcaoCopiar, AcaoExecutar;
 
 { TIDEControllerMainMenu }
 

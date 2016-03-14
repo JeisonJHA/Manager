@@ -3,7 +3,6 @@ inherited frmCadastroAcaoCopiar: TfrmCadastroAcaoCopiar
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    Properties.ActivePage = tabDetalhes
     inherited tabDetalhes: TcxTabSheet
       inherited Label1: TLabel
         Top = 21
