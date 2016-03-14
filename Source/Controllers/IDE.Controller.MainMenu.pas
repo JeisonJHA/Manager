@@ -3,7 +3,7 @@ unit IDE.Controller.MainMenu;
 interface
 
 uses Classes, SysUtils, dxRibbon, dxBar, InstantPresentation, Vcl.ActnList,
-  InstantPersistence, Acao, AcaoConjuntoDeBases, BarraFerramenta, Vcl.Menus;
+  InstantPersistence, Acao, AcaoConjuntoDeBases, BarraFerramenta, Vcl.Menus, DB;
 
 type
   TBarraFerramentaController = class(TPersistent)
@@ -12,6 +12,9 @@ type
     function BuscarAcao(AAcao: TAcao): TAcao;
     procedure AdicionarItem(AToolBar: TdxBar; ABarra: TBarraFerramenta; AAcao: TAcao);
     procedure InternalCarregar(const AClasse: string; ABarSubItem: TdxBarSubItem);
+  protected
+    procedure OnCompare(Sender, AObject1, AObject2: TObject;
+      var Compare: Integer);
   public
     constructor Create(AActionList: TActionList);
     procedure CarregarMenuPrincipal(ATab: TdxRibbonTab);
@@ -81,7 +84,7 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := Format('SELECT * FROM %s', [AClasse]);
+    Command.Text := Format('SELECT * FROM %s ORDER BY Descricao', [AClasse]);
     Open;
 
     for I := 0 to Pred(ObjectCount) do
@@ -103,6 +106,12 @@ begin
   end;
 end;
 
+procedure TBarraFerramentaController.OnCompare(Sender, AObject1,
+  AObject2: TObject; var Compare: Integer);
+begin
+  Compare := AnsiCompareText(TAcao(AObject1).Descricao, TAcao(AObject2).Descricao);
+end;
+
 procedure TBarraFerramentaController.CarregarMenuPrincipal(ATab: TdxRibbonTab);
 var
   I: Integer;
@@ -110,15 +119,21 @@ var
   barra: TBarraFerramenta;
   group: TdxRibbonTabGroup;
   bar: TdxBar;
+  qryBarraFerramenta: TInstantSelector;
+  dtsBarraFerramenta: TDataSource;
 begin
-  with TInstantSelector.Create(nil) do
+  qryBarraFerramenta := TInstantSelector.Create(nil);
+  dtsBarraFerramenta := TDataSource.Create(nil);
   try
-    Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM TBarraFerramenta';
-    Open;
-    for I := 0 to Pred(ObjectCount) do
+    qryBarraFerramenta.Connector := dtmDatabase.InstantIBXConnector1;
+    qryBarraFerramenta.Command.Text := 'SELECT * FROM TBarraFerramenta';
+    qryBarraFerramenta.Open;
+
+    dtsBarraFerramenta.DataSet := qryBarraFerramenta;
+
+    for I := 0 to Pred(qryBarraFerramenta.ObjectCount) do
     begin
-      barra := Objects[I] as TBarraFerramenta;
+      barra := qryBarraFerramenta.Objects[I] as TBarraFerramenta;
 
       if barra.AcaoCount <= 0 then
         Continue;
@@ -140,15 +155,17 @@ begin
         AdicionarItem(bar, barra, barra.Acoes[II]);
       end;
     end;
-    Close;
+    qryBarraFerramenta.Close;
   finally
-    Free;
+    FreeAndNil(dtsBarraFerramenta);
+    FreeAndNil(qryBarraFerramenta);
   end;
 end;
 
 procedure TBarraFerramentaController.CarregarPopupMenuTrayIcon(APopupMenu: TPopupMenu);
 var
   I: integer;
+  Y: integer;
   item: TMenuItem;
   itemBase: TMenuItem;
   acao: TAcao;
@@ -157,7 +174,7 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM TAcaoConjuntoDeBases';
+    Command.Text := 'SELECT * FROM TAcaoConjuntoDeBases ORDER BY Descricao DESC';
     Open;
 
     itemBase := TMenuItem.Create(APopupMenu);
@@ -190,7 +207,7 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM TAcaoCatalogoDeBases';
+    Command.Text := 'SELECT * FROM TAcaoCatalogoDeBases ORDER BY Descricao DESC';
     Open;
 
     itemBase := TMenuItem.Create(APopupMenu);
@@ -223,26 +240,42 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM ANY TAcaoExecutar';
+    Command.Text := 'SELECT * FROM TBarraFerramenta ORDER BY Descricao DESC';
     Open;
 
     for I := 0 to Pred(ObjectCount) do
     begin
-      if Objects[I].InheritsFrom(TAcaoCatalogoDeBases) then
-        Continue;
 
-      acao := BuscarAcao(Objects[I] as TAcao);
+      itemBase := TMenuItem.Create(APopupMenu);
+      itemBase.Caption := TBarraFerramenta(Objects[I]).Descricao;
+      itemBase.ImageIndex := 17;
+      APopupMenu.Items.Insert(0, itemBase);
 
-      action := TWorkspaceAction.Create(FActionList);
-      action.Acao := acao;
-      action.Caption := acao.Descricao;
-      action.ImageIndex := acao.Icone;
+      for Y := 0 to TBarraFerramenta(Objects[I]).AcaoCount -1 do
+      begin
+        if TBarraFerramenta(Objects[I]).Acoes[Y].InheritsFrom(TAcaoCatalogoDeBases) then
+          Continue;
 
-      item := TMenuItem.Create(APopupMenu);
-      item.Action := action;
-      item.Caption := acao.Descricao;
-      APopupMenu.Items.Insert(0, item);
+        acao := BuscarAcao(TBarraFerramenta(Objects[I]).Acoes[Y] as TAcao);
+
+        action := TWorkspaceAction.Create(FActionList);
+        action.Acao := acao;
+        action.Caption := acao.Descricao;
+        action.ImageIndex := acao.Icone;
+
+        item := TMenuItem.Create(APopupMenu);
+        item.Action := action;
+        item.Caption := acao.Descricao;
+        itemBase.Insert(0, item);
+      end;
     end;
+    if APopupMenu.Items.IndexOf(itemBase) > 0 then
+    begin
+      itemBase := TMenuItem.Create(APopupMenu);
+      itemBase.Caption := '-';
+      APopupMenu.Items.Insert(0, itemBase);
+    end;
+
   finally
     Free;
   end;
