@@ -1,11 +1,17 @@
 inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
   Caption = 'Conjunto de Bases'
+  ExplicitWidth = 696
+  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    Properties.ActivePage = cxTabSheet1
-    ExplicitLeft = -29
-    ExplicitTop = 2
+    Properties.ActivePage = cxTabSheet2
+    inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
+    end
     inherited tabDetalhes: TcxTabSheet
       Caption = 'Informa'#231#245'es'
       inherited lblIcone: TLabel
@@ -21,7 +27,6 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
         DataBinding.DataSource = dtsSelecionador
         ExplicitLeft = 600
         ExplicitTop = 32
-        ExplicitHeight = 36
       end
       inherited edtDescricao: TcxDBTextEdit
         ExplicitWidth = 570
@@ -31,8 +36,6 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
     object cxTabSheet2: TcxTabSheet
       Caption = 'Base de dados'
       ImageIndex = 3
-      ExplicitLeft = 3
-      ExplicitTop = 29
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 3
@@ -42,8 +45,6 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
         Align = alClient
         Caption = 'Sele'#231#227'o de bases para o conjunto'
         TabOrder = 0
-        ExplicitTop = 86
-        ExplicitHeight = 263
         object Panel3: TPanel
           Left = 637
           Top = 15
@@ -52,7 +53,6 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitHeight = 246
           object JvSpeedButton1: TJvSpeedButton
             Left = 6
             Top = 35
@@ -146,34 +146,28 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitHeight = 246
-          object cxGrid2: TcxGrid
+          object cxGrid2: TDBGrid
             AlignWithMargins = True
             Left = 3
             Top = 3
             Width = 629
             Height = 323
             Align = alClient
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = cxcbsNone
+            DataSource = dtsMestre
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             TabOrder = 0
-            ExplicitHeight = 240
-            object cxGrid2DBTableView1: TcxGridDBTableView
-              Navigator.Buttons.CustomButtons = <>
-              DataController.DataSource = dtsMestre
-              DataController.Summary.DefaultGroupSummaryItems = <>
-              DataController.Summary.FooterSummaryItems = <>
-              DataController.Summary.SummaryGroups = <>
-              OptionsSelection.CellSelect = False
-              OptionsView.ColumnAutoWidth = True
-              object cxGrid2DBTableView1Descricao: TcxGridDBColumn
-                DataBinding.FieldName = 'Descricao'
-              end
-            end
-            object cxGrid2Level1: TcxGridLevel
-              GridView = cxGrid2DBTableView1
-            end
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'Descricao'
+                Title.Caption = 'Descri'#231#227'o'
+                Visible = True
+              end>
           end
         end
       end
@@ -291,32 +285,28 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          object cxGrid3: TcxGrid
+          object cxGrid3: TDBGrid
             AlignWithMargins = True
             Left = 3
             Top = 3
             Width = 629
             Height = 323
             Align = alClient
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = cxcbsNone
+            DataSource = dtsCatalogos
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             TabOrder = 0
-            object cxGridDBTableView1: TcxGridDBTableView
-              Navigator.Buttons.CustomButtons = <>
-              DataController.DataSource = dtsCatalogos
-              DataController.Summary.DefaultGroupSummaryItems = <>
-              DataController.Summary.FooterSummaryItems = <>
-              DataController.Summary.SummaryGroups = <>
-              OptionsSelection.CellSelect = False
-              OptionsView.ColumnAutoWidth = True
-              object cxGridDBColumn1: TcxGridDBColumn
-                DataBinding.FieldName = 'Descricao'
-              end
-            end
-            object cxGridLevel1: TcxGridLevel
-              GridView = cxGridDBTableView1
-            end
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'Descricao'
+                Title.Caption = 'Descri'#231#227'o'
+                Visible = True
+              end>
           end
         end
       end

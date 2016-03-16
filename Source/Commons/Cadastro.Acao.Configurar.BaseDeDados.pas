@@ -12,7 +12,7 @@ uses
   cxDropDownEdit, cxImageComboBox, cxTextEdit, Vcl.StdCtrls, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxGridCustomView, cxGrid, cxPC, Vcl.ExtCtrls, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, cxSpinEdit, Vcl.Buttons;
+  cxDBLookupComboBox, cxSpinEdit, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroAcaoConfigurarBaseDeDados = class(TfrmCadastroAcaoCopiar)
@@ -31,9 +31,6 @@ type
     ioeMestreSistemaDescricao: TStringField;
     ioeMestreSistemaNomeDiretorio: TStringField;
     ioeMestreUsuario: TStringField;
-    cxGrid1DBTableView1Senha: TcxGridDBColumn;
-    cxGrid1DBTableView1SistemaDescricao: TcxGridDBColumn;
-    cxGrid1DBTableView1Usuario: TcxGridDBColumn;
     iosSistema: TInstantSelector;
     dtsSistema: TDataSource;
     iosSistemaDescricao: TStringField;

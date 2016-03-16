@@ -10,22 +10,6 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
       ExplicitTop = 28
       ExplicitWidth = 680
       ExplicitHeight = 352
-      inherited cxGrid1: TcxGrid
-        inherited cxGrid1DBTableView1: TcxGridDBTableView
-          inherited cxGrid1DBTableView1Descricao: TcxGridDBColumn
-            DataBinding.FieldName = 'Alias'
-          end
-          object cxGrid1DBTableView1SistemaDescricao: TcxGridDBColumn
-            DataBinding.FieldName = 'Sistema.Descricao'
-          end
-          object cxGrid1DBTableView1Senha: TcxGridDBColumn
-            DataBinding.FieldName = 'Senha'
-          end
-          object cxGrid1DBTableView1Usuario: TcxGridDBColumn
-            DataBinding.FieldName = 'Usuario'
-          end
-        end
-      end
     end
     inherited tabDetalhes: TcxTabSheet
       ExplicitLeft = 2

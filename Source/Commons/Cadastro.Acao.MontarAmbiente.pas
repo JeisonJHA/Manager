@@ -11,7 +11,7 @@ uses
   System.Actions, Vcl.ActnList, cxMaskEdit, cxDropDownEdit, cxImageComboBox,
   cxDBEdit, cxTextEdit, Vcl.StdCtrls, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxPC,
-  Vcl.ExtCtrls, JvExControls, JvSpeedButton;
+  Vcl.ExtCtrls, JvExControls, JvSpeedButton, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroAcaoMontarAmbiente = class(TfrmCadastroAcao)
@@ -37,6 +37,7 @@ type
     procedure JvSpeedButton1Click(Sender: TObject);
     procedure actAddDetalheUpdate(Sender: TObject);
     procedure actDelDetalheUpdate(Sender: TObject);
+    procedure JvSpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -78,6 +79,25 @@ begin
   ambiente.AddAcao(TAcao(objeto));
   ambiente.Store();
   iosSelecionador.RefreshCurrentObject;
+end;
+
+procedure TfrmCadastroAcaoMontarAmbiente.JvSpeedButton2Click(Sender: TObject);
+var
+  objeto: TObject;
+  ambiente: TAcaoMontarAmbiente;
+begin
+  inherited;
+
+  if (MessageDlg('Deseja realmente excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrNo) then
+    Exit;
+
+  ambiente := TAcaoMontarAmbiente(iosSelecionador.CurrentObject);
+  objeto := ioeMestre.CurrentObject;
+  if not Assigned(objeto) then
+    Exit;
+
+  ambiente.RemoveAcao(TAcao(objeto));
+  ambiente.Store();
 end;
 
 initialization

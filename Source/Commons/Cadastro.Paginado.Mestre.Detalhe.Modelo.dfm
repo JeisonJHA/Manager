@@ -128,29 +128,26 @@ inherited frmCadastroPaginadoMestreDetalheModelo: TfrmCadastroPaginadoMestreDeta
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          object cxGrid2: TcxGrid
+          object cxGrid2: TDBGrid
             AlignWithMargins = True
             Left = 3
             Top = 3
             Width = 629
             Height = 240
             Align = alClient
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = cxcbsNone
+            DataSource = dtsDetalhe
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             TabOrder = 0
-            object cxGrid2DBTableView1: TcxGridDBTableView
-              Navigator.Buttons.CustomButtons = <>
-              DataController.DataSource = dtsDetalhe
-              DataController.Summary.DefaultGroupSummaryItems = <>
-              DataController.Summary.FooterSummaryItems = <>
-              DataController.Summary.SummaryGroups = <>
-              OptionsSelection.CellSelect = False
-              OptionsView.ColumnAutoWidth = True
-            end
-            object cxGrid2Level1: TcxGridLevel
-              GridView = cxGrid2DBTableView1
-            end
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                Visible = True
+              end>
           end
         end
       end

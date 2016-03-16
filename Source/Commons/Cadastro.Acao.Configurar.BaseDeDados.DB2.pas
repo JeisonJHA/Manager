@@ -12,7 +12,7 @@ uses
   cxMaskEdit, cxDropDownEdit, cxImageComboBox, cxTextEdit, Vcl.StdCtrls,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxGridCustomView, cxGrid, cxPC, Vcl.ExtCtrls, cxLookupEdit,
-  cxDBLookupEdit, cxDBLookupComboBox, Vcl.Buttons;
+  cxDBLookupEdit, cxDBLookupComboBox, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroAcaoConfigurarBaseDeDadosDB2 = class(TfrmCadastroAcaoConfigurarBaseDeDados)

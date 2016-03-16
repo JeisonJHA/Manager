@@ -11,7 +11,7 @@ uses
   System.Actions, Vcl.ActnList, cxMaskEdit, cxDropDownEdit, cxImageComboBox,
   cxDBEdit, cxTextEdit, Vcl.StdCtrls, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxPC,
-  Vcl.ExtCtrls, JvExControls, JvSpeedButton;
+  Vcl.ExtCtrls, JvExControls, JvSpeedButton, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroAcaoConjuntoBases = class(TfrmCadastroAcao)
@@ -30,10 +30,6 @@ type
     btnAddComando: TJvSpeedButton;
     btnDelComando: TJvSpeedButton;
     Panel6: TPanel;
-    cxGrid3: TcxGrid;
-    cxGridDBTableView1: TcxGridDBTableView;
-    cxGridDBColumn1: TcxGridDBColumn;
-    cxGridLevel1: TcxGridLevel;
     iosSelecionadorTipoAcao: TStringField;
     iosCatalogo: TInstantSelector;
     StringField1: TStringField;
@@ -56,10 +52,8 @@ type
     JvSpeedButton1: TJvSpeedButton;
     JvSpeedButton2: TJvSpeedButton;
     Panel4: TPanel;
-    cxGrid2: TcxGrid;
-    cxGrid2DBTableView1: TcxGridDBTableView;
-    cxGrid2DBTableView1Descricao: TcxGridDBColumn;
-    cxGrid2Level1: TcxGridLevel;
+    cxGrid3: TDBGrid;
+    cxGrid2: TDBGrid;
     procedure JvSpeedButton1Click(Sender: TObject);
     procedure actAddDetalheUpdate(Sender: TObject);
     procedure actDelDetalheUpdate(Sender: TObject);

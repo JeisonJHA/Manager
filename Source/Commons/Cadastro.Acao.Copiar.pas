@@ -11,7 +11,7 @@ uses
   System.Actions, Vcl.ActnList, cxTextEdit, cxDBEdit, Vcl.StdCtrls, cxGridLevel,
   cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, cxPC, Vcl.ExtCtrls, cxMaskEdit, cxSpinEdit,
-  cxDropDownEdit, cxImageComboBox;
+  cxDropDownEdit, cxImageComboBox, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroAcaoCopiar = class(TfrmCadastroAcao)

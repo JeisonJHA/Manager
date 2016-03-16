@@ -3,20 +3,17 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
+    Properties.ActivePage = tabGrade
     inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 24
-      ExplicitWidth = 684
-      ExplicitHeight = 358
-      inherited cxGrid1: TcxGrid
-        ExplicitWidth = 678
-        ExplicitHeight = 352
-        inherited cxGrid1DBTableView1: TcxGridDBTableView
-          object cxGrid1DBTableView1Descricao: TcxGridDBColumn
-            Caption = 'Descri'#231#227'o'
-            DataBinding.FieldName = 'Descricao'
-          end
-        end
+      inherited cxGrid1: TDBGrid
+        DataSource = dtsSelecionador
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Descricao'
+            Title.Caption = 'Descri'#231#227'o'
+            Visible = True
+          end>
       end
     end
     inherited tabDetalhes: TcxTabSheet
@@ -36,12 +33,14 @@ inherited frmCadastroBarraFerramentas: TfrmCadastroBarraFerramentas
           end
         end
         inherited Panel4: TPanel
-          inherited cxGrid2: TcxGrid
-            inherited cxGrid2DBTableView1: TcxGridDBTableView
-              object cxGrid2DBTableView1Descricao: TcxGridDBColumn
-                DataBinding.FieldName = 'Descricao'
-              end
-            end
+          inherited cxGrid2: TDBGrid
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'Descricao'
+                Title.Caption = 'Descri'#231#227'o'
+                Visible = True
+              end>
           end
         end
       end

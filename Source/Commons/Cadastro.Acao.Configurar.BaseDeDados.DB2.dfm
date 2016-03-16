@@ -32,14 +32,14 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
     inherited tabGrade: TcxTabSheet
       ExplicitWidth = 684
       ExplicitHeight = 292
-      inherited cxGrid1: TcxGrid
+      inherited cxGrid1: TDBGrid
         Width = 678
         Height = 286
-        ExplicitWidth = 678
-        ExplicitHeight = 286
       end
     end
     inherited tabDetalhes: TcxTabSheet
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 684
       ExplicitHeight = 292
       inherited Label1: TLabel
@@ -105,6 +105,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
       inherited cbxIcone: TcxDBImageComboBox
         Top = 30
         ExplicitTop = 30
+        ExplicitHeight = 21
       end
       inherited cbxSistema: TcxDBLookupComboBox
         Left = 24

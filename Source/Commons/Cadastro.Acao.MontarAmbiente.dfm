@@ -5,16 +5,11 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
+    Properties.ActivePage = tabDetalhes
     inherited tabGrade: TcxTabSheet
-      ExplicitTop = 24
-      ExplicitWidth = 684
-      ExplicitHeight = 358
-      inherited cxGrid1: TcxGrid
-        Width = 678
-        Height = 352
-        ExplicitWidth = 678
-        ExplicitHeight = 352
-      end
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
     end
     inherited tabDetalhes: TcxTabSheet
       ExplicitLeft = 2
@@ -141,6 +136,7 @@ inherited frmCadastroAcaoMontarAmbiente: TfrmCadastroAcaoMontarAmbiente
               C6CF1B217A7F0304101000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000}
+            OnClick = JvSpeedButton2Click
           end
         end
         object Panel4: TPanel

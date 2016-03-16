@@ -3,17 +3,16 @@ inherited frmCadastroSistema: TfrmCadastroSistema
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
-    Properties.ActivePage = tabDetalhes
     inherited tabGrade: TcxTabSheet
-      inherited cxGrid1: TcxGrid
-        inherited cxGrid1DBTableView1: TcxGridDBTableView
-          object cxGrid1DBTableView1Descricao: TcxGridDBColumn
-            DataBinding.FieldName = 'Descricao'
-          end
-          object cxGrid1DBTableView1NomeDiretorio: TcxGridDBColumn
-            DataBinding.FieldName = 'NomeDiretorio'
-          end
-        end
+      inherited cxGrid1: TDBGrid
+        DataSource = dtsSelecionador
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Descricao'
+            Title.Caption = 'Descri'#231#227'o'
+            Visible = True
+          end>
       end
     end
     inherited tabDetalhes: TcxTabSheet

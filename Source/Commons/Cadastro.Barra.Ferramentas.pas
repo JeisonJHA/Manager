@@ -13,11 +13,10 @@ uses
   cxGridDBTableView, cxGrid, cxPC, Vcl.ExtCtrls, cxContainer, cxTextEdit,
   cxDBEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
   cxDBLookupComboBox, Vcl.DBActns, Vcl.Buttons, InstantPersistence,
-  JvExControls, JvSpeedButton;
+  JvExControls, JvSpeedButton, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroBarraFerramentas = class(TfrmCadastroPaginadoMestreDetalheModelo)
-    cxGrid1DBTableView1Descricao: TcxGridDBColumn;
     Label1: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
     ioeMestreDescricao: TStringField;
@@ -31,7 +30,6 @@ type
     iosSelecionadorAcoes: TDataSetField;
     iosSelecionadorDescricao: TStringField;
     iosSelecionadorSelf: TIntegerField;
-    cxGrid2DBTableView1Descricao: TcxGridDBColumn;
     iosSelecaoDeAcoes: TInstantSelector;
     iosSelecaoDeAcoesDescricao: TStringField;
     iosSelecaoDeAcoesIcone: TIntegerField;

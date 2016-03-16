@@ -9,27 +9,40 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarB
   inherited Bevel1: TBevel
     Top = 328
     Width = 694
+    ExplicitTop = 328
+    ExplicitWidth = 694
   end
   inherited Panel1: TPanel
     Top = 330
     Width = 694
+    ExplicitTop = 330
+    ExplicitWidth = 694
     inherited Panel2: TPanel
       Left = 332
+      ExplicitLeft = 332
     end
   end
   inherited cxPageControl1: TcxPageControl
     Width = 688
     Height = 322
     Properties.ActivePage = tabGrade
+    ExplicitWidth = 688
+    ExplicitHeight = 322
     ClientRectBottom = 320
     ClientRectRight = 686
     inherited tabGrade: TcxTabSheet
-      inherited cxGrid1: TcxGrid
+      ExplicitWidth = 684
+      ExplicitHeight = 292
+      inherited cxGrid1: TDBGrid
         Width = 678
         Height = 286
       end
     end
     inherited tabDetalhes: TcxTabSheet
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       inherited Label1: TLabel
         Top = 53
         ExplicitTop = 53
@@ -88,6 +101,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosMSSQL: TfrmCadastroAcaoConfigurarB
       inherited cbxIcone: TcxDBImageComboBox
         Top = 30
         ExplicitTop = 30
+        ExplicitHeight = 21
       end
       inherited cbxSistema: TcxDBLookupComboBox
         Left = 24

@@ -50,7 +50,7 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
     Height = 382
     Align = alClient
     TabOrder = 1
-    Properties.ActivePage = tabDetalhes
+    Properties.ActivePage = tabGrade
     Properties.CustomButtons.Buttons = <>
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
@@ -61,27 +61,21 @@ inherited frmCadastroPaginadoModelo: TfrmCadastroPaginadoModelo
     object tabGrade: TcxTabSheet
       Caption = 'Principal'
       ImageIndex = 0
-      object cxGrid1: TcxGrid
+      object cxGrid1: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 3
         Width = 674
         Height = 346
         Align = alClient
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 0
-        object cxGrid1DBTableView1: TcxGridDBTableView
-          Navigator.Buttons.CustomButtons = <>
-          OnCellDblClick = cxGrid1DBTableView1CellDblClick
-          DataController.DataSource = dtsSelecionador
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsSelection.CellSelect = False
-          OptionsView.ColumnAutoWidth = True
-        end
-        object cxGrid1Level1: TcxGridLevel
-          GridView = cxGrid1DBTableView1
-        end
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnDblClick = cxGrid1DblClick
       end
     end
     object tabDetalhes: TcxTabSheet

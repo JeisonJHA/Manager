@@ -10,15 +10,12 @@ uses
   dxSkinscxPCPainter, dxBarBuiltInMenu, cxPC, cxStyles, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxEdit, cxNavigator, cxDBData, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid, InstantPersistence;
+  cxGrid, InstantPersistence, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroPaginadoModelo = class(TfrmCadastroModelo)
     cxPageControl1: TcxPageControl;
     tabGrade: TcxTabSheet;
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1Level1: TcxGridLevel;
-    cxGrid1: TcxGrid;
     iosSelecionador: TInstantSelector;
     dtsSelecionador: TDataSource;
     tabDetalhes: TcxTabSheet;
@@ -26,6 +23,7 @@ type
     actNovo: TAction;
     btnExcluir: TButton;
     actExcluir: TAction;
+    cxGrid1: TDBGrid;
     procedure actNovoExecute(Sender: TObject);
     procedure actNovoUpdate(Sender: TObject);
     procedure actConfirmarUpdate(Sender: TObject);
@@ -34,9 +32,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure actExcluirUpdate(Sender: TObject);
     procedure actExcluirExecute(Sender: TObject);
-    procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
+    procedure cxGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -95,9 +91,7 @@ begin
   TAction(Sender).Enabled := (iosSelecionador.State in [dsBrowse]);
 end;
 
-procedure TfrmCadastroPaginadoModelo.cxGrid1DBTableView1CellDblClick(
-  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
-  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+procedure TfrmCadastroPaginadoModelo.cxGrid1DblClick(Sender: TObject);
 begin
   inherited;
   cxPageControl1.ActivePageIndex := PAGE_DETALHE;

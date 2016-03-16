@@ -4,13 +4,24 @@ inherited frmCadastroAcao: TfrmCadastroAcao
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
     inherited tabGrade: TcxTabSheet
-      inherited cxGrid1: TcxGrid
-        inherited cxGrid1DBTableView1: TcxGridDBTableView
-          object cxGrid1DBTableView1Descricao: TcxGridDBColumn
-            Caption = 'Descri'#231#227'o'
-            DataBinding.FieldName = 'Descricao'
+      inherited cxGrid1: TDBGrid
+        DataSource = dtsSelecionador
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Descricao'
+            Visible = True
           end
-        end
+          item
+            Expanded = False
+            FieldName = 'Icone'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'Self'
+            Visible = False
+          end>
       end
     end
     inherited tabDetalhes: TcxTabSheet
@@ -64,6 +75,7 @@ inherited frmCadastroAcao: TfrmCadastroAcao
       'SELECT * FROM TAcao')
     ObjectClassName = 'TAcao'
     object iosSelecionadorDescricao: TStringField
+      DisplayLabel = 'Descri'#231#227'o'
       FieldName = 'Descricao'
       Size = 255
     end

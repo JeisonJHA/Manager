@@ -10,15 +10,14 @@ uses
   cxData, cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData,
   InstantPresentation, System.Actions, Vcl.ActnList, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid, cxPC, Vcl.StdCtrls, Vcl.ExtCtrls, cxContainer, cxTextEdit, cxDBEdit;
+  cxGrid, cxPC, Vcl.StdCtrls, Vcl.ExtCtrls, cxContainer, cxTextEdit, cxDBEdit,
+  Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroSistema = class(TfrmCadastroPaginadoModelo)
     iosSelecionadorDescricao: TStringField;
     iosSelecionadorNomeDiretorio: TStringField;
     iosSelecionadorSelf: TIntegerField;
-    cxGrid1DBTableView1Descricao: TcxGridDBColumn;
-    cxGrid1DBTableView1NomeDiretorio: TcxGridDBColumn;
     ioeMestreDescricao: TStringField;
     ioeMestreNomeDiretorio: TStringField;
     ioeMestreSelf: TIntegerField;

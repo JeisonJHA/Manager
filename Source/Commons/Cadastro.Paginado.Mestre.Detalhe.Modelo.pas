@@ -11,7 +11,7 @@ uses
   InstantPresentation, System.Actions, Vcl.ActnList, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, cxPC, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons, JvExControls,
-  JvSpeedButton;
+  JvSpeedButton, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadastroPaginadoMestreDetalheModelo = class(TfrmCadastroPaginadoModelo)
@@ -20,13 +20,11 @@ type
     dtsDetalhe: TDataSource;
     Panel3: TPanel;
     Panel4: TPanel;
-    cxGrid2: TcxGrid;
-    cxGrid2DBTableView1: TcxGridDBTableView;
-    cxGrid2Level1: TcxGridLevel;
     actAddDetalhe: TAction;
     actDelDetalhe: TAction;
     btnAdd: TJvSpeedButton;
     btnDel: TJvSpeedButton;
+    cxGrid2: TDBGrid;
     procedure actAddDetalheUpdate(Sender: TObject);
     procedure actDelDetalheUpdate(Sender: TObject);
   private
