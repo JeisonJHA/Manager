@@ -3,7 +3,7 @@
         <ProjectGuid>{7F4C148F-5CAB-43E2-AFD2-141B83F45EE0}</ProjectGuid>
         <MainSource>Manager.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
@@ -107,119 +107,127 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\..\Source\Commons\udtmDatabase.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\udtmDatabase.pas">
             <Form>dtmDatabase</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Formulario.Workspace.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Formulario.Workspace.pas">
             <Form>frmWorkspace</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Workspace.Action.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Workspace.Config.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Workspace.Utils.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Workspace.Constantes.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Workspace.Action.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Configuration.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Workspace.List.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Workspace.Constantes.pas"/>
         <DCCReference Include="..\..\Source\Models\Ambiente.pas"/>
         <DCCReference Include="..\..\Source\Models\Acao.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Formulario.Modelo.pas">
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Modelo.pas">
             <Form>frmModelo</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Modelo.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Modelo.pas">
             <Form>frmCadastroModelo</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Gerenciamento.Modelo.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Gerenciamento.Modelo.pas">
             <Form>frmGerenciamentoModelo</Form>
         </DCCReference>
         <DCCReference Include="..\..\Source\Models\BarraFerramenta.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Paginado.Mestre.Detalhe.Modelo.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Paginado.Mestre.Detalhe.Modelo.pas">
             <Form>frmCadastroPaginadoMestreDetalheModelo</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Barra.Ferramentas.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Barra.Ferramentas.pas">
             <Form>frmCadastroBarraFerramentas</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.pas">
             <Form>frmCadastroAcao</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Executar.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Executar.pas">
             <Form>frmCadastroAcaoExecutar</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Copiar.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Copiar.pas">
             <Form>frmCadastroAcaoCopiar</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Controllers\IDE.Controller.MainMenu.pas"/>
+        <DCCReference Include="..\..\Source\Old\Controllers\IDE.Controller.MainMenu.pas"/>
         <DCCReference Include="..\..\Source\Models\Sistema.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Sistema.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Sistema.pas">
             <Form>frmCadastroSistema</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\IDE.Utils.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Utils.pas"/>
         <DCCReference Include="..\..\Source\Models\Workspace.pas"/>
-        <DCCReference Include="..\..\Source\Commons\ufrmPrincipal.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\ufrmPrincipal.pas">
             <Form>frmPrincipal</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\IDE.Aplicacao.pas"/>
-        <DCCReference Include="..\..\Source\Controllers\IDE.Controller.Parser.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.IParser.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.Parser.Workspace.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.IWorkspace.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.Parser.Aplicacao.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.Parser.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Aplicacao.pas"/>
+        <DCCReference Include="..\..\Source\Old\Controllers\IDE.Controller.Parser.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.IParser.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Parser.Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.IWorkspace.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Parser.Aplicacao.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Parser.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDados</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Conjunto.Bases.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Conjunto.Bases.pas">
             <Form>frmCadastroAcaoConjuntoBases</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDadosOracle</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDadosDB2</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas">
             <Form>frmCadastroAcaoConfigurarBaseDeDadosMSSQL</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Paginado.Modelo.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Paginado.Modelo.pas">
             <Form>frmCadastroPaginadoModelo</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Controllers\Acao.Controller.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Formulario.Escolha.pas">
+        <DCCReference Include="..\..\Source\Old\Controllers\Acao.Controller.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Formulario.Escolha.pas">
             <Form>frmFormularioEscolha</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\ActiveDs_TLB.pas"/>
-        <DCCReference Include="..\..\Source\Commons\adshlp.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.IBarraFerramenta.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\ActiveDs_TLB.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\adshlp.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.IBarraFerramenta.pas"/>
         <DCCReference Include="..\..\Source\Models\AcaoConjuntoDeBases.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.MontarAmbiente.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.MontarAmbiente.pas">
             <Form>frmCadastroAcaoMontarAmbiente</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Configuracao.Inicial.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Configuracao.Inicial.pas">
             <Form>frmConfiguracaoInicial</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Models\AcaoCatalogoDeBases.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Cadastro.Acao.Catalogo.Bases.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Catalogo.Bases.pas">
             <Form>frmCadastroAcaoCatalogoBases</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Models\AcaoExclusao.pas"/>
-        <DCCReference Include="..\..\Source\Commons\DosCommand.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Manager.PromptCommand.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.Inicializador.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.Inicializador.Intf.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.Update.pas"/>
-        <DCCReference Include="..\..\Source\Commons\IDE.Forms.Splash.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\DosCommand.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Manager.PromptCommand.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Inicializador.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Inicializador.Intf.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Update.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Forms.Splash.pas">
             <Form>frmSplash</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\IDE.Criptografia.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.Criptografia.pas"/>
         <DCCReference Include="..\..\third-part\Updater\Source\Updater.Core.pas"/>
         <DCCReference Include="..\..\third-part\Updater\Source\Updater.HttpDownload.pas"/>
-        <DCCReference Include="..\..\Source\Commons\Formulario.Opcoes.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Formulario.Opcoes.pas">
             <Form>frmFormularioOpcoes</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Forms.Utils.pas"/>
+        <DCCReference Include="..\..\Source\Old\Controllers\Workspace.Recentes.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Main.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Main.pas">
+            <Form>frmMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Commons\Formulario.Utils.pas"/>
-        <DCCReference Include="..\..\Source\Controllers\Workspace.Recentes.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.pas">
+            <Form>frmWorkspace2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.MainMenu.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Controller.Main.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -643,8 +651,8 @@
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
