@@ -1,4 +1,4 @@
-﻿object frmPrincipal: TfrmPrincipal
+object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Manager'
@@ -245,7 +245,7 @@
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 185
+      Width = 0
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -268,8 +268,8 @@
       object txtConsole: TMemo
         Left = 0
         Top = 0
-        Width = 1102
-        Height = 0
+        Width = 0
+        Height = 96
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -632,7 +632,7 @@
         end
         item
           Visible = True
-          ItemName = 'btnExclusaoDeDiret'#243'rio'
+          ItemName = 'btnExclusaoDeDiretorio'
         end>
     end
     object btnExclusaoDeArquivo: TdxBarButton
@@ -642,7 +642,7 @@
       Visible = ivAlways
       ImageIndex = 29
     end
-    object btnExclusaoDeDiretório: TdxBarButton
+    object btnExclusaoDeDiretorio: TdxBarButton
       Caption = 'Diret'#243'rio'
       Category = 0
       Hint = 'Diret'#243'rio'
@@ -783,6 +783,7 @@
   end
   object ppmTrayIcon: TPopupMenu
     Images = dtmDatabase.SmallImageList
+    OnChange = ppmTrayIconChange
     Left = 472
     Top = 64
     object N1: TMenuItem

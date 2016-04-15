@@ -4,37 +4,34 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs,
-  dxBar, dxRibbon, dxRibbonForm, dxRibbonSkins, cxGraphics, cxControls,
-  cxLookAndFeels,
-  cxLookAndFeelPainters, cxClasses, dxRibbonBackstageView, dxSkinsCore,
-  dxRibbonCustomizationForm, dxSkinsdxBarPainter, cxContainer, cxEdit,
-  dxSkinsForm, dxStatusBar, dxRibbonStatusBar, cxLabel, dxGallery,
-  dxGalleryControl, dxRibbonBackstageViewGalleryControl, System.Actions,
-  Vcl.ActnList, System.ImageList, Vcl.ImgList, JvComponentBase, JvAppStorage,
+  Dialogs, dxBar, dxRibbon, dxRibbonForm, dxRibbonSkins, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxClasses, dxRibbonBackstageView,
+  dxSkinsCore, dxRibbonCustomizationForm, dxSkinsdxBarPainter, cxContainer,
+  cxEdit, dxSkinsForm, dxStatusBar, dxRibbonStatusBar, cxLabel, dxGallery,
+  dxGalleryControl, dxRibbonBackstageViewGalleryControl, System.Actions, Vcl.ActnList,
+  System.ImageList, Vcl.ImgList, JvComponentBase, JvAppStorage,
   JvAppRegistryStorage, cxTextEdit, Vcl.StdCtrls, Vcl.Buttons, cxPC,
-  dxSkinscxPCPainter, dxBarBuiltInMenu, dxTabbedMDI, Workspace.Action,
-  Vcl.ExtCtrls, cxMaskEdit, cxSpinEdit, cxSpinButton, JvExControls, JvPageList,
+  dxSkinscxPCPainter, dxBarBuiltInMenu, dxTabbedMDI, Workspace.Action, Vcl.ExtCtrls,
+  cxMaskEdit, cxSpinEdit, cxSpinButton, JvExControls, JvPageList,
   JvNavigationPane, dxSkinsdxDockControlPainter, dxDockControl, dxDockPanel,
-  Workspace.Utils, Workspace.Config, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Workspace, Datasnap.DBClient, dxSkinBlack,
-  dxSkinBlue, dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
-  dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
-  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLiquidSky,
-  dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis, dxSkinMetropolisDark,
-  dxSkinMoneyTwins, dxSkinOffice2007Black, dxSkinOffice2007Blue,
-  dxSkinOffice2007Green, dxSkinOffice2007Pink, dxSkinOffice2007Silver,
-  dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
-  dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White,
-  dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
-  dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
-  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
-  dxSkinWhiteprint, dxSkinXmas2008Blue, cxStyles, cxCustomData, cxFilter,
-  cxData, cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomView,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  InstantPresentation, IDE.Aplicacao, DosCommand, Manager.PromptCommand,
-  JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts, Vcl.Menus, IDE.Update,
-  dxAlertWindow;
+  Workspace.Utils, Workspace.Config, Data.DB, Vcl.Grids, Vcl.DBGrids, Workspace,
+  Datasnap.DBClient, dxSkinBlack, dxSkinBlue, dxSkinBlueprint, dxSkinCaramel,
+  dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle,
+  dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast,
+  dxSkiniMaginary, dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin,
+  dxSkinMetropolis, dxSkinMetropolisDark, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinOffice2013DarkGray,
+  dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
+  dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
+  dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGrid, InstantPresentation, IDE.Aplicacao,
+  DosCommand, Manager.PromptCommand, JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts,
+  Vcl.Menus, IDE.Update, dxAlertWindow;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)
@@ -103,7 +100,7 @@ type
     btnConjuntoDeBases: TdxBarSubItem;
     btnExclusao: TdxBarSubItem;
     btnExclusaoDeArquivo: TdxBarButton;
-    btnExclusaoDeDiretório: TdxBarButton;
+    btnExclusaoDeDiretorio: TdxBarButton;
     dxBarButton1: TdxBarButton;
     actUpdate: TAction;
     dxAlertWindowManager1: TdxAlertWindowManager;
@@ -123,13 +120,10 @@ type
     procedure btnCadastroBancoDeDadosMSSQLClick(Sender: TObject);
     procedure btnCadastroBancoDeDadosDB2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
+    procedure cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
     procedure dxBarLargeButton1Click(Sender: TObject);
     procedure txtConsoleKeyPress(Sender: TObject; var Key: Char);
-    procedure dxDockPanel2Activate(Sender: TdxCustomDockControl;
-      Active: Boolean);
+    procedure dxDockPanel2Activate(Sender: TdxCustomDockControl; Active: Boolean);
     procedure txtConsoleEnter(Sender: TObject);
     procedure dxBarLargeButton4Click(Sender: TObject);
     procedure dxBarLargeButton3Click(Sender: TObject);
@@ -139,10 +133,10 @@ type
     procedure btnCriarConjuntoDeBasesClick(Sender: TObject);
     procedure btnCriarCatalogoDeBasesClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure dxAlertWindowManager1ButtonClick(Sender: TObject;
-      AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
+    procedure dxAlertWindowManager1ButtonClick(Sender: TObject; AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
     procedure actOpcoesExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure ppmTrayIconChange(Sender: TObject; Source: TMenuItem; Rebuild: Boolean);
   private
     { Private declarations }
     FUpdate: TUpdate;
@@ -151,6 +145,7 @@ type
     procedure InicializarWorkspaceList;
     procedure CarregarWorkspaceRecentes;
     procedure AbriAbaWorkspace(AWorkspace: TWorkspace);
+    procedure SalvarWorkspaceAtual;
   public
     { Public declarations }
   end;
@@ -162,9 +157,9 @@ implementation
 
 {$R *.dfm}
 
-uses JvTypes, Winapi.ShellApi, udtmDatabase, Workspace.Constantes,
- IDE.Controller.MainMenu, IDE.Utils, IDE.IWorkspace, Formulario.Utils,
- Workspace.Recentes;
+uses
+  JvTypes, Winapi.ShellApi, udtmDatabase, Workspace.Constantes, IDE.Controller.MainMenu,
+  IDE.Utils, IDE.IWorkspace, Formulario.Utils, Workspace.Recentes;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -201,7 +196,7 @@ begin
   if not Assigned(AWorkspace) then
     Exit;
 
-  for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount -1 do
+  for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount - 1 do
   begin
     dxTabbedMDIManager1.TabProperties.Pages[I].MDIChild.GetInterface(IWorkspace, iws);
     if Assigned(iws) and (iws.Sandbox = AWorkspace) then
@@ -214,9 +209,7 @@ begin
   CreateFormWithSubject('TfrmWorkspace', TObject(AWorkspace)).Show;
 end;
 
-procedure TfrmPrincipal.cxGrid1DBTableView1CellDblClick(
-  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
-  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+procedure TfrmPrincipal.cxGrid1DBTableView1CellDblClick(Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 begin
   AbriAbaWorkspace(TWorkspace(iosWorkspaces.CurrentObject));
 end;
@@ -265,11 +258,11 @@ begin
   CreateForm('TfrmCadastroAcaoConjuntoBases').ShowModal;
 end;
 
-procedure TfrmPrincipal.dxAlertWindowManager1ButtonClick(Sender: TObject;
-  AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
+procedure TfrmPrincipal.dxAlertWindowManager1ButtonClick(Sender: TObject; AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
 begin
   case AButtonIndex of
-    0: FUpdate.Executar;
+    0:
+      FUpdate.Executar;
   end;
 end;
 
@@ -301,8 +294,7 @@ begin
   CreateForm('TfrmCadastroAcaoCatalogoBases').ShowModal;
 end;
 
-procedure TfrmPrincipal.dxDockPanel2Activate(Sender: TdxCustomDockControl;
-  Active: Boolean);
+procedure TfrmPrincipal.dxDockPanel2Activate(Sender: TdxCustomDockControl; Active: Boolean);
 begin
   if txtConsole.CanFocus then
     txtConsole.SetFocus;
@@ -337,6 +329,11 @@ begin
   Application.Terminate;
 end;
 
+procedure TfrmPrincipal.ppmTrayIconChange(Sender: TObject; Source: TMenuItem; Rebuild: Boolean);
+begin
+  SalvarWorkspaceAtual;
+end;
+
 procedure TfrmPrincipal.Timer1Timer(Sender: TObject);
 begin
   if not TUpdate(Sender).HasUpdateAvailable then
@@ -362,22 +359,8 @@ begin
 end;
 
 procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-var
-  recentes: TSandboxesRecentes;
-  I: Integer;
 begin
-  recentes := TSandboxesRecentes.Create;
-  try
-    recentes.Clear;
-    for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount -1 do
-    if dxTabbedMDIManager1.TabProperties.ActivePage.Index = I then
-      recentes.Add(Format('%s=%s',[ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]).Sandbox.Descricao, 'True']))
-    else
-      recentes.Add(Format('%s=%s',[ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]).Sandbox.Descricao, 'False']));
-    recentes.Salvar;
-  finally
-    FreeAndNil(recentes);
-  end;
+  SalvarWorkspaceAtual;
 end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
@@ -396,7 +379,7 @@ begin
   end;
 end;
 
-function ExcluiQuebra( Str: String ): String;
+function ExcluiQuebra(Str: string): string;
 var
   texto: string;
 begin
@@ -418,8 +401,7 @@ begin
   Application.TabbedMDIManager(dxTabbedMDIManager1);
   Application.PromptCommand.InputToOutput := True;
   Application.PromptCommand.OutputLines := txtConsole.Lines;
-  txtConsole.Lines.Delete(Length(txtConsole.Lines.Text)+1);
-
+  txtConsole.Lines.Delete(Length(txtConsole.Lines.Text) + 1);
 
   CarregarVersao;
   dxRibbonStatusBar1.Panels[0].Text := AnsiLowerCase(dtmDatabase.IBDatabase1.DatabaseName);
@@ -428,7 +410,6 @@ begin
 end;
 
 procedure TfrmPrincipal.CarregarWorkspaceRecentes;
-
 var
   recentes: TSandboxesRecentes;
   I: Integer;
@@ -437,16 +418,16 @@ var
 begin
   recentes := TSandboxesRecentes.Create;
   try
-    for I := 0 to recentes.Count -1 do
+    for I := 0 to recentes.Count - 1 do
     begin
-      for X := 0 to iosWorkspaces.ObjectCount -1 do
+      for X := 0 to iosWorkspaces.ObjectCount - 1 do
       begin
         if TWorkspace(iosWorkspaces.Objects[X]).Descricao.Equals(recentes.Names[I]) then
           AbriAbaWorkspace(TWorkspace(iosWorkspaces.Objects[X]));
       end;
     end;
 
-    for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount -1 do
+    for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount - 1 do
     begin
       workspace := ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]);
       if recentes.Values[workspace.Sandbox.Descricao].Equals('True') then
@@ -496,4 +477,35 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.SalvarWorkspaceAtual;
+var
+  recentes: TSandboxesRecentes;
+  I: Integer;
+begin
+  if dxTabbedMDIManager1.TabProperties.PageCount = 0 then
+  begin
+    Exit;
+  end;
+
+  recentes := TSandboxesRecentes.Create;
+  try
+    recentes.Clear;
+    for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount - 1 do
+    begin
+      if dxTabbedMDIManager1.TabProperties.ActivePage.Index = I then
+      begin
+        recentes.Add(Format('%s=%s', [ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]).Sandbox.Descricao, 'True']));
+      end
+      else
+      begin
+        recentes.Add(Format('%s=%s', [ToWorkspace(dxTabbedMDIManager1.TabProperties.Pages[I]).Sandbox.Descricao, 'False']));
+      end;
+    end;
+    recentes.Salvar;
+  finally
+    FreeAndNil(recentes);
+  end;
+end;
+
 end.
+
