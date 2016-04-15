@@ -136,7 +136,6 @@ type
     procedure dxAlertWindowManager1ButtonClick(Sender: TObject; AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
     procedure actOpcoesExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure ppmTrayIconChange(Sender: TObject; Source: TMenuItem; Rebuild: Boolean);
   private
     { Private declarations }
     FUpdate: TUpdate;
@@ -329,11 +328,6 @@ begin
   Application.Terminate;
 end;
 
-procedure TfrmPrincipal.ppmTrayIconChange(Sender: TObject; Source: TMenuItem; Rebuild: Boolean);
-begin
-  SalvarWorkspaceAtual;
-end;
-
 procedure TfrmPrincipal.Timer1Timer(Sender: TObject);
 begin
   if not TUpdate(Sender).HasUpdateAvailable then
@@ -344,6 +338,8 @@ end;
 
 procedure TfrmPrincipal.tiPrincipalClick(Sender: TObject);
 begin
+  SalvarWorkspaceAtual;
+
   Self.tiPrincipal.Visible := False;
   Self.Show();
   WindowState := wsMaximized;

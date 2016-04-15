@@ -783,7 +783,6 @@ object frmPrincipal: TfrmPrincipal
   end
   object ppmTrayIcon: TPopupMenu
     Images = dtmDatabase.SmallImageList
-    OnChange = ppmTrayIconChange
     Left = 472
     Top = 64
     object N1: TMenuItem
