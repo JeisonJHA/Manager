@@ -4,7 +4,8 @@ interface
 
 uses Forms, Classes, SysUtils, Manager.Core.MainMenu, Manager.Core.IDE,
   Manager.Core.Workspace.List, Manager.Core.Configuration,
-  InstantPresentation, Vcl.ActnList, dxBar;
+  InstantPresentation, Vcl.ActnList, dxBar, Workspace, dxTabbedMDI,
+  Manager.Core.API.Workspace;
 
 type
   TControllerMain = class(TObject)
@@ -17,6 +18,7 @@ type
     destructor Destroy; override;
     procedure PrepararMainMenu;
     procedure PrepararWorkspaceList(AInstantSelector: TInstantSelector);
+    procedure AbriAbaWorkspace(AWorkspace: TObject);
   end;
 
 implementation
@@ -32,6 +34,27 @@ type
   end;
 
 { TControllerMain }
+
+procedure TControllerMain.AbriAbaWorkspace(AWorkspace: TObject);
+var
+  I: Integer;
+  workspace: IWorkspace;
+begin
+  if not Assigned(AWorkspace) then
+    Exit;
+
+  for I := 0 to Application.Main.MDIManager.TabProperties.PageCount - 1 do
+  begin
+    Application.Main.MDIManager.TabProperties.Pages[I].MDIChild.GetInterface(IWorkspace, workspace);
+    if Assigned(workspace) and (workspace.Sandbox = AWorkspace) then
+    begin
+      Application.Main.MDIManager.TabProperties.PageIndex := I;
+      Exit;
+    end;
+  end;
+
+  CreateFormWithSubject('TfrmWorkspace2', TObject(AWorkspace)).Show;
+end;
 
 constructor TControllerMain.Create;
 begin

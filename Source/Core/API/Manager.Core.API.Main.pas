@@ -3,7 +3,7 @@ unit Manager.Core.API.Main;
 interface
 
 uses Manager.Core.API.Workspace, dxRibbon, Vcl.ActnList, InstantPresentation,
-  dxBar;
+  dxBar, dxTabbedMDI;
 
 type
   IMain = interface
@@ -14,6 +14,7 @@ type
     function Workspaces: TInstantSelector;
     function TabPrincipal: TdxRibbonTab;
     function ToolBarCadastro: TdxBar;
+    function MDIManager: TdxTabbedMDIManager;
   end;
 
 implementation

@@ -34,11 +34,9 @@ type
     iosWorkspaces: TInstantSelector;
     dtsWorkspaces: TDataSource;
     dxDockSite1: TdxDockSite;
-    dxLayoutDockSite1: TdxLayoutDockSite;
     dxDockPanel1: TdxDockPanel;
     Panel1: TPanel;
     DBGrid1: TJvDBGrid;
-    Button1: TButton;
     mdiControleTelas: TdxTabbedMDIManager;
     barCadastros: TdxBar;
     aclToolbars: TActionList;
@@ -71,10 +69,11 @@ type
     dxBarSeparator1: TdxBarSeparator;
     dxBarSeparator2: TdxBarSeparator;
     btnMenu: TdxBarSubItem;
+    dxLayoutDockSite1: TdxLayoutDockSite;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure actOnAbreTelaExecute(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
     FController: TControllerMain;
@@ -84,6 +83,7 @@ type
     function Workspaces: TInstantSelector;
     function TabPrincipal: TdxRibbonTab;
     function ToolBarCadastro: TdxBar;
+    function MDIManager: TdxTabbedMDIManager;
     procedure OnAbreTelaExecute(Sender: TObject);
   public
     { Public declarations }
@@ -106,16 +106,12 @@ uses udtmDatabase, Manager.Core.Forms.Utils;
 procedure TfrmMain.actOnAbreTelaExecute(Sender: TObject);
 begin
   CreateForm(TAction(Sender).HelpKeyword).ShowModal;
+  Controller.PrepararMainMenu;
 end;
 
 function TfrmMain.ActionList: TActionList;
 begin
   Exit(aclToolbars);
-end;
-
-procedure TfrmMain.Button1Click(Sender: TObject);
-begin
-  Controller.PrepararMainMenu;
 end;
 
 constructor TfrmMain.Create(AOwner: TComponent);
@@ -127,6 +123,11 @@ end;
 function TfrmMain.CurrentWorkspace: IWorkspace;
 begin
   Exit(nil);
+end;
+
+procedure TfrmMain.DBGrid1DblClick(Sender: TObject);
+begin
+  Controller.AbriAbaWorkspace(iosWorkspaces.CurrentObject);
 end;
 
 destructor TfrmMain.Destroy;
@@ -144,6 +145,11 @@ procedure TfrmMain.FormShow(Sender: TObject);
 begin
   Controller.PrepararMainMenu;
   Controller.PrepararWorkspaceList(iosWorkspaces);
+end;
+
+function TfrmMain.MDIManager: TdxTabbedMDIManager;
+begin
+  Exit(mdiControleTelas);
 end;
 
 function TfrmMain.RibbonTabs: TdxRibbonTabCollection;

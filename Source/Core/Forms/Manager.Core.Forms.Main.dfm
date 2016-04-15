@@ -10,6 +10,7 @@ object frmMain: TfrmMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIForm
   OldCreateOrder = True
   OnCreate = FormCreate
   OnShow = FormShow
@@ -23,7 +24,7 @@ object frmMain: TfrmMain
     ApplicationButton.Menu = dxRibbonBackstageView1
     BarManager = dxBarManager1
     Style = rs2013
-    ColorSchemeAccent = rcsaOrange
+    ColorSchemeAccent = rcsaPurple
     ColorSchemeName = 'White'
     QuickAccessToolbar.Toolbar = dxBarManager1Bar1
     SupportNonClientDrawing = True
@@ -113,41 +114,33 @@ object frmMain: TfrmMain
     Font.Name = 'Tahoma'
     Font.Style = []
   end
-  object Button1: TButton
-    Left = 864
-    Top = 195
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
-    TabOrder = 8
-    OnClick = Button1Click
-  end
   object dxDockSite1: TdxDockSite
     Left = 0
     Top = 155
-    Width = 185
+    Width = 201
     Height = 482
     Color = 10114859
     ManagerColor = False
     Align = alLeft
     AutoSize = True
-    ExplicitHeight = 97
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
     object dxLayoutDockSite1: TdxLayoutDockSite
       Left = 0
       Top = 0
-      Width = 185
+      Width = 201
       Height = 482
+      ExplicitWidth = 300
+      ExplicitHeight = 200
       DockingType = 0
-      OriginalWidth = 185
+      OriginalWidth = 201
       OriginalHeight = 200
     end
     object dxDockPanel1: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 185
+      Width = 201
       Height = 482
       AllowFloating = True
       AutoHide = False
@@ -156,14 +149,15 @@ object frmMain: TfrmMain
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
+      ExplicitHeight = 97
       DockingType = 0
-      OriginalWidth = 185
+      OriginalWidth = 201
       OriginalHeight = 97
       object Panel1: TPanel
         AlignWithMargins = True
         Left = 0
         Top = 0
-        Width = 174
+        Width = 190
         Height = 438
         Margins.Left = 0
         Margins.Top = 0
@@ -171,10 +165,12 @@ object frmMain: TfrmMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 198
+        ExplicitHeight = 97
         object DBGrid1: TJvDBGrid
           Left = 0
           Top = 0
-          Width = 174
+          Width = 190
           Height = 438
           Align = alClient
           DataSource = dtsWorkspaces
@@ -185,6 +181,7 @@ object frmMain: TfrmMain
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = DBGrid1DblClick
           AutoSizeColumns = True
           SelectColumnsDialogStrings.Caption = 'Select columns'
           SelectColumnsDialogStrings.OK = '&OK'
@@ -197,7 +194,7 @@ object frmMain: TfrmMain
               Expanded = False
               FieldName = 'Descricao'
               Title.Caption = 'Descri'#231#227'o'
-              Width = 170
+              Width = 186
               Visible = True
             end>
         end
@@ -252,6 +249,7 @@ object frmMain: TfrmMain
       FloatTop = 8
       FloatClientWidth = 0
       FloatClientHeight = 0
+      Images = dtmDatabase.SmallImageList
       ItemLinks = <
         item
           Visible = True
@@ -286,10 +284,13 @@ object frmMain: TfrmMain
     object btnCadastroAcaoCopiar: TdxBarLargeButton
       Action = actCadastroAcaoCopiar
       Category = 0
+      SyncImageIndex = False
+      ImageIndex = 12
     end
     object btnCadastroAcaoExecutar: TdxBarButton
       Action = actCadastroAcaoExecutar
       Category = 0
+      ImageIndex = 5
     end
     object btnCadastroAcaoConfigurarBaseDeDadosDB2: TdxBarLargeButton
       Action = actCadastroAcaoConfigurarBaseDeDadosDB2
@@ -306,6 +307,8 @@ object frmMain: TfrmMain
     object btnCadastroAcaoConjuntoBases: TdxBarLargeButton
       Action = actCadastroAcaoConjuntoBases
       Category = 0
+      SyncImageIndex = False
+      ImageIndex = 1
     end
     object btnCadastroAcaoConfigurarBaseDeDados: TdxBarButton
       Action = actCadastroAcaoConfigurarBaseDeDados
@@ -314,19 +317,23 @@ object frmMain: TfrmMain
     object btnCadastroBarraFerramentas: TdxBarButton
       Action = actCadastroBarraFerramentas
       Category = 0
+      ImageIndex = 15
     end
     object btnCadastroAcaoMontarAmbiente: TdxBarButton
       Action = actCadastroAcaoMontarAmbiente
       Category = 0
+      ImageIndex = 20
     end
     object btnCadastroAcaoCatalogoBases: TdxBarButton
       Action = actCadastroAcaoCatalogoBases
       Category = 0
+      ImageIndex = 1
     end
     object btnBancoDeDados: TdxBarSubItem
       Caption = 'Banco de Dados'
       Category = 0
       Visible = ivAlways
+      ImageIndex = 1
       ItemLinks = <
         item
           Visible = True
@@ -345,6 +352,7 @@ object frmMain: TfrmMain
       Caption = 'A'#231#245'es'
       Category = 0
       Visible = ivAlways
+      ImageIndex = 16
       ItemLinks = <
         item
           Visible = True
@@ -391,6 +399,7 @@ object frmMain: TfrmMain
       Caption = 'Menu'
       Category = 0
       Visible = ivAlways
+      ImageIndex = 17
       ItemLinks = <
         item
           Visible = True
@@ -418,7 +427,7 @@ object frmMain: TfrmMain
     Top = 384
   end
   object mdiControleTelas: TdxTabbedMDIManager
-    Active = False
+    Active = True
     TabProperties.CustomButtons.Buttons = <>
     Left = 936
     Top = 288
@@ -430,6 +439,7 @@ object frmMain: TfrmMain
     object actCadastroSistema: TAction
       Caption = 'Sistemas'
       HelpKeyword = 'TfrmCadastroSistema'
+      ImageIndex = 3
       OnExecute = actOnAbreTelaExecute
     end
     object actFormularioOpcoes: TAction
