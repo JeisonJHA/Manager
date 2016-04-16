@@ -5,10 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Manager.Core.API.Workspace, Workspace,
-  Manager.Core.Forms.Modelo;
+  Manager.Core.Forms.Modelo, Manager.Core.API.Observer;
 
 type
-  TfrmWorkspace2 = class(TfrmModelo, IWorkspace)
+  TfrmWorkspace2 = class(TfrmModelo, IWorkspace, IObserver)
   private
     { Private declarations }
     FSandbox: TWorkspace;
@@ -16,6 +16,7 @@ type
   public
     { Public declarations }
     constructor Create(AOwner: TComponent; var ASubject: TObject); override;
+    procedure Update(Sender: TObject);
   end;
 
 var
@@ -38,6 +39,11 @@ end;
 function TfrmWorkspace2.Sandbox: TWorkspace;
 begin
   Exit(FSandbox);
+end;
+
+procedure TfrmWorkspace2.Update(Sender: TObject);
+begin
+  ShowMessage('Ops! Tenho atualizar os dados da tela.');
 end;
 
 initialization

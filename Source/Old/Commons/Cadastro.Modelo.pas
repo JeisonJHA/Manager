@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Manager.Core.Forms.Modelo, Data.DB, cxImageComboBox,
   InstantPresentation, Vcl.ExtCtrls, Vcl.StdCtrls, System.Actions, Vcl.ActnList,
-  cxDBEdit;
+  cxDBEdit, Manager.Core.IDE;
 
 type
   TfrmCadastroModeloClass = class of TfrmCadastroModelo;
@@ -22,6 +22,7 @@ type
     procedure actConfirmarUpdate(Sender: TObject);
     procedure actConfirmarExecute(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   protected
@@ -75,6 +76,13 @@ begin
       item.ImageIndex := I;
       item.Value := I;
     end;
+end;
+
+procedure TfrmCadastroModelo.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Application.Notify;
+  inherited;
 end;
 
 end.

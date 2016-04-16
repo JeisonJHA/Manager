@@ -152,7 +152,6 @@ object frmPrincipal: TfrmPrincipal
     ManagerColor = False
     Align = alLeft
     AutoSize = True
-    ExplicitHeight = 97
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -230,7 +229,6 @@ object frmPrincipal: TfrmPrincipal
     Height = 28
     Align = alBottom
     AutoSize = True
-    ExplicitWidth = 185
     DockingType = 5
     OriginalWidth = 1071
     OriginalHeight = 2
@@ -247,7 +245,7 @@ object frmPrincipal: TfrmPrincipal
     object dxDockPanel2: TdxDockPanel
       Left = 0
       Top = 0
-      Width = 185
+      Width = 0
       Height = 140
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -270,8 +268,8 @@ object frmPrincipal: TfrmPrincipal
       object txtConsole: TMemo
         Left = 0
         Top = 0
-        Width = 1102
-        Height = 0
+        Width = 0
+        Height = 96
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone

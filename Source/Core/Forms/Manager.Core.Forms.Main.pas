@@ -15,7 +15,7 @@ uses
   cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   dxDockPanel, dxDockControl, JvExDBGrids, JvDBGrid, Vcl.StdCtrls,
-  dxBarBuiltInMenu, dxTabbedMDI;
+  dxBarBuiltInMenu, dxTabbedMDI, Vcl.Menus, Manager.Core.IDE;
 
 type
   TfrmMain = class(TdxRibbonForm, IMain)
@@ -70,10 +70,16 @@ type
     dxBarSeparator2: TdxBarSeparator;
     btnMenu: TdxBarSubItem;
     dxLayoutDockSite1: TdxLayoutDockSite;
+    tiPrincipal: TTrayIcon;
+    ppmTrayIcon: TPopupMenu;
+    N1: TMenuItem;
+    mnuFechar: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure actOnAbreTelaExecute(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure tiPrincipalClick(Sender: TObject);
+    procedure mnuFecharClick(Sender: TObject);
   private
     { Private declarations }
     FController: TControllerMain;
@@ -84,7 +90,6 @@ type
     function TabPrincipal: TdxRibbonTab;
     function ToolBarCadastro: TdxBar;
     function MDIManager: TdxTabbedMDIManager;
-    procedure OnAbreTelaExecute(Sender: TObject);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -106,7 +111,6 @@ uses udtmDatabase, Manager.Core.Forms.Utils;
 procedure TfrmMain.actOnAbreTelaExecute(Sender: TObject);
 begin
   CreateForm(TAction(Sender).HelpKeyword).ShowModal;
-  Controller.PrepararMainMenu;
 end;
 
 function TfrmMain.ActionList: TActionList;
@@ -118,6 +122,7 @@ constructor TfrmMain.Create(AOwner: TComponent);
 begin
   inherited;
   FController := TControllerMain.Create;
+  Application.Register(FController);
 end;
 
 function TfrmMain.CurrentWorkspace: IWorkspace;
@@ -152,6 +157,11 @@ begin
   Exit(mdiControleTelas);
 end;
 
+procedure TfrmMain.mnuFecharClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
 function TfrmMain.RibbonTabs: TdxRibbonTabCollection;
 begin
   Exit(dxRibbon1.Tabs);
@@ -162,6 +172,14 @@ begin
   Exit(ribbonTabPrincipal);
 end;
 
+procedure TfrmMain.tiPrincipalClick(Sender: TObject);
+begin
+  Self.tiPrincipal.Visible := False;
+  Self.Show();
+  WindowState := wsMaximized;
+  Application.BringToFront();
+end;
+
 function TfrmMain.ToolBarCadastro: TdxBar;
 begin
   Exit(barCadastros);
@@ -170,10 +188,6 @@ end;
 function TfrmMain.Workspaces: TInstantSelector;
 begin
   Exit(iosWorkspaces);
-end;
-
-procedure TfrmMain.OnAbreTelaExecute(Sender: TObject);
-begin
 end;
 
 end.

@@ -2,7 +2,7 @@ unit IDE.Controller.Parser;
 
 interface
 
-uses Classes, SysUtils, Forms, Generics.Collections, IDE.IParser, Workspace;
+uses Classes, SysUtils, Forms, Generics.Collections, Manager.Core.API.Parser, Workspace;
 
 type
   TIDEControllerParser = class(TObject)

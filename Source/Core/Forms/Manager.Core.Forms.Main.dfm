@@ -123,6 +123,7 @@ object frmMain: TfrmMain
     ManagerColor = False
     Align = alLeft
     AutoSize = True
+    ExplicitHeight = 97
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -131,8 +132,6 @@ object frmMain: TfrmMain
       Top = 0
       Width = 201
       Height = 482
-      ExplicitWidth = 300
-      ExplicitHeight = 200
       DockingType = 0
       OriginalWidth = 201
       OriginalHeight = 200
@@ -149,7 +148,6 @@ object frmMain: TfrmMain
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
-      ExplicitHeight = 97
       DockingType = 0
       OriginalWidth = 201
       OriginalHeight = 97
@@ -165,8 +163,6 @@ object frmMain: TfrmMain
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 198
-        ExplicitHeight = 97
         object DBGrid1: TJvDBGrid
           Left = 0
           Top = 0
@@ -496,6 +492,27 @@ object frmMain: TfrmMain
       Caption = 'Cat'#225'logo de bases'
       HelpKeyword = 'TfrmCadastroAcaoCatalogoBases'
       OnExecute = actOnAbreTelaExecute
+    end
+  end
+  object tiPrincipal: TTrayIcon
+    BalloonTitle = 'Manager'
+    PopupMenu = ppmTrayIcon
+    Visible = True
+    OnClick = tiPrincipalClick
+    Left = 440
+    Top = 64
+  end
+  object ppmTrayIcon: TPopupMenu
+    Images = dtmDatabase.SmallImageList
+    Left = 472
+    Top = 64
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object mnuFechar: TMenuItem
+      Caption = 'Fechar'
+      ImageIndex = 38
+      OnClick = mnuFecharClick
     end
   end
 end

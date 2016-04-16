@@ -159,7 +159,7 @@ implementation
 
 uses
   JvTypes, Winapi.ShellApi, udtmDatabase, Workspace.Constantes, IDE.Controller.MainMenu,
-  IDE.Utils, IDE.IWorkspace, Manager.Core.Forms.Utils, Workspace.Recentes;
+  IDE.Utils, IDE.IWorkspace, Manager.Core.Forms.Utils, Manager.Core.Workspace.Recentes;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -411,12 +411,12 @@ end;
 
 procedure TfrmPrincipal.CarregarWorkspaceRecentes;
 var
-  recentes: TSandboxesRecentes;
+  recentes: TWorkspacesRecentes;
   I: Integer;
   workspace: IWorkspace;
   X: Integer;
 begin
-  recentes := TSandboxesRecentes.Create;
+  recentes := TWorkspacesRecentes.Create;
   try
     for I := 0 to recentes.Count - 1 do
     begin
@@ -479,7 +479,7 @@ end;
 
 procedure TfrmPrincipal.SalvarWorkspaceAtual;
 var
-  recentes: TSandboxesRecentes;
+  recentes: TWorkspacesRecentes;
   I: Integer;
 begin
   if dxTabbedMDIManager1.TabProperties.PageCount = 0 then
@@ -487,7 +487,7 @@ begin
     Exit;
   end;
 
-  recentes := TSandboxesRecentes.Create;
+  recentes := TWorkspacesRecentes.Create;
   try
     recentes.Clear;
     for I := 0 to dxTabbedMDIManager1.TabProperties.PageCount - 1 do
