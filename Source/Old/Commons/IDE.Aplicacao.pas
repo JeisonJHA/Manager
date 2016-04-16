@@ -2,9 +2,9 @@ unit IDE.Aplicacao;
 
 interface
 
-uses Classes, SysUtils, Forms, IDE.Controller.Parser, IDE.IWorkspace, dxTabbedMDI,
+uses Classes, SysUtils, Forms, Manager.Core.Parser.Manager, IDE.IWorkspace, dxTabbedMDI,
   DosCommand, ActiveX, adshlp, ActiveDs_Tlb, System.Win.ComObj, Manager.Core.Configuration,
-  IDE.Inicializador;
+  Manager.Core.IDE.Prepare;
 
 type
   TIDEAplicacao = class helper for TApplication
@@ -14,8 +14,8 @@ type
     function GetConfiguracoes: TConfiguration;
   public
     procedure Inicializar;
-    function Parser: TIDEControllerParser;
-    function Inicializador: TInicializador;
+    function Parser: TParserManager;
+    function Inicializador: TIDEPrepare;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
@@ -37,8 +37,8 @@ end;
 type
   TAplicacao = class(TObject)
   private
-    FInicializador: TInicializador;
-    FParser: TIDEControllerParser;
+    FInicializador: TIDEPrepare;
+    FParser: TParserManager;
     FTabbedMDIManager: TdxTabbedMDIManager;
     FPromptCommand: TDosCommand;
     FadObject: IADs;
@@ -49,8 +49,8 @@ type
     destructor Destroy; override;
     function Login(const AUsuario: string; const ASenha: string; ADominio: string): boolean;
   published
-    function Parser: TIDEControllerParser;
-    function Inicializador: TInicializador;
+    function Parser: TParserManager;
+    function Inicializador: TIDEPrepare;
     procedure TabbedMDIManager(ATabbedMDIManager: TdxTabbedMDIManager);
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
     property PromptCommand: TDosCommand read FPromptCommand;
@@ -64,8 +64,8 @@ var
 
 constructor TAplicacao.Create;
 begin
-  FInicializador := TInicializador.Create;
-  FParser := TIDEControllerParser.Create;
+  FInicializador := TIDEPrepare.Create;
+  FParser := TParserManager.Create;
   FPromptCommand := TDosCommand.Create(nil);
   FConfiguracoes := TConfiguration.Create(nil);
 end;
@@ -100,7 +100,7 @@ begin
   Exit(nil);
 end;
 
-function TAplicacao.Inicializador: TInicializador;
+function TAplicacao.Inicializador: TIDEPrepare;
 begin
   Exit(_aplicacao.FInicializador);
 end;
@@ -124,7 +124,7 @@ begin
   CoUninitialize;
 end;
 
-function TAplicacao.Parser: TIDEControllerParser;
+function TAplicacao.Parser: TParserManager;
 begin
   Exit(_aplicacao.FParser);
 end;
@@ -153,7 +153,7 @@ begin
   Exit(_aplicacao.PromptCommand);
 end;
 
-function TIDEAplicacao.Inicializador: TInicializador;
+function TIDEAplicacao.Inicializador: TIDEPrepare;
 begin
   Exit(_aplicacao.Inicializador);
 end;
@@ -182,7 +182,7 @@ begin
   Exit(_aplicacao.Login(AUsuario, ASenha, ADominio));
 end;
 
-function TIDEAplicacao.Parser: TIDEControllerParser;
+function TIDEAplicacao.Parser: TParserManager;
 begin
   Exit(_aplicacao.Parser);
 end;

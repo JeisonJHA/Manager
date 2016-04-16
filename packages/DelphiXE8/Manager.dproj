@@ -156,7 +156,7 @@
             <Form>frmPrincipal</Form>
         </DCCReference>
         <DCCReference Include="..\..\Source\Old\Commons\IDE.Aplicacao.pas"/>
-        <DCCReference Include="..\..\Source\Old\Controllers\IDE.Controller.Parser.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Parser.Manager.pas"/>
         <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Parser.pas"/>
         <DCCReference Include="..\..\Source\Core\Parser\Manager.Core.Parser.Workspace.pas"/>
         <DCCReference Include="..\..\Source\Old\Commons\IDE.IWorkspace.pas"/>
@@ -201,13 +201,13 @@
         <DCCReference Include="..\..\Source\Models\AcaoExclusao.pas"/>
         <DCCReference Include="..\..\Source\Old\Commons\DosCommand.pas"/>
         <DCCReference Include="..\..\Source\Old\Commons\Manager.PromptCommand.pas"/>
-        <DCCReference Include="..\..\Source\Old\Commons\IDE.Inicializador.pas"/>
-        <DCCReference Include="..\..\Source\Old\Commons\IDE.Inicializador.Intf.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Prepare.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Prepare.pas"/>
         <DCCReference Include="..\..\Source\Old\Commons\IDE.Update.pas"/>
-        <DCCReference Include="..\..\Source\Old\Commons\IDE.Forms.Splash.pas">
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Splash.pas">
             <Form>frmSplash</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Old\Commons\IDE.Criptografia.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Utils.pas"/>
         <DCCReference Include="..\..\third-part\Updater\Source\Updater.Core.pas"/>
         <DCCReference Include="..\..\third-part\Updater\Source\Updater.HttpDownload.pas"/>
         <DCCReference Include="..\..\Source\Old\Commons\Formulario.Opcoes.pas">
@@ -227,9 +227,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Source\Core\Manager.Core.MainMenu.pas"/>
-        <DCCReference Include="..\..\Source\Core\Manager.Core.Controller.Main.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Main.Controller.pas"/>
         <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Observer.pas"/>
-        <DCCReference Include="..\..\Source\Core\Manager.Core.Application.Notify.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Notify.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Content.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.Controller.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -648,13 +650,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

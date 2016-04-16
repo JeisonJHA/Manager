@@ -6,7 +6,7 @@ uses Classes, SysUtils, Forms, Manager.Core.IDE, Generics.Collections, Manager.C
   Workspace, Manager.Core.Parser;
 
 type
-  TIDEParserWorkspace = class(TParser, IParser)
+  TParserWorkspace = class(TParser, IParser)
   protected
     function PegarValor(ASandbox: TWorkspace; const AChave: string): string; override;
   public
@@ -17,14 +17,14 @@ implementation
 
 { TIDEParserWorkspace }
 
-constructor TIDEParserWorkspace.Create;
+constructor TParserWorkspace.Create;
 begin
   inherited;
   FChaves.Add('{WS_DIR}');
   FChaves.Add('{WS_TITLE}');
 end;
 
-function TIDEParserWorkspace.PegarValor(ASandbox: TWorkspace; const AChave: string): string;
+function TParserWorkspace.PegarValor(ASandbox: TWorkspace; const AChave: string): string;
 begin
   if Pos(AChave, '{WS_DIR}') > 0 then
     Exit(IncludeTrailingBackslash(ASandbox.Diretorio))

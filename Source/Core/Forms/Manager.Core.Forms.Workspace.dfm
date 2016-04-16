@@ -13,6 +13,29 @@ object frmWorkspace2: TfrmWorkspace2
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Visible = True
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object dxTileControl1: TdxTileControl
+    Left = 0
+    Top = 0
+    Width = 635
+    Height = 299
+    TabOrder = 0
+    ExplicitLeft = 128
+    ExplicitTop = 16
+    ExplicitWidth = 400
+    ExplicitHeight = 300
+  end
+  object Button1: TButton
+    Left = 520
+    Top = 40
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 1
+    OnClick = Button1Click
+  end
 end

@@ -2,11 +2,11 @@ unit IDE.Update;
 
 interface
 
-uses Classes, SysUtils, IDE.Inicializador.Intf, Forms, Dialogs, ShellApi,
+uses Classes, SysUtils, Manager.Core.API.Prepare, Forms, Dialogs, ShellApi,
   Windows, System.UITypes, Vcl.ActnList, Updater.Core, Vcl.ExtCtrls;
 
 type
-  TUpdate = class(TTimer, IInicializador)
+  TUpdate = class(TTimer, IPrepare)
   private
     FUpdater: TUpdaterCore;
     FUpdateAvailable: boolean;

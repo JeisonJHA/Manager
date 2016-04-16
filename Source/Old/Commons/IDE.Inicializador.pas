@@ -3,7 +3,7 @@ unit IDE.Inicializador;
 interface
 
 uses Classes, SysUtils, Forms, Generics.Collections, IDE.Inicializador.Intf,
-  IDE.Forms.Splash;
+  Manager.Core.Forms.Splash;
 
 type
   TInicializador = class(TObject)

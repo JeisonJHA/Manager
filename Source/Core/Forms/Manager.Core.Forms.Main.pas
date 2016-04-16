@@ -10,7 +10,7 @@ uses
   dxSkinsForm, dxStatusBar, dxRibbonStatusBar, cxLabel, dxGallery,
   dxGalleryControl, dxRibbonBackstageViewGalleryControl, Manager.Core.API.Main,
   Manager.Core.API.Workspace, System.Actions, Vcl.ActnList, Data.DB,
-  InstantPresentation, Manager.Core.Controller.Main, Vcl.Grids, Vcl.DBGrids,
+  InstantPresentation, Manager.Core.Forms.Main.Controller, Vcl.Grids, Vcl.DBGrids,
   cxPC, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
   cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
@@ -78,7 +78,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure actOnAbreTelaExecute(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
-    procedure tiPrincipalClick(Sender: TObject);
     procedure mnuFecharClick(Sender: TObject);
   private
     { Private declarations }
@@ -90,6 +89,7 @@ type
     function TabPrincipal: TdxRibbonTab;
     function ToolBarCadastro: TdxBar;
     function MDIManager: TdxTabbedMDIManager;
+    function TrayIcon: TTrayIcon;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -121,7 +121,7 @@ end;
 constructor TfrmMain.Create(AOwner: TComponent);
 begin
   inherited;
-  FController := TControllerMain.Create;
+  FController := TControllerMain.Create(Self);
   Application.Register(FController);
 end;
 
@@ -144,12 +144,12 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   DisableAero := True;
+  Controller.OnCreate(Self);
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
-  Controller.PrepararMainMenu;
-  Controller.PrepararWorkspaceList(iosWorkspaces);
+  Controller.OnShow(Self);
 end;
 
 function TfrmMain.MDIManager: TdxTabbedMDIManager;
@@ -172,17 +172,14 @@ begin
   Exit(ribbonTabPrincipal);
 end;
 
-procedure TfrmMain.tiPrincipalClick(Sender: TObject);
-begin
-  Self.tiPrincipal.Visible := False;
-  Self.Show();
-  WindowState := wsMaximized;
-  Application.BringToFront();
-end;
-
 function TfrmMain.ToolBarCadastro: TdxBar;
 begin
   Exit(barCadastros);
+end;
+
+function TfrmMain.TrayIcon: TTrayIcon;
+begin
+  Exit(tiPrincipal);
 end;
 
 function TfrmMain.Workspaces: TInstantSelector;

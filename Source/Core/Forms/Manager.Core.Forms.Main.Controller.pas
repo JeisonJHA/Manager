@@ -1,4 +1,4 @@
-unit Manager.Core.Controller.Main;
+unit Manager.Core.Forms.Main.Controller;
 
 interface
 
@@ -11,23 +11,28 @@ uses Forms, Classes, SysUtils, Manager.Core.MainMenu, Manager.Core.IDE,
 type
   TControllerMain = class(TInterfacedObject, IObserver)
   private
+    FForm: TForm;
     FMainMenu: TManagerMainMenu;
     FConfiguration: TConfiguration;
     FWorkspaceList: TWorkspaceList;
     FWorkspacesRecentes: TWorkspacesRecentes;
     procedure Update(Sender: TObject);
+    procedure OnTrayIconClick(Sender: TObject);
   public
-    constructor Create;
+    constructor Create(AForm: TForm);
     destructor Destroy; override;
     procedure PrepararMainMenu;
     procedure PrepararWorkspaceList(AInstantSelector: TInstantSelector);
     procedure AbriAbaWorkspace(AWorkspace: TObject);
     procedure SalvarWorkspaceAtual;
+
+    procedure OnShow(Sender: TObject);
+    procedure OnCreate(Sender: TObject);
   end;
 
 implementation
 
-uses Manager.Core.Forms.Utils;
+uses Manager.Core.Forms.Utils, Manager.Core.Forms.Main;
 
 type
   TTelaAction = class(TAction)
@@ -35,6 +40,11 @@ type
     FClassNameForm: string;
   published
     property ClassNameForm: string read FClassNameForm write FClassNameForm;
+  end;
+
+  function ToMainForm(AForm: TForm): TfrmMain;
+  begin
+    Exit(TfrmMain(AForm));
   end;
 
 { TControllerMain }
@@ -48,12 +58,12 @@ begin
   if not Assigned(AWorkspace) then
     Exit;
 
-  for I := 0 to Application.Main.MDIManager.TabProperties.PageCount - 1 do
+  for I := 0 to ToMainForm(FForm).mdiControleTelas.TabProperties.PageCount - 1 do
   begin
-    Application.Main.MDIManager.TabProperties.Pages[I].MDIChild.GetInterface(IWorkspace, workspace);
+    ToMainForm(FForm).mdiControleTelas.TabProperties.Pages[I].MDIChild.GetInterface(IWorkspace, workspace);
     if Assigned(workspace) and (workspace.Sandbox = AWorkspace) then
     begin
-      Application.Main.MDIManager.TabProperties.PageIndex := I;
+      ToMainForm(FForm).mdiControleTelas.TabProperties.PageIndex := I;
       Exit;
     end;
   end;
@@ -62,8 +72,9 @@ begin
   tela.Show;
 end;
 
-constructor TControllerMain.Create;
+constructor TControllerMain.Create(AForm: TForm);
 begin
+  FForm := AForm;
   FMainMenu := TManagerMainMenu.Create;
   FConfiguration := TConfiguration.Create(nil);
   FWorkspaceList := TWorkspaceList.Create(FConfiguration);
@@ -99,7 +110,7 @@ var
   I: Integer;
   tabProperties: TdxTabbedMDITabProperties;
 begin
-  tabProperties := Application.Main.MDIManager.TabProperties;
+  tabProperties := ToMainForm(FForm).mdiControleTelas.TabProperties;
   if tabProperties.PageCount = 0 then
   begin
     Exit;
@@ -123,6 +134,26 @@ end;
 procedure TControllerMain.Update(Sender: TObject);
 begin
   PrepararMainMenu;
+end;
+
+procedure TControllerMain.OnCreate(Sender: TObject);
+begin
+
+end;
+
+procedure TControllerMain.OnShow(Sender: TObject);
+begin
+  PrepararMainMenu;
+  PrepararWorkspaceList(ToMainForm(FForm).iosWorkspaces);
+  ToMainForm(FForm).tiPrincipal.OnClick := OnTrayIconClick;
+end;
+
+procedure TControllerMain.OnTrayIconClick(Sender: TObject);
+begin
+  ToMainForm(FForm).tiPrincipal.Visible := False;
+  ToMainForm(FForm).Show();
+  ToMainForm(FForm).WindowState := wsMaximized;
+  Application.BringToFront();
 end;
 
 end.

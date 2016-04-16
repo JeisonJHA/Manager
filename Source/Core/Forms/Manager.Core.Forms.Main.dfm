@@ -123,7 +123,6 @@ object frmMain: TfrmMain
     ManagerColor = False
     Align = alLeft
     AutoSize = True
-    ExplicitHeight = 97
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -498,7 +497,6 @@ object frmMain: TfrmMain
     BalloonTitle = 'Manager'
     PopupMenu = ppmTrayIcon
     Visible = True
-    OnClick = tiPrincipalClick
     Left = 440
     Top = 64
   end

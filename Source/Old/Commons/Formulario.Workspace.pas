@@ -50,7 +50,7 @@ implementation
 uses udtmDatabase, Manager.Core.Workspace.Action, Winapi.ShellApi,
   Workspace.Constantes, Sistema, Manager.Core.Configuration,
   Cadastro.Acao.Configurar.BaseDeDados.MSSQL, AcaoConjuntoDeBases, LbCipher,
-  LbProc, LbString, LbUtils, IDE.Criptografia, Manager.Core.Forms.Utils;
+  LbProc, LbString, LbUtils, Manager.Core.Utils, Manager.Core.Forms.Utils;
 
 const
   BoxColors: array [0 .. 3] of TColor = (

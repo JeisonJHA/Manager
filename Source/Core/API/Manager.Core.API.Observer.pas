@@ -10,9 +10,9 @@ type
 
   ISubject = interface
   ['{A9240295-B0C2-441D-BD43-932AF735832A}']
-    procedure RegisterObserver(Observer: IObserver);
-    procedure RemoveObserver(Observer: IObserver);
-    procedure NotifyObservers;
+    procedure Register(Observer: IObserver);
+    procedure Remove(Observer: IObserver);
+    procedure Notify;
   end;
 
 implementation

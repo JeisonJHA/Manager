@@ -30,7 +30,7 @@ uses
   Workspace in '..\..\Source\Models\Workspace.pas',
   ufrmPrincipal in '..\..\Source\Old\Commons\ufrmPrincipal.pas' {frmPrincipal},
   IDE.Aplicacao in '..\..\Source\Old\Commons\IDE.Aplicacao.pas',
-  IDE.Controller.Parser in '..\..\Source\Old\Controllers\IDE.Controller.Parser.pas',
+  Manager.Core.Parser.Manager in '..\..\Source\Core\Manager.Core.Parser.Manager.pas',
   Manager.Core.API.Parser in '..\..\Source\Core\API\Manager.Core.API.Parser.pas',
   Manager.Core.Parser.Workspace in '..\..\Source\Core\Parser\Manager.Core.Parser.Workspace.pas',
   IDE.IWorkspace in '..\..\Source\Old\Commons\IDE.IWorkspace.pas',
@@ -55,11 +55,11 @@ uses
   AcaoExclusao in '..\..\Source\Models\AcaoExclusao.pas',
   DosCommand in '..\..\Source\Old\Commons\DosCommand.pas',
   Manager.PromptCommand in '..\..\Source\Old\Commons\Manager.PromptCommand.pas',
-  IDE.Inicializador in '..\..\Source\Old\Commons\IDE.Inicializador.pas',
-  IDE.Inicializador.Intf in '..\..\Source\Old\Commons\IDE.Inicializador.Intf.pas',
+  Manager.Core.IDE.Prepare in '..\..\Source\Core\Manager.Core.IDE.Prepare.pas',
+  Manager.Core.API.Prepare in '..\..\Source\Core\API\Manager.Core.API.Prepare.pas',
   IDE.Update in '..\..\Source\Old\Commons\IDE.Update.pas',
-  IDE.Forms.Splash in '..\..\Source\Old\Commons\IDE.Forms.Splash.pas' {frmSplash},
-  IDE.Criptografia in '..\..\Source\Old\Commons\IDE.Criptografia.pas',
+  Manager.Core.Forms.Splash in '..\..\Source\Core\Forms\Manager.Core.Forms.Splash.pas' {frmSplash},
+  Manager.Core.Utils in '..\..\Source\Core\Manager.Core.Utils.pas',
   Updater.Core in '..\..\third-part\Updater\Source\Updater.Core.pas',
   Updater.HttpDownload in '..\..\third-part\Updater\Source\Updater.HttpDownload.pas',
   Formulario.Opcoes in '..\..\Source\Old\Commons\Formulario.Opcoes.pas' {frmFormularioOpcoes},
@@ -71,9 +71,11 @@ uses
   Manager.Core.Forms.Main in '..\..\Source\Core\Forms\Manager.Core.Forms.Main.pas' {frmMain},
   Manager.Core.Forms.Workspace in '..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.pas' {frmWorkspace2},
   Manager.Core.MainMenu in '..\..\Source\Core\Manager.Core.MainMenu.pas',
-  Manager.Core.Controller.Main in '..\..\Source\Core\Manager.Core.Controller.Main.pas',
+  Manager.Core.Forms.Main.Controller in '..\..\Source\Core\Forms\Manager.Core.Forms.Main.Controller.pas',
   Manager.Core.API.Observer in '..\..\Source\Core\API\Manager.Core.API.Observer.pas',
-  Manager.Core.Application.Notify in '..\..\Source\Core\Manager.Core.Application.Notify.pas';
+  Manager.Core.IDE.Notify in '..\..\Source\Core\Manager.Core.IDE.Notify.pas',
+  Manager.Core.IDE.Content in '..\..\Source\Core\Manager.Core.IDE.Content.pas',
+  Manager.Core.Forms.Workspace.Controller in '..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.Controller.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
@@ -92,7 +94,12 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Manager';
+  Application.Prepare.Splash.Show;
+  Application.Prepare.Splash.Refresh;
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.Parser.Registrar(TParserAplicacao.Create);
+  Application.Parser.Registrar(TParserWorkspace.Create);
+  Application.Prepare.Splash.Hide;
   Application.Run;
 end.

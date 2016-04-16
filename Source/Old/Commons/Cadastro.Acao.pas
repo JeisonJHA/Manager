@@ -11,7 +11,7 @@ uses
   InstantPresentation, System.Actions, Vcl.ActnList, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, cxPC, Vcl.StdCtrls, Vcl.ExtCtrls, cxContainer, cxTextEdit, cxDBEdit,
-  cxMaskEdit, cxDropDownEdit, cxImageComboBox, IDE.Aplicacao, Vcl.Grids,
+  cxMaskEdit, cxDropDownEdit, cxImageComboBox, Manager.Core.IDE, Vcl.Grids,
   Vcl.DBGrids;
 
 type
