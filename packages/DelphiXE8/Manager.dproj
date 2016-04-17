@@ -1,14 +1,14 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{3B40AE23-68C0-4D2A-AB0B-0CB939958289}</ProjectGuid>
-        <ProjectVersion>17.2</ProjectVersion>
-        <FrameworkType>VCL</FrameworkType>
+        <ProjectGuid>{7F4C148F-5CAB-43E2-AFD2-141B83F45EE0}</ProjectGuid>
         <MainSource>Manager.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>17.2</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -23,7 +23,7 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
@@ -34,146 +34,225 @@
         <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <SanitizedProjectName>Manager</SanitizedProjectName>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
-        <DCC_E>false</DCC_E>
-        <DCC_N>false</DCC_N>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <Icon_MainIcon>Storage.ico</Icon_MainIcon>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
+        <DCC_N>false</DCC_N>
         <DCC_K>false</DCC_K>
+        <SanitizedProjectName>Manager</SanitizedProjectName>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;CFBundleName=</VerInfo_Keys>
+        <DCC_E>false</DCC_E>
+        <VerInfo_Locale>1046</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_BplOutput>..\..\lib</DCC_BplOutput>
+        <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
+        <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
+        <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <DCC_UsePackage>dxBarRS22;JvGlobus;JvMM;JvManagedThreads;dxSkinsdxRibbonPainterRS22;dxSkinOffice2010BlackRS22;FireDACPgDriver;dxPScxVGridLnkRS22;JvCrypt;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;JvNet;dxWizardControlRS22;JvDotNetCtrls;DbxCommonDriver;vclimg;dbxcds;dxServerModeRS22;DatasnapConnectorsFreePascal;appanalytics;JvXPCtrls;vcldb;dxSkinDarkRoomRS22;dxSkinSilverRS22;dxGDIPlusRS22;CustomIPTransport;dxSkinOffice2010SilverRS22;dsnap;IndyIPServer;IndyCore;dxSkinSummer2008RS22;CloudService;IODBX;dxSkinLondonLiquidSkyRS22;FmxTeeUI;FireDACIBDriver;JvDB;JvRuntimeDesign;IOIBX;dxPScxPivotGridLnkRS22;dxComnRS22;cxPivotGridChartRS22;dsnapxml;dxPScxPCProdRS22;JclDeveloperTools;FireDACDb2Driver;dxSpellCheckerRS22;dxPScxGridLnkRS22;dxSkinVS2010RS22;dxorgcRS22;dxBarExtItemsRS22;dxRibbonRS22;dxSkinsdxBarPainterRS22;dxCoreRS22;cxVerticalGridRS22;frx22;bindcompfmx;dxSkinStardustRS22;dxSkinSevenClassicRS22;dxSkinsCoreRS22;dxSpreadSheetRS22;FireDACODBCDriver;RESTBackendComponents;cxSchedulerRS22;dbrtl;dxSkinDevExpressStyleRS22;FireDACCommon;bindcomp;inetdb;cxExportRS22;JvPluginSystem;dxPSDBTeeChartRS22;dxSkinOffice2007BlackRS22;dxSkinCoffeeRS22;dxSkinXmas2008BlueRS22;DBXOdbcDriver;dxSkinscxSchedulerPainterRS22;ibmonitor;vclFireDAC;JvCmp;JvTimeFramework;xmlrtl;ibxpress;dxSkinOffice2013WhiteRS22;IOZeosDBO_XE8;dxPSdxDBOCLnkRS22;cxDataRS22;FireDACCommonDriver;cxBarEditItemRS22;soaprtl;bindengine;vclactnband;FMXTee;bindcompvcl;dxBarExtDBItemsRS22;dxSkinOffice2010BlueRS22;Jcl;vclie;dxPSdxDBTVLnkRS22;cxPageControlRS22;dxPsPrVwAdvRS22;FireDACMSSQLDriver;DBXInformixDriver;dxSkinFoggyRS22;Intraweb;dxSkinPumpkinRS22;cxEditorsRS22;dxPScxExtCommonRS22;DataSnapServerMidas;dsnapcon;DBXFirebirdDriver;dxMapControlRS22;inet;dxPSPrVwRibbonRS22;dxSkinSharpRS22;dxmdsRS22;JvPascalInterpreter;FireDACMySQLDriver;soapmidas;vclx;dxSkinOffice2007GreenRS22;dxSkinMetropolisDarkRS22;DBXSybaseASADriver;dxDockingRS22;RESTComponents;dxTabbedMDIRS22;IOADO;dxdborRS22;dbexpress;dxSkinMoneyTwinsRS22;dxPScxTLLnkRS22;IndyIPClient;dxSkinSpringTimeRS22;FireDACTDataDriver;FireDACSqliteDriver;FireDACDSDriver;frxTee22;DBXSqliteDriver;ZComponent;dxSkinHighContrastRS22;dxSkinOffice2007SilverRS22;fmx;IOXML;JvDlgs;IndySystem;dxLayoutControlRS22;TeeDB;tethering;cxSchedulerGridRS22;dxPSdxFCLnkRS22;dxSkinMcSkinRS22;dxSkinOffice2007PinkRS22;vclib;DataSnapClient;dxSkinsdxNavBarPainterRS22;dxNavBarRS22;DataSnapProviderClient;DBXSybaseASEDriver;frxe22;DUnitXRuntime;dxSkinGlassOceansRS22;dxSkinBlueprintRS22;dxSkinBlueRS22;vcldsnap;dxBarDBNavRS22;dxSkiniMaginaryRS22;dxPSCoreRS22;dxSkinLiquidSkyRS22;IOFireDAC;fmxFireDAC;DBXDb2Driver;dxSkinOffice2007BlueRS22;dxSkinCaramelRS22;DBXOracleDriver;cxGridRS22;JvCore;vclribbon;fmxase;vcl;DBXMSSQLDriver;IndyIPCommon;CodeSiteExpressPkg;dxThemeRS22;DataSnapFireDAC;FireDACDBXDriver;cxPivotGridRS22;JvAppFrm;soapserver;dxtrmdRS22;dxPScxSchedulerLnkRS22;dxSkinscxPCPainterRS22;inetdbxpress;FireDACInfxDriver;JvDocking;adortl;cxLibraryRS22;dxFireDACServerModeRS22;dxPSdxSpreadSheetLnkRS22;JvWizards;dxPSdxLCLnkRS22;FireDACASADriver;dxSkinOffice2013DarkGrayRS22;JvHMI;dxPScxCommonRS22;JvBands;ZDbc;emsclientfiredac;rtl;DbxClientDriver;ZPlain;dxSkinOffice2013LightGrayRS22;Tee;JclContainers;dxFlowChartRS22;dxPSLnksRS22;dxSkinSharpPlusRS22;dxSkinDarkSideRS22;JvSystem;DataSnapNativeClient;svnui;cxTreeListdxBarPopupMenuRS22;JvControls;dxSkinsdxDLPainterRS22;dxSkinDevExpressDarkStyleRS22;IndyProtocols;DBXMySQLDriver;dxSkinMetropolisRS22;dxPSdxOCLnkRS22;dxSkinValentineRS22;bindcompdbx;TeeUI;JvJans;JvPrintPreview;JvPageComps;JvStdCtrls;JvCustom;cxTreeListRS22;dxSkinTheAsphaltWorldRS22;frxDB22;FireDACADSDriver;vcltouch;ZCore;dxADOServerModeRS22;emsclient;dxdbtrRS22;VclSmp;FireDAC;VCLRESTComponents;cxSchedulerRibbonStyleEventEditorRS22;dxTileControlRS22;dxSkinSevenRS22;DataSnapConnectors;dxSkinBlackRS22;fmxobj;JclVcl;dxSkinWhiteprintRS22;ZParseSql;dxPSTeeChartRS22;cxPivotGridOLAPRS22;svn;cxSchedulerTreeBrowserRS22;FireDACOracleDriver;fmxdae;FireDACMSAccDriver;IOCore;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+        <Icon_MainIcon>Storage.ico</Icon_MainIcon>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>dxBarRS22;dxSkinsdxRibbonPainterRS22;dxSkinOffice2010BlackRS22;FireDACPgDriver;dxPScxVGridLnkRS22;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;dxWizardControlRS22;DbxCommonDriver;vclimg;dbxcds;dxServerModeRS22;DatasnapConnectorsFreePascal;appanalytics;vcldb;dxSkinDarkRoomRS22;dxSkinSilverRS22;dxGDIPlusRS22;CustomIPTransport;dxSkinOffice2010SilverRS22;dsnap;IndyIPServer;IndyCore;dxSkinSummer2008RS22;CloudService;dxSkinLondonLiquidSkyRS22;FmxTeeUI;FireDACIBDriver;dxPScxPivotGridLnkRS22;dxComnRS22;cxPivotGridChartRS22;dsnapxml;dxPScxPCProdRS22;FireDACDb2Driver;dxSpellCheckerRS22;dxPScxGridLnkRS22;dxSkinVS2010RS22;dxorgcRS22;dxBarExtItemsRS22;dxRibbonRS22;dxSkinsdxBarPainterRS22;dxCoreRS22;cxVerticalGridRS22;bindcompfmx;dxSkinStardustRS22;dxSkinSevenClassicRS22;dxSkinsCoreRS22;dxSpreadSheetRS22;FireDACODBCDriver;RESTBackendComponents;cxSchedulerRS22;dbrtl;dxSkinDevExpressStyleRS22;FireDACCommon;bindcomp;inetdb;cxExportRS22;dxPSDBTeeChartRS22;dxSkinOffice2007BlackRS22;dxSkinCoffeeRS22;dxSkinXmas2008BlueRS22;DBXOdbcDriver;dxSkinscxSchedulerPainterRS22;ibmonitor;vclFireDAC;xmlrtl;ibxpress;dxSkinOffice2013WhiteRS22;dxPSdxDBOCLnkRS22;cxDataRS22;FireDACCommonDriver;cxBarEditItemRS22;soaprtl;bindengine;vclactnband;FMXTee;bindcompvcl;dxBarExtDBItemsRS22;dxSkinOffice2010BlueRS22;vclie;dxPSdxDBTVLnkRS22;cxPageControlRS22;dxPsPrVwAdvRS22;FireDACMSSQLDriver;DBXInformixDriver;dxSkinFoggyRS22;Intraweb;dxSkinPumpkinRS22;cxEditorsRS22;dxPScxExtCommonRS22;DataSnapServerMidas;dsnapcon;DBXFirebirdDriver;dxMapControlRS22;inet;dxPSPrVwRibbonRS22;dxSkinSharpRS22;dxmdsRS22;FireDACMySQLDriver;soapmidas;vclx;dxSkinOffice2007GreenRS22;dxSkinMetropolisDarkRS22;DBXSybaseASADriver;dxDockingRS22;RESTComponents;dxTabbedMDIRS22;dxdborRS22;dbexpress;dxSkinMoneyTwinsRS22;dxPScxTLLnkRS22;IndyIPClient;dxSkinSpringTimeRS22;FireDACTDataDriver;FireDACSqliteDriver;FireDACDSDriver;DBXSqliteDriver;ZComponent;dxSkinHighContrastRS22;dxSkinOffice2007SilverRS22;fmx;IndySystem;dxLayoutControlRS22;TeeDB;tethering;cxSchedulerGridRS22;dxPSdxFCLnkRS22;dxSkinMcSkinRS22;dxSkinOffice2007PinkRS22;vclib;DataSnapClient;dxSkinsdxNavBarPainterRS22;dxNavBarRS22;DataSnapProviderClient;DBXSybaseASEDriver;dxSkinGlassOceansRS22;dxSkinBlueprintRS22;dxSkinBlueRS22;vcldsnap;dxBarDBNavRS22;dxSkiniMaginaryRS22;dxPSCoreRS22;dxSkinLiquidSkyRS22;fmxFireDAC;DBXDb2Driver;dxSkinOffice2007BlueRS22;dxSkinCaramelRS22;DBXOracleDriver;cxGridRS22;vclribbon;fmxase;vcl;DBXMSSQLDriver;IndyIPCommon;dxThemeRS22;DataSnapFireDAC;FireDACDBXDriver;cxPivotGridRS22;soapserver;dxtrmdRS22;dxPScxSchedulerLnkRS22;dxSkinscxPCPainterRS22;inetdbxpress;FireDACInfxDriver;adortl;cxLibraryRS22;dxFireDACServerModeRS22;dxPSdxSpreadSheetLnkRS22;dxPSdxLCLnkRS22;FireDACASADriver;dxSkinOffice2013DarkGrayRS22;dxPScxCommonRS22;ZDbc;emsclientfiredac;rtl;DbxClientDriver;ZPlain;dxSkinOffice2013LightGrayRS22;Tee;dxFlowChartRS22;dxPSLnksRS22;dxSkinSharpPlusRS22;dxSkinDarkSideRS22;DataSnapNativeClient;cxTreeListdxBarPopupMenuRS22;dxSkinsdxDLPainterRS22;dxSkinDevExpressDarkStyleRS22;IndyProtocols;DBXMySQLDriver;dxSkinMetropolisRS22;dxPSdxOCLnkRS22;dxSkinValentineRS22;bindcompdbx;TeeUI;cxTreeListRS22;dxSkinTheAsphaltWorldRS22;FireDACADSDriver;vcltouch;ZCore;dxADOServerModeRS22;emsclient;dxdbtrRS22;VclSmp;FireDAC;VCLRESTComponents;cxSchedulerRibbonStyleEventEditorRS22;dxTileControlRS22;dxSkinSevenRS22;DataSnapConnectors;dxSkinBlackRS22;fmxobj;dxSkinWhiteprintRS22;ZParseSql;dxPSTeeChartRS22;cxPivotGridOLAPRS22;cxSchedulerTreeBrowserRS22;FireDACOracleDriver;fmxdae;FireDACMSAccDriver;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+        <Icon_MainIcon>Manager_Icon.ico</Icon_MainIcon>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
-        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-        <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <DCC_Optimize>false</DCC_Optimize>
-        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
-        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-        <DCC_RemoteDebug>true</DCC_RemoteDebug>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
-        <Icon_MainIcon>..\..\img\icons\ico\Storage.ico</Icon_MainIcon>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
-        <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_BplOutput>..\..\lib</DCC_BplOutput>
-        <DCC_RemoteDebug>false</DCC_RemoteDebug>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
-        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_Namespace>IBX;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_AutoIncVersion>false</VerInfo_AutoIncVersion>
+        <DCC_Namespace>IBX;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_BplOutput>..\..\lib</DCC_BplOutput>
+        <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
+        <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
+        <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\..\src\ufrmPrincipal.pas">
-            <Form>frmPrincipal</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmCadAplicacoes.pas">
-            <Form>spmCadAplicacoes</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmCadBaseDados.pas">
-            <Form>spmCadBaseDados</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmCadSistemas.pas">
-            <Form>spmCadSistemas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmCfgManager.pas">
-            <Form>spmCfgManager</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmConstantes.pas"/>
-        <DCCReference Include="..\..\src\uspmControleArquivoIni.pas"/>
-        <DCCReference Include="..\..\src\uspmForm.pas">
-            <Form>spmForm</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmFormCadPadrao.pas">
-            <Form>spmFormCadPadrao</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmFormCfgPadrao.pas">
-            <Form>spmFormCfgPadrao</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmFormPadrao.pas">
-            <Form>spmFormPadrao</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmFrameArvoreWorkSpace.pas">
-            <Form>spmFrameArvoreWorkSpace</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmFrameBarraBotoes.pas">
-            <Form>spmFrameBarraBotoes</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmFuncoes.pas"/>
-        <DCCReference Include="..\..\src\uspmMenu.pas">
-            <Form>frmMenu</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\uspmRegrasMenuAcoesExecutaveis.pas"/>
-        <DCCReference Include="..\..\src\uspmDados.pas">
-            <Form>dmDados</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="..\..\Source\Old\Commons\udtmDatabase.pas">
+            <Form>dtmDatabase</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\src\ufrmConfigDatabase.pas">
-            <Form>frmConfigDatabase</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\src\ufrmWorkspace.pas">
+        <DCCReference Include="..\..\Source\Old\Commons\Formulario.Workspace.pas">
             <Form>frmWorkspace</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Workspace.Action.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Configuration.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Workspace.List.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Workspace.Constantes.pas"/>
+        <DCCReference Include="..\..\Source\Models\Ambiente.pas"/>
+        <DCCReference Include="..\..\Source\Models\Acao.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Modelo.pas">
+            <Form>frmModelo</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Modelo.pas">
+            <Form>frmCadastroModelo</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Gerenciamento.Modelo.pas">
+            <Form>frmGerenciamentoModelo</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Models\BarraFerramenta.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Paginado.Mestre.Detalhe.Modelo.pas">
+            <Form>frmCadastroPaginadoMestreDetalheModelo</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Barra.Ferramentas.pas">
+            <Form>frmCadastroBarraFerramentas</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.pas">
+            <Form>frmCadastroAcao</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Executar.pas">
+            <Form>frmCadastroAcaoExecutar</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Copiar.pas">
+            <Form>frmCadastroAcaoCopiar</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Controllers\IDE.Controller.MainMenu.pas"/>
+        <DCCReference Include="..\..\Source\Models\Sistema.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Sistema.pas">
+            <Form>frmCadastroSistema</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Models\Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\ufrmPrincipal.pas">
+            <Form>frmPrincipal</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Parser.Manager.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Parser.pas"/>
+        <DCCReference Include="..\..\Source\Core\Parser\Manager.Core.Parser.Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.IWorkspace.pas"/>
+        <DCCReference Include="..\..\Source\Core\Parser\Manager.Core.Parser.Aplicacao.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Parser.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDados</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Conjunto.Bases.pas">
+            <Form>frmCadastroAcaoConjuntoBases</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosOracle</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosDB2</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosMSSQL</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Paginado.Modelo.pas">
+            <Form>frmCadastroPaginadoModelo</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Controllers\Acao.Controller.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Formulario.Escolha.pas">
+            <Form>frmFormularioEscolha</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\ActiveDs_TLB.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\adshlp.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\IDE.IBarraFerramenta.pas"/>
+        <DCCReference Include="..\..\Source\Models\AcaoConjuntoDeBases.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.MontarAmbiente.pas">
+            <Form>frmCadastroAcaoMontarAmbiente</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Old\Commons\Configuracao.Inicial.pas">
+            <Form>frmConfiguracaoInicial</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Models\AcaoCatalogoDeBases.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Acao.Catalogo.Bases.pas">
+            <Form>frmCadastroAcaoCatalogoBases</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Models\AcaoExclusao.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.PromptCommand.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Manager.PromptCommand.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Prepare.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Prepare.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Update.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Splash.pas">
+            <Form>frmSplash</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Utils.pas"/>
+        <DCCReference Include="..\..\third-part\Updater\Source\Updater.Core.pas"/>
+        <DCCReference Include="..\..\third-part\Updater\Source\Updater.HttpDownload.pas"/>
+        <DCCReference Include="..\..\Source\Old\Commons\Formulario.Opcoes.pas">
+            <Form>frmFormularioOpcoes</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Forms.Utils.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Workspace.Recentes.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Main.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Main.pas">
+            <Form>frmMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\src\AplicacaoAction.pas"/>
-        <BuildConfiguration Include="Release">
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.pas">
+            <Form>frmWorkspace2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Ribbon.MainMenu.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Main.Controller.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Observer.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Notify.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Content.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.Controller.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Constants.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.TrayIconMenu.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Menu.pas"/>
+        <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas">
+            <Form>frmCadastroAcaoExclusao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
-        <BuildConfiguration Include="Debug">
+        <BuildConfiguration Include="Release">
             <Key>Cfg_1</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Delphi.Personality.12</Borland.Personality>
-        <Borland.ProjectType>Application</Borland.ProjectType>
+        <Borland.ProjectType/>
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
@@ -184,8 +263,18 @@
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp220.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
             <Deployment Version="1">
                 <DeployFile LocalName="..\..\bin\Manager.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Manager.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\bin\Manager.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Manager.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -567,18 +656,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
-            <Platforms>
-                <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
-            </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
