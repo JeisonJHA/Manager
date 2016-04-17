@@ -16,7 +16,8 @@ uses
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   dxDockPanel, dxDockControl, JvExDBGrids, JvDBGrid, Vcl.StdCtrls,
   dxBarBuiltInMenu, dxTabbedMDI, Vcl.Menus, Manager.Core.IDE, Vcl.AppEvnts,
-  dxAlertWindow, InstantExplorer;
+  dxAlertWindow, InstantExplorer, JvComponentBase, JvFormPlacement,
+  JvAppStorage, JvAppIniStorage;
 
 type
   TfrmMain = class(TdxRibbonForm, IMain)
@@ -83,6 +84,8 @@ type
     barBaseDeDados: TdxBar;
     btnConjuntoDeBases: TdxBarSubItem;
     btnCatalagoBases: TdxBarSubItem;
+    JvAppIniFileStorage1: TJvAppIniFileStorage;
+    JvFormStorage1: TJvFormStorage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure actOnAbreTelaExecute(Sender: TObject);

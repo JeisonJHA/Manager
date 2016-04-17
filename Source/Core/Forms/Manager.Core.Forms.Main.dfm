@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'Manager'
+  Caption = 'dev.manager'
   ClientHeight = 660
   ClientWidth = 1087
   Color = clBtnFace
@@ -26,7 +26,7 @@ object frmMain: TfrmMain
     ApplicationButton.Menu = dxRibbonBackstageView1
     BarManager = dxBarManager1
     Style = rs2013
-    ColorSchemeAccent = rcsaPurple
+    ColorSchemeAccent = rcsaBlue
     ColorSchemeName = 'White'
     QuickAccessToolbar.Toolbar = dxBarManager1Bar1
     SupportNonClientDrawing = True
@@ -622,5 +622,20 @@ object frmMain: TfrmMain
     Left = 888
     Top = 432
     PixelsPerInch = 96
+  end
+  object JvAppIniFileStorage1: TJvAppIniFileStorage
+    StorageOptions.BooleanStringTrueValues = 'TRUE, YES, Y'
+    StorageOptions.BooleanStringFalseValues = 'FALSE, NO, N'
+    FileName = 'style.ini'
+    SubStorages = <>
+    Left = 992
+    Top = 416
+  end
+  object JvFormStorage1: TJvFormStorage
+    AppStorage = JvAppIniFileStorage1
+    AppStoragePath = '%FORM_NAME%\'
+    StoredValues = <>
+    Left = 984
+    Top = 464
   end
 end

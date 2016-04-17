@@ -102,7 +102,7 @@ begin
   {$ENDIF}
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.Title := 'Manager';
+  Application.Title := 'dev.manager';
   Application.Prepare.Splash.Show;
   Application.Prepare.Splash.Refresh;
   Application.CreateForm(TdtmDatabase, dtmDatabase);

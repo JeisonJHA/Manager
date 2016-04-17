@@ -116,20 +116,39 @@ var
   acao: TAcao;
   action: TWorkspaceAction;
   link: TdxBarItemLink;
+
+  function ItemExists(ABarSubItem: TdxBarSubItem; AAcao: TAcao): TdxBarItemLink;
+  var
+    I: integer;
+  begin
+    for I := 0 to ABarSubItem.ItemLinks.Count -1 do
+      if TWorkspaceAction(ABarSubItem.ItemLinks.Items[I].Item.Action).Acao.Id = AAcao.Id then
+        Exit(ABarSubItem.ItemLinks.Items[I]);
+    Exit(nil);
+  end;
+
 begin
   for I := 0 to Pred(ASelector.ObjectCount) do
   begin
     acao := BuscarAcao(ASelector.Objects[I] as TAcao);
+    link := ItemExists(ABarSubItem, acao);
+    if not Assigned(link) then
+    begin
+      action := TWorkspaceAction.Create(Application.Main.ActionList);
+      action.Acao := acao;
+      action.Caption := acao.Descricao;
+      action.ImageIndex := acao.Icone;
 
-    action := TWorkspaceAction.Create(Application.Main.ActionList);
-    action.Acao := acao;
-    action.Caption := acao.Descricao;
-    action.ImageIndex := acao.Icone;
+      link := ABarSubItem.ItemLinks.Add;
+      link.Item := TdxBarLargeButton.Create(ABarSubItem.BarManager);
+      link.Item.Action := action;
+      link.Item.Category := ABarSubItem.BarManager.Categories.IndexOf('Default');
+      Continue;
+    end;
 
-    link := ABarSubItem.ItemLinks.Add;
-    link.Item := TdxBarLargeButton.Create(ABarSubItem.BarManager);
-    link.Item.Action := action;
-    link.Item.Category := ABarSubItem.BarManager.Categories.IndexOf('Default');
+    TWorkspaceAction(link.Item.Action).Acao := acao;
+    TWorkspaceAction(link.Item.Action).Caption := acao.Descricao;
+    TWorkspaceAction(link.Item.Action).ImageIndex := acao.Icone;
   end;
 end;
 

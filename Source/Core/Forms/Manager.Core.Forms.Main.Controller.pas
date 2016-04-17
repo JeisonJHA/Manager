@@ -185,6 +185,7 @@ begin
   Action := caFree;
   if ToMainForm(FForm).iosWorkspaces.Active then
     ToMainForm(FForm).iosWorkspaces.Close;
+  SalvarWorkspaceAtual;
 end;
 
 procedure TControllerMain.OnShow(Sender: TObject);
