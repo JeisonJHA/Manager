@@ -60,6 +60,7 @@ type
   protected
     function GetTipoAcao: string; override;
     procedure InternalExecute; override;
+    procedure InternalAfterExecute; override;
   public
   published
     property Aplicativo: string read GetAplicativo write SetAplicativo;
@@ -82,6 +83,7 @@ type
   protected
     function GetTipoAcao: string; override;
     procedure InternalExecute; override;
+    procedure InternalAfterExecute; override;
   published
     property Destino: string read GetDestino write SetDestino;
     property Origem: string read GetOrigem write SetOrigem;
@@ -145,6 +147,7 @@ type
     procedure InternalConfigurarIni(AArquivo: TIniFile); virtual;
     function GetTipoBanco: string; virtual;
     procedure InternalExecute; override;
+    procedure InternalAfterExecute; override;
   published
     property Alias: string read GetAlias write SetAlias;
     property DBSenha: string read GetDBSenha write SetDBSenha;
@@ -181,7 +184,7 @@ type
 implementation
 
 uses
-  InstantMetadata;
+  InstantMetadata, Manager.Core.IDE.Constants;
 
 { TAcao }
 
@@ -209,7 +212,7 @@ end;
 
 procedure TAcao.InternalAfterExecute;
 begin
-  Application.Notify;
+  Application.Notify(taIndefinido);
 end;
 
 procedure TAcao.InternalBeforeExecute;
@@ -228,6 +231,11 @@ begin
 end;
 
 { TAcaoExecutar }
+
+procedure TAcaoExecutar.InternalAfterExecute;
+begin
+  Application.Notify(taExecutar);
+end;
 
 procedure TAcaoExecutar.InternalExecute;
 var
@@ -399,6 +407,11 @@ begin
   _Usuario.Value := Value;;
 end;
 
+procedure TAcaoCopiar.InternalAfterExecute;
+begin
+  Application.Notify(taCopiar);
+end;
+
 procedure TAcaoCopiar.InternalExecute;
 var
   shellinfo: TSHFileOpStructW;
@@ -454,6 +467,11 @@ begin
 end;
 
 { TAcaoConfigurarBaseDeDados }
+
+procedure TAcaoConfigurarBaseDeDados.InternalAfterExecute;
+begin
+  Application.Notify(taConfiguarBase);
+end;
 
 procedure TAcaoConfigurarBaseDeDados.InternalConfigurarIni(AArquivo: TIniFile);
 begin

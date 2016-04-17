@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Manager.Core.API.Workspace, Workspace,
   Manager.Core.Forms.Modelo, Manager.Core.API.Observer, Manager.Core.Forms.Workspace.Controller,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
-  dxCustomTileControl, dxTileControl, Vcl.StdCtrls;
+  dxCustomTileControl, dxTileControl, Vcl.StdCtrls, Manager.Core.IDE.Constants;
 
 type
   TfrmWorkspace2 = class(TfrmModelo, IWorkspace, IObserver)
@@ -23,7 +23,7 @@ type
     { Public declarations }
     constructor Create(AOwner: TComponent; var ASubject: TObject); override;
     destructor Destroy; override;
-    procedure Update(Sender: TObject);
+    procedure Update(Sender: TObject; ATipoAcao: TTipoAcao);
     property Controller: TWorkspaceController read FController;
   end;
 
@@ -68,9 +68,9 @@ begin
   Exit(FSandbox);
 end;
 
-procedure TfrmWorkspace2.Update(Sender: TObject);
+procedure TfrmWorkspace2.Update(Sender: TObject; ATipoAcao: TTipoAcao);
 begin
-  Controller.Update(Sender);
+  Controller.Update(Sender, ATipoAcao);
 end;
 
 initialization

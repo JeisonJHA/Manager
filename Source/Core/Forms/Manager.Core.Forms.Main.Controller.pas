@@ -19,7 +19,7 @@ type
     FWorkspaceList: TWorkspaceList;
     FWorkspacesRecentes: TWorkspacesRecentes;
     FUpdate: TUpdate;
-    procedure Update(Sender: TObject);
+    procedure Update(Sender: TObject; ATipoAcao: TTipoAcao);
     procedure OnUpdateTimer(Sender: TObject);
     procedure PrepararMainMenu;
     procedure PrepararIDEUpdate;
@@ -163,8 +163,11 @@ begin
   FWorkspacesRecentes.Salvar;
 end;
 
-procedure TControllerMain.Update(Sender: TObject);
+procedure TControllerMain.Update(Sender: TObject; ATipoAcao: TTipoAcao);
 begin
+  if (ATipoAcao in [taExecutar, taCopiar, taExcluir]) then
+    Exit;
+
   PrepararIDEUpdate;
   PrepararMainMenu;
 end;

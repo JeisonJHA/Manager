@@ -3,7 +3,7 @@ unit AcaoConjuntoDeBases;
 interface
 
 uses
-  Acao, InstantPersistence, InstantTypes, AcaoCatalogoDeBases;
+  Forms, Acao, InstantPersistence, InstantTypes, AcaoCatalogoDeBases;
 
 type
   TAcaoConjuntoDeBases = class(TAcao)
@@ -22,6 +22,7 @@ type
   protected
     function GetTipoAcao: string; override;
     procedure InternalExecute; override;
+    procedure InternalAfterExecute; override;
   public
     procedure DeleteCatalogo(Index: Integer);
     function AddAcao(Acao: TAcaoConfigurarBaseDeDados): Integer;
@@ -44,13 +45,18 @@ type
 implementation
 
 uses
-  InstantMetadata;
+  InstantMetadata, Manager.Core.IDE.Constants, Manager.Core.IDE;
 
 { TAcaoConjuntoDeBases }
 
 procedure TAcaoConjuntoDeBases.DeleteCatalogo(Index: Integer);
 begin
   _Catalogos.Delete(Index);
+end;
+
+procedure TAcaoConjuntoDeBases.InternalAfterExecute;
+begin
+  Application.Notify(taConfigurarConjuntoDeBases);
 end;
 
 procedure TAcaoConjuntoDeBases.InternalExecute;

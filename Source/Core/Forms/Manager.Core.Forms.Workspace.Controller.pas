@@ -8,7 +8,7 @@ uses Forms, Classes, SysUtils, Manager.Core.Ribbon.MainMenu, Manager.Core.IDE,
   Manager.Core.API.Workspace, Manager.Core.Workspace.Recentes,
   Manager.Core.API.Observer, Dialogs, IniFiles, dxCustomTileControl, dxTileControl,
   Acao, Winapi.ShellApi, Winapi.Windows, Winapi.Messages,
-  Manager.Core.Utils;
+  Manager.Core.Utils, Manager.Core.IDE.Constants;
 
 type
   TWorkspaceController = class(TInterfacedObject, IObserver)
@@ -27,7 +27,7 @@ type
   public
     constructor Create(AForm: TForm);
     procedure Prepare;
-    procedure Update(Sender: TObject);
+    procedure Update(Sender: TObject; ATipoAcao: TTipoAcao);
     procedure OnShow(Sender: TObject);
     procedure OnCreate(Sender: TObject);
   end;
@@ -164,8 +164,11 @@ begin
   ConfigurarItemsOfTile(form);
 end;
 
-procedure TWorkspaceController.Update(Sender: TObject);
+procedure TWorkspaceController.Update(Sender: TObject; ATipoAcao: TTipoAcao);
 begin
+  if (ATipoAcao in [taExecutar, taCopiar, taExcluir]) then
+    Exit;
+
   Prepare;
 end;
 

@@ -86,6 +86,8 @@ type
     btnCatalagoBases: TdxBarSubItem;
     JvAppIniFileStorage1: TJvAppIniFileStorage;
     JvFormStorage1: TJvFormStorage;
+    actCadastroAcaoExclusao: TAction;
+    btnCadastroAcaoExclusao: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure actOnAbreTelaExecute(Sender: TObject);

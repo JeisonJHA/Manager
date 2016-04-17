@@ -76,7 +76,8 @@ uses
   Manager.Core.Forms.Workspace.Controller in '..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.Controller.pas',
   Manager.Core.IDE.Constants in '..\..\Source\Core\Manager.Core.IDE.Constants.pas',
   Manager.Core.TrayIconMenu in '..\..\Source\Core\Manager.Core.TrayIconMenu.pas',
-  Manager.Core.IDE.Menu in '..\..\Source\Core\Manager.Core.IDE.Menu.pas';
+  Manager.Core.IDE.Menu in '..\..\Source\Core\Manager.Core.IDE.Menu.pas',
+  Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Core\Forms\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao};
 
 {$R *.res}
 {$R *.mdr} {Acao,
@@ -102,7 +103,7 @@ begin
   {$ENDIF}
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.Title := 'dev.manager';
+  Application.Title := 'Manager Developer';
   Application.Prepare.Splash.Show;
   Application.Prepare.Splash.Refresh;
   Application.CreateForm(TdtmDatabase, dtmDatabase);

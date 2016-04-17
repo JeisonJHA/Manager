@@ -6,7 +6,8 @@ uses
   Classes, SysUtils, Forms, Manager.Core.API.Main, Manager.Core.Configuration, Windows,
   Manager.Core.IDE.Content, Manager.Core.API.Observer, ShellApi,
   Manager.Core.Parser.Manager, Manager.Core.IDE.Prepare, Messages,
-  Manager.Core.API.Workspace, dxTabbedMDI, Manager.Core.PromptCommand;
+  Manager.Core.API.Workspace, dxTabbedMDI, Manager.Core.PromptCommand,
+  Manager.Core.IDE.Constants;
 
 type
   IDE = class helper for TApplication
@@ -20,7 +21,7 @@ type
     function Main: IMain;
     procedure Register(AObserver: IObserver);
     procedure Remove(AObserver: IObserver);
-    procedure Notify;
+    procedure Notify(ATipoAcao: TTipoAcao = taIndefinido);
     property Parser: TParserManager read GetParserManager;
     property Prepare: TIDEPrepare read GetPrepare;
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
@@ -106,9 +107,9 @@ begin
   Exit(Self.MainForm as IMain);
 end;
 
-procedure IDE.Notify;
+procedure IDE.Notify(ATipoAcao: TTipoAcao);
 begin
-  TIDEContent.GetInstance.Observers.Notify;
+  TIDEContent.GetInstance.Observers.Notify(ATipoAcao);
 end;
 
 procedure IDE.Register(AObserver: IObserver);

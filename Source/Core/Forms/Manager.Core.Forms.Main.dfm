@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'dev.manager'
+  Caption = 'Manager Developer'
   ClientHeight = 660
   ClientWidth = 1087
   Color = clBtnFace
@@ -406,6 +406,10 @@ object frmMain: TfrmMain
         end
         item
           Visible = True
+          ItemName = 'btnCadastroAcaoExclusao'
+        end
+        item
+          Visible = True
           ItemName = 'dxBarSeparator1'
         end
         item
@@ -472,6 +476,10 @@ object frmMain: TfrmMain
       ImageIndex = 36
       ItemLinks = <>
     end
+    object btnCadastroAcaoExclusao: TdxBarLargeButton
+      Action = actCadastroAcaoExclusao
+      Category = 0
+    end
   end
   object dxSkinController1: TdxSkinController
     NativeStyle = False
@@ -526,21 +534,25 @@ object frmMain: TfrmMain
     object actCadastroAcaoConfigurarBaseDeDadosDB2: TAction
       Caption = 'DB2'
       HelpKeyword = 'TfrmCadastroAcaoConfigurarBaseDeDadosDB2'
+      ImageIndex = 1
       OnExecute = actOnAbreTelaExecute
     end
     object actCadastroAcaoConfigurarBaseDeDadosMSSQL: TAction
       Caption = 'MS SQL'
       HelpKeyword = 'TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL'
+      ImageIndex = 1
       OnExecute = actOnAbreTelaExecute
     end
     object actCadastroAcaoConfigurarBaseDeDadosOracle: TAction
       Caption = 'Oracle'
       HelpKeyword = 'TfrmCadastroAcaoConfigurarBaseDeDadosOracle'
+      ImageIndex = 1
       OnExecute = actOnAbreTelaExecute
     end
     object actCadastroAcaoConjuntoBases: TAction
       Caption = 'Conjunto de Bases'
       HelpKeyword = 'TfrmCadastroAcaoConjuntoBases'
+      ImageIndex = 37
       OnExecute = actOnAbreTelaExecute
     end
     object actCadastroAcaoConfigurarBaseDeDados: TAction
@@ -561,6 +573,13 @@ object frmMain: TfrmMain
     object actCadastroAcaoCatalogoBases: TAction
       Caption = 'Cat'#225'logo de bases'
       HelpKeyword = 'TfrmCadastroAcaoCatalogoBases'
+      ImageIndex = 36
+      OnExecute = actOnAbreTelaExecute
+    end
+    object actCadastroAcaoExclusao: TAction
+      Caption = 'Excluir'
+      HelpKeyword = 'TfrmCadastroAcaoExclusao'
+      ImageIndex = 29
       OnExecute = actOnAbreTelaExecute
     end
     object actUpdate: TAction
