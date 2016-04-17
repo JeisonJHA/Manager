@@ -25,7 +25,7 @@ type
 
 implementation
 
-uses AcaoCatalogoDeBases, AcaoConjuntoDeBases;
+uses AcaoCatalogoDeBases, AcaoConjuntoDeBases, AcaoExclusao;
 
 { TIDEMenu }
 
@@ -51,6 +51,9 @@ begin
 
   if AAcao.InheritsFrom(TAcaoCatalogoDeBases) then
     Exit(TAcaoCatalogoDeBases.Retrieve(AAcao.Id));
+
+  if AAcao.InheritsFrom(TAcaoExclusaoArquivo) then
+    Exit(TAcaoExclusaoArquivo.Retrieve(AAcao.Id));
 
   if AAcao.InheritsFrom(TAcaoCopiar) then
     Exit(TAcaoCopiar.Retrieve(AAcao.Id));

@@ -46,8 +46,12 @@ end;
 procedure TAcaoExclusaoArquivo.DeleteDirectory(const APath: string; ARemoveDir: boolean);
 var
   F: TSearchRec;
+  path: string;
 begin
-  if FindFirst(Aplicativo, faAnyFile, F) = 0 then
+  path := StringReplace(APath, '\*.*', '', [rfReplaceAll]);
+  path := StringReplace(path, '\*', '', [rfReplaceAll]);
+
+  if FindFirst(path + '\*.*', faAnyFile, F) = 0 then
   begin
     try
       repeat
@@ -55,25 +59,25 @@ begin
         begin
           if (F.Name <> '.') and (F.Name <> '..') then
           begin
-            RemoveDir(Aplicativo + '\' + F.Name);
+            RemoveDir(path + '\' + F.Name);
           end;
         end else
         begin
-          DeleteFile(Aplicativo + '\' + F.Name);
+          DeleteFile(path + '\' + F.Name);
         end;
       until FindNext(F) <> 0;
     finally
       FindClose(F);
     end;
     if ARemoveDir then
-      RemoveDir(Aplicativo);
+      RemoveDir(path);
   end;
 end;
 
 procedure TAcaoExclusaoArquivo.DeleteUniqueFile(const APath: string);
 begin
   if FileExists(APath) then
-    DeleteFile(Aplicativo);
+    DeleteFile(APath);
 end;
 
 procedure TAcaoExclusaoArquivo.InternalAfterExecute;
@@ -82,12 +86,14 @@ begin
 end;
 
 procedure TAcaoExclusaoArquivo.InternalExecute;
+var
+  path: string;
 begin
-  inherited InternalExecute;
-  case VerificarTipoExclusao(Aplicativo) of
-    teFile: DeleteUniqueFile(Aplicativo);
-    teAllFiles: DeleteDirectory(Aplicativo, False);
-    teDirectory: DeleteDirectory(Aplicativo);
+  path := Application.Parser.ParserText(Aplicativo);
+  case VerificarTipoExclusao(path) of
+    teFile: DeleteUniqueFile(path);
+    teAllFiles: DeleteDirectory(path, False);
+    teDirectory: DeleteDirectory(path);
   end;
 end;
 

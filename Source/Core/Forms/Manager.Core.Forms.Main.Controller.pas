@@ -6,7 +6,7 @@ uses Forms, Classes, SysUtils, Manager.Core.Ribbon.MainMenu, Manager.Core.IDE,
   Manager.Core.Workspace.List, Manager.Core.Configuration,
   InstantPresentation, Vcl.ActnList, dxBar, Workspace, dxTabbedMDI,
   Manager.Core.API.Workspace, Manager.Core.Workspace.Recentes,
-  Manager.Core.API.Observer, Manager.Core.IDE.Constants,
+  Manager.Core.API.Observer, Manager.Core.IDE.Constants, Graphics,
   Manager.Core.IDE.Update, Manager.Core.TrayIconMenu, Manager.Core.Utils;
 
 type

@@ -141,7 +141,6 @@ object frmMain: TfrmMain
     ManagerColor = False
     Align = alLeft
     AutoSize = True
-    ExplicitHeight = 97
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -188,7 +187,7 @@ object frmMain: TfrmMain
           Height = 438
           Align = alClient
           DataSource = dtsWorkspaces
-          Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          Options = [dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -202,12 +201,18 @@ object frmMain: TfrmMain
           SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
           EditControls = <>
           RowsHeight = 16
-          TitleRowHeight = 17
+          TitleRowHeight = 16
           Columns = <
             item
               Expanded = False
               FieldName = 'Descricao'
-              Title.Caption = 'Descri'#231#227'o'
+              Title.Caption = ' + Descri'#231#227'o'
+              Title.Color = clWhite
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = 10114859
+              Title.Font.Height = -11
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
               Width = 186
               Visible = True
             end>

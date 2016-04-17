@@ -42,8 +42,8 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 Name: {app}; Permissions: everyone-modify; Flags: uninsalwaysuninstall
 
 [Files]
-Source: ..\bin\Manager.exe; DestDir: {app}; Permissions: everyone-modify; Flags: ignoreversion; DestName: manager.exe
-Source: ..\bin\Updater.exe; DestDir: {app}; Permissions: everyone-modify; Flags: ignoreversion; DestName: updater.exe
+Source: ..\bin\Manager.exe; DestDir: {app}; Permissions: everyone-modify; DestName: manager.exe
+Source: ..\bin\Updater.exe; DestDir: {app}; Permissions: everyone-modify; DestName: updater.exe
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ; ### Firebird Embeded ###
 Source: Recursos\Firebird-2.5.2.26540-0_Win32_embed\aliases.conf; DestDir: {app}
@@ -78,14 +78,14 @@ Source: Recursos\ssleay32.dll; DestDir: {app}
 Source: Recursos\DownloadInfo.xml; DestDir: {app}
 Source: Recursos\data.fdb; DestDir: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data; Permissions: everyone-modify; Flags: uninsneveruninstall onlyifdoesntexist
 Source: Templates\DB\DB2\PG\pg.template; DestDir: {app}\Templates\DB\DB2\PG
-Source: Templates\DB\DB2\PG\pro.template; DestDir: {app}\Templates\DB\DB2\PG
-Source: Templates\DB\DB2\PG\sgc.template; DestDir: {app}\Templates\DB\DB2\PG
+Source: Templates\DB\DB2\PG\net.template; DestDir: {app}\Templates\DB\DB2\PG
+Source: Templates\DB\DB2\PG\ind.template; DestDir: {app}\Templates\DB\DB2\PG
 Source: Templates\DB\MSSQL\PG\pg.template; DestDir: {app}\Templates\DB\MSSQL\PG
-Source: Templates\DB\MSSQL\PG\pro.template; DestDir: {app}\Templates\DB\MSSQL\PG
-Source: Templates\DB\MSSQL\PG\sgc.template; DestDir: {app}\Templates\DB\MSSQL\PG
+Source: Templates\DB\MSSQL\PG\net.template; DestDir: {app}\Templates\DB\MSSQL\PG
+Source: Templates\DB\MSSQL\PG\ind.template; DestDir: {app}\Templates\DB\MSSQL\PG
 Source: Templates\DB\Oracle\PG\pg.template; DestDir: {app}\Templates\DB\Oracle\PG
-Source: Templates\DB\Oracle\PG\pro.template; DestDir: {app}\Templates\DB\Oracle\PG
-Source: Templates\DB\Oracle\PG\sgc.template; DestDir: {app}\Templates\DB\Oracle\PG
+Source: Templates\DB\Oracle\PG\net.template; DestDir: {app}\Templates\DB\Oracle\PG
+Source: Templates\DB\Oracle\PG\ind.template; DestDir: {app}\Templates\DB\Oracle\PG
 
 
 [Icons]
