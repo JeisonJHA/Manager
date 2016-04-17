@@ -114,7 +114,17 @@ object frmMain: TfrmMain
     Top = 637
     Width = 1087
     Height = 23
-    Panels = <>
+    Images = dtmDatabase.SmallImageList
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.ImageIndex = 1
+        Width = 300
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.Alignment = taRightJustify
+      end>
     Ribbon = dxRibbon1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clDefault
@@ -131,6 +141,7 @@ object frmMain: TfrmMain
     ManagerColor = False
     Align = alLeft
     AutoSize = True
+    ExplicitHeight = 97
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -274,8 +285,8 @@ object frmMain: TfrmMain
           Visible = True
           ItemName = 'btnMenu'
         end>
-      OneOnRow = True
-      Row = 1
+      OneOnRow = False
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -298,7 +309,7 @@ object frmMain: TfrmMain
           Visible = True
           ItemName = 'btnCatalagoBases'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -569,6 +580,7 @@ object frmMain: TfrmMain
   end
   object ppmTrayIcon: TPopupMenu
     Images = dtmDatabase.SmallImageList
+    OnChange = ppmTrayIconChange
     Left = 496
     Top = 64
     object N1: TMenuItem

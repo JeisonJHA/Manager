@@ -3,10 +3,10 @@ unit Manager.Core.IDE;
 interface
 
 uses
-  Forms, Manager.Core.API.Main, Manager.Core.Configuration, Windows,
+  Classes, SysUtils, Forms, Manager.Core.API.Main, Manager.Core.Configuration, Windows,
   Manager.Core.IDE.Content, Manager.Core.API.Observer, ShellApi,
   Manager.Core.Parser.Manager, Manager.Core.IDE.Prepare, Messages,
-  Manager.Core.API.Workspace, dxTabbedMDI;
+  Manager.Core.API.Workspace, dxTabbedMDI, Manager.Core.PromptCommand;
 
 type
   IDE = class helper for TApplication
@@ -14,6 +14,8 @@ type
     function GetParserManager: TParserManager;
     function GetPrepare: TIDEPrepare;
     function GetCurrentWorkspace: IWorkspace;
+    function GetPromptCommand: TDosCommand;
+    function GetConfiguration: TConfiguration;
   public
     function Main: IMain;
     procedure Register(AObserver: IObserver);
@@ -22,9 +24,13 @@ type
     property Parser: TParserManager read GetParserManager;
     property Prepare: TIDEPrepare read GetPrepare;
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
+    property PromptCommand: TDosCommand read GetPromptCommand;
+    property Configuration: TConfiguration read GetConfiguration;
 
     procedure RegisterUniqueInstance(AId: PWideChar);
     procedure UnregisterUniqueInstance;
+
+    procedure ExecCommand(ACommand: string);
   end;
 
 implementation
@@ -46,6 +52,18 @@ begin
 end;
 
 { IDE }
+
+procedure IDE.ExecCommand(ACommand: string);
+begin
+  if not Assigned(Application.PromptCommand.OutputLines) then
+    Exit;
+  Application.PromptCommand.OutputLines.Add(Format('%s %s',[FormatDateTime('[dd/MM/yyyy hh:mm:ss]', Date+Time), ACommand]));
+end;
+
+function IDE.GetConfiguration: TConfiguration;
+begin
+  Exit(TIDEContent.GetInstance.Configuration);
+end;
 
 function IDE.GetCurrentWorkspace: IWorkspace;
 var
@@ -76,6 +94,11 @@ end;
 function IDE.GetPrepare: TIDEPrepare;
 begin
   Exit(TIDEContent.GetInstance.Prepare);
+end;
+
+function IDE.GetPromptCommand: TDosCommand;
+begin
+  Exit(TIDEContent.GetInstance.PromptCommand);
 end;
 
 function IDE.Main: IMain;

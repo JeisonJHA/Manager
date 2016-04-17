@@ -95,6 +95,8 @@ type
     procedure actUpdateExecute(Sender: TObject);
     procedure alMessageAlertButtonClick(Sender: TObject;
       AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
+    procedure ppmTrayIconChange(Sender: TObject; Source: TMenuItem;
+      Rebuild: Boolean);
   private
     { Private declarations }
     FController: TControllerMain;
@@ -201,6 +203,15 @@ end;
 procedure TfrmMain.mnuFecharClick(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmMain.ppmTrayIconChange(Sender: TObject; Source: TMenuItem;
+  Rebuild: Boolean);
+begin
+  if not Assigned(Controller) then
+    Exit;
+
+  Controller.SalvarWorkspaceAtual;
 end;
 
 function TfrmMain.RibbonTabs: TdxRibbonTabCollection;

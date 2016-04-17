@@ -2,12 +2,12 @@ unit Manager.Core.Forms.Main.Controller;
 
 interface
 
-uses Forms, Classes, SysUtils, Manager.Core.MainMenu, Manager.Core.IDE,
+uses Forms, Classes, SysUtils, Manager.Core.Ribbon.MainMenu, Manager.Core.IDE,
   Manager.Core.Workspace.List, Manager.Core.Configuration,
   InstantPresentation, Vcl.ActnList, dxBar, Workspace, dxTabbedMDI,
   Manager.Core.API.Workspace, Manager.Core.Workspace.Recentes,
   Manager.Core.API.Observer, Manager.Core.IDE.Constants,
-  Manager.Core.IDE.Update, Manager.Core.TrayIconMenu;
+  Manager.Core.IDE.Update, Manager.Core.TrayIconMenu, Manager.Core.Utils;
 
 type
   TControllerMain = class(TInterfacedObject, IObserver)
@@ -24,6 +24,8 @@ type
     procedure PrepararMainMenu;
     procedure PrepararIDEUpdate;
     procedure PrepararWorkspaceList(AInstantSelector: TInstantSelector);
+    procedure CarregarVersao;
+    procedure CarregarWorkspaceRecentes;
   public
     constructor Create(AForm: TForm);
     destructor Destroy; override;
@@ -39,7 +41,7 @@ type
 
 implementation
 
-uses Manager.Core.Forms.Utils, Manager.Core.Forms.Main;
+uses Manager.Core.Forms.Utils, Manager.Core.Forms.Main, udtmDatabase;
 
 type
   TTelaAction = class(TAction)
@@ -191,6 +193,10 @@ begin
   PrepararMainMenu;
   if not ToMainForm(FForm).iosWorkspaces.Active then
     PrepararWorkspaceList(ToMainForm(FForm).iosWorkspaces);
+
+  CarregarVersao;
+  ToMainForm(FForm).dxRibbonStatusBar1.Panels[0].Text := AnsiLowerCase(dtmDatabase.IBDatabase1.DatabaseName);
+  CarregarWorkspaceRecentes;
 end;
 
 procedure TControllerMain.OnUpdateTimer(Sender: TObject);
@@ -199,6 +205,51 @@ begin
     Exit;
 
   ToMainForm(FForm).alMessageAlert.Show(TUpdate(Sender).ApplicationName, Format('Uma nova versão (%s) foi encontrado. Você quer baixar e instalar?', [TUpdate(Sender).ApplicationVersion]))
+end;
+
+procedure TControllerMain.CarregarVersao;
+begin
+  try
+    ToMainForm(FForm).dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + Manager.Core.Utils.PegarVersaoAplicacao + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32);
+  except
+    on E: Exception do
+    begin
+      raise Exception.Create(E.Message);
+    end;
+  end;
+end;
+
+procedure TControllerMain.CarregarWorkspaceRecentes;
+var
+  recentes: TWorkspacesRecentes;
+  I: Integer;
+  workspace: IWorkspace;
+  X: Integer;
+begin
+  recentes := TWorkspacesRecentes.Create;
+  try
+    for I := 0 to recentes.Count - 1 do
+    begin
+      for X := 0 to ToMainForm(FForm).iosWorkspaces.ObjectCount - 1 do
+      begin
+        if TWorkspace(ToMainForm(FForm).iosWorkspaces.Objects[X]).Descricao.Equals(recentes.Names[I]) then
+          AbriAbaWorkspace(TWorkspace(ToMainForm(FForm).iosWorkspaces.Objects[X]));
+      end;
+    end;
+
+    for I := 0 to ToMainForm(FForm).mdiControleTelas.TabProperties.PageCount - 1 do
+    begin
+      workspace := ToWorkspace(ToMainForm(FForm).mdiControleTelas.TabProperties.Pages[I]);
+      if recentes.Values[workspace.Sandbox.Descricao].Equals('True') then
+      begin
+        ToMainForm(FForm).mdiControleTelas.TabProperties.PageIndex := ToMainForm(FForm).mdiControleTelas.TabProperties.Pages[I].Index;
+        Break;
+      end;
+    end;
+
+  finally
+    FreeAndNil(recentes);
+  end;
 end;
 
 end.

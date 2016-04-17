@@ -21,9 +21,9 @@ type
     procedure SetCatalogos(Index: Integer; Value: TAcaoCatalogoDeBases);
   protected
     function GetTipoAcao: string; override;
+    procedure InternalExecute; override;
   public
     procedure DeleteCatalogo(Index: Integer);
-    procedure Executar; override;
     function AddAcao(Acao: TAcaoConfigurarBaseDeDados): Integer;
     function AddCatalogo(Catalogo: TAcaoCatalogoDeBases): Integer;
     procedure ClearAcoes;
@@ -53,11 +53,11 @@ begin
   _Catalogos.Delete(Index);
 end;
 
-procedure TAcaoConjuntoDeBases.Executar;
+procedure TAcaoConjuntoDeBases.InternalExecute;
 var
   I: Integer;
 begin
-  inherited Executar;
+  inherited InternalExecute;
   for I := 0 to AcaoCount -1 do
     Acoes[I].Executar;
 

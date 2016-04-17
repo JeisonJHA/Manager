@@ -6,7 +6,7 @@ unit Manager.Core.Utils;
 interface
 
 uses
-  Classes, Windows;
+  Classes, Windows, Forms;
 
 { **setaChave@string
   Define o valor da variável sChave. }
@@ -25,6 +25,8 @@ function CriptografaPalavra(psPalavra: string): string;
   Decriptografa um string previamente criptografado com a
   função CriptografaPalavra. }
 function DecriptografaPalavra(psPalavra: string): string;
+
+function PegarVersaoAplicacao: string;
 
 implementation
 
@@ -283,6 +285,38 @@ begin
     Exit(resp);
   end;
   Exit(String.Empty);
+end;
+
+function PegarVersaoAplicacao: string;
+type
+  PFFI = ^vs_FixedFileInfo;
+var
+  F: PFFI;
+  sHandle: Dword;
+  nLen: Longint;
+  sData: Pchar;
+  oBuffer: Pointer;
+  sTamanho: Dword;
+  sArquivo: Pchar;
+  sNomeAplicacao: string;
+begin
+  sNomeAplicacao := Application.ExeName;
+  sArquivo := StrAlloc(Length(sNomeAplicacao) + 1);
+  StrPcopy(sArquivo, sNomeAplicacao);
+  nLen := GetFileVersionInfoSize(sArquivo, sHandle);
+  Result := '';
+  if nLen > 0 then
+  begin
+    sData := StrAlloc(nLen + 1);
+    if GetFileVersionInfo(sArquivo, sHandle, nLen, sData) then
+    begin
+      VerQueryValue(sData, '\', oBuffer, sTamanho);
+      F := PFFI(oBuffer);
+      Result := Format('%d.%d.%d.%d', [HiWord(F^.dwFileVersionMs), LoWord(F^.dwFileVersionMs), HiWord(F^.dwFileVersionLs), Loword(F^.dwFileVersionLs)]);
+    end;
+    StrDispose(sData);
+  end;
+  StrDispose(sArquivo);
 end;
 
 initialization

@@ -1,4 +1,4 @@
-unit Manager.Core.MainMenu;
+unit Manager.Core.Ribbon.MainMenu;
 
 interface
 

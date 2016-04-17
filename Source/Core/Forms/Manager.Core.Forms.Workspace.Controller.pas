@@ -2,7 +2,7 @@ unit Manager.Core.Forms.Workspace.Controller;
 
 interface
 
-uses Forms, Classes, SysUtils, Manager.Core.MainMenu, Manager.Core.IDE,
+uses Forms, Classes, SysUtils, Manager.Core.Ribbon.MainMenu, Manager.Core.IDE,
   Manager.Core.Workspace.List, Manager.Core.Configuration,
   InstantPresentation, Vcl.ActnList, dxBar, Workspace, dxTabbedMDI,
   Manager.Core.API.Workspace, Manager.Core.Workspace.Recentes,

@@ -4,7 +4,7 @@ interface
 
 uses Classes, SysUtils, Forms, InstantPresentation, InstantPersistence,
   Manager.Core.IDE, BarraFerramenta, Acao, Manager.Core.Workspace.Action,
-  Manager.Core.MainMenu, Vcl.Menus, Manager.Core.IDE.Menu;
+  Vcl.Menus, Manager.Core.IDE.Menu;
 
 type
   TTrayIconMenu = class(TIDEMenu)

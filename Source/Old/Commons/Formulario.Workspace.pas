@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, IDE.Aplicacao, IniFiles,
+  System.Classes, Vcl.Graphics, Manager.Core.IDE, IniFiles,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, JvExControls, JvPageList,
   JvNavigationPane, JvComponentBase, dxSkinsCore, dxSkinsdxBarPainter,
   cxClasses, dxBar, Data.DB, dxBarExtDBItems, Vcl.ActnList, Workspace,
@@ -213,7 +213,7 @@ begin
   arquivos := TStringList.Create;
   try
     arquivos.Delimiter := ';';
-    arquivos.DelimitedText := Application.Configuracoes.Sandbox.ArquivosIni;
+    arquivos.DelimitedText := Application.Configuration.Sandbox.ArquivosIni;
 
     if arquivos.Count <= 0  then
       Exit;

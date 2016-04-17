@@ -152,7 +152,6 @@ object frmPrincipal: TfrmPrincipal
     ManagerColor = False
     Align = alLeft
     AutoSize = True
-    ExplicitHeight = 97
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -230,7 +229,6 @@ object frmPrincipal: TfrmPrincipal
     Height = 28
     Align = alBottom
     AutoSize = True
-    ExplicitWidth = 185
     DockingType = 5
     OriginalWidth = 1071
     OriginalHeight = 2

@@ -27,7 +27,7 @@ implementation
 
 { TUpdate }
 
-uses IDE.Aplicacao;
+uses Manager.Core.IDE;
 
 const
   MESSAGE_UPDATE = 'Uma nova versão (%s) do %s foi encontrado. Você quer baixar e instalar?';

@@ -4,7 +4,7 @@ interface
 
 uses
   InstantPersistence, InstantTypes, Winapi.ShellApi, Classes, SysUtils,
-  Winapi.Windows, Forms, IDE.Aplicacao, IniFiles, Sistema;
+  Winapi.Windows, Forms, Manager.Core.IDE, IniFiles, Sistema;
 
 type
   TAcao = class;
@@ -29,6 +29,10 @@ type
     function GetTipoAcao: string; virtual;
     function GetDescricao: string; virtual;
     procedure SetDescricao(const Value: string); virtual;
+
+    procedure InternalExecute; virtual;
+    procedure InternalBeforeExecute; virtual;
+    procedure InternalAfterExecute; virtual;
   public
     procedure Executar; virtual;
   published
@@ -55,8 +59,8 @@ type
     function RunAsAdmin(hWnd: HWND; filename: string; Parameters: string): Boolean;
   protected
     function GetTipoAcao: string; override;
+    procedure InternalExecute; override;
   public
-    procedure Executar; override;
   published
     property Aplicativo: string read GetAplicativo write SetAplicativo;
     property IsAdmin: Boolean read GetIsAdmin write SetIsAdmin;
@@ -77,8 +81,7 @@ type
     procedure SetOrigem(const Value: string);
   protected
     function GetTipoAcao: string; override;
-  public
-    procedure Executar; override;
+    procedure InternalExecute; override;
   published
     property Destino: string read GetDestino write SetDestino;
     property Origem: string read GetOrigem write SetOrigem;
@@ -94,8 +97,8 @@ type
     procedure SetAcoes(Index: Integer; Value: TAcao);
   protected
     function GetTipoAcao: string; override;
+    procedure InternalExecute; override;
   public
-    procedure Executar; override;
     function AddAcao(Acao: TAcao): Integer;
     procedure ClearAcoes;
     procedure DeleteAcao(Index: Integer);
@@ -141,8 +144,7 @@ type
     function GetTipoAcao: string; override;
     procedure InternalConfigurarIni(AArquivo: TIniFile); virtual;
     function GetTipoBanco: string; virtual;
-  public
-    procedure Executar; override;
+    procedure InternalExecute; override;
   published
     property Alias: string read GetAlias write SetAlias;
     property DBSenha: string read GetDBSenha write SetDBSenha;
@@ -185,7 +187,9 @@ uses
 
 procedure TAcao.Executar;
 begin
-  Console(Application.Parser.ParserText(Descricao));
+  InternalBeforeExecute;
+  InternalExecute;
+  InternalAfterExecute;
 end;
 
 function TAcao.GetDescricao: string;
@@ -203,6 +207,21 @@ begin
   Exit('Indefinida');
 end;
 
+procedure TAcao.InternalAfterExecute;
+begin
+  Application.Notify;
+end;
+
+procedure TAcao.InternalBeforeExecute;
+begin
+  Application.ExecCommand(Application.Parser.ParserText(Descricao));
+end;
+
+procedure TAcao.InternalExecute;
+begin
+  Exit;
+end;
+
 procedure TAcao.SetDescricao(const Value: string);
 begin
   _Descricao.Value := Value;;
@@ -210,12 +229,12 @@ end;
 
 { TAcaoExecutar }
 
-procedure TAcaoExecutar.Executar;
+procedure TAcaoExecutar.InternalExecute;
 var
   handle: THandle;
 begin
   try
-    inherited Executar;
+    inherited InternalExecute;
 
     if Aplicativo.IsEmpty then
       Exit();
@@ -380,12 +399,12 @@ begin
   _Usuario.Value := Value;;
 end;
 
-procedure TAcaoCopiar.Executar;
+procedure TAcaoCopiar.InternalExecute;
 var
   shellinfo: TSHFileOpStructW;
   path_origem: string;
 begin
-  inherited Executar;
+  inherited InternalExecute;
   path_origem := Application.Parser.ParserText(Origem);
   path_destino_tmp := Application.Parser.ParserText(Destino);
   try
@@ -444,12 +463,12 @@ begin
   AArquivo.WriteString('Database', 'TipoBanco', TipoBanco);
 end;
 
-procedure TAcaoConfigurarBaseDeDados.Executar;
+procedure TAcaoConfigurarBaseDeDados.InternalExecute;
 var
   arquivo: TIniFile;
   path: string;
 begin
-  inherited Executar;
+  inherited InternalExecute;
   if path_destino_tmp.IsEmpty then
     Exit;
 
@@ -478,11 +497,11 @@ begin
   _Acoes.Delete(Index);
 end;
 
-procedure TAcaoMontarAmbiente.Executar;
+procedure TAcaoMontarAmbiente.InternalExecute;
 var
   I: Integer;
 begin
-  inherited Executar;
+  inherited InternalExecute;
   for I := 0 to AcaoCount -1 do
     Acoes[I].Executar;
 end;

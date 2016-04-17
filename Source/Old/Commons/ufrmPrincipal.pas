@@ -29,8 +29,8 @@ uses
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGrid, InstantPresentation, IDE.Aplicacao,
-  DosCommand, Manager.PromptCommand, JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts,
+  cxGridTableView, cxGridDBTableView, cxGrid, InstantPresentation, Manager.Core.IDE,
+  Manager.Core.PromptCommand, Manager.PromptCommand, JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts,
   Vcl.Menus, Manager.Core.IDE.Update, dxAlertWindow;
 
 type
@@ -159,7 +159,7 @@ implementation
 
 uses
   JvTypes, Winapi.ShellApi, udtmDatabase, Workspace.Constantes, IDE.Controller.MainMenu,
-  IDE.Utils, IDE.IWorkspace, Manager.Core.Forms.Utils, Manager.Core.Workspace.Recentes;
+  Manager.Core.Utils, IDE.IWorkspace, Manager.Core.Forms.Utils, Manager.Core.Workspace.Recentes;
 
 const
   CONSOLE_TEXTO = 'manager/>';
@@ -179,7 +179,7 @@ end;
 procedure TfrmPrincipal.CarregarVersao;
 begin
   try
-    dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + IDE.Utils.PegarVersaoAplicacao + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32);
+    dxRibbonStatusBar1.Panels[1].Text := 'Versão: ' + Manager.Core.Utils.PegarVersaoAplicacao + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32) + Chr(32);
   except
     on E: Exception do
     begin
@@ -317,9 +317,9 @@ end;
 
 procedure TfrmPrincipal.InicializarWorkspaceList;
 begin
-  with TWorkspaceList.Create(Application.Configuracoes) do
+  with TWorkspaceList.Create(Application.Configuration) do
   begin
-    Sandboxes(iosWorkspaces, Application.Configuracoes.Workspace.EstruturaTFS);
+    Sandboxes(iosWorkspaces, Application.Configuration.Workspace.EstruturaTFS);
     Free;
   end;
 end;
@@ -370,9 +370,9 @@ begin
   InicializarMainMenu;
   FUpdate := TUpdate.Create(actUpdate);
   FUpdate.OnTimer := Timer1Timer;
-  FUpdate.Interval := Trunc(Application.Configuracoes.Aplicacao.TempoVerificaoAtualizacaoAuto * 60000);
+  FUpdate.Interval := Trunc(Application.Configuration.Aplicacao.TempoVerificaoAtualizacaoAuto * 60000);
 
-  if Application.Configuracoes.Aplicacao.VerificarAtualizacaoAuto then
+  if Application.Configuration.Aplicacao.VerificarAtualizacaoAuto then
   begin
     FUpdate.Enabled := True;
     FUpdate.OnTimer(FUpdate);
@@ -398,7 +398,6 @@ begin
   {$ENDIF}
   Self.Caption := Application.Title;
 
-  Application.TabbedMDIManager(dxTabbedMDIManager1);
   Application.PromptCommand.InputToOutput := True;
   Application.PromptCommand.OutputLines := txtConsole.Lines;
   txtConsole.Lines.Delete(Length(txtConsole.Lines.Text) + 1);

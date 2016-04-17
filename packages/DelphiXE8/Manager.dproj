@@ -150,12 +150,10 @@
         <DCCReference Include="..\..\Source\Old\Commons\Cadastro.Sistema.pas">
             <Form>frmCadastroSistema</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Old\Commons\IDE.Utils.pas"/>
         <DCCReference Include="..\..\Source\Models\Workspace.pas"/>
         <DCCReference Include="..\..\Source\Old\Commons\ufrmPrincipal.pas">
             <Form>frmPrincipal</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Old\Commons\IDE.Aplicacao.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Core.Parser.Manager.pas"/>
         <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Parser.pas"/>
         <DCCReference Include="..\..\Source\Core\Parser\Manager.Core.Parser.Workspace.pas"/>
@@ -199,7 +197,7 @@
             <Form>frmCadastroAcaoCatalogoBases</Form>
         </DCCReference>
         <DCCReference Include="..\..\Source\Models\AcaoExclusao.pas"/>
-        <DCCReference Include="..\..\Source\Old\Commons\DosCommand.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.PromptCommand.pas"/>
         <DCCReference Include="..\..\Source\Old\Commons\Manager.PromptCommand.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Prepare.pas"/>
         <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Prepare.pas"/>
@@ -226,7 +224,7 @@
             <Form>frmWorkspace2</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\Source\Core\Manager.Core.MainMenu.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Ribbon.MainMenu.pas"/>
         <DCCReference Include="..\..\Source\Core\Forms\Manager.Core.Forms.Main.Controller.pas"/>
         <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Observer.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Notify.pas"/>

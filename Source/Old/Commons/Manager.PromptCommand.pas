@@ -3,7 +3,7 @@ unit Manager.PromptCommand;
 interface
 
 uses Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, DBCtrls, DosCommand;
+  Dialogs, StdCtrls, Mask, DBCtrls, Manager.Core.PromptCommand;
 
 type
   TManagerPromptCommand = class(TMemo)
