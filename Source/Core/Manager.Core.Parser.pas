@@ -41,7 +41,7 @@ function TParser.ParserText(const ATexto: string): string;
 var
   sandbox: TWorkspace;
 begin
-  sandbox := Application.Main.CurrentWorkspace.Sandbox;
+  sandbox := Application.CurrentWorkspace.Sandbox;
   if not Assigned(sandbox) then
     Exit(ATexto);
 

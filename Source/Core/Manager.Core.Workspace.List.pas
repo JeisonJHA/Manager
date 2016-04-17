@@ -37,6 +37,7 @@ var
   diretorios: TStrings;
   Descricao: string;
   Diretorio: string;
+  sistemas: TInstantSelector;
 
   function TratarDescricao(const ADescricao: string): string;
   begin
@@ -45,18 +46,13 @@ var
 
   function IsDiretorioProjeto(const ADiretorio: string): boolean;
   var
-    sistemas: TInstantSelector;
     I: integer;
   begin
-    with TInstantSelector.Create(nil) do
+    with sistemas do
     begin
-      Connector := dtmDatabase.InstantIBXConnector1;
-      Command.Text := 'SELECT * FROM TSistema';
-      Open;
       for I := 0 to Pred(ObjectCount) do
         if Pos(ADiretorio, TSistema(Objects[I]).NomeDiretorio) > 0then
           Exit(True);
-      Free;
     end;
     Exit(False);
   end;
@@ -95,10 +91,15 @@ begin
     if not AIOSelector.Active then
     AIOSelector.Open;
 
+  sistemas := TInstantSelector.Create(nil);
   diretorios := TStringList.Create;
   try
     diretorios.StrictDelimiter := True;
     diretorios.DelimitedText := ADiretorio;
+
+    sistemas.Connector := dtmDatabase.InstantIBXConnector1;
+    sistemas.Command.Text := 'SELECT * FROM TSistema';
+    sistemas.Open;
 
     for X := 0 to diretorios.Count - 1 do
     begin
@@ -131,8 +132,10 @@ begin
         TWorkspace(AIOSelector.Objects[I]).Diretorio := Diretorio;
       end;
     end;
+    sistemas.Close;
     diretorios.Clear;
   finally
+    FreeAndNil(sistemas);
     FreeAndNil(diretorios);
   end;
   AIOSelector.Refresh;

@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'frmMain'
+  Caption = 'Manager'
   ClientHeight = 660
   ClientWidth = 1087
   Color = clBtnFace
@@ -12,7 +12,9 @@ object frmMain: TfrmMain
   Font.Style = []
   FormStyle = fsMDIForm
   OldCreateOrder = True
+  OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -38,6 +40,9 @@ object frmMain: TfrmMain
         item
           Caption = 'Cadastros'
           ToolbarName = 'barCadastros'
+        end
+        item
+          ToolbarName = 'barBaseDeDados'
         end>
       Index = 0
     end
@@ -47,7 +52,10 @@ object frmMain: TfrmMain
     Top = 166
     Width = 577
     Height = 266
-    Buttons = <>
+    Buttons = <
+      item
+        Item = btnOpcoes
+      end>
     Ribbon = dxRibbon1
     object dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet
       Left = 132
@@ -228,7 +236,11 @@ object frmMain: TfrmMain
       FloatTop = 0
       FloatClientWidth = 0
       FloatClientHeight = 0
-      ItemLinks = <>
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarButton2'
+        end>
       OneOnRow = True
       Row = 0
       UseOwnFont = False
@@ -261,6 +273,30 @@ object frmMain: TfrmMain
         item
           Visible = True
           ItemName = 'btnMenu'
+        end>
+      OneOnRow = True
+      Row = 1
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object barBaseDeDados: TdxBar
+      Caption = 'Base de dados'
+      CaptionButtons = <>
+      DockedLeft = 231
+      DockedTop = 0
+      FloatLeft = 1121
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnConjuntoDeBases'
+        end
+        item
+          Visible = True
+          ItemName = 'btnCatalagoBases'
         end>
       OneOnRow = True
       Row = 0
@@ -401,6 +437,30 @@ object frmMain: TfrmMain
           ItemName = 'btnCadastroBarraFerramentas'
         end>
     end
+    object dxBarButton1: TdxBarButton
+      Caption = 'New Button'
+      Category = 0
+      Hint = 'New Button'
+      Visible = ivAlways
+    end
+    object dxBarButton2: TdxBarButton
+      Action = actUpdate
+      Category = 0
+    end
+    object btnConjuntoDeBases: TdxBarSubItem
+      Caption = 'Conjunto de Bases'
+      Category = 0
+      Visible = ivAlways
+      ImageIndex = 37
+      ItemLinks = <>
+    end
+    object btnCatalagoBases: TdxBarSubItem
+      Caption = 'Cat'#225'logo de Bases'
+      Category = 0
+      Visible = ivAlways
+      ImageIndex = 36
+      ItemLinks = <>
+    end
   end
   object dxSkinController1: TdxSkinController
     NativeStyle = False
@@ -492,17 +552,24 @@ object frmMain: TfrmMain
       HelpKeyword = 'TfrmCadastroAcaoCatalogoBases'
       OnExecute = actOnAbreTelaExecute
     end
+    object actUpdate: TAction
+      Caption = 'Update'
+      ImageIndex = 39
+      Visible = False
+      OnExecute = actUpdateExecute
+    end
   end
   object tiPrincipal: TTrayIcon
     BalloonTitle = 'Manager'
     PopupMenu = ppmTrayIcon
     Visible = True
+    OnClick = tiPrincipalClick
     Left = 440
     Top = 64
   end
   object ppmTrayIcon: TPopupMenu
     Images = dtmDatabase.SmallImageList
-    Left = 472
+    Left = 496
     Top = 64
     object N1: TMenuItem
       Caption = '-'
@@ -512,5 +579,36 @@ object frmMain: TfrmMain
       ImageIndex = 38
       OnClick = mnuFecharClick
     end
+  end
+  object aePrincipal: TApplicationEvents
+    OnMinimize = aePrincipalMinimize
+    Left = 520
+    Top = 440
+  end
+  object alMessageAlert: TdxAlertWindowManager
+    OptionsButtons.Buttons = <
+      item
+        ImageIndex = 39
+      end>
+    OptionsButtons.Images = dtmDatabase.SmallImageList
+    OptionsMessage.Caption.Font.Charset = DEFAULT_CHARSET
+    OptionsMessage.Caption.Font.Color = clWindowText
+    OptionsMessage.Caption.Font.Height = -13
+    OptionsMessage.Caption.Font.Name = 'Tahoma'
+    OptionsMessage.Caption.Font.Style = [fsBold]
+    OptionsMessage.Text.Font.Charset = DEFAULT_CHARSET
+    OptionsMessage.Text.Font.Color = clWindowText
+    OptionsMessage.Text.Font.Height = -11
+    OptionsMessage.Text.Font.Name = 'Tahoma'
+    OptionsMessage.Text.Font.Style = []
+    OptionsNavigationPanel.Font.Charset = DEFAULT_CHARSET
+    OptionsNavigationPanel.Font.Color = clWindowText
+    OptionsNavigationPanel.Font.Height = -11
+    OptionsNavigationPanel.Font.Name = 'Tahoma'
+    OptionsNavigationPanel.Font.Style = []
+    OnButtonClick = alMessageAlertButtonClick
+    Left = 888
+    Top = 432
+    PixelsPerInch = 96
   end
 end

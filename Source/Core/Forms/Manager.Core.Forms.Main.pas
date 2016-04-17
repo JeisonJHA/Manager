@@ -15,7 +15,8 @@ uses
   cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   dxDockPanel, dxDockControl, JvExDBGrids, JvDBGrid, Vcl.StdCtrls,
-  dxBarBuiltInMenu, dxTabbedMDI, Vcl.Menus, Manager.Core.IDE;
+  dxBarBuiltInMenu, dxTabbedMDI, Vcl.Menus, Manager.Core.IDE, Vcl.AppEvnts,
+  dxAlertWindow, InstantExplorer;
 
 type
   TfrmMain = class(TdxRibbonForm, IMain)
@@ -74,15 +75,29 @@ type
     ppmTrayIcon: TPopupMenu;
     N1: TMenuItem;
     mnuFechar: TMenuItem;
+    aePrincipal: TApplicationEvents;
+    actUpdate: TAction;
+    dxBarButton1: TdxBarButton;
+    dxBarButton2: TdxBarButton;
+    alMessageAlert: TdxAlertWindowManager;
+    barBaseDeDados: TdxBar;
+    btnConjuntoDeBases: TdxBarSubItem;
+    btnCatalagoBases: TdxBarSubItem;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure actOnAbreTelaExecute(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure mnuFecharClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure aePrincipalMinimize(Sender: TObject);
+    procedure tiPrincipalClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure actUpdateExecute(Sender: TObject);
+    procedure alMessageAlertButtonClick(Sender: TObject;
+      AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
   private
     { Private declarations }
     FController: TControllerMain;
-    function CurrentWorkspace: IWorkspace;
     function RibbonTabs: TdxRibbonTabCollection;
     function ActionList: TActionList;
     function Workspaces: TInstantSelector;
@@ -113,6 +128,28 @@ begin
   CreateForm(TAction(Sender).HelpKeyword).ShowModal;
 end;
 
+procedure TfrmMain.actUpdateExecute(Sender: TObject);
+begin
+  Controller.ExecutarAtulizacao;
+end;
+
+procedure TfrmMain.aePrincipalMinimize(Sender: TObject);
+begin
+  Self.Hide();
+  Self.WindowState := wsMinimized;
+  Self.tiPrincipal.Visible := True;
+  Self.tiPrincipal.Animate := True;
+  Self.tiPrincipal.ShowBalloonHint;
+end;
+
+procedure TfrmMain.alMessageAlertButtonClick(Sender: TObject;
+  AAlertWindow: TdxAlertWindow; AButtonIndex: Integer);
+begin
+  case AButtonIndex of
+    0: Controller.ExecutarAtulizacao;
+  end;
+end;
+
 function TfrmMain.ActionList: TActionList;
 begin
   Exit(aclToolbars);
@@ -125,11 +162,6 @@ begin
   Application.Register(FController);
 end;
 
-function TfrmMain.CurrentWorkspace: IWorkspace;
-begin
-  Exit(nil);
-end;
-
 procedure TfrmMain.DBGrid1DblClick(Sender: TObject);
 begin
   Controller.AbriAbaWorkspace(iosWorkspaces.CurrentObject);
@@ -137,14 +169,23 @@ end;
 
 destructor TfrmMain.Destroy;
 begin
-  FreeAndNil(FController);
   inherited;
+end;
+
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Controller.OnFormClose(Sender, Action);
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   DisableAero := True;
   Controller.OnCreate(Self);
+end;
+
+procedure TfrmMain.FormDestroy(Sender: TObject);
+begin
+  Controller.OnDestroy(Sender);
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
@@ -170,6 +211,14 @@ end;
 function TfrmMain.TabPrincipal: TdxRibbonTab;
 begin
   Exit(ribbonTabPrincipal);
+end;
+
+procedure TfrmMain.tiPrincipalClick(Sender: TObject);
+begin
+  Self.tiPrincipal.Visible := False;
+  Self.Show();
+  WindowState := wsMaximized;
+  Application.BringToFront();
 end;
 
 function TfrmMain.ToolBarCadastro: TdxBar;

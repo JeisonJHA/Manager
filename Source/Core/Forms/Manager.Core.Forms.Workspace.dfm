@@ -24,18 +24,5 @@ object frmWorkspace2: TfrmWorkspace2
     Width = 635
     Height = 299
     TabOrder = 0
-    ExplicitLeft = 128
-    ExplicitTop = 16
-    ExplicitWidth = 400
-    ExplicitHeight = 300
-  end
-  object Button1: TButton
-    Left = 520
-    Top = 40
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
-    TabOrder = 1
-    OnClick = Button1Click
   end
 end

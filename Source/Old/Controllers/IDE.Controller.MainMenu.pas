@@ -174,7 +174,7 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM TAcaoConjuntoDeBases ORDER BY Descricao DESC';
+    Command.Text := 'SELECT * FROM TAcaoConjuntoDeBases ORDER BY Descricao';
     Open;
 
     itemBase := TMenuItem.Create(APopupMenu);
@@ -207,7 +207,7 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM TAcaoCatalogoDeBases ORDER BY Descricao DESC';
+    Command.Text := 'SELECT * FROM TAcaoCatalogoDeBases ORDER BY Descricao';
     Open;
 
     itemBase := TMenuItem.Create(APopupMenu);
@@ -240,7 +240,7 @@ begin
   with TInstantSelector.Create(nil) do
   try
     Connector := dtmDatabase.InstantIBXConnector1;
-    Command.Text := 'SELECT * FROM TBarraFerramenta ORDER BY Descricao DESC';
+    Command.Text := 'SELECT * FROM TBarraFerramenta ORDER BY Descricao';
     Open;
 
     for I := 0 to Pred(ObjectCount) do

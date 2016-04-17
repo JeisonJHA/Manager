@@ -75,7 +75,9 @@ begin
         ' ', [rfReplaceAll]);
     Free;
   end;
-  ATileControl.Title.Text := StringReplace(texto, '-', ' ', [rfReplaceAll]);
+  texto := StringReplace(texto, '-', ' ', [rfReplaceAll]);
+  ATileControl.Title.Text := texto;
+  FForm.Caption := texto;
 end;
 
 procedure TWorkspaceController.ConfigurarItemsOfTile(AForm: TForm);

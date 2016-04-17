@@ -114,8 +114,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         Height = 368
         Caption = 'pageDiretorios'
         ParentBackground = True
-        ExplicitLeft = 3
-        ExplicitTop = -1
         object Panel5: TPanel
           Left = 0
           Top = 0
@@ -144,8 +142,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           Align = alClient
           Caption = 'Diret'#243'rios'
           TabOrder = 1
-          ExplicitTop = 72
-          ExplicitHeight = 273
           object Panel6: TPanel
             Left = 2
             Top = 201
@@ -155,7 +151,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
             BevelOuter = bvNone
             ParentColor = True
             TabOrder = 0
-            ExplicitTop = 257
             object btnDiretorio: TSpeedButton
               Left = 447
               Top = 12

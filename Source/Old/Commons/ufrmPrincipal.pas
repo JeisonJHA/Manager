@@ -31,7 +31,7 @@ uses
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, InstantPresentation, IDE.Aplicacao,
   DosCommand, Manager.PromptCommand, JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts,
-  Vcl.Menus, IDE.Update, dxAlertWindow;
+  Vcl.Menus, Manager.Core.IDE.Update, dxAlertWindow;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)

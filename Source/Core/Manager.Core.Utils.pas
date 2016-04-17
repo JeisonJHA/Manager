@@ -72,7 +72,7 @@ var
   strEmbaralhada, strAux: String;
   i: integer;
 begin
-  strEmbaralhada := '';
+  strEmbaralhada := String.Empty;
   strAux := CompletaString(strDesembaralhada, 20);
   i := 1;
   while i <= 20 do
@@ -110,10 +110,10 @@ var
   strSubtraida, strAux, strChave: String;
   i: integer;
 begin
-  result := '';
-  if (trim(strEntrada) <> '') then
+  result := String.Empty;
+  if (trim(strEntrada) <> String.Empty) then
   begin
-    strSubtraida := '';
+    strSubtraida := String.Empty;
     strAux := strEntrada;
     strChave := sChave;
     i := 1;
@@ -122,8 +122,9 @@ begin
       strSubtraida := strSubtraida + Chr(Ord(strAux[i]) - Ord(strChave[i]));
       i := i + 1;
     end;
-    result := strSubtraida;
+    Exit(strSubtraida);
   end;
+  Exit(String.Empty);
 end;
 
 { ** Define a variável [sChave], já com o tamanho certinho (20 chars). }
@@ -274,15 +275,14 @@ var
   resp: AnsiString;
   chave: TKey128;
 begin
-  if trim(psPalavra) = '' then
-    result := ''
-  else
+  if not (trim(psPalavra) = String.Empty) then
   begin
     FillChar(chave, SizeOf(chave), 0);
     GenerateMD5Key(chave, sChave2);
     RDLEncryptString(psPalavra, resp, chave, SizeOf(chave), false);
-    result := resp;
+    Exit(resp);
   end;
+  Exit(String.Empty);
 end;
 
 initialization

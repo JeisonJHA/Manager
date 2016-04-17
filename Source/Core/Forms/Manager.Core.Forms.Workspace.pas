@@ -12,11 +12,8 @@ uses
 type
   TfrmWorkspace2 = class(TfrmModelo, IWorkspace, IObserver)
     dxTileControl1: TdxTileControl;
-    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     FController: TWorkspaceController;
@@ -41,12 +38,6 @@ uses Manager.Core.Forms.Utils;
 
 { TfrmWorkspace2 }
 
-procedure TfrmWorkspace2.Button1Click(Sender: TObject);
-begin
-  inherited;
-  Controller.Prepare;
-end;
-
 constructor TfrmWorkspace2.Create(AOwner: TComponent; var ASubject: TObject);
 begin
   inherited Create(AOwner);
@@ -58,12 +49,6 @@ destructor TfrmWorkspace2.Destroy;
 begin
   FreeAndNil(FController);
   inherited;
-end;
-
-procedure TfrmWorkspace2.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  inherited;
-  Action := caFree;
 end;
 
 procedure TfrmWorkspace2.FormCreate(Sender: TObject);

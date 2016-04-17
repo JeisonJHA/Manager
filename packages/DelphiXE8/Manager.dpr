@@ -57,7 +57,7 @@ uses
   Manager.PromptCommand in '..\..\Source\Old\Commons\Manager.PromptCommand.pas',
   Manager.Core.IDE.Prepare in '..\..\Source\Core\Manager.Core.IDE.Prepare.pas',
   Manager.Core.API.Prepare in '..\..\Source\Core\API\Manager.Core.API.Prepare.pas',
-  IDE.Update in '..\..\Source\Old\Commons\IDE.Update.pas',
+  Manager.Core.IDE.Update in '..\..\Source\Core\Manager.Core.IDE.Update.pas',
   Manager.Core.Forms.Splash in '..\..\Source\Core\Forms\Manager.Core.Forms.Splash.pas' {frmSplash},
   Manager.Core.Utils in '..\..\Source\Core\Manager.Core.Utils.pas',
   Updater.Core in '..\..\third-part\Updater\Source\Updater.Core.pas',
@@ -75,7 +75,10 @@ uses
   Manager.Core.API.Observer in '..\..\Source\Core\API\Manager.Core.API.Observer.pas',
   Manager.Core.IDE.Notify in '..\..\Source\Core\Manager.Core.IDE.Notify.pas',
   Manager.Core.IDE.Content in '..\..\Source\Core\Manager.Core.IDE.Content.pas',
-  Manager.Core.Forms.Workspace.Controller in '..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.Controller.pas';
+  Manager.Core.Forms.Workspace.Controller in '..\..\Source\Core\Forms\Manager.Core.Forms.Workspace.Controller.pas',
+  Manager.Core.IDE.Constants in '..\..\Source\Core\Manager.Core.IDE.Constants.pas',
+  Manager.Core.TrayIconMenu in '..\..\Source\Core\Manager.Core.TrayIconMenu.pas',
+  Manager.Core.IDE.Menu in '..\..\Source\Core\Manager.Core.IDE.Menu.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
@@ -88,6 +91,14 @@ uses
             Workspace}
 
 begin
+  CreateMutex(nil, False, APP_GUID);
+  if GetLastError = ERROR_ALREADY_EXISTS Then
+  begin
+    SendMessage(HWND_BROADCAST,
+    RegisterWindowMessage(APP_GUID),0,0);
+    Halt(0);
+  end;
+
   {$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown := True;
   {$ENDIF}

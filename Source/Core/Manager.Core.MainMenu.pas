@@ -3,71 +3,29 @@ unit Manager.Core.MainMenu;
 interface
 
 uses Classes, SysUtils, Forms, InstantPresentation, InstantPersistence,
-  Manager.Core.IDE, BarraFerramenta, Acao, dxRibbon, dxBar, Manager.Core.Workspace.Action;
+  Manager.Core.IDE, BarraFerramenta, Acao, dxRibbon, dxBar, Manager.Core.Workspace.Action,
+  Manager.Core.IDE.Menu;
 
 type
-  TManagerMainMenu = class
+  TManagerMainMenu = class(TIDEMenu)
   private
-    FGroups: TInstantSelector;
     function PrepareGroup(ABarraFerramenta: TBarraFerramenta): TdxRibbonTabGroup;
     procedure Action(AGroup: TdxRibbonTabGroup; ABarraFerramenta: TBarraFerramenta; AAcao: TAcao);
-  public
-    constructor Create;
-    destructor Destroy; override;
-    procedure Load;
+    function CreateBarItem(AToolBar: TdxBar; ABarraFerramenta: TBarraFerramenta;
+      AAcao: TAcao): TdxBarItemLink;
+
+    procedure InternalCarregar(ASelector: TInstantSelector; ABarSubItem: TdxBarSubItem);
+
+    procedure PrepararConjuntoDeBases(const ACaption: string; const AImageIndex: integer); override;
+    procedure PrepararCatalogoDeBases(const ACaption: string; const AImageIndex: integer); override;
+    procedure PrepararBarraFerramenta; override;
   end;
 
 implementation
 
-uses AcaoCatalogoDeBases, AcaoConjuntoDeBases;
-
 { TManagerMainMenu }
 
-function BuscarAcao(AAcao: TAcao): TAcao;
-begin
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosDB2) then
-    Exit(TAcaoConfigurarBaseDeDadosDB2.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosOracle) then
-    Exit(TAcaoConfigurarBaseDeDadosOracle.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
-    Exit(TAcaoConfigurarBaseDeDadosMSSQL.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDados) then
-    Exit(TAcaoConfigurarBaseDeDados.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoMontarAmbiente) then
-    Exit(TAcaoMontarAmbiente.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConjuntoDeBases) then
-    Exit(TAcaoConjuntoDeBases.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoCatalogoDeBases) then
-    Exit(TAcaoCatalogoDeBases.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoCopiar) then
-    Exit(TAcaoCopiar.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoExecutar) then
-    Exit(TAcaoExecutar.Retrieve(AAcao.Id));
-
-  Exit(TAcao.Retrieve(AAcao.Id));
-end;
-
-constructor TManagerMainMenu.Create;
-begin
-  FGroups := TInstantSelector.Create(nil);
-  FGroups.Command.Text := 'SELECT * FROM TBarraFerramenta';
-end;
-
-destructor TManagerMainMenu.Destroy;
-begin
-  if FGroups.Active then
-    FGroups.Close;
-  FreeAndNil(FGroups);
-  inherited;
-end;
+uses udtmDatabase, Manager.Core.Forms.Main;
 
 function CreateRibbonBar(ARibbonTab: TdxRibbonTab; ABarraFerramenta: TBarraFerramenta): TdxBar;
 begin
@@ -98,6 +56,33 @@ begin
   UpdateRibbonBar(ARibbonTabGroup.ToolBar, ABarraFerramenta);
 end;
 
+procedure TManagerMainMenu.PrepararBarraFerramenta;
+var
+  I: integer;
+  II: Integer;
+  group: TdxRibbonTabGroup;
+begin
+  FBarraFerramenta.Open;
+  for I := 0 to Pred(FBarraFerramenta.ObjectCount) do
+  begin
+    group := PrepareGroup(TBarraFerramenta(FBarraFerramenta.Objects[I]));
+    for II := 0 to Pred(TBarraFerramenta(FBarraFerramenta.Objects[I]).AcaoCount) do
+      Action(group, TBarraFerramenta(FBarraFerramenta.Objects[I]), TAcao(TBarraFerramenta(TBarraFerramenta(FBarraFerramenta.Objects[I])).Acoes[II]));
+  end;
+end;
+
+procedure TManagerMainMenu.PrepararCatalogoDeBases(const ACaption: string;
+  const AImageIndex: integer);
+begin
+  InternalCarregar(FCatalogoDeBases, TfrmMain(Application.MainForm).btnCatalagoBases);
+end;
+
+procedure TManagerMainMenu.PrepararConjuntoDeBases(const ACaption: string;
+  const AImageIndex: integer);
+begin
+  InternalCarregar(FConjuntoDeBases, TfrmMain(Application.MainForm).btnConjuntoDeBases);
+end;
+
 function TManagerMainMenu.PrepareGroup(ABarraFerramenta: TBarraFerramenta): TdxRibbonTabGroup;
 begin
   if not Application.Main.RibbonTabs[0].Groups.Find(ABarraFerramenta.Descricao, Result) then
@@ -108,7 +93,7 @@ begin
   UpdateGroup(Result, ABarraFerramenta);
 end;
 
-function CreateBarItem(AToolBar: TdxBar; ABarraFerramenta: TBarraFerramenta; AAcao: TAcao): TdxBarItemLink;
+function TManagerMainMenu.CreateBarItem(AToolBar: TdxBar; ABarraFerramenta: TBarraFerramenta; AAcao: TAcao): TdxBarItemLink;
 var
   action: TWorkspaceAction;
 begin
@@ -122,6 +107,30 @@ begin
   Result.Item := TdxBarLargeButton.Create(AToolBar.BarManager);
   Result.Item.Action := action;
   Result.Item.Category := AToolBar.BarManager.Categories.IndexOf('Default');
+end;
+
+procedure TManagerMainMenu.InternalCarregar(ASelector: TInstantSelector;
+  ABarSubItem: TdxBarSubItem);
+var
+  I: integer;
+  acao: TAcao;
+  action: TWorkspaceAction;
+  link: TdxBarItemLink;
+begin
+  for I := 0 to Pred(ASelector.ObjectCount) do
+  begin
+    acao := BuscarAcao(ASelector.Objects[I] as TAcao);
+
+    action := TWorkspaceAction.Create(Application.Main.ActionList);
+    action.Acao := acao;
+    action.Caption := acao.Descricao;
+    action.ImageIndex := acao.Icone;
+
+    link := ABarSubItem.ItemLinks.Add;
+    link.Item := TdxBarLargeButton.Create(ABarSubItem.BarManager);
+    link.Item.Action := action;
+    link.Item.Category := ABarSubItem.BarManager.Categories.IndexOf('Default');
+  end;
 end;
 
 procedure UpdateBarItem(AAction: TWorkspaceAction; ABarraFerramenta: TBarraFerramenta; AAcao: TAcao);
@@ -156,21 +165,6 @@ begin
     Exit;
   end;
   UpdateBarItem(action, ABarraFerramenta, AAcao);
-end;
-
-procedure TManagerMainMenu.Load;
-var
-  I: integer;
-  II: Integer;
-  group: TdxRibbonTabGroup;
-begin
-  FGroups.Open;
-  for I := 0 to Pred(FGroups.ObjectCount) do
-  begin
-    group := PrepareGroup(TBarraFerramenta(FGroups.Objects[I]));
-    for II := 0 to Pred(TBarraFerramenta(FGroups.Objects[I]).AcaoCount) do
-      Action(group, TBarraFerramenta(FGroups.Objects[I]), TAcao(TBarraFerramenta(TBarraFerramenta(FGroups.Objects[I])).Acoes[II]));
-  end;
 end;
 
 end.

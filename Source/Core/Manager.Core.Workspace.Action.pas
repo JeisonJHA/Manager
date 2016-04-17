@@ -52,7 +52,7 @@ end;
 
 procedure TWorkspaceAction.InternalOnUpdate(Sender: TObject);
 begin
-  TAction(Sender).Enabled := Assigned(Application.Main.CurrentWorkspace);
+  TAction(Sender).Enabled := Assigned(Application.CurrentWorkspace);
 end;
 
 end.

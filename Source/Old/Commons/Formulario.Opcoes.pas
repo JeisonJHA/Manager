@@ -84,7 +84,7 @@ implementation
 
 {$R *.dfm}
 
-uses Manager.Core.Forms.Utils;
+uses Manager.Core.Forms.Utils, Manager.Core.IDE;
 
 procedure TfrmFormularioOpcoes.AplicacaoLoad;
 begin
@@ -157,6 +157,7 @@ end;
 procedure TfrmFormularioOpcoes.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  Application.Notify;
   FreeAndNil(FConfig);
   inherited;
 end;
