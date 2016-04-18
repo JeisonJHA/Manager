@@ -36,7 +36,7 @@ type
 
 function VerificarTipoExclusao(const APath: string): TTipoExclusao;
 begin
-  if (ExtractFileName(APath) = '*.*') or (ExtractFileName(APath) = '*') then
+  if (ExtractFileName(APath) = '*.*') or (ExtractFileName(APath) = '*') or (Pos('*.', ExtractFileName(APath)) > 0) then
     Exit(teAllFiles);
 
   if DirectoryExists(APath) then
@@ -49,11 +49,15 @@ procedure TAcaoExclusaoArquivo.DeleteAllFiles(const APath: string);
 var
   F: TSearchRec;
   path: string;
+  file_name: string;
 begin
-  path := StringReplace(APath, '\*.*', '', [rfReplaceAll]);
-  path := StringReplace(path, '\*', '', [rfReplaceAll]);
+  file_name := ExtractFileName(APath);
+  if (Trim(file_name) = '*') then
+	  file_name := '*.*';
+  
+  path := ExtractFilePath(APath);
 
-  if FindFirst(path + '\*.*', faAnyFile, F) = 0 then
+  if FindFirst(IncludeTrailingBackslash(path) + file_name, faAnyFile, F) = 0 then
   begin
     try
       repeat
@@ -61,11 +65,11 @@ begin
         begin
           if (F.Name <> '.') and (F.Name <> '..') then
           begin
-            RemoveDir(path + '\' + F.Name);
+            RemoveDir(IncludeTrailingBackslash(path) + F.Name);
           end;
         end else
         begin
-          DeleteFile(path + '\' + F.Name);
+          DeleteFile(IncludeTrailingBackslash(path) + F.Name);
         end;
       until FindNext(F) <> 0;
     finally
