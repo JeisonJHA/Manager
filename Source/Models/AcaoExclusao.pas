@@ -11,9 +11,11 @@ type
 
   TAcaoExclusaoArquivo = class(TAcaoExecutar)
   {IOMETADATA stored; }
-  protected
+  private
+    procedure DeleteDiretory(hHandle: THandle; const sPath: string; Confirm: boolean);
     procedure DeleteUniqueFile(const APath: string);
-    procedure DeleteDirectory(const APath: string; ARemoveDir: boolean = True);
+    procedure DeleteAllFiles(const APath: string);
+  protected
     procedure InternalExecute; override;
     procedure InternalAfterExecute; override;
   end;
@@ -43,7 +45,7 @@ begin
   Exit(teFile);
 end;
 
-procedure TAcaoExclusaoArquivo.DeleteDirectory(const APath: string; ARemoveDir: boolean);
+procedure TAcaoExclusaoArquivo.DeleteAllFiles(const APath: string);
 var
   F: TSearchRec;
   path: string;
@@ -69,8 +71,6 @@ begin
     finally
       FindClose(F);
     end;
-    if ARemoveDir then
-      RemoveDir(path);
   end;
 end;
 
@@ -92,9 +92,39 @@ begin
   path := Application.Parser.ParserText(Aplicativo);
   case VerificarTipoExclusao(path) of
     teFile: DeleteUniqueFile(path);
-    teAllFiles: DeleteDirectory(path, False);
-    teDirectory: DeleteDirectory(path);
+    teAllFiles: DeleteAllFiles(path);
+    teDirectory: DeleteDiretory(Application.Handle, path, IsAdmin);
   end;
+end;
+
+// utilize a funcão desta forma:  DeleteDir(Self.Handle,'C:TESTE',True);
+procedure TAcaoExclusaoArquivo.DeleteDiretory(hHandle: THandle; const sPath: string; Confirm: boolean);
+var
+  OpStruc: TSHFileOpStruct;
+  FromBuffer, ToBuffer: array[0..128] of char;
+begin
+  fillChar(OpStruc, Sizeof(OpStruc), 0);
+  FillChar(FromBuffer, Sizeof(FromBuffer), 0);
+  FillChar(ToBuffer, Sizeof(ToBuffer), 0);
+  StrPCopy(FromBuffer, sPath);
+
+  with OpStruc do
+  begin
+    Wnd := hHandle;
+    wFunc := FO_DELETE;
+    pFrom := @FromBuffer;
+    pTo := @ToBuffer;
+
+    if not confirm then
+    begin
+      fFlags := FOF_NOCONFIRMATION;
+    end;
+
+    fAnyOperationsAborted := False;
+    hNameMappings := nil;
+  end;
+
+  ShFileOperation(OpStruc);
 end;
 
 initialization

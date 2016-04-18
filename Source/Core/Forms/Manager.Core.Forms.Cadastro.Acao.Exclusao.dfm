@@ -18,17 +18,25 @@ inherited frmCadastroAcaoExclusao: TfrmCadastroAcaoExclusao
       ExplicitWidth = 680
       ExplicitHeight = 352
       inherited Label4: TLabel
+        Top = 260
         Visible = False
+        ExplicitTop = 260
       end
       inherited cbxIcone: TcxDBImageComboBox
         ExplicitHeight = 36
       end
       inherited chkIsAdmin: TcxDBCheckBox
-        Visible = False
+        Left = 24
+        Top = 120
+        Caption = 'Confirmar a exclus'#227'o'
+        ExplicitLeft = 24
+        ExplicitTop = 120
         ExplicitHeight = 19
       end
       inherited cbxParametros: TcxDBComboBox
+        Top = 276
         Visible = False
+        ExplicitTop = 276
       end
     end
   end
