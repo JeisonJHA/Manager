@@ -507,6 +507,7 @@ object frmMain: TfrmMain
   end
   object mdiControleTelas: TdxTabbedMDIManager
     Active = True
+    TabProperties.CloseButtonMode = cbmEveryTab
     TabProperties.CustomButtons.Buttons = <>
     Left = 936
     Top = 288
