@@ -24,9 +24,11 @@ type
     procedure actCancelarExecute(Sender: TObject);
     procedure actCancelarUpdate(Sender: TObject);
     procedure actFecharExecute(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   protected
+    procedure AoCancelar(Sender: TObject); virtual;
     procedure CarregarComboIcones(AComboBoxes: array of TcxDBImageComboBox);
   public
     { Public declarations }
@@ -43,26 +45,13 @@ uses udtmDatabase;
 
 procedure TfrmCadastroModelo.actCancelarExecute(Sender: TObject);
 begin
-  inherited;
-  if ioeMestre.IsChanged then
-  begin
-    if (MessageDlg('Existe modificações realizadas, deseja realmente cancelar a operação?', mtConfirmation, [mbYes, mbNo], 0) = mbNo) then
-      Abort;
-    ioeMestre.Cancel;
-    ModalResult := mrCancel;
-  end
-  else
-  begin
-    ModalResult := mrOk;
-    Application.Notify;
-  end;
-  Self.Close;
+  AoCancelar(Sender);
 end;
 
 procedure TfrmCadastroModelo.actCancelarUpdate(Sender: TObject);
 begin
   inherited;
-  if ioeMestre.IsChanged then
+  if ioeMestre.State in (dsEditModes) then
   begin
     TAction(Sender).Caption := 'Cancelar';
     Exit;
@@ -91,6 +80,26 @@ begin
   Self.Close;
 end;
 
+procedure TfrmCadastroModelo.AoCancelar(Sender: TObject);
+begin
+  if ioeMestre.State in (dsEditModes) then
+  begin
+    if (MessageDlg('Existe modificações realizadas, deseja realmente cancelar a operação?', mtConfirmation, [mbYes, mbNo], 0) = mrNo) then
+    begin
+      ModalResult := mrNone;
+      Abort;
+    end;
+    ioeMestre.Cancel;
+    ModalResult := mrCancel;
+  end
+  else
+  begin
+    ModalResult := mrOk;
+    Application.Notify;
+  end;
+  Self.Close;
+end;
+
 procedure TfrmCadastroModelo.CarregarComboIcones(AComboBoxes: array of TcxDBImageComboBox);
 var
   I: Integer;
@@ -105,6 +114,13 @@ begin
       item.ImageIndex := I;
       item.Value := I;
     end;
+end;
+
+procedure TfrmCadastroModelo.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  inherited;
+  actCancelarExecute(actCancelar);
 end;
 
 end.

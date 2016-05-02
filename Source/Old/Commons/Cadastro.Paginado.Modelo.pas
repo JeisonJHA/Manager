@@ -33,7 +33,9 @@ type
     procedure actExcluirUpdate(Sender: TObject);
     procedure actExcluirExecute(Sender: TObject);
     procedure cxGrid1DblClick(Sender: TObject);
-  private
+    procedure actCancelarUpdate(Sender: TObject);
+  protected
+    procedure AoCancelar(Sender: TObject); override;
     { Private declarations }
   public
     { Public declarations }
@@ -47,11 +49,41 @@ implementation
 
 {$R *.dfm}
 
+uses Manager.Core.IDE;
+
+procedure TfrmCadastroPaginadoModelo.AoCancelar(Sender: TObject);
+begin
+  if iosSelecionador.State in (dsEditModes) then
+  begin
+    if (MessageDlg('Existe modificações realizadas, deseja realmente cancelar a operação?', mtConfirmation, [mbYes, mbNo], 0) = mrNo) then
+    begin
+      ModalResult := mrNone;
+      Abort;
+    end;
+    iosSelecionador.Cancel;
+    ModalResult := mrCancel;
+  end
+  else
+  begin
+    ModalResult := mrOk;
+    Application.Notify;
+  end;
+  Self.Hide;
+end;
+
 procedure TfrmCadastroPaginadoModelo.actCancelarExecute(Sender: TObject);
 begin
-  if (iosSelecionador.State in [dsInsert, dsEdit]) then
-    iosSelecionador.Cancel;
-  Close;
+  AoCancelar(Sender);
+end;
+
+procedure TfrmCadastroPaginadoModelo.actCancelarUpdate(Sender: TObject);
+begin
+  if iosSelecionador.State in (dsEditModes) then
+  begin
+    TAction(Sender).Caption := 'Cancelar';
+    Exit;
+  end;
+  TAction(Sender).Caption := 'Fechar';
 end;
 
 procedure TfrmCadastroPaginadoModelo.actConfirmarExecute(Sender: TObject);

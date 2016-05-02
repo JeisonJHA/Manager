@@ -4,6 +4,7 @@ inherited frmCadastroModelo: TfrmCadastroModelo
   ClientHeight = 431
   ClientWidth = 690
   Position = poMainFormCenter
+  OnCloseQuery = FormCloseQuery
   ExplicitWidth = 696
   ExplicitHeight = 460
   PixelsPerInch = 96
