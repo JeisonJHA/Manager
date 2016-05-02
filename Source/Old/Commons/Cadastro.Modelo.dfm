@@ -64,6 +64,7 @@ inherited frmCadastroModelo: TfrmCadastroModelo
     object actCancelar: TAction
       Caption = 'Cancelar'
       OnExecute = actCancelarExecute
+      OnUpdate = actCancelarUpdate
     end
   end
 end

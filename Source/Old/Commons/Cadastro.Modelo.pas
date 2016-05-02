@@ -22,7 +22,8 @@ type
     procedure actConfirmarUpdate(Sender: TObject);
     procedure actConfirmarExecute(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure actCancelarUpdate(Sender: TObject);
+    procedure actFecharExecute(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -43,8 +44,30 @@ uses udtmDatabase;
 procedure TfrmCadastroModelo.actCancelarExecute(Sender: TObject);
 begin
   inherited;
-  ioeMestre.Cancel;
+  if ioeMestre.IsChanged then
+  begin
+    if (MessageDlg('Existe modificações realizadas, deseja realmente cancelar a operação?', mtConfirmation, [mbYes, mbNo], 0) = mbNo) then
+      Abort;
+    ioeMestre.Cancel;
+    ModalResult := mrCancel;
+  end
+  else
+  begin
+    ModalResult := mrOk;
+    Application.Notify;
+  end;
   Self.Close;
+end;
+
+procedure TfrmCadastroModelo.actCancelarUpdate(Sender: TObject);
+begin
+  inherited;
+  if ioeMestre.IsChanged then
+  begin
+    TAction(Sender).Caption := 'Cancelar';
+    Exit;
+  end;
+  TAction(Sender).Caption := 'Fechar';
 end;
 
 procedure TfrmCadastroModelo.actConfirmarExecute(Sender: TObject);
@@ -62,6 +85,12 @@ begin
   TAction(Sender).Enabled := ioeMestre.State in [dsInsert, dsEdit];
 end;
 
+procedure TfrmCadastroModelo.actFecharExecute(Sender: TObject);
+begin
+  inherited;
+  Self.Close;
+end;
+
 procedure TfrmCadastroModelo.CarregarComboIcones(AComboBoxes: array of TcxDBImageComboBox);
 var
   I: Integer;
@@ -76,13 +105,6 @@ begin
       item.ImageIndex := I;
       item.Value := I;
     end;
-end;
-
-procedure TfrmCadastroModelo.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-  Application.Notify;
-  inherited;
 end;
 
 end.
