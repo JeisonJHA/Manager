@@ -608,14 +608,6 @@ object frmMain: TfrmMain
     OnChange = ppmTrayIconChange
     Left = 496
     Top = 64
-    object N1: TMenuItem
-      Caption = '-'
-    end
-    object mnuFechar: TMenuItem
-      Caption = 'Fechar'
-      ImageIndex = 38
-      OnClick = mnuFecharClick
-    end
   end
   object aePrincipal: TApplicationEvents
     OnMinimize = aePrincipalMinimize

@@ -74,8 +74,6 @@ type
     dxLayoutDockSite1: TdxLayoutDockSite;
     tiPrincipal: TTrayIcon;
     ppmTrayIcon: TPopupMenu;
-    N1: TMenuItem;
-    mnuFechar: TMenuItem;
     aePrincipal: TApplicationEvents;
     actUpdate: TAction;
     dxBarButton1: TdxBarButton;

@@ -94,14 +94,14 @@ begin
   if not Assigned(itemBase) then
   begin
     itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
+    itemBase.Caption := '-';
+    Application.Main.TrayIcon.PopupMenu.Items.Insert(Application.Main.TrayIcon.PopupMenu.Items.Count, itemBase);
+
+    itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
     itemBase.Caption := 'Fechar';
     itemBase.ImageIndex := 38;
     itemBase.OnClick := OnFecharClick;
-    Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
-
-    itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-    itemBase.Caption := '-';
-    Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
+    Application.Main.TrayIcon.PopupMenu.Items.Insert(Application.Main.TrayIcon.PopupMenu.Items.Count, itemBase);
   end;
 end;
 
