@@ -77,7 +77,8 @@ uses
   Manager.Core.IDE.Constants in '..\..\Source\Core\Manager.Core.IDE.Constants.pas',
   Manager.Core.TrayIconMenu in '..\..\Source\Core\Manager.Core.TrayIconMenu.pas',
   Manager.Core.IDE.Menu in '..\..\Source\Core\Manager.Core.IDE.Menu.pas',
-  Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Core\Forms\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao};
+  Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Core\Forms\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao},
+  Manager.Core.IDE.ActionList in '..\..\Source\Core\Manager.Core.IDE.ActionList.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,

@@ -252,6 +252,8 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         Height = 368
         Caption = 'pageAtualizacao'
         ParentBackground = True
+        ExplicitLeft = 3
+        ExplicitTop = -1
         object Label2: TLabel
           Left = 24
           Top = 76
@@ -295,7 +297,9 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         object edtTempoVerificacaoAtualizacao: TcxSpinEdit
           Left = 161
           Top = 73
+          Properties.MinValue = 1.000000000000000000
           TabOrder = 2
+          Value = 10
           Width = 72
         end
       end

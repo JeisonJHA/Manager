@@ -5,7 +5,7 @@ interface
 uses Forms, Classes, SysUtils, Manager.Core.Ribbon.MainMenu, Manager.Core.IDE,
   Manager.Core.Workspace.List, Manager.Core.Configuration,
   InstantPresentation, Vcl.ActnList, dxBar, Workspace, dxTabbedMDI,
-  Manager.Core.API.Workspace, Manager.Core.Workspace.Recentes,
+  Manager.Core.API.Workspace, Manager.Core.Workspace.Recentes, DateUtils,
   Manager.Core.API.Observer, Manager.Core.IDE.Constants, Graphics,
   Manager.Core.IDE.Update, Manager.Core.TrayIconMenu, Manager.Core.Utils;
 
@@ -26,6 +26,7 @@ type
     procedure PrepararWorkspaceList(AInstantSelector: TInstantSelector);
     procedure CarregarVersao;
     procedure CarregarWorkspaceRecentes;
+    function PodeVerificarAtualizacao: boolean;
   public
     constructor Create(AForm: TForm);
     destructor Destroy; override;
@@ -107,6 +108,17 @@ begin
   FUpdate.Executar;
 end;
 
+function TControllerMain.PodeVerificarAtualizacao: boolean;
+var
+  pode: boolean;
+begin
+  pode := IncMinute(Application.UltimaVerificacaoAtualizacao, FConfiguration.Aplicacao.TempoVerificaoAtualizacaoAuto) < (Date + Time);
+  if pode then
+    Application.UltimaVerificacaoAtualizacao := (Date + Time);
+
+  Exit(pode);
+end;
+
 procedure TControllerMain.PrepararIDEUpdate;
 const
   intMSec = 60 * 1000; // o equivalente a 1 milisegundo
@@ -115,7 +127,7 @@ begin
   FUpdate.Interval := Trunc(FConfiguration.Aplicacao.TempoVerificaoAtualizacaoAuto * intMSec);
 
   FUpdate.Enabled := FConfiguration.Aplicacao.VerificarAtualizacaoAuto;
-  if FUpdate.Enabled then
+  if FUpdate.Enabled and PodeVerificarAtualizacao then
   begin
     FUpdate.OnTimer(FUpdate);
   end;

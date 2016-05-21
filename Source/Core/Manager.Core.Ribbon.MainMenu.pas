@@ -13,9 +13,7 @@ type
     procedure Action(AGroup: TdxRibbonTabGroup; ABarraFerramenta: TBarraFerramenta; AAcao: TAcao);
     function CreateBarItem(AToolBar: TdxBar; ABarraFerramenta: TBarraFerramenta;
       AAcao: TAcao): TdxBarItemLink;
-
     procedure InternalCarregar(ASelector: TInstantSelector; ABarSubItem: TdxBarSubItem);
-
     procedure PrepararConjuntoDeBases(const ACaption: string; const AImageIndex: integer); override;
     procedure PrepararCatalogoDeBases(const ACaption: string; const AImageIndex: integer); override;
     procedure PrepararBarraFerramenta; override;
@@ -25,7 +23,7 @@ implementation
 
 { TManagerMainMenu }
 
-uses udtmDatabase, Manager.Core.Forms.Main;
+uses udtmDatabase, Manager.Core.Forms.Main, Manager.Core.IDE.ActionList;
 
 function CreateRibbonBar(ARibbonTab: TdxRibbonTab; ABarraFerramenta: TBarraFerramenta): TdxBar;
 begin
@@ -97,16 +95,16 @@ function TManagerMainMenu.CreateBarItem(AToolBar: TdxBar; ABarraFerramenta: TBar
 var
   action: TWorkspaceAction;
 begin
-  action := TWorkspaceAction.Create(Application.Main.ActionList);
+  action := Application.Main.ActionList.Add;
   action.Acao := BuscarAcao(AAcao);
-  action.Category := ABarraFerramenta.Descricao;
-  action.Caption := AAcao.Descricao;
-  action.ImageIndex := AAcao.Icone;
+  action.BarraFerramenta := ABarraFerramenta;
 
-  Result := AToolBar.ItemLinks.Add;
-  Result.Item := TdxBarLargeButton.Create(AToolBar.BarManager);
-  Result.Item.Action := action;
-  Result.Item.Category := AToolBar.BarManager.Categories.IndexOf('Default');
+  action.Link := AToolBar.ItemLinks.Add;
+  action.Link.Item := TdxBarLargeButton.Create(AToolBar.BarManager);
+  action.Link.Item.Action := action;
+  action.Link.Item.Category := AToolBar.BarManager.Categories.IndexOf('Default');
+
+  Exit(action.Link);
 end;
 
 procedure TManagerMainMenu.InternalCarregar(ASelector: TInstantSelector;
@@ -115,75 +113,39 @@ var
   I: integer;
   acao: TAcao;
   action: TWorkspaceAction;
-  link: TdxBarItemLink;
-
-  function ItemExists(ABarSubItem: TdxBarSubItem; AAcao: TAcao): TdxBarItemLink;
-  var
-    I: integer;
-  begin
-    for I := 0 to ABarSubItem.ItemLinks.Count -1 do
-      if TWorkspaceAction(ABarSubItem.ItemLinks.Items[I].Item.Action).Acao.Id = AAcao.Id then
-        Exit(ABarSubItem.ItemLinks.Items[I]);
-    Exit(nil);
-  end;
-
 begin
   for I := 0 to Pred(ASelector.ObjectCount) do
   begin
-    acao := BuscarAcao(ASelector.Objects[I] as TAcao);
-    link := ItemExists(ABarSubItem, acao);
-    if not Assigned(link) then
+    action := Application.Main.ActionList.GetInternalAction(TAcao(ASelector.Objects[I]).Id);
+    if not Assigned(action) then
     begin
-      action := TWorkspaceAction.Create(Application.Main.ActionList);
-      action.Acao := acao;
-      action.Caption := acao.Descricao;
-      action.ImageIndex := acao.Icone;
+      acao := BuscarAcao(ASelector.Objects[I] as TAcao);
 
-      link := ABarSubItem.ItemLinks.Add;
-      link.Item := TdxBarLargeButton.Create(ABarSubItem.BarManager);
-      link.Item.Action := action;
-      link.Item.Category := ABarSubItem.BarManager.Categories.IndexOf('Default');
+      action := Application.Main.ActionList.Add;
+      action.Acao := acao;
+      action.Link := ABarSubItem.ItemLinks.Add;
+      action.link.Item := TdxBarLargeButton.Create(ABarSubItem.BarManager);
+      action.link.Item.Action := action;
+      action.link.Item.Category := ABarSubItem.BarManager.Categories.IndexOf('Default');
       Continue;
     end;
 
-    TWorkspaceAction(link.Item.Action).Acao := acao;
-    TWorkspaceAction(link.Item.Action).Caption := acao.Descricao;
-    TWorkspaceAction(link.Item.Action).ImageIndex := acao.Icone;
+    action.Refresh;
   end;
-end;
-
-procedure UpdateBarItem(AAction: TWorkspaceAction; ABarraFerramenta: TBarraFerramenta; AAcao: TAcao);
-begin
-  AAction.Category := ABarraFerramenta.Descricao;
-  AAction.Caption := AAcao.Descricao;
-  AAction.ImageIndex := AAcao.Icone;
-  AAction.Acao.Refresh;
 end;
 
 procedure TManagerMainMenu.Action(AGroup: TdxRibbonTabGroup; ABarraFerramenta: TBarraFerramenta; AAcao: TAcao);
-
-  function FindById(const AId: string; var AAction: TWorkspaceAction): boolean;
-  var
-    I: Integer;
-  begin
-    for I := 0 to AGroup.ToolBar.ItemLinks.Count -1 do
-    begin
-      AAction := TWorkspaceAction(AGroup.ToolBar.ItemLinks[I].Item.Action);
-      if AAction.Acao.Id = AId then
-        Exit(True);
-    end;
-    Exit(False);
-  end;
-
 var
   action: TWorkspaceAction;
 begin
-  if not FindById(AAcao.Id, action) then
+  action := Application.Main.ActionList.GetInternalAction(AAcao.Id);
+  if not Assigned(action) then
   begin
     CreateBarItem(AGroup.ToolBar, ABarraFerramenta, AAcao);
     Exit;
   end;
-  UpdateBarItem(action, ABarraFerramenta, AAcao);
+
+  action.Refresh;
 end;
 
 end.

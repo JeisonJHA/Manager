@@ -172,6 +172,7 @@ procedure TfrmFormularioOpcoes.FormShow(Sender: TObject);
 begin
   inherited;
   LoadAll;
+  JvPageList1.ActivePage := pageDiretorios;
 end;
 
 procedure TfrmFormularioOpcoes.LoadAll;

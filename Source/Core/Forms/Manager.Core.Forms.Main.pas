@@ -124,7 +124,7 @@ var
 
 implementation
 
-uses udtmDatabase, Manager.Core.Forms.Utils;
+uses udtmDatabase, Manager.Core.Forms.Utils, Manager.Core.Workspace.Action;
 
 {$R *.dfm}
 
@@ -180,6 +180,8 @@ begin
 end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  I: Integer;
 begin
   Controller.OnFormClose(Sender, Action);
 end;

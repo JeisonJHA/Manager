@@ -97,10 +97,10 @@ end;
 
 procedure TIDEMenu.Load;
 begin
-  PrepararBarraBasica;
   PrepararConjuntoDeBases('Conjunto de Bases', 37);
   PrepararCatalogoDeBases('Catálogo de Bases', 36);
   PrepararBarraFerramenta;
+  PrepararBarraBasica;
 end;
 
 procedure TIDEMenu.PrepararBarraBasica;

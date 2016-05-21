@@ -8,24 +8,29 @@ uses Classes, SysUtils, Forms, InstantPresentation, InstantPersistence,
 
 type
   TTrayIconMenu = class(TIDEMenu)
+  private
+    procedure CarregarItens(const ADataset: TInstantSelector;
+      const ACaption: string; const AImageIndex: integer);
   protected
     procedure PrepararConjuntoDeBases(const ACaption: string; const AImageIndex: integer); override;
     procedure PrepararCatalogoDeBases(const ACaption: string; const AImageIndex: integer); override;
     procedure PrepararBarraFerramenta; override;
     procedure PrepararBarraBasica; override;
-
     procedure OnFecharClick(Sender: TObject);
-  public
-    procedure Load; override;
   end;
 
 implementation
 
 { TTrayIconMenu }
 
-uses udtmDatabase, AcaoCatalogoDeBases;
+uses udtmDatabase, AcaoCatalogoDeBases, Manager.Core.IDE.ActionList;
 
 procedure TTrayIconMenu.PrepararConjuntoDeBases(const ACaption: string; const AImageIndex: integer);
+begin
+  CarregarItens(FConjuntoDeBases, ACaption, AImageIndex);
+end;
+
+procedure TTrayIconMenu.CarregarItens(const ADataset: TInstantSelector; const ACaption: string; const AImageIndex: integer);
 var
   I: integer;
   item: TMenuItem;
@@ -33,63 +38,46 @@ var
   acao: TAcao;
   action: TWorkspaceAction;
 begin
-  itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-  itemBase.Caption := ACaption;
-  itemBase.ImageIndex := AImageIndex;
-  Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
-
-  item := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-  item.Caption := '-';
-  Application.Main.TrayIcon.PopupMenu.Items.Insert(0, item);
-
-  for I := 0 to Pred(FConjuntoDeBases.ObjectCount) do
+  itemBase := Application.Main.TrayIcon.PopupMenu.Items.Find(ACaption);
+  if not Assigned(itemBase) then
   begin
-    acao := BuscarAcao(FConjuntoDeBases.Objects[I] as TAcao);
+    itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
+    itemBase.Caption := ACaption;
+    itemBase.ImageIndex := AImageIndex;
+    Application.Main.TrayIcon.PopupMenu.Items.Add(itemBase);
 
-    action := TWorkspaceAction.Create(Application.Main.ActionList);
-    action.Acao := acao;
-    action.Caption := acao.Descricao;
-    action.ImageIndex := acao.Icone;
+    item := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
+    item.Caption := '-';
+    Application.Main.TrayIcon.PopupMenu.Items.Add(item);
+  end;
 
-    item := TMenuItem.Create(itemBase);
-    item.Action := action;
-    item.Caption := acao.Descricao;
-    itemBase.Insert(0, item);
+  for I := 0 to Pred(ADataset.ObjectCount) do
+  begin
+    action := Application.Main.ActionList.GetInternalAction(TAcao(ADataset.Objects[I]).Id);
+    if not Assigned(action) then
+    begin
+      acao := BuscarAcao(ADataset.Objects[I] as TAcao);
+
+      action := Application.Main.ActionList.Add;
+      action.Acao := acao;
+    end
+    else
+    begin
+      action.Refresh;
+    end;
+
+    if not Assigned(itemBase.Find(action.Acao.Descricao)) then
+    begin
+      item := TMenuItem.Create(itemBase);
+      item.Action := action;
+      itemBase.Add(item);
+    end;
   end;
 end;
 
 procedure TTrayIconMenu.PrepararCatalogoDeBases(const ACaption: string; const AImageIndex: integer);
-var
-  I: integer;
-  item: TMenuItem;
-  itemBase: TMenuItem;
-  acao: TAcao;
-  action: TWorkspaceAction;
 begin
-  FCatalogoDeBases.Refresh;
-  itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-  itemBase.Caption := ACaption;
-  itemBase.ImageIndex := AImageIndex;
-  Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
-
-  item := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-  item.Caption := '-';
-  Application.Main.TrayIcon.PopupMenu.Items.Insert(0, item);
-
-  for I := 0 to Pred(FCatalogoDeBases.ObjectCount) do
-  begin
-    acao := BuscarAcao(FCatalogoDeBases.Objects[I] as TAcao);
-
-    action := TWorkspaceAction.Create(Application.Main.ActionList);
-    action.Acao := acao;
-    action.Caption := acao.Descricao;
-    action.ImageIndex := acao.Icone;
-
-    item := TMenuItem.Create(itemBase);
-    item.Action := action;
-    item.Caption := acao.Descricao;
-    itemBase.Insert(0, item);
-  end;
+  CarregarItens(FCatalogoDeBases, ACaption, AImageIndex);
 end;
 
 procedure TTrayIconMenu.OnFecharClick(Sender: TObject);
@@ -102,15 +90,19 @@ var
   itemBase: TMenuItem;
 begin
   inherited;
-  itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-  itemBase.Caption := 'Fechar';
-  itemBase.ImageIndex := 38;
-  itemBase.OnClick := OnFecharClick;
-  Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
+  itemBase := Application.Main.TrayIcon.PopupMenu.Items.Find('Fechar');
+  if not Assigned(itemBase) then
+  begin
+    itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
+    itemBase.Caption := 'Fechar';
+    itemBase.ImageIndex := 38;
+    itemBase.OnClick := OnFecharClick;
+    Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
 
-  itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-  itemBase.Caption := '-';
-  Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
+    itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
+    itemBase.Caption := '-';
+    Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
+  end;
 end;
 
 procedure TTrayIconMenu.PrepararBarraFerramenta;
@@ -120,31 +112,47 @@ var
   item: TMenuItem;
   itemBase: TMenuItem;
   acao: TAcao;
+  barra: TBarraFerramenta;
   action: TWorkspaceAction;
 begin
   for I := 0 to Pred(FBarraFerramenta.ObjectCount) do
   begin
-    itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-    itemBase.Caption := TBarraFerramenta(FBarraFerramenta.Objects[I]).Descricao;
-    itemBase.ImageIndex := 17;
-    Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
+    barra := TBarraFerramenta(FBarraFerramenta.Objects[I]);
 
-    for Y := 0 to TBarraFerramenta(FBarraFerramenta.Objects[I]).AcaoCount -1 do
+    itemBase := Application.Main.TrayIcon.PopupMenu.Items.Find(barra.Descricao);
+    if not Assigned(itemBase) then
     begin
-      if TBarraFerramenta(FBarraFerramenta.Objects[I]).Acoes[Y].InheritsFrom(TAcaoCatalogoDeBases) then
+      itemBase := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
+      itemBase.Caption := barra.Descricao;
+      itemBase.ImageIndex := 17;
+      Application.Main.TrayIcon.PopupMenu.Items.Add(itemBase);
+    end;
+
+    for Y := 0 to barra.AcaoCount -1 do
+    begin
+      acao := barra.Acoes[Y];
+      if acao.InheritsFrom(TAcaoCatalogoDeBases) then
         Continue;
 
-      acao := BuscarAcao(TBarraFerramenta(FBarraFerramenta.Objects[I]).Acoes[Y] as TAcao);
+      action := Application.Main.ActionList.GetInternalAction(acao.Id);
+      if not Assigned(action) then
+      begin
+        acao := BuscarAcao(acao as TAcao);
 
-      action := TWorkspaceAction.Create(Application.Main.ActionList);
-      action.Acao := acao;
-      action.Caption := acao.Descricao;
-      action.ImageIndex := acao.Icone;
+        action := Application.Main.ActionList.Add;
+        action.Acao := acao;
+      end
+      else
+      begin
+        action.Refresh;
+      end;
 
-      item := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
-      item.Action := action;
-      item.Caption := acao.Descricao;
-      itemBase.Insert(0, item);
+      if not Assigned(itemBase.Find(action.Acao.Descricao)) then
+      begin
+        item := TMenuItem.Create(Application.Main.TrayIcon.PopupMenu);
+        item.Action := action;
+        itemBase.Add(item);
+      end;
     end;
   end;
   if Application.Main.TrayIcon.PopupMenu.Items.IndexOf(itemBase) > 0 then
@@ -153,12 +161,6 @@ begin
     itemBase.Caption := '-';
     Application.Main.TrayIcon.PopupMenu.Items.Insert(0, itemBase);
   end;
-end;
-
-procedure TTrayIconMenu.Load;
-begin
-  Application.Main.TrayIcon.PopupMenu.Items.Clear;
-  inherited Load;
 end;
 
 end.

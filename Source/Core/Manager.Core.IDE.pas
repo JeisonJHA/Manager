@@ -17,6 +17,8 @@ type
     function GetCurrentWorkspace: IWorkspace;
     function GetPromptCommand: TDosCommand;
     function GetConfiguration: TConfiguration;
+    function GetUltimaVerifAtualizacao: TDateTime;
+    procedure SetUltimaVerifAtualizacao(const Value: TDateTime);
   public
     function Main: IMain;
     procedure Register(AObserver: IObserver);
@@ -27,6 +29,7 @@ type
     property CurrentWorkspace: IWorkspace read GetCurrentWorkspace;
     property PromptCommand: TDosCommand read GetPromptCommand;
     property Configuration: TConfiguration read GetConfiguration;
+    property UltimaVerificacaoAtualizacao: TDateTime read GetUltimaVerifAtualizacao write SetUltimaVerifAtualizacao;
 
     procedure RegisterUniqueInstance(AId: PWideChar);
     procedure UnregisterUniqueInstance;
@@ -39,6 +42,7 @@ implementation
 var
   _OldWindowProc: Pointer;
   _MyMsg: LongInt;
+  _UltimaVerifAtualizacao: TDateTime;
 
 function NewWindowProc(WH: hWnd; Msg,PW,PL:LongInt):LongInt stdcall;
 begin
@@ -102,6 +106,11 @@ begin
   Exit(TIDEContent.GetInstance.PromptCommand);
 end;
 
+function IDE.GetUltimaVerifAtualizacao: TDateTime;
+begin
+  Exit(_UltimaVerifAtualizacao);
+end;
+
 function IDE.Main: IMain;
 begin
   Exit(Self.MainForm as IMain);
@@ -128,9 +137,17 @@ begin
   TIDEContent.GetInstance.Observers.Remove(AObserver);
 end;
 
+procedure IDE.SetUltimaVerifAtualizacao(const Value: TDateTime);
+begin
+  _UltimaVerifAtualizacao := Value;
+end;
+
 procedure IDE.UnregisterUniqueInstance;
 begin
   SetWindowLong(Handle, GWL_WNDPROC, LongInt(_OldWindowProc));
 end;
+
+initialization
+  _UltimaVerifAtualizacao := 0;
 
 end.
