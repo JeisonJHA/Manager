@@ -24,6 +24,7 @@ object frmMain: TfrmMain
     Width = 1087
     Height = 155
     ApplicationButton.Menu = dxRibbonBackstageView1
+    ApplicationButton.Text = 'Ferramentas'
     BarManager = dxBarManager1
     Style = rs2013
     ColorSchemeAccent = rcsaBlue
