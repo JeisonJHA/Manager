@@ -12,7 +12,8 @@ uses
   cxDropDownEdit, cxImageComboBox, cxTextEdit, Vcl.StdCtrls, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxGridCustomView, cxGrid, cxPC, Vcl.ExtCtrls, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, cxSpinEdit, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids;
+  cxDBLookupComboBox, cxSpinEdit, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, Vcl.Menus,
+  InstantPersistence;
 
 type
   TfrmCadastroAcaoConfigurarBaseDeDados = class(TfrmCadastroAcaoCopiar)
@@ -56,7 +57,12 @@ type
     edtUsuario: TcxDBTextEdit;
     Label5: TLabel;
     edtSenha: TcxDBTextEdit;
+    PopupMenu1: TPopupMenu;
+    mnoCopiar: TMenuItem;
+    actCopiarAcao: TAction;
     procedure SpeedButton1Click(Sender: TObject);
+    procedure actCopiarAcaoUpdate(Sender: TObject);
+    procedure actCopiarAcaoExecute(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -72,7 +78,30 @@ implementation
 
 {$R *.dfm}
 
-uses Manager.Core.Forms.Utils;
+uses Manager.Core.Forms.Utils, Acao;
+
+procedure TfrmCadastroAcaoConfigurarBaseDeDados.actCopiarAcaoExecute(
+  Sender: TObject);
+var
+  clone: TInstantObject;
+  copy: TInstantObject;
+begin
+  inherited;
+  clone := InstantGetClass(iosSelecionador.ObjectClassName).Clone(TInstantObject(iosSelecionador.CurrentObject));
+  copy := InstantGetClass(iosSelecionador.ObjectClassName).Create();
+  TAcaoConfigurarBaseDeDados(clone).CopiarPara(copy);
+  TAcao(copy).Descricao := Format('%s %s', [TAcao(copy).Descricao, 'Cópia']);
+  iosSelecionador.InsertObject(copy);
+  TInstantObject(copy).Store();
+end;
+
+procedure TfrmCadastroAcaoConfigurarBaseDeDados.actCopiarAcaoUpdate(
+  Sender: TObject);
+begin
+  inherited;
+  TAction(Sender).Enabled := Assigned(iosSelecionador.CurrentObject) and
+    (cxPageControl1.ActivePage = tabDetalhes);
+end;
 
 function TfrmCadastroAcaoConfigurarBaseDeDados.PegarCaminhoTemplate: string;
 begin

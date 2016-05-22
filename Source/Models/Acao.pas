@@ -35,6 +35,7 @@ type
     procedure InternalAfterExecute; virtual;
   public
     procedure Executar; virtual;
+    procedure CopiarPara(AObject: TObject); virtual;
   published
     property Descricao: string read GetDescricao write SetDescricao;
     property Icone: Integer read GetIcone write SetIcone;
@@ -84,6 +85,8 @@ type
     function GetTipoAcao: string; override;
     procedure InternalExecute; override;
     procedure InternalAfterExecute; override;
+  public
+    procedure CopiarPara(AObject: TObject); override;
   published
     property Destino: string read GetDestino write SetDestino;
     property Origem: string read GetOrigem write SetOrigem;
@@ -148,6 +151,8 @@ type
     function GetTipoBanco: string; virtual;
     procedure InternalExecute; override;
     procedure InternalAfterExecute; override;
+  public
+    procedure CopiarPara(AObject: TObject); virtual;
   published
     property Alias: string read GetAlias write SetAlias;
     property DBSenha: string read GetDBSenha write SetDBSenha;
@@ -187,6 +192,15 @@ uses
   InstantMetadata, Manager.Core.IDE.Constants;
 
 { TAcao }
+
+procedure TAcao.CopiarPara(AObject: TObject);
+begin
+  with TAcao(AObject) do
+  begin
+    Descricao := Self.Descricao;
+    Icone := Self.Icone;
+  end;
+end;
 
 procedure TAcao.Executar;
 begin
@@ -327,6 +341,21 @@ begin
   _Icone.Value := Value;;
 end;
 
+procedure TAcaoConfigurarBaseDeDados.CopiarPara(AObject: TObject);
+begin
+  inherited CopiarPara(AObject);
+  with TAcaoConfigurarBaseDeDados(AObject) do
+  begin
+    Alias := Self.Alias;
+    DBSenha := Self.DBSenha;
+    DBUsuario := Self.DBUsuario;
+    Senha := Self.Senha;
+    Server := Self.Server;
+    Sistema := Self.Sistema;
+    Usuario := Self.Usuario;
+  end;
+end;
+
 function TAcaoConfigurarBaseDeDados.GetAlias: string;
 begin
   Result := _Alias.Value;
@@ -438,6 +467,16 @@ begin
   except
     on E: Exception do
       raise Exception.Create(E.Message);
+  end;
+end;
+
+procedure TAcaoCopiar.CopiarPara(AObject: TObject);
+begin
+  inherited CopiarPara(AObject);
+  with TAcaoCopiar(AObject) do
+  begin
+    Destino := Self.Destino;
+    Origem := Self.Origem;
   end;
 end;
 

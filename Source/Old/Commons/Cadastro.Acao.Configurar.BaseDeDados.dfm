@@ -4,6 +4,14 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
   ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
+  inherited Panel1: TPanel
+    inherited Panel2: TPanel
+      inherited btnNovo: TButton
+        DropDownMenu = PopupMenu1
+        Style = bsSplitButton
+      end
+    end
+  end
   inherited cxPageControl1: TcxPageControl
     inherited tabGrade: TcxTabSheet
       ExplicitLeft = 2
@@ -238,6 +246,11 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
   inherited ActionList: TActionList
     Left = 424
     Top = 272
+    object actCopiarAcao: TAction
+      Caption = 'Clonar configura'#231#227'o'
+      OnExecute = actCopiarAcaoExecute
+      OnUpdate = actCopiarAcaoUpdate
+    end
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
@@ -320,5 +333,12 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
   object OpenDialog1: TOpenDialog
     Left = 432
     Top = 312
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 336
+    Top = 216
+    object mnoCopiar: TMenuItem
+      Action = actCopiarAcao
+    end
   end
 end
