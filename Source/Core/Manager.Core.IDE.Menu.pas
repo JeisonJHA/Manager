@@ -31,37 +31,7 @@ uses AcaoCatalogoDeBases, AcaoConjuntoDeBases, AcaoExclusao;
 
 function TIDEMenu.BuscarAcao(AAcao: TAcao): TAcao;
 begin
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosDB2) then
-    Exit(TAcaoConfigurarBaseDeDadosDB2.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosOracle) then
-    Exit(TAcaoConfigurarBaseDeDadosOracle.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDadosMSSQL) then
-    Exit(TAcaoConfigurarBaseDeDadosMSSQL.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConfigurarBaseDeDados) then
-    Exit(TAcaoConfigurarBaseDeDados.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoMontarAmbiente) then
-    Exit(TAcaoMontarAmbiente.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoConjuntoDeBases) then
-    Exit(TAcaoConjuntoDeBases.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoCatalogoDeBases) then
-    Exit(TAcaoCatalogoDeBases.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoExclusaoArquivo) then
-    Exit(TAcaoExclusaoArquivo.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoCopiar) then
-    Exit(TAcaoCopiar.Retrieve(AAcao.Id));
-
-  if AAcao.InheritsFrom(TAcaoExecutar) then
-    Exit(TAcaoExecutar.Retrieve(AAcao.Id));
-
-  Exit(TAcao.Retrieve(AAcao.Id));
+  Exit(TAcao(InstantGetClass(AAcao.ClassName).Retrieve(AAcao.Id)));
 end;
 
 constructor TIDEMenu.Create;
