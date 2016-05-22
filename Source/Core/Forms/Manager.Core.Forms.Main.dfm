@@ -381,7 +381,7 @@ object frmMain: TfrmMain
       Caption = 'Banco de Dados'
       Category = 0
       Visible = ivAlways
-      ImageIndex = 1
+      ImageIndex = 54
       ItemLinks = <
         item
           Visible = True
@@ -541,19 +541,19 @@ object frmMain: TfrmMain
     object actCadastroAcaoConfigurarBaseDeDadosDB2: TAction
       Caption = 'DB2'
       HelpKeyword = 'TfrmCadastroAcaoConfigurarBaseDeDadosDB2'
-      ImageIndex = 1
+      ImageIndex = 47
       OnExecute = actOnAbreTelaExecute
     end
     object actCadastroAcaoConfigurarBaseDeDadosMSSQL: TAction
       Caption = 'MS SQL'
       HelpKeyword = 'TfrmCadastroAcaoConfigurarBaseDeDadosMSSQL'
-      ImageIndex = 1
+      ImageIndex = 49
       OnExecute = actOnAbreTelaExecute
     end
     object actCadastroAcaoConfigurarBaseDeDadosOracle: TAction
       Caption = 'Oracle'
       HelpKeyword = 'TfrmCadastroAcaoConfigurarBaseDeDadosOracle'
-      ImageIndex = 1
+      ImageIndex = 48
       OnExecute = actOnAbreTelaExecute
     end
     object actCadastroAcaoConjuntoBases: TAction
