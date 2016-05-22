@@ -77,6 +77,7 @@ Source: Recursos\libeay32.dll; DestDir: {app}
 Source: Recursos\ssleay32.dll; DestDir: {app}
 Source: Recursos\DownloadInfo.xml; DestDir: {app}
 Source: Recursos\data.fdb; DestDir: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data; Permissions: everyone-modify; Flags: uninsneveruninstall onlyifdoesntexist
+Source: recursos\Scripts\1.1.0.5\foreingkey.sql; DestDir: {app}\Scripts
 Source: Templates\DB\DB2\PG\pg.template; DestDir: {app}\Templates\DB\DB2\PG
 Source: Templates\DB\DB2\PG\net.template; DestDir: {app}\Templates\DB\DB2\PG
 Source: Templates\DB\DB2\PG\ind.template; DestDir: {app}\Templates\DB\DB2\PG

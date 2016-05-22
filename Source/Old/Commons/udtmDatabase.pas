@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Classes, Vcl.Forms, Data.DB,
   InstantPersistence, InstantBrokers, System.ImageList, Vcl.ImgList,
-  Vcl.Controls, cxGraphics, IBX.IBDatabase, Manager.Core.Configuration, InstantIBX;
+  Vcl.Controls, cxGraphics, IBX.IBDatabase, Manager.Core.Configuration, InstantIBX,
+  IBX.IBScript;
 
 type
   TdtmDatabase = class(TDataModule)
@@ -16,6 +17,7 @@ type
     MediumImageList: TcxImageList;
     LargeImageList: TcxImageList;
     XLargeImageList: TcxImageList;
+    IBScript1: TIBScript;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;

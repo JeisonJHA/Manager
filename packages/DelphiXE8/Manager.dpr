@@ -78,7 +78,8 @@ uses
   Manager.Core.TrayIconMenu in '..\..\Source\Core\Manager.Core.TrayIconMenu.pas',
   Manager.Core.IDE.Menu in '..\..\Source\Core\Manager.Core.IDE.Menu.pas',
   Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Core\Forms\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao},
-  Manager.Core.IDE.ActionList in '..\..\Source\Core\Manager.Core.IDE.ActionList.pas';
+  Manager.Core.IDE.ActionList in '..\..\Source\Core\Manager.Core.IDE.ActionList.pas',
+  Manager.Core.Script in '..\..\Source\Core\Manager.Core.Script.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
@@ -109,8 +110,10 @@ begin
   Application.Prepare.Splash.Refresh;
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.Prepare.Registrar(TManagerScript.Create);
   Application.Parser.Registrar(TParserAplicacao.Create);
   Application.Parser.Registrar(TParserWorkspace.Create);
+  Application.Prepare.Executar;
   Application.Prepare.Splash.Hide;
   Application.Run;
 end.

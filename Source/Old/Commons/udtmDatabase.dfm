@@ -16761,4 +16761,11 @@ object dtmDatabase: TdtmDatabase
           E6FFE6E6E6FFE6E6E6FFE5E5E5FFE5E5E5FFECECECFFECECECFF}
       end>
   end
+  object IBScript1: TIBScript
+    Database = IBDatabase1
+    Transaction = IBTransaction1
+    Terminator = ';'
+    Left = 56
+    Top = 184
+  end
 end
