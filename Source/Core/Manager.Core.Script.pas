@@ -84,8 +84,11 @@ begin
   begin
     IBScript.Script.Clear;
     IBScript.Script.LoadFromFile(ALista.Strings[I]);
+
+    {$IFNDEF DEBUG}
     if not IBScript.ValidateScript then
       Continue;
+    {$ENDIF}
 
     filename := AnsiUpperCase(ExtractFileName(ALista.Strings[I]));
     if not ScriptJaRodado(filename) then
