@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Vcl.Forms, Data.DB,
   InstantPersistence, InstantBrokers, System.ImageList, Vcl.ImgList,
   Vcl.Controls, cxGraphics, IBX.IBDatabase, Manager.Core.Configuration, InstantIBX,
-  IBX.IBScript;
+  IBX.IBScript, IBX.IBCustomDataSet, IBX.IBQuery;
 
 type
   TdtmDatabase = class(TDataModule)
@@ -18,6 +18,7 @@ type
     LargeImageList: TcxImageList;
     XLargeImageList: TcxImageList;
     IBScript1: TIBScript;
+    IBQuery1: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;

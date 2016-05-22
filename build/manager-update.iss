@@ -43,8 +43,12 @@ Name: {app}; Permissions: everyone-modify; Flags: uninsalwaysuninstall
 [Files]
 Source: ..\bin\Manager.exe; DestDir: {app}; Permissions: everyone-modify; DestName: manager.exe
 Source: ..\bin\Updater.exe; DestDir: {app}; Permissions: everyone-modify; DestName: updater.exe
-Source: recursos\Scripts\1.1.0.5\foreingkey.sql; DestDir: {app}\Scripts
+; ### Scripts ###
+Source: recursos\Scripts\1.1.0.5\110500001.sql; DestDir: {app}\Scripts
+Source: recursos\Scripts\1.1.0.5\110500002.sql; DestDir: {app}\Scripts
+; ### Scripts End ###
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
 
 [Run]
 Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}; Flags: nowait postinstall skipifsilent

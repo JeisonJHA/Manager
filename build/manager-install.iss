@@ -77,7 +77,6 @@ Source: Recursos\libeay32.dll; DestDir: {app}
 Source: Recursos\ssleay32.dll; DestDir: {app}
 Source: Recursos\DownloadInfo.xml; DestDir: {app}
 Source: Recursos\data.fdb; DestDir: {commonappdata}\{#MySoftHouseName}\{#MyAppName}\{#MyAppVersion}\Data; Permissions: everyone-modify; Flags: uninsneveruninstall onlyifdoesntexist
-Source: recursos\Scripts\1.1.0.5\foreingkey.sql; DestDir: {app}\Scripts
 Source: Templates\DB\DB2\PG\pg.template; DestDir: {app}\Templates\DB\DB2\PG
 Source: Templates\DB\DB2\PG\net.template; DestDir: {app}\Templates\DB\DB2\PG
 Source: Templates\DB\DB2\PG\ind.template; DestDir: {app}\Templates\DB\DB2\PG
@@ -87,6 +86,10 @@ Source: Templates\DB\MSSQL\PG\ind.template; DestDir: {app}\Templates\DB\MSSQL\PG
 Source: Templates\DB\Oracle\PG\pg.template; DestDir: {app}\Templates\DB\Oracle\PG
 Source: Templates\DB\Oracle\PG\net.template; DestDir: {app}\Templates\DB\Oracle\PG
 Source: Templates\DB\Oracle\PG\ind.template; DestDir: {app}\Templates\DB\Oracle\PG
+; ### Scripts ###
+Source: recursos\Scripts\1.1.0.5\110500001.sql; DestDir: {app}\Scripts
+Source: recursos\Scripts\1.1.0.5\110500002.sql; DestDir: {app}\Scripts
+; ### Scripts End ###
 
 
 [Icons]

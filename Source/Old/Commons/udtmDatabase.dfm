@@ -16768,4 +16768,13 @@ object dtmDatabase: TdtmDatabase
     Left = 56
     Top = 184
   end
+  object IBQuery1: TIBQuery
+    Database = IBDatabase1
+    Transaction = IBTransaction1
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    Left = 56
+    Top = 232
+  end
 end
