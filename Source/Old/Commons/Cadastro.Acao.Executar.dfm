@@ -1,9 +1,21 @@
 inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
   Caption = 'Executar Aplicativo'
+  ExplicitWidth = 696
+  ExplicitHeight = 460
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxPageControl1: TcxPageControl
+    inherited tabGrade: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
+    end
     inherited tabDetalhes: TcxTabSheet
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       object Label4: TLabel [1]
         Left = 24
         Top = 116
@@ -31,6 +43,7 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
         TabOrder = 3
         ExplicitLeft = 24
         ExplicitTop = 175
+        ExplicitHeight = 36
       end
       inherited edtDescricao: TcxDBTextEdit
         TabOrder = 0
@@ -80,7 +93,7 @@ inherited frmCadastroAcaoExecutar: TfrmCadastroAcaoExecutar
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
-      'SELECT * FROM TAcaoExecutar')
+      'SELECT * FROM TAcaoExecutar ORDER BY Descricao')
     ObjectClassName = 'TAcaoExecutar'
     object iosSelecionadorAplicativo: TStringField
       FieldName = 'Aplicativo'

@@ -30,8 +30,6 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosOracle: TfrmCadastroAcaoConfigurar
     ClientRectBottom = 320
     ClientRectRight = 686
     inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 684
       ExplicitHeight = 292
       inherited cxGrid1: TDBGrid
@@ -40,10 +38,8 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosOracle: TfrmCadastroAcaoConfigurar
       end
     end
     inherited tabDetalhes: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 684
+      ExplicitHeight = 292
       inherited Label1: TLabel
         Left = 24
         Top = 53
@@ -107,7 +103,6 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosOracle: TfrmCadastroAcaoConfigurar
       inherited cbxIcone: TcxDBImageComboBox
         Top = 30
         ExplicitTop = 30
-        ExplicitHeight = 21
       end
       inherited cbxSistema: TcxDBLookupComboBox
         Left = 24
@@ -150,7 +145,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosOracle: TfrmCadastroAcaoConfigurar
         Top = 201
         Width = 664
         Height = 81
-        ExplicitTop = 172
+        ExplicitTop = 201
         ExplicitWidth = 664
         ExplicitHeight = 81
         inherited Label6: TLabel
@@ -181,7 +176,9 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosOracle: TfrmCadastroAcaoConfigurar
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
-      'SELECT * FROM TAcaoConfigurarBaseDeDadosOracle')
+      
+        'SELECT * FROM TAcaoConfigurarBaseDeDadosOracle ORDER BY Descrica' +
+        'o')
     ObjectClassName = 'TAcaoConfigurarBaseDeDadosOracle'
     Left = 96
     Top = 328

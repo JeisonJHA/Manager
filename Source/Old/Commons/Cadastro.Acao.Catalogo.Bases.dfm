@@ -16,6 +16,9 @@ inherited frmCadastroAcaoCatalogoBases: TfrmCadastroAcaoCatalogoBases
       ExplicitTop = 28
       ExplicitWidth = 680
       ExplicitHeight = 352
+      inherited cbxIcone: TcxDBImageComboBox
+        ExplicitHeight = 36
+      end
       inherited chkIsAdmin: TcxDBCheckBox
         ExplicitHeight = 19
       end
@@ -23,7 +26,7 @@ inherited frmCadastroAcaoCatalogoBases: TfrmCadastroAcaoCatalogoBases
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
-      'SELECT * FROM TAcaoCatalogoDeBases')
+      'SELECT * FROM TAcaoCatalogoDeBases ORDER BY Descricao')
     ObjectClassName = 'TAcaoCatalogoDeBases'
   end
 end

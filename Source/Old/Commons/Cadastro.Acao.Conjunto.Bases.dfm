@@ -14,6 +14,10 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
     end
     inherited tabDetalhes: TcxTabSheet
       Caption = 'Informa'#231#245'es'
+      ExplicitLeft = 2
+      ExplicitTop = 28
+      ExplicitWidth = 680
+      ExplicitHeight = 352
       inherited lblIcone: TLabel
         Left = 610
         Top = 3
@@ -27,6 +31,7 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
         DataBinding.DataSource = dtsSelecionador
         ExplicitLeft = 600
         ExplicitTop = 32
+        ExplicitHeight = 36
       end
       inherited edtDescricao: TcxDBTextEdit
         ExplicitWidth = 570
@@ -36,10 +41,6 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
     object cxTabSheet2: TcxTabSheet
       Caption = 'Base de dados'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         AlignWithMargins = True
         Left = 3
@@ -179,10 +180,6 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
     object cxTabSheet1: TcxTabSheet
       Caption = 'Cat'#225'logo'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox2: TGroupBox
         AlignWithMargins = True
         Left = 3
@@ -341,7 +338,7 @@ inherited frmCadastroAcaoConjuntoBases: TfrmCadastroAcaoConjuntoBases
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
-      'SELECT * FROM TAcaoConjuntoDeBases')
+      'SELECT * FROM TAcaoConjuntoDeBases ORDER BY Descricao')
     ObjectClassName = 'TAcaoConjuntoDeBases'
     object iosSelecionadorAcoes: TDataSetField
       FieldName = 'Acoes'

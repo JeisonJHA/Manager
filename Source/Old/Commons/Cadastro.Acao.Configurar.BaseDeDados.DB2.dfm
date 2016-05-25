@@ -30,8 +30,6 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
     ClientRectBottom = 320
     ClientRectRight = 686
     inherited tabGrade: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 684
       ExplicitHeight = 292
       inherited cxGrid1: TDBGrid
@@ -40,8 +38,6 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
       end
     end
     inherited tabDetalhes: TcxTabSheet
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 684
       ExplicitHeight = 292
       inherited Label1: TLabel
@@ -107,7 +103,6 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
       inherited cbxIcone: TcxDBImageComboBox
         Top = 30
         ExplicitTop = 30
-        ExplicitHeight = 21
       end
       inherited cbxSistema: TcxDBLookupComboBox
         Left = 24
@@ -186,7 +181,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDadosDB2: TfrmCadastroAcaoConfigurarBas
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
-      'SELECT * FROM TAcaoConfigurarBaseDeDadosDB2')
+      'SELECT * FROM TAcaoConfigurarBaseDeDadosDB2 ORDER BY Descricao')
     ObjectClassName = 'TAcaoConfigurarBaseDeDadosDB2'
     Left = 96
     Top = 328

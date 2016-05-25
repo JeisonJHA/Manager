@@ -13,6 +13,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
     end
   end
   inherited cxPageControl1: TcxPageControl
+    Properties.ActivePage = tabGrade
     inherited tabGrade: TcxTabSheet
       ExplicitLeft = 2
       ExplicitTop = 28
@@ -254,7 +255,7 @@ inherited frmCadastroAcaoConfigurarBaseDeDados: TfrmCadastroAcaoConfigurarBaseDe
   end
   inherited iosSelecionador: TInstantSelector
     Command.Strings = (
-      'SELECT * FROM TAcaoConfigurarBaseDeDados')
+      'SELECT * FROM TAcaoConfigurarBaseDeDados ORDER BY Descricao')
     ObjectClassName = 'TAcaoConfigurarBaseDeDados'
     object iosSelecionadorAlias: TStringField
       FieldName = 'Alias'
