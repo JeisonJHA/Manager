@@ -3,7 +3,7 @@
         <ProjectGuid>{7F4C148F-5CAB-43E2-AFD2-141B83F45EE0}</ProjectGuid>
         <MainSource>Manager.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
@@ -239,6 +239,13 @@
             <Form>frmCadastroAcaoExclusao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.ActionList.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.Script.pas"/>
+        <DCCReference Include="..\..\Source\Models\Aplicacao.pas"/>
+        <DCCReference Include="..\..\Source\Core\API\Manager.Core.API.Host.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Host.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Host.Developer.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Core.IDE.Host.Tester.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -657,12 +664,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
         </BorlandProject>

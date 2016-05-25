@@ -80,7 +80,11 @@ uses
   Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Core\Forms\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao},
   Manager.Core.IDE.ActionList in '..\..\Source\Core\Manager.Core.IDE.ActionList.pas',
   Manager.Core.Script in '..\..\Source\Core\Manager.Core.Script.pas',
-  Aplicacao in '..\..\Source\Models\Aplicacao.pas';
+  Aplicacao in '..\..\Source\Models\Aplicacao.pas',
+  Manager.Core.API.Host in '..\..\Source\Core\API\Manager.Core.API.Host.pas',
+  Manager.Core.IDE.Host in '..\..\Source\Core\Manager.Core.IDE.Host.pas',
+  Manager.Core.IDE.Host.Developer in '..\..\Source\Core\Manager.Core.IDE.Host.Developer.pas',
+  Manager.Core.IDE.Host.Tester in '..\..\Source\Core\Manager.Core.IDE.Host.Tester.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,

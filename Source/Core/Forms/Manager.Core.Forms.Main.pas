@@ -17,7 +17,8 @@ uses
   dxDockPanel, dxDockControl, JvExDBGrids, JvDBGrid, Vcl.StdCtrls,
   dxBarBuiltInMenu, dxTabbedMDI, Vcl.Menus, Manager.Core.IDE, Vcl.AppEvnts,
   dxAlertWindow, InstantExplorer, JvComponentBase, JvFormPlacement,
-  JvAppStorage, JvAppIniStorage;
+  JvAppStorage, JvAppIniStorage, Manager.Core.IDE.Host.Developer,
+  Manager.Core.IDE.Host, Manager.Core.IDE.Host.Tester, Manager.Core.API.Host;
 
 type
   TfrmMain = class(TdxRibbonForm, IMain)
@@ -102,6 +103,7 @@ type
       Rebuild: Boolean);
   private
     { Private declarations }
+    FHost: IManagerHost;
     FController: TControllerMain;
     function RibbonTabs: TdxRibbonTabCollection;
     function ActionList: TActionList;
@@ -197,6 +199,17 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
+{$IFDEF TESTER}
+  FHost := TManagerHostTester.Create;
+{$ELSE}
+  FHost := TManagerHostDeveloper.Create;
+{$ENDIF}
+
+  FHost.CarregarMainMenu(dxRibbon1);
+  FHost.CarregarWorkspaces(iosWorkspaces);
+  FHost.CarregarBarraStatus(dxRibbonStatusBar1);
+  FHost.CarregarBackstageView(dxRibbonBackstageView1);
+
   Controller.OnShow(Self);
 end;
 
