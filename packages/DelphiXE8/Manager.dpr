@@ -79,7 +79,8 @@ uses
   Manager.Core.IDE.Menu in '..\..\Source\Core\Manager.Core.IDE.Menu.pas',
   Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Core\Forms\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao},
   Manager.Core.IDE.ActionList in '..\..\Source\Core\Manager.Core.IDE.ActionList.pas',
-  Manager.Core.Script in '..\..\Source\Core\Manager.Core.Script.pas';
+  Manager.Core.Script in '..\..\Source\Core\Manager.Core.Script.pas',
+  Aplicacao in '..\..\Source\Models\Aplicacao.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
@@ -87,6 +88,7 @@ uses
             AcaoConjuntoDeBases,
             AcaoExclusao,
             Ambiente,
+            Aplicacao,
             BarraFerramenta,
             Sistema,
             Workspace}
