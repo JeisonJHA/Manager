@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9D7FFC7F-5EC0-4995-9CA7-8ABFD34DE05A}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ManagerDev.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ManagerTest.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ManagerComponents.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ManagerDev">
+        <MSBuild Projects="ManagerDev.dproj"/>
+    </Target>
+    <Target Name="ManagerDev:Clean">
+        <MSBuild Projects="ManagerDev.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ManagerDev:Make">
+        <MSBuild Projects="ManagerDev.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ManagerTest">
+        <MSBuild Projects="ManagerTest.dproj"/>
+    </Target>
+    <Target Name="ManagerTest:Clean">
+        <MSBuild Projects="ManagerTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ManagerTest:Make">
+        <MSBuild Projects="ManagerTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ManagerComponents">
+        <MSBuild Projects="ManagerComponents.dproj"/>
+    </Target>
+    <Target Name="ManagerComponents:Clean">
+        <MSBuild Projects="ManagerComponents.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ManagerComponents:Make">
+        <MSBuild Projects="ManagerComponents.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ManagerDev;ManagerTest;ManagerComponents"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ManagerDev:Clean;ManagerTest:Clean;ManagerComponents:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ManagerDev:Make;ManagerTest:Make;ManagerComponents:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
