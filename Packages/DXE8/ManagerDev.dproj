@@ -40,11 +40,12 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <Icon_MainIcon>ManagerDev_Icon.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <DCC_Define>DEVELOPER;$(DCC_Define)</DCC_Define>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;IBX;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>ManagerDev</SanitizedProjectName>
         <DCC_DcuOutput>..\..\Build\Dcu\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>..\..\Build\Bin\$(Platform)\$(Config)</DCC_ExeOutput>
@@ -77,7 +78,6 @@
         <VerInfo_Build>4</VerInfo_Build>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.0.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
-        <Icon_MainIcon>ManagerDev_Icon.ico</Icon_MainIcon>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
@@ -141,6 +141,79 @@
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.Workspace.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.ParserControl.pas"/>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Catalogo.Bases.pas">
+            <Form>frmCadastroAcaoCatalogoBases</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosDB2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosMSSQL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosOracle</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDados</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Conjunto.Bases.pas">
+            <Form>frmCadastroAcaoConjuntoBases</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Copiar.pas">
+            <Form>frmCadastroAcaoCopiar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Executar.pas">
+            <Form>frmCadastroAcaoExecutar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.MontarAmbiente.pas">
+            <Form>frmCadastroAcaoMontarAmbiente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.pas">
+            <Form>frmCadastroAcao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Barra.Ferramentas.pas">
+            <Form>frmCadastroBarraFerramentas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Modelo.pas">
+            <Form>frmCadastroModelo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Paginado.Mestre.Detalhe.Modelo.pas">
+            <Form>frmCadastroPaginadoMestreDetalheModelo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Paginado.Modelo.pas">
+            <Form>frmCadastroPaginadoModelo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Sistema.pas">
+            <Form>frmCadastroSistema</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.InstantSelectorHelper.pas"/>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.Selecao.pas">
+            <Form>frmSelecao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.Opcoes.pas">
+            <Form>frmOpcoes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas">
+            <Form>frmCadastroAcaoExclusao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -549,13 +622,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>

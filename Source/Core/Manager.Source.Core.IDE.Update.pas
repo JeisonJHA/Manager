@@ -33,7 +33,7 @@ implementation
 
 { TUpdate }
 
-uses Manager.Source.Core.AplicationHelper;
+uses Manager.Source.Core.AplicationHelper, Manager.Source.Consts;
 
 var
   _LastUpdateVerification: TDateTime;
@@ -73,7 +73,7 @@ begin
   if not TUpdate(Sender).HasUpdateAvailable then
     Exit;
 
-  Application.IDE.Alert(Self.ApplicationName, Format(MSG_ALERT_UPDATE, [Application.Title, Self.ApplicationVersion]));
+  Application.IDE.Alert(Self.ApplicationName, Format(MSG_ALERT_UPDATE, [Self.ApplicationVersion, APP_TITLE]));
 end;
 
 function TUpdate.PodeVerificarAtualizacao: boolean;
