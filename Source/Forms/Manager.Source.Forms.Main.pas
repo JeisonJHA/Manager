@@ -22,14 +22,15 @@ uses
   cxContainer, cxEdit, dxSkinsForm, dxStatusBar, dxRibbonStatusBar, cxLabel,
   dxGallery, dxGalleryControl, dxRibbonBackstageViewGalleryControl,
   Manager.Source.Core.Intf.Host, System.Actions, Vcl.ActnList,
-  Manager.Source.Components.ActionList, Manager.Source.Core.AplicationHelper;
+  Manager.Source.Components.ActionList, Manager.Source.Core.AplicationHelper,
+  cxPC, dxSkinscxPCPainter, dxBarBuiltInMenu, dxTabbedMDI, dxAlertWindow;
 
 type
   TfrmMain = class(TdxRibbonForm)
     bmToolBars: TdxBarManager;
     dxBarManager1Bar1: TdxBar;
-    dxRibbon1: TdxRibbon;
-    dxRibbonBackstageView1: TdxRibbonBackstageView;
+    mnuRibbon: TdxRibbon;
+    ribBackstageView: TdxRibbonBackstageView;
     dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet;
     dxRibbonStatusBar1: TdxRibbonStatusBar;
     dxRibbonBackstageViewGalleryControl1: TdxRibbonBackstageViewGalleryControl;
@@ -37,7 +38,9 @@ type
     dxRibbonBackstageViewGalleryControl1Group1: TdxRibbonBackstageViewGalleryGroup;
     dxSkinController1: TdxSkinController;
     dxRibbonBackstageViewGalleryControl1Group1Item1: TdxRibbonBackstageViewGalleryItem;
-    aclAcoes: TManagerActionList;
+    aclAtividades: TManagerActionList;
+    tabMDIManager: TdxTabbedMDIManager;
+    msgAlertMessages: TdxAlertWindowManager;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -55,7 +58,7 @@ implementation
 
 {$R *.dfm}
 
-uses Manager.Source.Core.Host;
+uses Manager.Source.Core.Host, Manager.Source.Forms.DataModule.Resources;
 
 { TForm1 }
 

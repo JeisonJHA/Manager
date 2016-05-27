@@ -17,7 +17,15 @@ uses
   Manager.Source.Forms.Splash in '..\..\Source\Forms\Manager.Source.Forms.Splash.pas' {frmSplash},
   Manager.Source.Core.AplicationHelper in '..\..\Source\Core\Manager.Source.Core.AplicationHelper.pas',
   Manager.Source.Core.IDE in '..\..\Source\Core\Manager.Source.Core.IDE.pas',
-  Manager.Source.Core.Intf.BasicItem in '..\..\Source\Core\Manager.Source.Core.Intf.BasicItem.pas';
+  Manager.Source.Core.Intf.BasicItem in '..\..\Source\Core\Manager.Source.Core.Intf.BasicItem.pas',
+  Manager.Source.Core.FormUtils in '..\..\Source\Core\Manager.Source.Core.FormUtils.pas',
+  Manager.Source.Forms.Modelo in '..\..\Source\Forms\Manager.Source.Forms.Modelo.pas' {frmModelo},
+  Manager.Source.Core.IDE.Update in '..\..\Source\Core\Manager.Source.Core.IDE.Update.pas',
+  Manager.Source.Core.IDE.Consts in '..\..\Source\Core\Manager.Source.Core.IDE.Consts.pas',
+  Manager.Source.Core.Config in '..\..\Source\Core\Manager.Source.Core.Config.pas',
+  Manager.Source.Core.Messages in '..\..\Source\Core\Manager.Source.Core.Messages.pas',
+  Manager.Source.Forms.DataModule.Database in '..\..\Source\Forms\Manager.Source.Forms.DataModule.Database.pas' {dtmDatabase: TDataModule},
+  Manager.Source.Forms.DataModule.Resources in '..\..\Source\Forms\Manager.Source.Forms.DataModule.Resources.pas' {dtmResources: TDataModule};
 
 {$R *.res}
 
@@ -35,7 +43,10 @@ begin
   {$ENDIF}
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TdtmDatabase, dtmDatabase);
+  Application.CreateForm(TdtmResources, dtmResources);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.IDE.Initialize.Add(Application.IDE.Update);
   Application.IDE.Initialize.Add(TManagerHostDeveloper.Create(Application.MainForm));
   Application.IDE.ExecuteInitialization;
   Application.Run;

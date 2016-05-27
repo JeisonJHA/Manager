@@ -10,17 +10,18 @@ object frmMain: TfrmMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIForm
   OldCreateOrder = True
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object dxRibbon1: TdxRibbon
+  object mnuRibbon: TdxRibbon
     Left = 0
     Top = 0
     Width = 1212
     Height = 60
-    ApplicationButton.Menu = dxRibbonBackstageView1
+    ApplicationButton.Menu = ribBackstageView
     ApplicationButton.Text = 'FERRAMENTAS'
     BarManager = bmToolBars
     Style = rs2013
@@ -32,13 +33,13 @@ object frmMain: TfrmMain
     TabOrder = 0
     TabStop = False
   end
-  object dxRibbonBackstageView1: TdxRibbonBackstageView
+  object ribBackstageView: TdxRibbonBackstageView
     Left = 8
     Top = 166
     Width = 577
     Height = 266
     Buttons = <>
-    Ribbon = dxRibbon1
+    Ribbon = mnuRibbon
     object dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet
       Left = 132
       Top = 0
@@ -61,7 +62,7 @@ object frmMain: TfrmMain
         OptionsView.Item.Text.AlignVert = vaCenter
         OptionsView.Item.Text.Position = posRight
         OptionsView.Item.PinMode = bgipmTag
-        Ribbon = dxRibbon1
+        Ribbon = mnuRibbon
         object dxRibbonBackstageViewGalleryControl1Group1: TdxRibbonBackstageViewGalleryGroup
           ShowCaption = False
           object dxRibbonBackstageViewGalleryControl1Group1Item1: TdxRibbonBackstageViewGalleryItem
@@ -97,7 +98,7 @@ object frmMain: TfrmMain
     Width = 1212
     Height = 23
     Panels = <>
-    Ribbon = dxRibbon1
+    Ribbon = mnuRibbon
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clDefault
     Font.Height = -11
@@ -116,6 +117,8 @@ object frmMain: TfrmMain
       2)
     Categories.Visibles = (
       True)
+    ImageOptions.Images = dtmResources.SmallImageList
+    ImageOptions.LargeImages = dtmResources.LargeImageList
     PopupMenuLinks = <>
     UseSystemFont = True
     Left = 640
@@ -145,11 +148,39 @@ object frmMain: TfrmMain
   object dxSkinController1: TdxSkinController
     NativeStyle = False
     SkinName = 'Office2013White'
-    Left = 536
+    Left = 560
     Top = 8
   end
-  object aclAcoes: TManagerActionList
+  object aclAtividades: TManagerActionList
+    Images = dtmResources.SmallImageList
     Left = 712
-    Top = 64
+    Top = 8
+  end
+  object tabMDIManager: TdxTabbedMDIManager
+    Active = True
+    TabProperties.CustomButtons.Buttons = <>
+    Left = 792
+    Top = 8
+  end
+  object msgAlertMessages: TdxAlertWindowManager
+    OptionsButtons.Buttons = <>
+    OptionsMessage.Caption.Font.Charset = DEFAULT_CHARSET
+    OptionsMessage.Caption.Font.Color = clWindowText
+    OptionsMessage.Caption.Font.Height = -13
+    OptionsMessage.Caption.Font.Name = 'Tahoma'
+    OptionsMessage.Caption.Font.Style = [fsBold]
+    OptionsMessage.Text.Font.Charset = DEFAULT_CHARSET
+    OptionsMessage.Text.Font.Color = clWindowText
+    OptionsMessage.Text.Font.Height = -11
+    OptionsMessage.Text.Font.Name = 'Tahoma'
+    OptionsMessage.Text.Font.Style = []
+    OptionsNavigationPanel.Font.Charset = DEFAULT_CHARSET
+    OptionsNavigationPanel.Font.Color = clWindowText
+    OptionsNavigationPanel.Font.Height = -11
+    OptionsNavigationPanel.Font.Name = 'Tahoma'
+    OptionsNavigationPanel.Font.Style = []
+    Left = 752
+    Top = 216
+    PixelsPerInch = 96
   end
 end

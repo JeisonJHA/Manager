@@ -12,6 +12,9 @@
         <Projects Include="ManagerComponents.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="ManagerUpdate.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="ManagerComponents:Make">
         <MSBuild Projects="ManagerComponents.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ManagerUpdate">
+        <MSBuild Projects="ManagerUpdate.dproj"/>
+    </Target>
+    <Target Name="ManagerUpdate:Clean">
+        <MSBuild Projects="ManagerUpdate.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ManagerUpdate:Make">
+        <MSBuild Projects="ManagerUpdate.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ManagerDev;ManagerTest;ManagerComponents"/>
+        <CallTarget Targets="ManagerDev;ManagerTest;ManagerComponents;ManagerUpdate"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ManagerDev:Clean;ManagerTest:Clean;ManagerComponents:Clean"/>
+        <CallTarget Targets="ManagerDev:Clean;ManagerTest:Clean;ManagerComponents:Clean;ManagerUpdate:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ManagerDev:Make;ManagerTest:Make;ManagerComponents:Make"/>
+        <CallTarget Targets="ManagerDev:Make;ManagerTest:Make;ManagerComponents:Make;ManagerUpdate:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

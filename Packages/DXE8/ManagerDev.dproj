@@ -44,11 +44,10 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <DCC_Define>DEVELOPER;$(DCC_Define)</DCC_Define>
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>ManagerDev</SanitizedProjectName>
-        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>..\..\Build\Dcu\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_ExeOutput>..\..\Build\Bin\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
@@ -106,6 +105,25 @@
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.AplicationHelper.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.IDE.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Intf.BasicItem.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.FormUtils.pas"/>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.Modelo.pas">
+            <Form>frmModelo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.IDE.Update.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.IDE.Consts.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Config.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Messages.pas"/>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.DataModule.Database.pas">
+            <Form>dtmDatabase</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.DataModule.Resources.pas">
+            <Form>dtmResources</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -132,7 +150,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="1">
-                <DeployFile LocalName="Win32\Debug\ManagerDev.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\Build\Bin\Win32\Debug\ManagerDev.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ManagerDev.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -514,13 +532,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>

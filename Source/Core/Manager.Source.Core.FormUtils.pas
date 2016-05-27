@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Generics.Collections, Vcl.Forms,
-  Manager.Core.Forms.Modelo;
+  Manager.Source.Forms.Modelo;
 
   procedure RegisterForm(AFormClass: TFormClass);
   procedure UnRegisterForm(AFormClass: TFormClass);
@@ -88,8 +88,10 @@ var
   I: Integer;
 begin
   Result := False;
-  for I := 0 to Screen.FormCount -1 do begin
-    if Screen.Forms[I] is AClass then begin
+  for I := 0 to Screen.FormCount -1 do
+  begin
+    if Screen.Forms[I] is AClass then
+    begin
       Result := True;
       Break;
     end;

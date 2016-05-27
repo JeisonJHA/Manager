@@ -26,7 +26,7 @@ end;
 
 procedure TManagerHostDeveloper.Execute;
 begin
-  FMainForm.dxRibbon1.ColorSchemeAccent := rcsaBlue;
+  FMainForm.mnuRibbon.ColorSchemeAccent := rcsaBlue;
   inherited Execute;
 end;
 
