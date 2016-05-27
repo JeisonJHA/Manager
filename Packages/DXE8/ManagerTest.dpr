@@ -39,7 +39,26 @@ uses
   Manager.Source.Core.FormUtils in '..\..\Source\Core\Manager.Source.Core.FormUtils.pas',
   Manager.Source.Core.Parser.Aplicacao in '..\..\Source\Core\Manager.Source.Core.Parser.Aplicacao.pas',
   Manager.Source.Core.Parser in '..\..\Source\Core\Manager.Source.Core.Parser.pas',
-  Manager.Source.Core.Parser.Workspace in '..\..\Source\Core\Manager.Source.Core.Parser.Workspace.pas';
+  Manager.Source.Core.Parser.Workspace in '..\..\Source\Core\Manager.Source.Core.Parser.Workspace.pas',
+  Cadastro.Acao.Catalogo.Bases in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Catalogo.Bases.pas' {frmCadastroAcaoCatalogoBases},
+  Cadastro.Acao.Configurar.BaseDeDados.DB2 in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas' {frmCadastroAcaoConfigurarBaseDeDadosDB2},
+  Cadastro.Acao.Configurar.BaseDeDados.MSSQL in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas' {frmCadastroAcaoConfigurarBaseDeDadosMSSQL},
+  Cadastro.Acao.Configurar.BaseDeDados.Oracle in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas' {frmCadastroAcaoConfigurarBaseDeDadosOracle},
+  Cadastro.Acao.Configurar.BaseDeDados in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.pas' {frmCadastroAcaoConfigurarBaseDeDados},
+  Cadastro.Acao.Conjunto.Bases in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Conjunto.Bases.pas' {frmCadastroAcaoConjuntoBases},
+  Cadastro.Acao.Copiar in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Copiar.pas' {frmCadastroAcaoCopiar},
+  Cadastro.Acao.Executar in '..\..\Source\Forms\Cadastro\Cadastro.Acao.Executar.pas' {frmCadastroAcaoExecutar},
+  Cadastro.Acao.MontarAmbiente in '..\..\Source\Forms\Cadastro\Cadastro.Acao.MontarAmbiente.pas' {frmCadastroAcaoMontarAmbiente},
+  Cadastro.Acao in '..\..\Source\Forms\Cadastro\Cadastro.Acao.pas' {frmCadastroAcao},
+  Cadastro.Barra.Ferramentas in '..\..\Source\Forms\Cadastro\Cadastro.Barra.Ferramentas.pas' {frmCadastroBarraFerramentas},
+  Cadastro.Modelo in '..\..\Source\Forms\Cadastro\Cadastro.Modelo.pas' {frmCadastroModelo},
+  Cadastro.Paginado.Mestre.Detalhe.Modelo in '..\..\Source\Forms\Cadastro\Cadastro.Paginado.Mestre.Detalhe.Modelo.pas' {frmCadastroPaginadoMestreDetalheModelo},
+  Cadastro.Paginado.Modelo in '..\..\Source\Forms\Cadastro\Cadastro.Paginado.Modelo.pas' {frmCadastroPaginadoModelo},
+  Cadastro.Sistema in '..\..\Source\Forms\Cadastro\Cadastro.Sistema.pas' {frmCadastroSistema},
+  Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Forms\Cadastro\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao},
+  Manager.Source.Forms.Opcoes in '..\..\Source\Forms\Manager.Source.Forms.Opcoes.pas' {frmOpcoes},
+  Manager.Source.Forms.Selecao in '..\..\Source\Forms\Manager.Source.Forms.Selecao.pas' {frmSelecao},
+  Manager.Source.Core.InstantSelectorHelper in '..\..\Source\Core\Manager.Source.Core.InstantSelectorHelper.pas';
 
 {$R *.res}
 
@@ -56,7 +75,6 @@ begin
   ReportMemoryLeaksOnShutdown := True;
   {$ENDIF}
   Application.Initialize;
-  Application.IDE.Splash.Show;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TdtmResources, dtmResources);

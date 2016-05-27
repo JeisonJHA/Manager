@@ -5,9 +5,7 @@ interface
 uses System.Actions, Vcl.ActnList;
 
 type
-  TManagerAction = class(TAction)
-
-  end;
+  TManagerAction = class(TAction);
 
   TManagerActionExecute = class(TManagerAction);
 

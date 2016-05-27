@@ -78,6 +78,7 @@ var
   I: Integer;
   gauge: integer;
 begin
+  Sleep(500);
   gauge := Trunc(100/FInitialize.Count);
   for I := 0 to FInitialize.Count -1 do
   begin
@@ -88,7 +89,7 @@ begin
 
   TfrmSplash(FSplash).Gauge1.Progress := 100;
   FSplash.Repaint;
-  Sleep(1000);
+  Sleep(500);
 end;
 
 class function TManagerIDE.GetInstance: TManagerIDE;

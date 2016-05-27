@@ -142,6 +142,79 @@
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.Aplicacao.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.pas"/>
         <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Catalogo.Bases.pas">
+            <Form>frmCadastroAcaoCatalogoBases</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.DB2.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosDB2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.MSSQL.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosMSSQL</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.Oracle.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDadosOracle</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Configurar.BaseDeDados.pas">
+            <Form>frmCadastroAcaoConfigurarBaseDeDados</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Conjunto.Bases.pas">
+            <Form>frmCadastroAcaoConjuntoBases</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Copiar.pas">
+            <Form>frmCadastroAcaoCopiar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.Executar.pas">
+            <Form>frmCadastroAcaoExecutar</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.MontarAmbiente.pas">
+            <Form>frmCadastroAcaoMontarAmbiente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Acao.pas">
+            <Form>frmCadastroAcao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Barra.Ferramentas.pas">
+            <Form>frmCadastroBarraFerramentas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Modelo.pas">
+            <Form>frmCadastroModelo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Paginado.Mestre.Detalhe.Modelo.pas">
+            <Form>frmCadastroPaginadoMestreDetalheModelo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Paginado.Modelo.pas">
+            <Form>frmCadastroPaginadoModelo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Cadastro.Sistema.pas">
+            <Form>frmCadastroSistema</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Cadastro\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas">
+            <Form>frmCadastroAcaoExclusao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.Opcoes.pas">
+            <Form>frmOpcoes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.Selecao.pas">
+            <Form>frmSelecao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.InstantSelectorHelper.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -550,13 +623,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>

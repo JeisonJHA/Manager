@@ -214,6 +214,10 @@
             <Form>frmCadastroAcaoExclusao</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.ActionWorkspace.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.LoadMenu.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.LoadRibbon.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.LoadTrayIcon.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

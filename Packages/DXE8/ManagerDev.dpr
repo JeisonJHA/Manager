@@ -58,7 +58,11 @@ uses
   Manager.Source.Core.InstantSelectorHelper in '..\..\Source\Core\Manager.Source.Core.InstantSelectorHelper.pas',
   Manager.Source.Forms.Selecao in '..\..\Source\Forms\Manager.Source.Forms.Selecao.pas' {frmSelecao},
   Manager.Source.Forms.Opcoes in '..\..\Source\Forms\Manager.Source.Forms.Opcoes.pas' {frmOpcoes},
-  Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Forms\Cadastro\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao};
+  Manager.Core.Forms.Cadastro.Acao.Exclusao in '..\..\Source\Forms\Cadastro\Manager.Core.Forms.Cadastro.Acao.Exclusao.pas' {frmCadastroAcaoExclusao},
+  Manager.Source.Core.ActionWorkspace in '..\..\Source\Core\Manager.Source.Core.ActionWorkspace.pas',
+  Manager.Source.Core.LoadMenu in '..\..\Source\Core\Manager.Source.Core.LoadMenu.pas',
+  Manager.Source.Core.LoadRibbon in '..\..\Source\Core\Manager.Source.Core.LoadRibbon.pas',
+  Manager.Source.Core.LoadTrayIcon in '..\..\Source\Core\Manager.Source.Core.LoadTrayIcon.pas';
 
 {$R *.res}
 {$R *.mdr} {Acao,
