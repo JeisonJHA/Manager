@@ -4,7 +4,7 @@ interface
 
 uses
   InstantPersistence, InstantTypes, Winapi.ShellApi, Classes, SysUtils,
-  Winapi.Windows, Forms, Manager.Core.IDE, IniFiles, Sistema;
+  Winapi.Windows, Forms, IniFiles, Sistema;
 
 type
   TAcao = class;
@@ -189,7 +189,8 @@ type
 implementation
 
 uses
-  InstantMetadata, Manager.Core.IDE.Constants;
+  InstantMetadata, Manager.Source.Core.AplicationHelper,
+  Manager.Source.Core.IDE.Consts;
 
 { TAcao }
 
@@ -226,12 +227,12 @@ end;
 
 procedure TAcao.InternalAfterExecute;
 begin
-  Application.Notify(taIndefinido);
+  Application.IDE.Notify;
 end;
 
 procedure TAcao.InternalBeforeExecute;
 begin
-  Application.ExecCommand(Application.Parser.ParserText(Descricao));
+  Exit;
 end;
 
 procedure TAcao.InternalExecute;
@@ -248,7 +249,7 @@ end;
 
 procedure TAcaoExecutar.InternalAfterExecute;
 begin
-  Application.Notify(taExecutar);
+  Application.IDE.Notify;
 end;
 
 procedure TAcaoExecutar.InternalExecute;
@@ -263,12 +264,12 @@ begin
 
     if IsAdmin then
     begin
-      RunAsAdmin(handle, Application.Parser.ParserText(Aplicativo), Application.Parser.ParserText(Parametros));
+      RunAsAdmin(handle, Application.IDE.Parser.ParserText(Aplicativo), Application.IDE.Parser.ParserText(Parametros));
       Exit;
     end;
 
-    ShellExecute(handle, nil, PChar(Application.Parser.ParserText(Aplicativo)),
-      PChar(Application.Parser.ParserText(Parametros)), String.Empty, SW_SHOWNORMAL);
+    ShellExecute(handle, nil, PChar(Application.IDE.Parser.ParserText(Aplicativo)),
+      PChar(Application.IDE.Parser.ParserText(Parametros)), String.Empty, SW_SHOWNORMAL);
   except
     on E: Exception do
     begin
@@ -438,7 +439,7 @@ end;
 
 procedure TAcaoCopiar.InternalAfterExecute;
 begin
-  Application.Notify(taCopiar);
+  Application.IDE.Notify;
 end;
 
 procedure TAcaoCopiar.InternalExecute;
@@ -447,8 +448,8 @@ var
   path_origem: string;
 begin
   inherited InternalExecute;
-  path_origem := Application.Parser.ParserText(Origem);
-  path_destino_tmp := Application.Parser.ParserText(Destino);
+  path_origem := Application.IDE.Parser.ParserText(Origem);
+  path_destino_tmp := Application.IDE.Parser.ParserText(Destino);
   try
 
     if Length(ExtractFileExt(path_destino_tmp)) <= 0 then
@@ -509,7 +510,7 @@ end;
 
 procedure TAcaoConfigurarBaseDeDados.InternalAfterExecute;
 begin
-  Application.Notify(taConfiguarBase);
+  Application.IDE.Notify;
 end;
 
 procedure TAcaoConfigurarBaseDeDados.InternalConfigurarIni(AArquivo: TIniFile);
@@ -645,7 +646,5 @@ initialization
     TAcaoExecutar,
     TAcaoMontarAmbiente
   ]);
-
-end.
 
 end.

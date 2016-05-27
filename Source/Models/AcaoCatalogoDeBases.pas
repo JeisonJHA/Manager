@@ -16,7 +16,7 @@ type
 implementation
 
 uses
-  InstantMetadata, Manager.Core.IDE.Constants, Manager.Core.IDE;
+  InstantMetadata, Manager.Source.Core.AplicationHelper;
 
 { TAcaoCatalogoDeBases }
 
@@ -27,7 +27,7 @@ end;
 
 procedure TAcaoCatalogoDeBases.InternalAfterExecute;
 begin
-  Application.Notify(taCatalogar);
+  Application.IDE.Notify;
 end;
 
 initialization

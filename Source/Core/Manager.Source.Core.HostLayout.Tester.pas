@@ -17,6 +17,7 @@ procedure TManagerHostLayoutTester.InicializarRibbon;
 var
   tab: TdxRibbonTab;
 begin
+  inherited InicializarRibbon;
   tab := MainForm.mnuRibbon.Tabs.Add;
   tab.Caption := 'TESTER';
 end;

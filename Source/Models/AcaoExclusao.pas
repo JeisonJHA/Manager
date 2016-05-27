@@ -27,7 +27,7 @@ type
 implementation
 
 uses
-  InstantMetadata, Manager.Core.IDE.Constants, Manager.Core.IDE;
+  InstantMetadata, Manager.Source.Core.AplicationHelper;
 
 { TAcaoExclusaoArquivo }
 
@@ -86,14 +86,14 @@ end;
 
 procedure TAcaoExclusaoArquivo.InternalAfterExecute;
 begin
-  Application.Notify(taExcluir);
+  Application.IDE.Notify;
 end;
 
 procedure TAcaoExclusaoArquivo.InternalExecute;
 var
   path: string;
 begin
-  path := Application.Parser.ParserText(Aplicativo);
+  path := Application.IDE.Parser.ParserText(Aplicativo);
   case VerificarTipoExclusao(path) of
     teFile: DeleteUniqueFile(path);
     teAllFiles: DeleteAllFiles(path);

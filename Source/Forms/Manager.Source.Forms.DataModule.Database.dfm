@@ -1,6 +1,5 @@
 object dtmDatabase: TdtmDatabase
   OldCreateOrder = False
-  OnCreate = DataModuleCreate
   Height = 362
   Width = 793
   object InstantIBXConnector1: TInstantIBXConnector

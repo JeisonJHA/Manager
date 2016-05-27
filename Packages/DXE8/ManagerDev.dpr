@@ -25,9 +25,32 @@ uses
   Manager.Source.Core.Config in '..\..\Source\Core\Manager.Source.Core.Config.pas',
   Manager.Source.Core.Messages in '..\..\Source\Core\Manager.Source.Core.Messages.pas',
   Manager.Source.Forms.DataModule.Database in '..\..\Source\Forms\Manager.Source.Forms.DataModule.Database.pas' {dtmDatabase: TDataModule},
-  Manager.Source.Forms.DataModule.Resources in '..\..\Source\Forms\Manager.Source.Forms.DataModule.Resources.pas' {dtmResources: TDataModule};
+  Manager.Source.Forms.DataModule.Resources in '..\..\Source\Forms\Manager.Source.Forms.DataModule.Resources.pas' {dtmResources: TDataModule},
+  Acao in '..\..\Source\Models\Acao.pas',
+  AcaoCatalogoDeBases in '..\..\Source\Models\AcaoCatalogoDeBases.pas',
+  AcaoConjuntoDeBases in '..\..\Source\Models\AcaoConjuntoDeBases.pas',
+  AcaoExclusao in '..\..\Source\Models\AcaoExclusao.pas',
+  BarraFerramenta in '..\..\Source\Models\BarraFerramenta.pas',
+  Sistema in '..\..\Source\Models\Sistema.pas',
+  Workspace in '..\..\Source\Models\Workspace.pas',
+  Manager.Source.Core.Intf.Observer in '..\..\Source\Core\Manager.Source.Core.Intf.Observer.pas',
+  Manager.Source.Core.Intf.Workspace in '..\..\Source\Core\Manager.Source.Core.Intf.Workspace.pas',
+  Manager.Source.Core.Intf.Parser in '..\..\Source\Core\Manager.Source.Core.Intf.Parser.pas',
+  Manager.Source.Core.Parser.Aplicacao in '..\..\Source\Core\Manager.Source.Core.Parser.Aplicacao.pas',
+  Manager.Source.Core.Parser in '..\..\Source\Core\Manager.Source.Core.Parser.pas',
+  Manager.Source.Core.Parser.Workspace in '..\..\Source\Core\Manager.Source.Core.Parser.Workspace.pas',
+  Manager.Source.Core.ParserControl in '..\..\Source\Core\Manager.Source.Core.ParserControl.pas';
 
 {$R *.res}
+{$R *.mdr} {Ambiente,
+            Aplicacao,
+            Atividade,
+            AtividadeCatalogoDeBases,
+            AtividadeConjuntoDeBases,
+            AtividadeExclusao,
+            BarraFerramenta,
+            Sistema,
+            Workspace}
 
 begin
   CreateMutex(nil, False, APP_GUID);
@@ -46,6 +69,9 @@ begin
   Application.CreateForm(TdtmDatabase, dtmDatabase);
   Application.CreateForm(TdtmResources, dtmResources);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.IDE.Parser.Registrar(TParserAplicacao.Create);
+  Application.IDE.Parser.Registrar(TParserWorkspace.Create);
+  Application.IDE.Initialize.Add(dtmDatabase);
   Application.IDE.Initialize.Add(Application.IDE.Update);
   Application.IDE.Initialize.Add(TManagerHostDeveloper.Create(Application.MainForm));
   Application.IDE.ExecuteInitialization;

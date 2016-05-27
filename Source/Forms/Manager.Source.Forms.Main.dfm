@@ -137,12 +137,24 @@ object frmMain: TfrmMain
       FloatTop = 0
       FloatClientWidth = 0
       FloatClientHeight = 0
-      ItemLinks = <>
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnUpdate'
+        end>
       OneOnRow = True
       Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
+    end
+    object btnUpdate: TdxBarLargeButton
+      Caption = 'Atualiza'#231#227'o autom'#225'tica'
+      Category = 0
+      Hint = 'Atualiza'#231#227'o autom'#225'tica'
+      Visible = ivAlways
+      SyncImageIndex = False
+      ImageIndex = 55
     end
   end
   object dxSkinController1: TdxSkinController

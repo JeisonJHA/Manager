@@ -23,13 +23,7 @@ implementation
 
 { TManagerHost }
 
-uses Manager.Source.Core.HostLayout
-//{$IF defined(TESTER)}
-//  , Manager.Source.Core.HostLayout.Tester
-//{$ELSEIF defined(DEVELOPER)}
-//  , Manager.Source.Core.HostLayout.Developer
-//{$ENDIF}
- , Manager.Source.Consts;
+uses Manager.Source.Core.HostLayout, Manager.Source.Consts;
 
 constructor TManagerHost.Create(AMainForm: TForm);
 begin
@@ -48,11 +42,6 @@ begin
   FMainForm.Caption := APP_TITLE;
   FMainForm.Hint := APP_TITLE;
 
-//{$IF defined(TESTER)}
-//  layout := TManagerHostLayoutTester.Create(MainForm);
-//{$ELSEIF defined(DEVELOPER)}
-//  layout := TManagerHostLayoutDeveloper.Create(MainForm);
-//{$ENDIF}
   FLayout.InicializarRibbon;
   FLayout.InicializarBarraStatus;
 end;

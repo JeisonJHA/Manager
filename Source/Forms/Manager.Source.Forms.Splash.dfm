@@ -580,4 +580,17 @@ object frmSplash: TfrmSplash
     ParentFont = False
     ExplicitWidth = 307
   end
+  object Gauge1: TGauge
+    Left = 0
+    Top = 206
+    Width = 500
+    Height = 3
+    Align = alBottom
+    BackColor = 8087383
+    BorderStyle = bsNone
+    ForeColor = 5786175
+    Progress = 0
+    ShowText = False
+    ExplicitTop = 193
+  end
 end

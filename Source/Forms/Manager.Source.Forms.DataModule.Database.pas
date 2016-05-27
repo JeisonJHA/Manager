@@ -6,19 +6,20 @@ uses
   System.SysUtils, System.Classes, Vcl.Forms, Data.DB,
   InstantPersistence, InstantBrokers, System.ImageList, Vcl.ImgList,
   Vcl.Controls, cxGraphics, IBX.IBDatabase, InstantIBX,
-  IBX.IBScript, IBX.IBCustomDataSet, IBX.IBQuery;
+  IBX.IBScript, IBX.IBCustomDataSet, IBX.IBQuery,
+  Manager.Source.Core.Intf.BasicItem;
 
 type
-  TdtmDatabase = class(TDataModule)
+  TdtmDatabase = class(TDataModule, IManagerBasicItem)
     InstantIBXConnector1: TInstantIBXConnector;
     IBTransaction1: TIBTransaction;
     IBDatabase1: TIBDatabase;
     IBScript1: TIBScript;
     IBQuery1: TIBQuery;
-    procedure DataModuleCreate(Sender: TObject);
   private
     procedure Conectar;
   public
+    procedure Execute;
   end;
 
 var
@@ -32,7 +33,7 @@ uses Manager.Source.Core.AplicationHelper;
 
 {$R *.dfm}
 
-procedure TdtmDatabase.DataModuleCreate(Sender: TObject);
+procedure TdtmDatabase.Execute;
 begin
   Conectar;
 end;

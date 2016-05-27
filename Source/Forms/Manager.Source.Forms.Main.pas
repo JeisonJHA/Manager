@@ -41,6 +41,7 @@ type
     aclAtividades: TManagerActionList;
     tabMDIManager: TdxTabbedMDIManager;
     msgAlertMessages: TdxAlertWindowManager;
+    btnUpdate: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private

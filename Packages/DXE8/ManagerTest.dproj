@@ -110,6 +110,38 @@
             <Form>frmSplash</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.Modelo.pas">
+            <Form>frmModelo</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.IDE.Update.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.IDE.Consts.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Config.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Messages.pas"/>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.DataModule.Database.pas">
+            <Form>dtmDatabase</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Forms\Manager.Source.Forms.DataModule.Resources.pas">
+            <Form>dtmResources</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Intf.Observer.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Intf.Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Models\Acao.pas"/>
+        <DCCReference Include="..\..\Source\Models\AcaoCatalogoDeBases.pas"/>
+        <DCCReference Include="..\..\Source\Models\AcaoConjuntoDeBases.pas"/>
+        <DCCReference Include="..\..\Source\Models\AcaoExclusao.pas"/>
+        <DCCReference Include="..\..\Source\Models\BarraFerramenta.pas"/>
+        <DCCReference Include="..\..\Source\Models\Sistema.pas"/>
+        <DCCReference Include="..\..\Source\Models\Workspace.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.ParserControl.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Intf.Parser.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.FormUtils.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.Aplicacao.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.pas"/>
+        <DCCReference Include="..\..\Source\Core\Manager.Source.Core.Parser.Workspace.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -136,7 +168,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="1">
-                <DeployFile LocalName="Win32\Debug\ManagerTest.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\Build\Bin\Win32\Debug\ManagerTest.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ManagerTest.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -518,13 +550,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>

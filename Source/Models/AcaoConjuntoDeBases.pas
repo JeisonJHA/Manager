@@ -45,7 +45,7 @@ type
 implementation
 
 uses
-  InstantMetadata, Manager.Core.IDE.Constants, Manager.Core.IDE;
+  InstantMetadata, Manager.Source.Core.AplicationHelper;
 
 { TAcaoConjuntoDeBases }
 
@@ -56,7 +56,7 @@ end;
 
 procedure TAcaoConjuntoDeBases.InternalAfterExecute;
 begin
-  Application.Notify(taConfigurarConjuntoDeBases);
+  Application.IDE.Notify;
 end;
 
 procedure TAcaoConjuntoDeBases.InternalExecute;
