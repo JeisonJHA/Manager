@@ -2,7 +2,8 @@ unit Manager.Source.Core.Config;
 
 interface
 
-uses Classes, SysUtils, JvAppRegistryStorage, Manager.Source.Core.IDE.Consts;
+uses Classes, SysUtils, JvAppRegistryStorage, Manager.Source.Core.IDE.Consts,
+  Manager.Source.Consts;
 
 type
   TManagerConfig = class;

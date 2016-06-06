@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>ManagerDev.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -39,9 +39,17 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <Icon_MainIcon>ManagerDev_Icon.ico</Icon_MainIcon>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_MajorVer>2</VerInfo_MajorVer>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=2.0.0.0;Comments=</VerInfo_Keys>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <DCC_Define>DEVELOPER;$(DCC_Define)</DCC_Define>
@@ -56,12 +64,10 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <Icon_MainIcon>1464285800_rocket.ico</Icon_MainIcon>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <DCC_UsePackage>dxBarRS22;JvGlobus;JvMM;JvManagedThreads;dxSkinsdxRibbonPainterRS22;dxSkinOffice2010BlackRS22;FireDACPgDriver;dxPScxVGridLnkRS22;JvCrypt;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;JvNet;dxWizardControlRS22;JvDotNetCtrls;DbxCommonDriver;vclimg;dbxcds;dxServerModeRS22;DatasnapConnectorsFreePascal;appanalytics;JvXPCtrls;vcldb;dxSkinDarkRoomRS22;dxSkinSilverRS22;dxGDIPlusRS22;CustomIPTransport;dxSkinOffice2010SilverRS22;dsnap;IndyIPServer;IndyCore;dxSkinSummer2008RS22;CloudService;IODBX;dxSkinLondonLiquidSkyRS22;FmxTeeUI;FireDACIBDriver;dataset;JvDB;JvRuntimeDesign;IOIBX;dxPScxPivotGridLnkRS22;dxComnRS22;cxPivotGridChartRS22;dsnapxml;dxPScxPCProdRS22;JclDeveloperTools;FireDACDb2Driver;dxSpellCheckerRS22;dxPScxGridLnkRS22;dxSkinVS2010RS22;dxorgcRS22;dxBarExtItemsRS22;dxRibbonRS22;dxSkinsdxBarPainterRS22;dxCoreRS22;cxVerticalGridRS22;frx22;bindcompfmx;dxSkinStardustRS22;dxSkinSevenClassicRS22;dxSkinsCoreRS22;dxSpreadSheetRS22;FireDACODBCDriver;RESTBackendComponents;cxSchedulerRS22;dbrtl;dxSkinDevExpressStyleRS22;FireDACCommon;bindcomp;inetdb;cxExportRS22;JvPluginSystem;dxPSDBTeeChartRS22;dxSkinOffice2007BlackRS22;dxSkinCoffeeRS22;dxSkinXmas2008BlueRS22;DBXOdbcDriver;dxSkinscxSchedulerPainterRS22;ibmonitor;vclFireDAC;JvCmp;JvTimeFramework;xmlrtl;ibxpress;dxSkinOffice2013WhiteRS22;dxPSdxDBOCLnkRS22;cxDataRS22;FireDACCommonDriver;cxBarEditItemRS22;soaprtl;bindengine;vclactnband;FMXTee;bindcompvcl;dxBarExtDBItemsRS22;dxSkinOffice2010BlueRS22;Jcl;vclie;dxPSdxDBTVLnkRS22;cxPageControlRS22;dxPsPrVwAdvRS22;FireDACMSSQLDriver;DBXInformixDriver;dxSkinFoggyRS22;Intraweb;dxSkinPumpkinRS22;cxEditorsRS22;dxPScxExtCommonRS22;DataSnapServerMidas;dsnapcon;DBXFirebirdDriver;dxMapControlRS22;inet;dxPSPrVwRibbonRS22;dxSkinSharpRS22;dxmdsRS22;JvPascalInterpreter;FireDACMySQLDriver;soapmidas;vclx;dxSkinOffice2007GreenRS22;dxSkinMetropolisDarkRS22;DBXSybaseASADriver;dxDockingRS22;RESTComponents;dxTabbedMDIRS22;IOADO;dxdborRS22;dbexpress;dxSkinMoneyTwinsRS22;dxPScxTLLnkRS22;IndyIPClient;dxSkinSpringTimeRS22;FireDACTDataDriver;FireDACSqliteDriver;FireDACDSDriver;frxTee22;DBXSqliteDriver;dxSkinHighContrastRS22;dxSkinOffice2007SilverRS22;fmx;IOXML;JvDlgs;IndySystem;dxLayoutControlRS22;TeeDB;tethering;cxSchedulerGridRS22;dxPSdxFCLnkRS22;dxSkinMcSkinRS22;dxSkinOffice2007PinkRS22;vclib;DataSnapClient;dxSkinsdxNavBarPainterRS22;dxNavBarRS22;DataSnapProviderClient;DBXSybaseASEDriver;frxe22;MdDataPack;DUnitXRuntime;dxSkinGlassOceansRS22;dxSkinBlueprintRS22;dxSkinBlueRS22;vcldsnap;dxBarDBNavRS22;dxSkiniMaginaryRS22;dxPSCoreRS22;dxSkinLiquidSkyRS22;IOFireDAC;fmxFireDAC;DBXDb2Driver;dxSkinOffice2007BlueRS22;dxSkinCaramelRS22;DBXOracleDriver;cxGridRS22;JvCore;vclribbon;fmxase;vcl;DBXMSSQLDriver;IndyIPCommon;CodeSiteExpressPkg;dxThemeRS22;DataSnapFireDAC;FireDACDBXDriver;cxPivotGridRS22;JvAppFrm;soapserver;dxtrmdRS22;dxPScxSchedulerLnkRS22;dxSkinscxPCPainterRS22;inetdbxpress;FireDACInfxDriver;JvDocking;adortl;cxLibraryRS22;dxFireDACServerModeRS22;dxPSdxSpreadSheetLnkRS22;JvWizards;dxPSdxLCLnkRS22;FireDACASADriver;dxSkinOffice2013DarkGrayRS22;JvHMI;dxPScxCommonRS22;JvBands;emsclientfiredac;rtl;DbxClientDriver;dxSkinOffice2013LightGrayRS22;Tee;JclContainers;dxFlowChartRS22;dxPSLnksRS22;dxSkinSharpPlusRS22;dxSkinDarkSideRS22;JvSystem;DataSnapNativeClient;svnui;cxTreeListdxBarPopupMenuRS22;JvControls;dxSkinsdxDLPainterRS22;dxSkinDevExpressDarkStyleRS22;IndyProtocols;DBXMySQLDriver;dxSkinMetropolisRS22;dxPSdxOCLnkRS22;dxSkinValentineRS22;advmemopkgdxe8;bindcompdbx;TeeUI;JvJans;JvPrintPreview;JvPageComps;JvStdCtrls;JvCustom;cxTreeListRS22;dxSkinTheAsphaltWorldRS22;frxDB22;FireDACADSDriver;vcltouch;dxADOServerModeRS22;emsclient;dxdbtrRS22;VclSmp;FireDAC;VCLRESTComponents;cxSchedulerRibbonStyleEventEditorRS22;dxTileControlRS22;dxSkinSevenRS22;DataSnapConnectors;ManagerUtils;dxSkinBlackRS22;fmxobj;JclVcl;dxSkinWhiteprintRS22;dxPSTeeChartRS22;cxPivotGridOLAPRS22;svn;cxSchedulerTreeBrowserRS22;FireDACOracleDriver;fmxdae;FireDACMSAccDriver;IOCore;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_UsePackage>dxBarRS22;dxSkinsdxRibbonPainterRS22;dxSkinOffice2010BlackRS22;FireDACPgDriver;dxPScxVGridLnkRS22;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;dxWizardControlRS22;DbxCommonDriver;vclimg;dbxcds;dxServerModeRS22;DatasnapConnectorsFreePascal;appanalytics;vcldb;dxSkinDarkRoomRS22;dxSkinSilverRS22;dxGDIPlusRS22;CustomIPTransport;dxSkinOffice2010SilverRS22;dsnap;IndyIPServer;IndyCore;dxSkinSummer2008RS22;CloudService;dxSkinLondonLiquidSkyRS22;FmxTeeUI;FireDACIBDriver;dxPScxPivotGridLnkRS22;dxComnRS22;cxPivotGridChartRS22;dsnapxml;dxPScxPCProdRS22;FireDACDb2Driver;dxSpellCheckerRS22;dxPScxGridLnkRS22;dxSkinVS2010RS22;dxorgcRS22;dxBarExtItemsRS22;dxRibbonRS22;dxSkinsdxBarPainterRS22;dxCoreRS22;cxVerticalGridRS22;bindcompfmx;dxSkinStardustRS22;dxSkinSevenClassicRS22;dxSkinsCoreRS22;dxSpreadSheetRS22;FireDACODBCDriver;RESTBackendComponents;cxSchedulerRS22;dbrtl;dxSkinDevExpressStyleRS22;FireDACCommon;bindcomp;inetdb;cxExportRS22;dxPSDBTeeChartRS22;dxSkinOffice2007BlackRS22;dxSkinCoffeeRS22;dxSkinXmas2008BlueRS22;DBXOdbcDriver;dxSkinscxSchedulerPainterRS22;ibmonitor;vclFireDAC;xmlrtl;ibxpress;dxSkinOffice2013WhiteRS22;dxPSdxDBOCLnkRS22;cxDataRS22;FireDACCommonDriver;cxBarEditItemRS22;soaprtl;bindengine;vclactnband;FMXTee;bindcompvcl;dxBarExtDBItemsRS22;dxSkinOffice2010BlueRS22;vclie;dxPSdxDBTVLnkRS22;cxPageControlRS22;dxPsPrVwAdvRS22;FireDACMSSQLDriver;DBXInformixDriver;dxSkinFoggyRS22;Intraweb;dxSkinPumpkinRS22;cxEditorsRS22;dxPScxExtCommonRS22;DataSnapServerMidas;dsnapcon;DBXFirebirdDriver;dxMapControlRS22;inet;dxPSPrVwRibbonRS22;dxSkinSharpRS22;dxmdsRS22;FireDACMySQLDriver;soapmidas;vclx;dxSkinOffice2007GreenRS22;dxSkinMetropolisDarkRS22;DBXSybaseASADriver;dxDockingRS22;RESTComponents;dxTabbedMDIRS22;dxdborRS22;dbexpress;dxSkinMoneyTwinsRS22;dxPScxTLLnkRS22;IndyIPClient;dxSkinSpringTimeRS22;FireDACTDataDriver;FireDACSqliteDriver;FireDACDSDriver;DBXSqliteDriver;dxSkinHighContrastRS22;dxSkinOffice2007SilverRS22;fmx;IndySystem;dxLayoutControlRS22;TeeDB;tethering;cxSchedulerGridRS22;dxPSdxFCLnkRS22;dxSkinMcSkinRS22;dxSkinOffice2007PinkRS22;vclib;DataSnapClient;dxSkinsdxNavBarPainterRS22;dxNavBarRS22;DataSnapProviderClient;DBXSybaseASEDriver;dxSkinGlassOceansRS22;dxSkinBlueprintRS22;dxSkinBlueRS22;vcldsnap;dxBarDBNavRS22;dxSkiniMaginaryRS22;dxPSCoreRS22;dxSkinLiquidSkyRS22;fmxFireDAC;DBXDb2Driver;dxSkinOffice2007BlueRS22;dxSkinCaramelRS22;DBXOracleDriver;cxGridRS22;vclribbon;fmxase;vcl;DBXMSSQLDriver;IndyIPCommon;dxThemeRS22;DataSnapFireDAC;FireDACDBXDriver;cxPivotGridRS22;soapserver;dxtrmdRS22;dxPScxSchedulerLnkRS22;dxSkinscxPCPainterRS22;inetdbxpress;FireDACInfxDriver;adortl;cxLibraryRS22;dxFireDACServerModeRS22;dxPSdxSpreadSheetLnkRS22;dxPSdxLCLnkRS22;FireDACASADriver;dxSkinOffice2013DarkGrayRS22;dxPScxCommonRS22;emsclientfiredac;rtl;DbxClientDriver;dxSkinOffice2013LightGrayRS22;Tee;dxFlowChartRS22;dxPSLnksRS22;dxSkinSharpPlusRS22;dxSkinDarkSideRS22;DataSnapNativeClient;cxTreeListdxBarPopupMenuRS22;dxSkinsdxDLPainterRS22;dxSkinDevExpressDarkStyleRS22;IndyProtocols;DBXMySQLDriver;dxSkinMetropolisRS22;dxPSdxOCLnkRS22;dxSkinValentineRS22;bindcompdbx;TeeUI;cxTreeListRS22;dxSkinTheAsphaltWorldRS22;FireDACADSDriver;vcltouch;dxADOServerModeRS22;emsclient;dxdbtrRS22;VclSmp;FireDAC;VCLRESTComponents;cxSchedulerRibbonStyleEventEditorRS22;dxTileControlRS22;dxSkinSevenRS22;DataSnapConnectors;dxSkinBlackRS22;fmxobj;dxSkinWhiteprintRS22;dxPSTeeChartRS22;cxPivotGridOLAPRS22;cxSchedulerTreeBrowserRS22;FireDACOracleDriver;fmxdae;FireDACMSAccDriver;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
@@ -75,18 +81,23 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Icon_MainIcon>1464285800_rocket.ico</Icon_MainIcon>
         <VerInfo_Build>4</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.0.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.0.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=2.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Icon_MainIcon>1464285800_rocket.ico</Icon_MainIcon>
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_DebugInformation>0</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Build>4</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.0.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=2.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -630,9 +641,9 @@
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>
