@@ -26,6 +26,7 @@ object dtmDatabase: TdtmDatabase
     Top = 40
   end
   object SmallImageList: TcxImageList
+    SourceDPI = 96
     FormatVersion = 1
     DesignInfo = 2621600
     ImageInfo = <
@@ -2066,6 +2067,7 @@ object dtmDatabase: TdtmDatabase
       end>
   end
   object MediumImageList: TcxImageList
+    SourceDPI = 96
     Height = 24
     Width = 24
     FormatVersion = 1
@@ -6308,6 +6310,7 @@ object dtmDatabase: TdtmDatabase
       end>
   end
   object LargeImageList: TcxImageList
+    SourceDPI = 96
     Height = 32
     Width = 32
     FormatVersion = 1
@@ -13630,6 +13633,7 @@ object dtmDatabase: TdtmDatabase
       end>
   end
   object XLargeImageList: TcxImageList
+    SourceDPI = 96
     Height = 64
     Width = 64
     FormatVersion = 1

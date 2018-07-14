@@ -9,7 +9,9 @@ uses
   Vcl.ComCtrls, JvExComCtrls, JvPageListTreeView, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.Buttons, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
   cxContainer, cxEdit, dxSkinsCore, cxCheckBox, Manager.Core.Configuration, cxTextEdit,
-  cxMaskEdit, cxSpinEdit;
+  cxMaskEdit, cxSpinEdit, dxSkinLilian, dxSkinOffice2016Colorful,
+  dxSkinOffice2016Dark, dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light;
 
 type
   TfrmFormularioOpcoes = class(TfrmModelo)
@@ -48,6 +50,7 @@ type
     Panel9: TPanel;
     cbxEstruturaTFS: TCheckBox;
     cbxJazzOnly: TCheckBox;
+    cbxEstruturaRTC: TCheckBox;
     procedure lstPathClick(Sender: TObject);
     procedure btnSubscreverClick(Sender: TObject);
     procedure btnExcluirInvalidosClick(Sender: TObject);
@@ -187,6 +190,7 @@ begin
   lstPath.Items.DelimitedText := FConfig.Diretorio;
   cbxEstruturaTFS.Checked := FConfig.Workspace.EstruturaTFS;
   cbxJazzOnly.Checked := FConfig.Workspace.JazzOnly;
+  cbxEstruturaRTC.Checked := FConfig.Workspace.EstruturaRTC;
 end;
 
 procedure TfrmFormularioOpcoes.lstPathClick(Sender: TObject);
@@ -216,6 +220,7 @@ begin
   Fconfig.Diretorio := lstPath.Items.CommaText;
   FConfig.Workspace.EstruturaTFS := cbxEstruturaTFS.Checked;
   FConfig.Workspace.JazzOnly := cbxJazzOnly.Checked;
+  FConfig.Workspace.EstruturaRTC := cbxEstruturaRTC.Checked;
 end;
 
 initialization

@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, Vcl.Forms, Data.DB,
   InstantPersistence, InstantBrokers, System.ImageList, Vcl.ImgList,
   Vcl.Controls, cxGraphics, IBX.IBDatabase, Manager.Core.Configuration, InstantIBX,
-  IBX.IBScript, IBX.IBCustomDataSet, IBX.IBQuery;
+  IBX.IBScript, IBX.IBCustomDataSet, IBX.IBQuery, cxImageList;
 
 type
   TdtmDatabase = class(TDataModule)

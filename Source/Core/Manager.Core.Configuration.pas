@@ -20,9 +20,12 @@ type
     procedure SetEstruturaTFS(const Value: boolean);
     function GetJazzOnly: boolean;
     procedure SetJazzOnly(const Value: boolean);
+    function GetEstruturaRTC: boolean;
+    procedure SetEstruturaRTC(const Value: boolean);
   public
     property JazzOnly: boolean read GetJazzOnly write SetJazzOnly;
     property EstruturaTFS: boolean read GetEstruturaTFS write SetEstruturaTFS;
+    property EstruturaRTC: boolean read GetEstruturaRTC write SetEstruturaRTC;
   end;
 
   TConfigurationSandbox = class(TConfigurationItem)
@@ -176,6 +179,11 @@ end;
 
 { TWorkspaceConfigWorkspace }
 
+function TConfigurationWorkspace.GetEstruturaRTC: boolean;
+begin
+  Exit(FOwner.ReadInteger('Workspace\EstruturaRTC', False.ToInteger).ToBoolean());
+end;
+
 function TConfigurationWorkspace.GetEstruturaTFS: boolean;
 begin
   Exit(FOwner.ReadInteger('Workspace\EstruturaTFS', False.ToInteger).ToBoolean());
@@ -184,6 +192,11 @@ end;
 function TConfigurationWorkspace.GetJazzOnly: boolean;
 begin
   Exit(FOwner.ReadInteger('Workspace\JazzOnly', False.ToInteger).ToBoolean());
+end;
+
+procedure TConfigurationWorkspace.SetEstruturaRTC(const Value: boolean);
+begin
+  FOwner.WriteInteger('Workspace\EstruturaRTC', Value.ToInteger);
 end;
 
 procedure TConfigurationWorkspace.SetEstruturaTFS(const Value: boolean);

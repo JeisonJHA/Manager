@@ -51,7 +51,7 @@ var
     with sistemas do
     begin
       for I := 0 to Pred(ObjectCount) do
-        if Pos(ADiretorio, TSistema(Objects[I]).NomeDiretorio) > 0then
+        if (Pos(ADiretorio, TSistema(Objects[I]).NomeDiretorio) > 0) or (FConfiguration.Workspace.EstruturaRTC) then
           Exit(True);
     end;
     Exit(False);
@@ -64,7 +64,7 @@ var
   begin
     IsSandbox := False;
     FindFirst(IncludeTrailingBackslash(ADiretorio) + '*.*', faDirectory, SearchRec);
-    if AEstruturaTFS then
+    if AEstruturaTFS or (FConfiguration.Workspace.EstruturaRTC) then
     begin
       while FindNext(SearchRec) = 0 do
       begin

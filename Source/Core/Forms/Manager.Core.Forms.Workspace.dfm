@@ -1,6 +1,7 @@
 object frmWorkspace2: TfrmWorkspace2
   Left = 0
   Top = 0
+  BorderStyle = bsDialog
   Caption = 'frmWorkspace2'
   ClientHeight = 299
   ClientWidth = 635

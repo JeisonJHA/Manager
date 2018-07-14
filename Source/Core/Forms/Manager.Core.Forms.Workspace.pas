@@ -7,7 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Manager.Core.API.Workspace, Workspace,
   Manager.Core.Forms.Modelo, Manager.Core.API.Observer, Manager.Core.Forms.Workspace.Controller,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
-  dxCustomTileControl, dxTileControl, Vcl.StdCtrls, Manager.Core.IDE.Constants;
+  dxCustomTileControl, dxTileControl, Vcl.StdCtrls, Manager.Core.IDE.Constants,
+  dxSkinLilian, dxSkinOffice2016Colorful, dxSkinOffice2016Dark,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light;
 
 type
   TfrmWorkspace2 = class(TfrmModelo, IWorkspace, IObserver)

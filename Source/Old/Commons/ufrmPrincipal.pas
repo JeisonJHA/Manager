@@ -31,7 +31,10 @@ uses
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, InstantPresentation, Manager.Core.IDE,
   Manager.Core.PromptCommand, Manager.PromptCommand, JvAppIniStorage, JvFormPlacement, Vcl.AppEvnts,
-  Vcl.Menus, Manager.Core.IDE.Update, dxAlertWindow;
+  Vcl.Menus, Manager.Core.IDE.Update, dxAlertWindow, dxSkinLilian,
+  dxSkinOffice2016Colorful, dxSkinOffice2016Dark, dxSkinVisualStudio2013Blue,
+  dxSkinVisualStudio2013Dark, dxSkinVisualStudio2013Light,
+  cxDataControllerConditionalFormattingRulesManagerDialog;
 
 type
   TfrmPrincipal = class(TdxRibbonForm)

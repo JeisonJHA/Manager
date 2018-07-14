@@ -136,21 +136,24 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         object GroupBox1: TGroupBox
           AlignWithMargins = True
           Left = 3
-          Top = 84
+          Top = 104
           Width = 481
-          Height = 281
+          Height = 261
           Align = alClient
           Caption = 'Diret'#243'rios'
           TabOrder = 1
+          ExplicitTop = 84
+          ExplicitHeight = 281
           object Panel6: TPanel
             Left = 2
-            Top = 201
+            Top = 181
             Width = 477
             Height = 78
             Align = alBottom
             BevelOuter = bvNone
             ParentColor = True
             TabOrder = 0
+            ExplicitTop = 201
             object btnDiretorio: TSpeedButton
               Left = 447
               Top = 12
@@ -208,7 +211,7 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
             Left = 7
             Top = 20
             Width = 467
-            Height = 176
+            Height = 156
             Margins.Left = 5
             Margins.Top = 5
             Margins.Right = 5
@@ -217,13 +220,14 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
             ItemHeight = 13
             TabOrder = 1
             OnClick = lstPathClick
+            ExplicitHeight = 176
           end
         end
         object Panel9: TPanel
           Left = 0
           Top = 25
           Width = 487
-          Height = 56
+          Height = 76
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 2
@@ -243,6 +247,14 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
             Caption = 'Suporte somente para diret'#243'rios da plataforma JAZZ'
             TabOrder = 1
           end
+          object cbxEstruturaRTC: TCheckBox
+            Left = 15
+            Top = 59
+            Width = 427
+            Height = 17
+            Caption = 'Suporte somente para diret'#243'rios da plataforma RTC'
+            TabOrder = 2
+          end
         end
       end
       object pageAtualizacao: TJvStandardPage
@@ -252,8 +264,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
         Height = 368
         Caption = 'pageAtualizacao'
         ParentBackground = True
-        ExplicitLeft = 3
-        ExplicitTop = -1
         object Label2: TLabel
           Left = 24
           Top = 76
@@ -292,7 +302,6 @@ inherited frmFormularioOpcoes: TfrmFormularioOpcoes
           Top = 48
           Caption = 'Verifica'#231#227'o autom'#225'tica de atualiza'#231#245'es dispon'#237'veis'
           TabOrder = 1
-          Width = 441
         end
         object edtTempoVerificacaoAtualizacao: TcxSpinEdit
           Left = 161

@@ -87,6 +87,7 @@ object frmPrincipal: TfrmPrincipal
         OptionsView.Item.Text.Position = posRight
         OptionsView.Item.PinMode = bgipmTag
         Ribbon = dxRibbon1
+        TabOrder = 0
         object dxRibbonBackstageViewGalleryControl1Group1: TdxRibbonBackstageViewGalleryGroup
           ShowCaption = False
           object dxRibbonBackstageViewGalleryControl1Group1Item1: TdxRibbonBackstageViewGalleryItem
@@ -152,6 +153,8 @@ object frmPrincipal: TfrmPrincipal
     ManagerColor = False
     Align = alLeft
     AutoSize = True
+    ExplicitTop = 131
+    ExplicitHeight = 455
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -160,6 +163,7 @@ object frmPrincipal: TfrmPrincipal
       Top = 0
       Width = 185
       Height = 431
+      ExplicitHeight = 455
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 200
@@ -176,6 +180,7 @@ object frmPrincipal: TfrmPrincipal
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       TabsProperties.Style = 6
+      ExplicitHeight = 455
       DockingType = 0
       OriginalWidth = 185
       OriginalHeight = 97
@@ -191,6 +196,7 @@ object frmPrincipal: TfrmPrincipal
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitHeight = 411
         object cxGrid1: TcxGrid
           Left = 0
           Top = 0
@@ -201,6 +207,7 @@ object frmPrincipal: TfrmPrincipal
           BevelOuter = bvNone
           BorderStyle = cxcbsNone
           TabOrder = 0
+          ExplicitHeight = 411
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             OnCellDblClick = cxGrid1DBTableView1CellDblClick
@@ -311,11 +318,7 @@ object frmPrincipal: TfrmPrincipal
     UseSystemFont = True
     Left = 504
     Top = 8
-    DockControlHeights = (
-      0
-      0
-      0
-      0)
+    PixelsPerInch = 96
     object dxBarManager1Bar1: TdxBar
       Caption = 'Quick Access Toolbar'
       CaptionButtons = <>
@@ -707,6 +710,7 @@ object frmPrincipal: TfrmPrincipal
     TabProperties.CustomButtons.Buttons = <>
     Left = 888
     Top = 360
+    PixelsPerInch = 96
   end
   object dxDockingManager1: TdxDockingManager
     Color = clBtnFace

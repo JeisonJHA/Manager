@@ -17,7 +17,9 @@ uses
   dxDockPanel, dxDockControl, JvExDBGrids, JvDBGrid, Vcl.StdCtrls,
   dxBarBuiltInMenu, dxTabbedMDI, Vcl.Menus, Manager.Core.IDE, Vcl.AppEvnts,
   dxAlertWindow, InstantExplorer, JvComponentBase, JvFormPlacement,
-  JvAppStorage, JvAppIniStorage;
+  JvAppStorage, JvAppIniStorage, dxSkinLilian, dxSkinOffice2016Colorful,
+  dxSkinOffice2016Dark, dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light;
 
 type
   TfrmMain = class(TdxRibbonForm, IMain)
@@ -163,6 +165,7 @@ end;
 constructor TfrmMain.Create(AOwner: TComponent);
 begin
   inherited;
+  DisableAero := True;
   FController := TControllerMain.Create(Self);
   Application.Register(FController);
 end;

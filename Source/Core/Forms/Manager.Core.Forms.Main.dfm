@@ -26,9 +26,9 @@ object frmMain: TfrmMain
     ApplicationButton.Menu = dxRibbonBackstageView1
     ApplicationButton.Text = 'Ferramentas'
     BarManager = dxBarManager1
-    Style = rs2013
+    Style = rs2016
     ColorSchemeAccent = rcsaBlue
-    ColorSchemeName = 'White'
+    ColorSchemeName = 'Colorful'
     QuickAccessToolbar.Toolbar = dxBarManager1Bar1
     SupportNonClientDrawing = True
     Contexts = <>
@@ -81,6 +81,7 @@ object frmMain: TfrmMain
         OptionsView.Item.Text.Position = posRight
         OptionsView.Item.PinMode = bgipmTag
         Ribbon = dxRibbon1
+        TabOrder = 0
         object dxRibbonBackstageViewGalleryControl1Group1: TdxRibbonBackstageViewGalleryGroup
           ShowCaption = False
           object dxRibbonBackstageViewGalleryControl1Group1Item1: TdxRibbonBackstageViewGalleryItem
@@ -142,6 +143,8 @@ object frmMain: TfrmMain
     ManagerColor = False
     Align = alLeft
     AutoSize = True
+    ExplicitTop = 134
+    ExplicitHeight = 503
     DockingType = 5
     OriginalWidth = 1
     OriginalHeight = 319
@@ -150,6 +153,7 @@ object frmMain: TfrmMain
       Top = 0
       Width = 201
       Height = 482
+      ExplicitHeight = 503
       DockingType = 0
       OriginalWidth = 201
       OriginalHeight = 200
@@ -165,27 +169,28 @@ object frmMain: TfrmMain
       CaptionButtons = [cbMaximize, cbHide]
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
-      TabsProperties.Style = 6
+      TabsProperties.Style = 3
       DockingType = 0
       OriginalWidth = 201
       OriginalHeight = 97
       object Panel1: TPanel
-        AlignWithMargins = True
         Left = 0
         Top = 0
-        Width = 190
-        Height = 438
+        Width = 197
+        Height = 458
         Margins.Left = 0
         Margins.Top = 0
         Margins.Bottom = 0
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 190
+        ExplicitHeight = 459
         object DBGrid1: TJvDBGrid
           Left = 0
           Top = 0
-          Width = 190
-          Height = 438
+          Width = 197
+          Height = 458
           Align = alClient
           DataSource = dtsWorkspaces
           Options = [dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -214,7 +219,7 @@ object frmMain: TfrmMain
               Title.Font.Height = -11
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 186
+              Width = 193
               Visible = True
             end>
         end
@@ -239,11 +244,7 @@ object frmMain: TfrmMain
     UseSystemFont = True
     Left = 568
     Top = 8
-    DockControlHeights = (
-      0
-      0
-      0
-      0)
+    PixelsPerInch = 96
     object dxBarManager1Bar1: TdxBar
       Caption = 'Quick Access Toolbar'
       CaptionButtons = <>
@@ -489,7 +490,8 @@ object frmMain: TfrmMain
   end
   object dxSkinController1: TdxSkinController
     NativeStyle = False
-    SkinName = 'Office2013White'
+    SkinName = 'Office2016Colorful'
+    UseSkins = False
     Left = 536
     Top = 8
   end
@@ -512,6 +514,7 @@ object frmMain: TfrmMain
     TabProperties.CustomButtons.Buttons = <>
     Left = 936
     Top = 288
+    PixelsPerInch = 96
   end
   object aclToolbars: TActionList
     Images = dtmDatabase.SmallImageList
